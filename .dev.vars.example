@@ -1,0 +1,7 @@
+# Local development secrets, read by the Cloudflare Vite plugin (mirrors
+# `wrangler dev`). Copy this file to `.dev.vars` (already gitignored) and
+# fill in a real value before running `npm run dev` or `npm start`.
+
+# Password for /admin. In production, set this as a Worker secret instead:
+#   npx wrangler secret put ADMIN_PASSWORD
+ADMIN_PASSWORD=change-me

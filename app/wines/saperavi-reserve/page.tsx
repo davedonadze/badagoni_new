@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
-import wineData from "../../wine-data.json";
+import { getWineBySlug } from "@/lib/wines/service";
 import { ReserveAwards } from "./awards";
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ const awards = [
   { name: "Decanter World Wine Awards — Platinum", year: "2021", image: "/images/awards/decanter-platinum-2021.png" },
 ];
 
-export default function SaperaviReserve() {
-  const wine = wineData.find(item => item.slug === "saperavi-reserve");
+export default async function SaperaviReserve() {
+  const wine = await getWineBySlug("saperavi-reserve");
   if (!wine) notFound();
 
   const facts = [

@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { FeaturedWines } from "./wine-collection";
 import { EditorialCards } from "./editorial-cards";
 import { ScrollScene } from "./scroll-scene";
+import { listWines } from "@/lib/wines/service";
 
 const worlds = [
   { number: "01", title: "Our place", subtitle: "Rooted in Kakheti", text: "Between the Caucasus Mountains and the Alazani Valley, our vineyards give every wine a sense of belonging.", href: "/terroir", link: "Explore our vineyards" },
@@ -10,7 +11,8 @@ const worlds = [
   { number: "03", title: "Our perspective", subtitle: "Always looking forward", text: "Georgian heritage meets contemporary winemaking. An ongoing conversation between the vineyard, the cellar, and the world.", href: "/story", link: "Meet Badagoni" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const wines = await listWines();
   return <main>
     <ScrollScene media={<section className="campaign-hero" aria-label="Badagoni wine">
       <img className="campaign-image" src="/images/ritual-editorial.webp" alt="An editorial scene of two people sharing Badagoni wine at a table" fetchPriority="high" />
@@ -26,7 +28,7 @@ export default function Home() {
 
     <section className="selected-collection" aria-labelledby="collection-title">
       <div className="collection-label"><h2 id="collection-title">The collection</h2><span>Selected expressions / 01—03</span></div>
-      <FeaturedWines />
+      <FeaturedWines wines={wines} />
       <div className="collection-more"><Link href="/catalogue" className="underlined-link">View all wines <ArrowUpRight size={16} /></Link></div>
     </section>
 

@@ -2,21 +2,16 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
-import wineData from "../../wine-data.json";
-import type { Wine } from "../../wine-collection";
+import { getWineBySlug } from "@/lib/wines/service";
 
-const wines = wineData as Wine[];
 const labels: Record<string, string> = { red: "Red wine", white: "White wine", qvevri: "Qvevri wine", rose: "Rosé wine", sparkling: "Sparkling wine", chacha: "Chacha" };
 
 type WinePageProps = { params: Promise<{ slug: string }> };
 
-export function generateStaticParams() {
-  return wines.filter(wine => wine.slug !== "saperavi-reserve").map(wine => ({ slug: wine.slug }));
-}
-
 export async function generateMetadata({ params }: WinePageProps): Promise<Metadata> {
   const { slug } = await params;
-  const wine = wines.find(item => item.slug === slug);
+  if (slug === "saperavi-reserve") return {};
+  const wine = await getWineBySlug(slug);
   if (!wine) return { title: "Wine not found" };
   return { title: wine.name, description: wine.description || `Discover ${wine.name} from the Badagoni collection. Native Georgian grapes, ${labels[wine.category].toLowerCase()}.` };
 }
@@ -24,7 +19,7 @@ export async function generateMetadata({ params }: WinePageProps): Promise<Metad
 export default async function WinePage({ params }: WinePageProps) {
   const { slug } = await params;
   if (slug === "saperavi-reserve") notFound();
-  const wine = wines.find(item => item.slug === slug);
+  const wine = await getWineBySlug(slug);
   if (!wine) notFound();
 
   const facts = [
