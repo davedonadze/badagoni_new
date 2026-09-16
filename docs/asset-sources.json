@@ -1,0 +1,315 @@
+{
+  "photography": [
+    {
+      "local_path": "/workspace/scratch/ec85965ce7eb/badagoni-assets/vineyard-home.jpg",
+      "role": "hero",
+      "description": "Wide vineyard aerial with Kakheti mountains, 2048×1152",
+      "source_page": "https://badagoni.com/",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/09/%E1%83%93%E1%83%A3%E1%83%A0%E1%83%A3%E1%83%AF%E1%83%98-%E1%83%A1%E1%83%AE%E1%83%95%E1%83%90-2048x1152.jpg"
+    },
+    {
+      "local_path": "/workspace/scratch/ec85965ce7eb/badagoni-assets/vineyard-alaverdi.png",
+      "role": "heritage",
+      "description": "Alaverdi Monastery with vineyards and mountain backdrop, 1680×1080",
+      "source_page": "https://badagoni.com/badagoni-vineyards/",
+      "image_url": "https://badagoni.com/wp-content/uploads/2026/04/%E1%83%90%E1%83%9A%E1%83%90%E1%83%95%E1%83%94%E1%83%A0%E1%83%93%E1%83%98-2-1680.png"
+    },
+    {
+      "local_path": "/workspace/scratch/ec85965ce7eb/badagoni-assets/cellar-1.jpg",
+      "role": "qvevri-story",
+      "description": "Actual Alaverdi cellar interior with a monk and open buried qvevri, 1536×1024",
+      "source_page": "https://badagoni.com/alaverdi-wine-cellar/",
+      "image_url": "https://badagoni.com/wp-content/uploads/2025/11/Nikas-dasamushavebeli-3-1536x1024.jpg"
+    }
+  ],
+  "products": [
+    {
+      "slug": "saperavi-reserve",
+      "name": "Saperavi Reserve",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Saperavi-Reservess.png",
+      "source_page": "https://badagoni.com/product/saperavi-reserve/",
+      "download_source": null
+    },
+    {
+      "slug": "saperavi-qvevri",
+      "name": "Saperavi Qvevri",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/SAPERAVI-2.png",
+      "source_page": "https://badagoni.com/product/saperavi-qvevri/",
+      "download_source": null
+    },
+    {
+      "slug": "alaverdi-tradition-red",
+      "name": "Alaverdi Tradition",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Alaverdi-Tradition-Red-scaled-1.png",
+      "source_page": "https://badagoni.com/product/alaverdi-tradition-red/",
+      "download_source": null
+    },
+    {
+      "slug": "alaverdi-tradition-white-qvevri-wine",
+      "name": "Alaverdi Tradition",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Alaverdi-Tradition-White.png",
+      "source_page": "https://badagoni.com/product/alaverdi-tradition-white-qvevri-wine/",
+      "download_source": null
+    },
+    {
+      "slug": "khikhi-qvevri",
+      "name": "Khikhvi Qvevri",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Khikhvi.png",
+      "source_page": "https://badagoni.com/product/khikhi-qvevri/",
+      "download_source": null
+    },
+    {
+      "slug": "kisi-qvevri",
+      "name": "Kisi Qvevri",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Kisi_Qvevri.png",
+      "source_page": "https://badagoni.com/product/kisi-qvevri/",
+      "download_source": null
+    },
+    {
+      "slug": "kakhetian-noble-3",
+      "name": "Kakhetian Noble",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/4-1.png",
+      "source_page": "https://badagoni.com/product/kakhetian-noble-3/",
+      "download_source": null
+    },
+    {
+      "slug": "kakhetian-noble-2",
+      "name": "Kakhetian Noble",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/KN-copy.png",
+      "source_page": "https://badagoni.com/product/kakhetian-noble-2/",
+      "download_source": null
+    },
+    {
+      "slug": "saperavi-1011",
+      "name": "Saperavi 1011",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/1011-Saperavi.png",
+      "source_page": "https://badagoni.com/product/saperavi-1011/",
+      "download_source": null
+    },
+    {
+      "slug": "rkatsiteli-1011",
+      "name": "Rkatsiteli 1011",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/1011-Rkatsiteli-scaled-1.png",
+      "source_page": "https://badagoni.com/product/rkatsiteli-1011/",
+      "download_source": null
+    },
+    {
+      "slug": "saperavi-kosher",
+      "name": "Saperavi Kosher",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/11saf1-319x598-1.png",
+      "source_page": "https://badagoni.com/product/saperavi-kosher/",
+      "download_source": null
+    },
+    {
+      "slug": "mukuzani",
+      "name": "Mukuzani",
+      "image_url": "https://badagoni.com/wp-content/uploads/2016/03/Badagoni_Mukuzani.png",
+      "source_page": "https://badagoni.com/product/mukuzani/",
+      "download_source": null
+    },
+    {
+      "slug": "khvanchkara",
+      "name": "Khvanchkara",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Khvanchkara.png",
+      "source_page": "https://badagoni.com/product/khvanchkara/",
+      "download_source": null
+    },
+    {
+      "slug": "kindzmarauli",
+      "name": "Kindzmarauli",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Kindzmarauli.png",
+      "source_page": "https://badagoni.com/product/kindzmarauli/",
+      "download_source": null
+    },
+    {
+      "slug": "saperavi",
+      "name": "Saperavi",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Saperavi.png",
+      "source_page": "https://badagoni.com/product/saperavi/",
+      "download_source": null
+    },
+    {
+      "slug": "akhasheni",
+      "name": "Akhasheni",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Akhasheni-1.png",
+      "source_page": "https://badagoni.com/product/akhasheni/",
+      "download_source": null
+    },
+    {
+      "slug": "alazani-valley-2",
+      "name": "Alazani Valley",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Alazani_Valley_Red.png",
+      "source_page": "https://badagoni.com/product/alazani-valley-2/",
+      "download_source": null
+    },
+    {
+      "slug": "pirosmani-2",
+      "name": "Pirosmani",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Pirosmani_Red.png",
+      "source_page": "https://badagoni.com/product/pirosmani-2/",
+      "download_source": null
+    },
+    {
+      "slug": "saperavi-rose",
+      "name": "Saperavi Rose",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Saperavi_Rose.png",
+      "source_page": "https://badagoni.com/product/saperavi-rose/",
+      "download_source": null
+    },
+    {
+      "slug": "manavi",
+      "name": "Manavi",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Manavi.png",
+      "source_page": "https://badagoni.com/product/manavi/",
+      "download_source": null
+    },
+    {
+      "slug": "tvishi",
+      "name": "Tvishi",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Tvishi.png",
+      "source_page": "https://badagoni.com/product/tvishi/",
+      "download_source": null
+    },
+    {
+      "slug": "tsinandali",
+      "name": "Tsinandali",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Tsinandali.png",
+      "source_page": "https://badagoni.com/product/tsinandali/",
+      "download_source": null
+    },
+    {
+      "slug": "kisi-2",
+      "name": "Kisi",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Kisi.png",
+      "source_page": "https://badagoni.com/product/kisi-2/",
+      "download_source": null
+    },
+    {
+      "slug": "alazani-valley",
+      "name": "Alazani Valley",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Alazani_Valley.png",
+      "source_page": "https://badagoni.com/product/alazani-valley/",
+      "download_source": null
+    },
+    {
+      "slug": "pirosmani",
+      "name": "Pirosmani",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Pirosmani.png",
+      "source_page": "https://badagoni.com/product/pirosmani/",
+      "download_source": null
+    },
+    {
+      "slug": "white-one",
+      "name": "GAU#5 White One",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/0c243f590c95427787e5f006ae677169-1.png",
+      "source_page": "https://badagoni.com/product/white-one/",
+      "download_source": null
+    },
+    {
+      "slug": "white-two",
+      "name": "GAU#5 White Two",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/68fd3263175242fcacf3a9bf377f6a88-1.png",
+      "source_page": "https://badagoni.com/product/white-two/",
+      "download_source": null
+    },
+    {
+      "slug": "rose-three",
+      "name": "GAU#5 Rose",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/99cbe35b32514a5bb235a9522e45f0e2-1.png",
+      "source_page": "https://badagoni.com/product/rose-three/",
+      "download_source": null
+    },
+    {
+      "slug": "red-four",
+      "name": "GAU#5 Red Four",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/bffb270b13804b3e80fed498fd7608ac-1.png",
+      "source_page": "https://badagoni.com/product/red-four/",
+      "download_source": null
+    },
+    {
+      "slug": "red-five",
+      "name": "GAU#5 Red Five",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/af44a899e2e54e39a7b49c0bba7b91d2-1.png",
+      "source_page": "https://badagoni.com/product/red-five/",
+      "download_source": null
+    },
+    {
+      "slug": "badagoni-brut",
+      "name": "Badagoni Brut",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni-Brut-scaled.png",
+      "source_page": "https://badagoni.com/product/badagoni-brut/",
+      "download_source": null
+    },
+    {
+      "slug": "badagoni-rose",
+      "name": "Badagoni Rose",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/edited-photo.png",
+      "source_page": "https://badagoni.com/product/badagoni-rose/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-extra-brut",
+      "name": "Maestro Extra",
+      "image_url": "https://badagoni.com/wp-content/uploads/2025/11/badagoni-extra-brut-scaled.png",
+      "source_page": "https://badagoni.com/product/maestro-extra-brut/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-extra-rose-brut",
+      "name": "Maestro Extra",
+      "image_url": "https://badagoni.com/wp-content/uploads/2025/11/Badagoni_Rose_Extra_Brut_2.png",
+      "source_page": "https://badagoni.com/product/maestro-extra-rose-brut/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-saperavi",
+      "name": "Maestro Saperavi",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/a02ef594850b43b3a0c12b22c28e0b29-1.png",
+      "source_page": "https://badagoni.com/product/maestro-saperavi/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-semi-dry",
+      "name": "Maestro Semi-Dry",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/2f960f7f9dd04ebe95be3866e061e052-1.png",
+      "source_page": "https://badagoni.com/product/maestro-semi-dry/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-rose",
+      "name": "Maestro Rose",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/b4ee3fa72d9042d88d4f1c6f307047ce-1.png",
+      "source_page": "https://badagoni.com/product/maestro-rose/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-semi-sweet",
+      "name": "Maestro S/Sweet",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/5a26cd99aebd4830934501c229027c48-1.png",
+      "source_page": "https://badagoni.com/product/maestro-semi-sweet/",
+      "download_source": null
+    },
+    {
+      "slug": "maestro-brut",
+      "name": "Maestro Brut",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/c028273bf0574f6aad6ec192462bb484-1.png",
+      "source_page": "https://badagoni.com/product/maestro-brut/",
+      "download_source": null
+    },
+    {
+      "slug": "chacha-classic",
+      "name": "Chacha Classic",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Chacha_Classic.png",
+      "source_page": "https://badagoni.com/product/chacha-classic/",
+      "download_source": null
+    },
+    {
+      "slug": "chacha-original",
+      "name": "Chacha Original",
+      "image_url": "https://badagoni.com/wp-content/uploads/2024/07/Badagoni_Chacha_Original.png",
+      "source_page": "https://badagoni.com/product/chacha-original/",
+      "download_source": null
+    }
+  ],
+  "reuse_info": "Official Badagoni imagery sourced for the requested Badagoni website. No explicit open reuse license found on inspected pages. Preserve brand and product artwork."
+}

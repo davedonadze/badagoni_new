@@ -1,0 +1,560 @@
+[
+  {
+    "slug": "saperavi-reserve",
+    "name": "Saperavi Reserve",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/saperavi-reserve.webp",
+    "style": "Dry",
+    "grapes": [
+      "Saperavi"
+    ],
+    "alcohol": "14%",
+    "description": "A limited Saperavi Reserve from vineyards near Alaverdi Monastery, with dark berry and plum notes."
+  },
+  {
+    "slug": "saperavi-qvevri",
+    "name": "Saperavi Qvevri",
+    "category": "qvevri",
+    "categories": [
+      "qvevri",
+      "red"
+    ],
+    "image": "/images/saperavi-qvevri.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "alaverdi-tradition-red",
+    "name": "Alaverdi Tradition Red",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/alaverdi-tradition-red.webp",
+    "style": "Dry",
+    "grapes": [
+      "Saperavi"
+    ],
+    "alcohol": "14%",
+    "description": "A dry Saperavi made in Alaverdi Monastery’s historic cellar and aged in French oak."
+  },
+  {
+    "slug": "alaverdi-tradition-white-qvevri-wine",
+    "name": "Alaverdi Tradition White",
+    "category": "qvevri",
+    "categories": [
+      "qvevri",
+      "white"
+    ],
+    "image": "/images/alaverdi-tradition-white-qvevri-wine.webp",
+    "style": "Dry",
+    "grapes": [
+      "Rkatsiteli"
+    ],
+    "alcohol": "14%",
+    "description": "Golden Rkatsiteli made in qvevri in the historic 11th-century cellar of Alaverdi Monastery."
+  },
+  {
+    "slug": "khikhi-qvevri",
+    "name": "Khikhvi Qvevri",
+    "category": "qvevri",
+    "categories": [
+      "qvevri",
+      "white"
+    ],
+    "image": "/images/khikhi-qvevri.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "kisi-qvevri",
+    "name": "Kisi Qvevri",
+    "category": "qvevri",
+    "categories": [
+      "qvevri",
+      "white"
+    ],
+    "image": "/images/kisi-qvevri.webp",
+    "style": "Dry",
+    "grapes": [
+      "Kisi"
+    ],
+    "alcohol": "13.5%",
+    "description": "Kisi from Badagoni’s Maghraani vineyards, crafted in qvevri at Alaverdi Monastery."
+  },
+  {
+    "slug": "kakhetian-noble-3",
+    "name": "Kakhetian Noble Red",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/kakhetian-noble-3.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "kakhetian-noble-2",
+    "name": "Kakhetian Noble White",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/kakhetian-noble-2.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "saperavi-1011",
+    "name": "Saperavi 1011",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/saperavi-1011.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "rkatsiteli-1011",
+    "name": "Rkatsiteli 1011",
+    "category": "qvevri",
+    "categories": [
+      "qvevri",
+      "white"
+    ],
+    "image": "/images/rkatsiteli-1011.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "saperavi-kosher",
+    "name": "Saperavi Kosher",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/saperavi-kosher.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "mukuzani",
+    "name": "Mukuzani",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/mukuzani.webp",
+    "style": "Dry",
+    "grapes": null,
+    "alcohol": null,
+    "description": "A dry red Mukuzani from Badagoni’s appellation wine collection."
+  },
+  {
+    "slug": "khvanchkara",
+    "name": "Khvanchkara",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/khvanchkara.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "kindzmarauli",
+    "name": "Kindzmarauli",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/kindzmarauli.webp",
+    "style": "Semi-sweet",
+    "grapes": [
+      "Saperavi"
+    ],
+    "alcohol": "12%",
+    "description": "A ruby red Saperavi from the Kindzmarauli appellation, with ripe black fruit aromas."
+  },
+  {
+    "slug": "saperavi",
+    "name": "Saperavi",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/saperavi.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "akhasheni",
+    "name": "Akhasheni",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/akhasheni.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "alazani-valley-2",
+    "name": "Alazani Valley Red",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/alazani-valley-2.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "pirosmani-2",
+    "name": "Pirosmani Red",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/pirosmani-2.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "saperavi-rose",
+    "name": "Saperavi Rosé",
+    "category": "rose",
+    "categories": [
+      "rose"
+    ],
+    "image": "/images/saperavi-rose.webp",
+    "style": "Dry",
+    "grapes": [
+      "Saperavi"
+    ],
+    "alcohol": null,
+    "description": "A dry Saperavi rosé from the official Badagoni wine collection."
+  },
+  {
+    "slug": "manavi",
+    "name": "Manavi",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/manavi.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "tvishi",
+    "name": "Tvishi",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/tvishi.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "tsinandali",
+    "name": "Tsinandali",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/tsinandali.webp",
+    "style": "Dry",
+    "grapes": [
+      "Mtsvane",
+      "Rkatsiteli"
+    ],
+    "alcohol": "13%",
+    "description": "A dry Mtsvane and Rkatsiteli blend from the Tsinandali appellation, with a light straw hue."
+  },
+  {
+    "slug": "kisi-2",
+    "name": "Kisi",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/kisi-2.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "alazani-valley",
+    "name": "Alazani Valley White",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/alazani-valley.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "pirosmani",
+    "name": "Pirosmani White",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/pirosmani.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "white-one",
+    "name": "GAU#5 White One",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/white-one.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "white-two",
+    "name": "GAU#5 White Two",
+    "category": "white",
+    "categories": [
+      "white"
+    ],
+    "image": "/images/white-two.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "rose-three",
+    "name": "GAU#5 Rosé",
+    "category": "rose",
+    "categories": [
+      "rose"
+    ],
+    "image": "/images/rose-three.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "red-four",
+    "name": "GAU#5 Red Four",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/red-four.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "red-five",
+    "name": "GAU#5 Red Five",
+    "category": "red",
+    "categories": [
+      "red"
+    ],
+    "image": "/images/red-five.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "badagoni-brut",
+    "name": "Badagoni Brut",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/badagoni-brut.webp",
+    "style": "Brut",
+    "grapes": [
+      "Mtsvane"
+    ],
+    "alcohol": "12%",
+    "description": "A Kakhetian Mtsvane sparkling wine with citrus and green apple aromas."
+  },
+  {
+    "slug": "badagoni-rose",
+    "name": "Badagoni Rosé",
+    "category": "sparkling",
+    "categories": [
+      "sparkling",
+      "rose"
+    ],
+    "image": "/images/badagoni-rose.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-extra-brut",
+    "name": "Maestro Extra Brut",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/maestro-extra-brut.webp",
+    "style": "Extra Brut",
+    "grapes": null,
+    "alcohol": null,
+    "description": "Maestro Extra, an extra brut sparkling wine in Badagoni’s Maestro collection."
+  },
+  {
+    "slug": "maestro-extra-rose-brut",
+    "name": "Maestro Extra Rosé Brut",
+    "category": "sparkling",
+    "categories": [
+      "sparkling",
+      "rose"
+    ],
+    "image": "/images/maestro-extra-rose-brut.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-saperavi",
+    "name": "Maestro Saperavi",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/maestro-saperavi.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-semi-dry",
+    "name": "Maestro Semi-Dry",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/maestro-semi-dry.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-rose",
+    "name": "Maestro Rosé",
+    "category": "sparkling",
+    "categories": [
+      "sparkling",
+      "rose"
+    ],
+    "image": "/images/maestro-rose.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-semi-sweet",
+    "name": "Maestro S/Sweet",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/maestro-semi-sweet.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "maestro-brut",
+    "name": "Maestro Brut",
+    "category": "sparkling",
+    "categories": [
+      "sparkling"
+    ],
+    "image": "/images/maestro-brut.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "chacha-classic",
+    "name": "Chacha Classic",
+    "category": "chacha",
+    "categories": [
+      "chacha"
+    ],
+    "image": "/images/chacha-classic.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  },
+  {
+    "slug": "chacha-original",
+    "name": "Chacha Original",
+    "category": "chacha",
+    "categories": [
+      "chacha"
+    ],
+    "image": "/images/chacha-original.webp",
+    "style": null,
+    "grapes": null,
+    "alcohol": null,
+    "description": null
+  }
+]

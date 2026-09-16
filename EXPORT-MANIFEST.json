@@ -1,0 +1,1245 @@
+{
+  "project": "Badagoni Ritual",
+  "source_commit": "7d783fd1f9b1ba4c7b65f4c3094cf2b836a33eac",
+  "published_version": 23,
+  "live_url": "https://badagoni-ritual.l-lomsadze18.chatgpt.site",
+  "exported_at_utc": "2026-09-16T06:50:43.108533+00:00",
+  "source_file_count": 196,
+  "routes": [
+    {
+      "url": "/",
+      "source": "app/page.tsx"
+    },
+    {
+      "url": "/catalogue",
+      "source": "app/catalogue/page.tsx"
+    },
+    {
+      "url": "/story",
+      "source": "app/story/page.tsx"
+    },
+    {
+      "url": "/terroir",
+      "source": "app/terroir/page.tsx"
+    },
+    {
+      "url": "/enologists",
+      "source": "app/enologists/page.tsx"
+    },
+    {
+      "url": "/wines/saperavi-reserve",
+      "source": "app/wines/saperavi-reserve/page.tsx"
+    },
+    {
+      "url": "/alaverdi-monastery-cellar",
+      "source": "app/alaverdi-monastery-cellar/page.tsx"
+    },
+    {
+      "url": "/newsroom",
+      "source": "app/newsroom/page.tsx"
+    },
+    {
+      "url": "/newsroom/mundus-vini-gold-medals",
+      "source": "app/newsroom/[slug]/page.tsx"
+    },
+    {
+      "url": "/newsroom/saperavi-reserve-best-of-show",
+      "source": "app/newsroom/[slug]/page.tsx"
+    },
+    {
+      "url": "/newsroom/sanlian-lifeweek-georgian-wine",
+      "source": "app/newsroom/[slug]/page.tsx"
+    },
+    {
+      "url": "/contact",
+      "source": "app/contact/page.tsx"
+    },
+    {
+      "url": "/wines",
+      "source": "app/wines/page.tsx",
+      "redirect": "/catalogue"
+    }
+  ],
+  "files": [
+    {
+      "path": ".gitignore",
+      "size_bytes": 613,
+      "sha256": "cb59d954d56ab7d6fc77163723519bcd5e10ed4c0271e949bb9c77ebbc7689ea",
+      "git_mode": "100644"
+    },
+    {
+      "path": ".npmrc",
+      "size_bytes": 45,
+      "sha256": "a3909ac0447c469fda12c57374993be70f47ce73e49fd3124678c7c047f2214d",
+      "git_mode": "100644"
+    },
+    {
+      "path": ".openai/hosting.json",
+      "size_bytes": 91,
+      "sha256": "9086923da2e095ddc32eb4eaf832d562410f6e734b7444030614a57d50051c07",
+      "git_mode": "100644"
+    },
+    {
+      "path": "README.md",
+      "size_bytes": 996,
+      "sha256": "c8cd8b358b5a846a82040d7b60d5ca9105e3dd5940c5bccd10fc17675583c05c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/alaverdi-monastery-cellar/page.tsx",
+      "size_bytes": 3310,
+      "sha256": "2d74546417d4c2faa0455832eb661f4b3f4c289659c418558df7e691f59eb603",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/catalogue/page.tsx",
+      "size_bytes": 784,
+      "sha256": "6ba974e7356d65c9ad43619f2428650cdfb8b3b37defcf57b36892e37493f7e0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/chatgpt-auth.ts",
+      "size_bytes": 2550,
+      "sha256": "4265a2e7c2dcb3a6f4b7026f762bf5b6e4caec76cc13c0a45987ee9a9f2e42cc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/contact/page.tsx",
+      "size_bytes": 2306,
+      "sha256": "7f7476092b64458495eda8350434176cd1e40700ebbfa80d275e605ea84f5b64",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/editorial-cards.tsx",
+      "size_bytes": 3172,
+      "sha256": "313c2edbff0f54b5e9c7efe82d28d12a63809b7d6343f407489a14d279e0d6f5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/enologists/enologist-list.tsx",
+      "size_bytes": 3023,
+      "sha256": "8403ab08de52ae9aea49a51861ce7f9da0b97f2258fdd8b199bc736e613b6da8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/enologists/page.tsx",
+      "size_bytes": 3024,
+      "sha256": "45b5d7ee5ad73c3ef6a4bc542e4d9868e9b0d32d4eeac4f61a55bb8a9a7e57ab",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/fonts.css",
+      "size_bytes": 650,
+      "sha256": "f6d46e73dfc9a82ec04ef6b2bbe8be543e04d081f130280428edcacd6c12d621",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/globals.css",
+      "size_bytes": 55510,
+      "sha256": "00507ae427ce381003826964fbafd1eec700d2755f5eef5e2c724835ad8db04d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/layout.tsx",
+      "size_bytes": 725,
+      "sha256": "6d2183ca7e11c85cbbc3193a456e5128bae32a2d1043633a4cf354c54dab8f26",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/newsroom/[slug]/page.tsx",
+      "size_bytes": 2483,
+      "sha256": "3b4ceafd8b74a490e0036e152a3a253d17fe647df1b2d90542ec8d09fb0c670b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/newsroom/articles.ts",
+      "size_bytes": 4321,
+      "sha256": "48d7834e7ec792bde3baffbc16d79b8c2455db2ffda3567c715a30bd2ed7dff8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/newsroom/news-cards.tsx",
+      "size_bytes": 2581,
+      "sha256": "66a280944808519f387cbd63f400f3c2b77e96590174e7fa88cc4b8a59561aef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/newsroom/page.tsx",
+      "size_bytes": 1978,
+      "sha256": "d043850ffc5c0d7b40cb12d6c187388e63523d21e3444aa9a066f38d57ede254",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/not-found.tsx",
+      "size_bytes": 261,
+      "sha256": "685e87a5038e8cea52c7de9f0d6300313f0ecbd72ba5d65de830597c3e5b68d6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/page.tsx",
+      "size_bytes": 3852,
+      "sha256": "8a41be5bdf1911e9fe9a654048abb2f8ca26dee51ea1c6cfd506fc3f014ffb7b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/scroll-scene.tsx",
+      "size_bytes": 2612,
+      "sha256": "fc111fdebfb1b7e388f82945c2d2510d05c377ce76931a31ac47cd6e7fe09031",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/site-shell.tsx",
+      "size_bytes": 4257,
+      "sha256": "af92649c210313b5abdee45718f085efda0b4e1a487fa3b5871eabaee537f81c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/story/page.tsx",
+      "size_bytes": 2533,
+      "sha256": "7d5bf139b85c4fffb46cf392e9bd9c66b6ddb24f1093819568333f06b744fdf3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/story/winery-scroll-scene.tsx",
+      "size_bytes": 2897,
+      "sha256": "a469f7d2b7fe50f50af450bfa90d367169383d94dab64fed6ec39b26ea670fd4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/story/winery-section.tsx",
+      "size_bytes": 931,
+      "sha256": "9d995df33d4e47323ee09018cd08d78184c3908c6a2da410c2b8e5a991ef5f04",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/terroir/page.tsx",
+      "size_bytes": 2886,
+      "sha256": "2b30519a2307dff798f367aa7aedc79d9f587bf9c0e999c795b72d04c8cf91d0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/terroir/vineyard-list.tsx",
+      "size_bytes": 2183,
+      "sha256": "77cf9df230a5c95034671e3db301feff37fecb128e97b5bf4f9b1ee897b3191b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/wine-collection.tsx",
+      "size_bytes": 5169,
+      "sha256": "68db16c389e77efc2e042cdd9c0c41e2247894a6e41e94bf1c5fbbda8a13579e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/wine-data.json",
+      "size_bytes": 11870,
+      "sha256": "9e958eceb0c41fd3f922f5660dbafaeb39866476374bcdbcdf3466561a318233",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/wines/page.tsx",
+      "size_bytes": 102,
+      "sha256": "9b572167405f7dcf735e91c13840ea574e59f96a9fd3b685ef1d175ac928e8bb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/wines/saperavi-reserve/awards.tsx",
+      "size_bytes": 1581,
+      "sha256": "2fdb4ba41d91b27c06701afdfa8e7a5fe89d020d41d0c6ac5255ed1cbc173576",
+      "git_mode": "100644"
+    },
+    {
+      "path": "app/wines/saperavi-reserve/page.tsx",
+      "size_bytes": 3487,
+      "sha256": "0002a8263a75eecb1c87ec29de36c463fb30cb02d525cc5e222d6856eaf7141e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "build/sites-vite-plugin.LICENSE",
+      "size_bytes": 1063,
+      "sha256": "7de1e115d165f176e68f962acdb809b5ab8d8ae78d3981e0701392b2ac50c713",
+      "git_mode": "100644"
+    },
+    {
+      "path": "build/sites-vite-plugin.ts",
+      "size_bytes": 7185,
+      "sha256": "07af20e7097d9ed1d76f7c446d02997550b8fc5ca89668b249e25eabd62c6834",
+      "git_mode": "100644"
+    },
+    {
+      "path": "cloudflare-env.d.ts",
+      "size_bytes": 99,
+      "sha256": "8b0eca84aa3364cc7ccc43cc3af6beb88dd34ebd410de08690bf094ce39fbcb0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components.json",
+      "size_bytes": 420,
+      "sha256": "31f4ca67a4a62572571003d3d5aac85ee6fbfca67a192924bac6b168d95e98fd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/accordion.tsx",
+      "size_bytes": 2048,
+      "sha256": "a4f153089ba886dfcf73fac26b5c01ca933fa12fbe88df6fb723912bfffdfbb0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/alert-dialog.tsx",
+      "size_bytes": 5439,
+      "sha256": "9a8d950f2b9b4352d5ebb762fb44d5c28c2d353aa29712071973656a8736e311",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/alert.tsx",
+      "size_bytes": 1614,
+      "sha256": "2cc59b5f7bda91c1670884b1bf46bfc8a2a6f226cef184f5762acc037188885b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/aspect-ratio.tsx",
+      "size_bytes": 274,
+      "sha256": "b1c157886236782cb92d8fbcd4749532aaf6d8aabefd6e157ca40358f902f407",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/attachment.tsx",
+      "size_bytes": 6002,
+      "sha256": "ae8a25dd1a896d3964e3ef54d97e51221b418cde287dfd794428b89951c5c790",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/avatar.tsx",
+      "size_bytes": 2916,
+      "sha256": "58a846bf1617b94b9681921db9b8461d0145f311424663d11678a06b6153cb34",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/badge.tsx",
+      "size_bytes": 1776,
+      "sha256": "46a0de5224f6a5d5d63d45246534288518dce888f031064bff925bbc7fe6ad97",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/breadcrumb.tsx",
+      "size_bytes": 2350,
+      "sha256": "d4c0831bba2212e778248f54a6ace6ef378df8bba4616d1abf27787a31eabae5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/bubble.tsx",
+      "size_bytes": 4699,
+      "sha256": "870cc0c5cfc8a515053f7e41e706a6bd017a909b45f1305fd3b164a52cc4483b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/button-group.tsx",
+      "size_bytes": 2202,
+      "sha256": "784c89d8ee683e1bc972ae69e6ea8225a7f63abe22aa1b5fc3423ae8a2a399c0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/button.tsx",
+      "size_bytes": 2392,
+      "sha256": "cc36af0f8b5019c33cc039fbf03bb952a513072b15b55b53c592b78af3e5f4c4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/calendar.tsx",
+      "size_bytes": 7832,
+      "sha256": "3855fbe0d3f8ad3a4b93071f98b76a9f6782d46ec8b05f5d2ddbee1e4e39bc84",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/card.tsx",
+      "size_bytes": 1987,
+      "sha256": "c48dd3b96be90a7066f1aebf294f0af9d00ebcdc367d5d4aca55429ade570c1c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/carousel.tsx",
+      "size_bytes": 5556,
+      "sha256": "b7ea0dda3903d972c186f739e23da61f547bc83b5a0bf13b16856577846d5fc3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/chart.tsx",
+      "size_bytes": 10614,
+      "sha256": "45aa5ea4a386f4fb5b8869ff4bab3a08cf89255190ee322043baf84c3e950b6a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/checkbox.tsx",
+      "size_bytes": 1214,
+      "sha256": "b23ab9d4deeedf2ac8f512c368361ede681aa383437ef48563a6f9b7dbe95f27",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/collapsible.tsx",
+      "size_bytes": 795,
+      "sha256": "c6598e5584f4258b5d9fefadbc5ad6a66888ad58729f4b634a0bb2d9c513188b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/combobox.tsx",
+      "size_bytes": 9158,
+      "sha256": "2d68e78b2dc7e38a085f222dede60a80b4f8229a6e91732c484605e204d46735",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/command.tsx",
+      "size_bytes": 4818,
+      "sha256": "361193df1e3d64a9e9b5048f045264782fcb387aab3f00f2b805fdcbf538b16a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/context-menu.tsx",
+      "size_bytes": 8268,
+      "sha256": "2cf1fcf59df0649a3e2a126d1df2f639145f6b6bf5689ee54af1f40ab1245017",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/dialog.tsx",
+      "size_bytes": 4303,
+      "sha256": "dce39c6adc47d997bd2567f8b7a72f466b0134715105cd42f9194007b8ecdb14",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/direction.tsx",
+      "size_bytes": 506,
+      "sha256": "84ae2ad658207f0e0f367978e5508cd8027cd00c29c41d3d13db21a708c3d1e6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/drawer.tsx",
+      "size_bytes": 4255,
+      "sha256": "cb6eaf58eb0757ca91af284e5d925b89a42ad7eb19cb3f44c575a3487aa9350f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/dropdown-menu.tsx",
+      "size_bytes": 8418,
+      "sha256": "98f0dcdae38225b73734aceeb9213dd751fea2c72ea520df31003cd133deac8a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/empty.tsx",
+      "size_bytes": 2396,
+      "sha256": "ae95bdcf367a076ae02e7925f14522a148798f72d9651749c6d55497dba584c0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/field.tsx",
+      "size_bytes": 6159,
+      "sha256": "ba67d76f017ac059fc86cf8c344e0b2991c4322d3619e125498c19b87f6eefbd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/form.tsx",
+      "size_bytes": 3757,
+      "sha256": "315b46bb75ab7d1c6061b5d750aa4bedf6e7a455e15e2d7f9182f053d5972b1e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/hover-card.tsx",
+      "size_bytes": 1526,
+      "sha256": "f5d8df42c59370ec14d61bcc54f7d68e9bb7dfa0d6a872b2f7cffc2aafbf23b8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/input-group.tsx",
+      "size_bytes": 5065,
+      "sha256": "6afbd58fea4c438e6252dc4568bddc122e84ababead4ad5cee50ace01100c9a0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/input-otp.tsx",
+      "size_bytes": 2254,
+      "sha256": "161946daa89f0eda2575b9271c0494e35807c4ffb55598a49f67160c17fec299",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/input.tsx",
+      "size_bytes": 962,
+      "sha256": "8c4612a7c41319ac5049daa3b34b080f9784b6245c17780eb87c127e58e473db",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/item.tsx",
+      "size_bytes": 4486,
+      "sha256": "6e2144d6d87142dbbe56d568810bf546318c8aa661447ebb0d76ebbf382cb45f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/kbd.tsx",
+      "size_bytes": 862,
+      "sha256": "6088c3a5432338b1719c17e9b5d0e1fa74fd1f66060f248fc88909d33a82cd13",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/label.tsx",
+      "size_bytes": 606,
+      "sha256": "a476e41f08b9de5bd447de66a33d8bc2ad18f2fa6b96c064778bab4b6f439f4c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/marker.tsx",
+      "size_bytes": 1864,
+      "sha256": "3d798763f094b2bb5e7ade2d5cd1b9bab498bc8ca7fd4cfaf4e5835bdedc34a0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/menubar.tsx",
+      "size_bytes": 8389,
+      "sha256": "9243af8afcea03703398ccd1c2a8c0a87ad6cbaf2bd272fb609f5b79fe46aebb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/message-scroller.tsx",
+      "size_bytes": 3992,
+      "sha256": "bb7660a248e4e9589c3816c7c1c199ea1381a70d2c8476ae895b567a7a4d86cf",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/message.tsx",
+      "size_bytes": 2232,
+      "sha256": "9d2952bf3b641081f09aa2739535e6bbd1be0a4946789752a2c20d8aaef43185",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/native-select.tsx",
+      "size_bytes": 1995,
+      "sha256": "007516b111fca8c98a6c40c94ab91bb68cc5b52afce1ed1f5e510c3d86e7347c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/navigation-menu.tsx",
+      "size_bytes": 6658,
+      "sha256": "889d358a77de88e9cb6f39ea4895ea4c76eaf01d731b74e44f1c41e97a78a044",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/pagination.tsx",
+      "size_bytes": 2717,
+      "sha256": "374ad135c3d4ff3ec080a0009cd9745cdd0e12faa89d2b0e86074f11e5127fd1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/popover.tsx",
+      "size_bytes": 2357,
+      "sha256": "31c350309ff5d3034e6ecf1b0eda75ba8855bdbf987fc7ad6d71f0ef07c5a447",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/progress.tsx",
+      "size_bytes": 755,
+      "sha256": "c8c26e8f5f041c3cdf4915347dc1d9c022f9448f149990fadcaf303e952fa57d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/radio-group.tsx",
+      "size_bytes": 1460,
+      "sha256": "fe5ce39636d0818c2bf9c4eebddff893d1225fa2c81b5fa4bb8cbb39a8c913ce",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/resizable.tsx",
+      "size_bytes": 1815,
+      "sha256": "bc63958467aa00557c551bb0d96a5ae4c965c1e1ba2380e595949d933b132f7c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/scroll-area.tsx",
+      "size_bytes": 1639,
+      "sha256": "8bd9d986b2844c9a87de825c6de4787b6739b36c3dc9a05ccf3eb107160e4043",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/select.tsx",
+      "size_bytes": 6353,
+      "sha256": "0b796a108a4eb5ba52d9ad938b7aea36dc56ae66c703a6d0a23dbc24f96daff3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/separator.tsx",
+      "size_bytes": 694,
+      "sha256": "6da346505c8629a4668420d2a5ca48891383bbe0b0ceb14163537c671879427e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/sheet.tsx",
+      "size_bytes": 4188,
+      "sha256": "63863cf2df8f8973e52b3459ac9bdbf81be1262dbc70eb53d5271ffb03488e16",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/sidebar.tsx",
+      "size_bytes": 21526,
+      "sha256": "4a8d73e7730a2b1fcecfca31299ed26db65c2307b84197a59c6ec7c01c7ad28e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/skeleton.tsx",
+      "size_bytes": 276,
+      "sha256": "ba48dd5be5a6a1378bd4e011028654b5bf419f1e7d20ee4b9f8330c1264e7239",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/slider.tsx",
+      "size_bytes": 1991,
+      "sha256": "0e37484f4b416e79ac18c655cac961aefacf6e67085cfc2b320ea8af545635a3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/sonner.tsx",
+      "size_bytes": 1034,
+      "sha256": "13ccc9b0fe4248e622f83a1d3b2f0566b72b5e04162d7d0c8db8945ecc71b55f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/spinner.tsx",
+      "size_bytes": 331,
+      "sha256": "3e6e6e8d37fb4069f8e43e55318f8db06fbc36e6c8be0096da3c9337c1c798b9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/switch.tsx",
+      "size_bytes": 1408,
+      "sha256": "386d4d4deb39f34126f9700fe9bf5393d238485dd94018bba9d154dda84c62ae",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/table.tsx",
+      "size_bytes": 2478,
+      "sha256": "20e5a7f224959c6b75802995706a97e9da171f693d4b6b1b436388fcd9df96f3",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/tabs.tsx",
+      "size_bytes": 3782,
+      "sha256": "865d0194331b9b2be36723fa79d3575dc83078b4cb941cafee87cb72fc2cff46",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/textarea.tsx",
+      "size_bytes": 759,
+      "sha256": "253cdeb487c73beaaccdf47fc163e36e7d5b7ae6ddf09a4f64998a109a112979",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/toggle-group.tsx",
+      "size_bytes": 2308,
+      "sha256": "69f643e889e933f05c1439084480d8646f66a161c7d1cf0730ee926382ade35e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/toggle.tsx",
+      "size_bytes": 1565,
+      "sha256": "ba4d0b0a2b2fee75dc36dfc19e32082e721024b919050c97fd5dc70faa924e16",
+      "git_mode": "100644"
+    },
+    {
+      "path": "components/ui/tooltip.tsx",
+      "size_bytes": 1830,
+      "sha256": "a0784eb77831a799fad7991df4f1b666f876201565a80175e1aa68733574a2e4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "db/index.ts",
+      "size_bytes": 423,
+      "sha256": "dc7610b00b918e0ffff1360a63626f16655ced3064b2eaf96095a4101fb14bcd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "db/schema.ts",
+      "size_bytes": 169,
+      "sha256": "13ddacbf0be50e054d450a6c642b7fdc1aa943fd6b99084711e07e58b600390d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/asset-sources.json",
+      "size_bytes": 12593,
+      "sha256": "01c67f0120323af748f7c27ee84c1d1a37c4de5551901490e5192c0c36417e98",
+      "git_mode": "100644"
+    },
+    {
+      "path": "docs/content-sources.md",
+      "size_bytes": 14000,
+      "sha256": "cd3b1a8199a64b585f05f0fca7fd2e7940887b86baece6518f5f70976a33479f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "drizzle.config.ts",
+      "size_bytes": 148,
+      "sha256": "af081f7384aaeb0082cf422e29f139d137ca2f6a57c69b2c37b9fb1f8479867b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "drizzle/meta/_journal.json",
+      "size_bytes": 61,
+      "sha256": "90cb374e093894d0efce6f1830d873a42aadd8ba49d2f024495e5cb2e1c8c303",
+      "git_mode": "100644"
+    },
+    {
+      "path": "eslint.config.mjs",
+      "size_bytes": 846,
+      "sha256": "f22a254df7d934bbf9be499d3c969a13abb7f7f64c03f5967d0095cad81dfe06",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/d1/app/api/notes/route.ts",
+      "size_bytes": 1700,
+      "sha256": "a3d4a74fd53b7bf53e2df41f169d9d9d44a8b22aeb6d92f4e754956079af8909",
+      "git_mode": "100644"
+    },
+    {
+      "path": "examples/d1/db/schema.ts",
+      "size_bytes": 370,
+      "sha256": "d89eabd95716ce404f5f7ca2a254220435be8ddce7c899d7ef461ff22ec80454",
+      "git_mode": "100644"
+    },
+    {
+      "path": "hooks/use-mobile.ts",
+      "size_bytes": 565,
+      "sha256": "ad0936f84f1df79d3697bfbff9c18f8ad58431c1cbaf2359c6a853b0fcc9f28b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "lib/utils.ts",
+      "size_bytes": 177,
+      "sha256": "53f3d3d070f0a9082934da25b875f9499855c2b0693868dd28be8c23d8730f68",
+      "git_mode": "100644"
+    },
+    {
+      "path": "next.config.ts",
+      "size_bytes": 133,
+      "sha256": "614bce25b089c3f19b1e17a6346c74b858034040154c6621e7d35303004767cc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "package-lock.json",
+      "size_bytes": 497666,
+      "sha256": "a8ed3541b98f94fcda50dbd412c001cb45b7a35d8ac28f3a674540990f3569b0",
+      "git_mode": "100644"
+    },
+    {
+      "path": "package.json",
+      "size_bytes": 1977,
+      "sha256": "32a5b2bf6bc0787b4d0375401e87dcc63dbd9d36a5640c634ce739483828ab06",
+      "git_mode": "100644"
+    },
+    {
+      "path": "postcss.config.mjs",
+      "size_bytes": 94,
+      "sha256": "dfac7ac2d86d326a0e5adb024e7943c181393ed17a5fcb8f0315b24c7da6ddde",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/favicon.svg",
+      "size_bytes": 225,
+      "sha256": "b90214d676645fb0d46452f66929f620982bd94675e75f4d51581322d5c63a19",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/InstrumentSerif-Regular.ttf",
+      "size_bytes": 69312,
+      "sha256": "56ac3be03ac3ba283196b3e77850ab2ffcf56cfb6fd3212c5620109a972f8c99",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/bodonimoda-OFL.txt",
+      "size_bytes": 4400,
+      "sha256": "931dfe2e0cd3c9443295f5c1d754b8a8403bf060df50c1d5900267ade83d0046",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/brand-0.ttf",
+      "size_bytes": 47556,
+      "sha256": "04e9d8c1baad0a16a87663969fd26109c4a7796436264a71492c2477e9b76ff6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/brand-1.ttf",
+      "size_bytes": 44752,
+      "sha256": "7bf8604bdeb63fe00278935c1a7e8595de56dfc053ab43581ca848ffd5ad11ba",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/brand-2.ttf",
+      "size_bytes": 94972,
+      "sha256": "a13d9b41b0a471ce58f0e46d377fa3cc76615e4632c3b15eb397caadf7a13f0a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/brand-3.ttf",
+      "size_bytes": 95060,
+      "sha256": "f433e5d333be1128d8ec8a28b8aadd0314d10e14e4105406076666bc830fc15d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/brand-4.ttf",
+      "size_bytes": 95096,
+      "sha256": "6bad1a774228464cc88b8b0271555b266f7a3c64a7bedf15e165fdab4f6ac0ce",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/fonts/manrope-OFL.txt",
+      "size_bytes": 4384,
+      "sha256": "e01b637272e0cbdfb240184dd98ea5cc671556d9894dae2668d92ab2c906787c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/akhasheni.webp",
+      "size_bytes": 45180,
+      "sha256": "4e20adaa8eaea3d121cf72788cb7ba8c61ce7adf2a7bc7c81f2d3e0cb191d0ef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/alaverdi-tradition-red.webp",
+      "size_bytes": 40276,
+      "sha256": "eebc08ee081ce600f0a36d4d11f8d71e2ff1c07d1eae719c738d75d496194a2d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/alaverdi-tradition-white-qvevri-wine.webp",
+      "size_bytes": 42100,
+      "sha256": "fb0f4fc3488990520fd06ef70a7adeb5c860faca9da3231d10ee4e8b12e1b165",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/alazani-valley-2.webp",
+      "size_bytes": 44810,
+      "sha256": "3b11cb927071add9c12fa182cf82c862a5de05bb8c69547283f1387523a4c38a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/alazani-valley.webp",
+      "size_bytes": 47158,
+      "sha256": "ae0b22296622553375eab15bef9df4a6fcdfd08d3d77b6e14e4db77af8e97128",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/awards/decanter-platinum-2021.png",
+      "size_bytes": 143241,
+      "sha256": "51921c6cba46ccfcdacb48a6ac37c20063b2cfbef7516ddcdd2d623f9a634499",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/awards/decanter-platinum-2024.png",
+      "size_bytes": 284086,
+      "sha256": "729efc140f9fddd53de3e49b09d41741d87a366c0d296ec201435174690438e1",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/awards/mundus-vini-gold-2024.png",
+      "size_bytes": 720276,
+      "sha256": "026a6ea291390992ea4555d8834f18e7ca8ef923aa4e6fda8ef1c469a9d3ffeb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/awards/vinarium-gold-2024.png",
+      "size_bytes": 614238,
+      "sha256": "07f99eb72dabf18bc0d770784d22b0f570d725e9793b530dc7818c2507d66f39",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/badagoni-brut.webp",
+      "size_bytes": 61992,
+      "sha256": "31bd0409a4976ebcce507a904e6f70e87a87ef666818ad57305d31d9bf4800f6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/badagoni-logo.svg",
+      "size_bytes": 4556,
+      "sha256": "53220a03a76f93471d482db6edc61021000200cdda0d7519869be0b0ef4c6a95",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/badagoni-rose.webp",
+      "size_bytes": 64088,
+      "sha256": "2e481b6affee4c0efdd24ba677b3f654c52a902ecae9fb0687531392da6fb41b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/badagoni-wordmark.svg",
+      "size_bytes": 2714,
+      "sha256": "0b37c711c09f80a4c92736d4089c3503caa3814439c76cc962d9095f16820131",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/cellar.webp",
+      "size_bytes": 122634,
+      "sha256": "fc732b776d6b5f28017a42805dbaf4d00309861965e64c79ac4e1c60a1215acb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/chacha-classic.webp",
+      "size_bytes": 46642,
+      "sha256": "012a00e43410a8594df09ccb8aac04a123e76e98c3772125b3cbf5a678b8c991",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/chacha-original.webp",
+      "size_bytes": 42306,
+      "sha256": "e1ccfc5391918f2c5560ba85cd2dcdc6dd11e9cda7cbe7b26003d85ec1b834f4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/donato-lanati.webp",
+      "size_bytes": 107952,
+      "sha256": "ec0a9c897c5edf480d7467ade689b1e4123d9129682557b2e8f521344801b65b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/hero.webp",
+      "size_bytes": 575652,
+      "sha256": "2af40a11de6492657cf1697521f146bda50922ea2ebc4315d4020113391c1fc8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/kakhetian-noble-2.webp",
+      "size_bytes": 59852,
+      "sha256": "9c3c07c692efa7af6b37e7e883070b96fcecd2695120b2f7e5ae285ce35e685c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/kakhetian-noble-3.webp",
+      "size_bytes": 39398,
+      "sha256": "c285f4e4c932ab622e921b05ecce5c25f95bdc633855b97289e8f618052e8afc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/khikhi-qvevri.webp",
+      "size_bytes": 46794,
+      "sha256": "0d88f94f298f70cbd2b173d7f770a2c47680c2665e81b3a9a2823d2fbcad14a9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/khvanchkara.webp",
+      "size_bytes": 44522,
+      "sha256": "89424ba5ae1f8e3f6016b32043f9a8664575fa8d96549c1f53317b88af6393da",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/kindzmarauli.webp",
+      "size_bytes": 33642,
+      "sha256": "b5cb54a8d6b8a2068987b9840a004bf15e9c6b25190ac82b4836cb3367233029",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/kisi-2.webp",
+      "size_bytes": 44086,
+      "sha256": "4804ea0dd8390e46187943afcb91dfb6d3cd4fe33bc2de1cde2c69ba73756ff8",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/kisi-qvevri.webp",
+      "size_bytes": 40632,
+      "sha256": "f37f6fdbe3bcb5fa608d9e4b230d02c718ac2cb4cb1eb5412023b4b044385105",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/logo.png",
+      "size_bytes": 14387,
+      "sha256": "ddb357482d33cd591902b61dc1d3c7a5d19dcac5421bc8f0f82dd42cfd344b58",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-brut.webp",
+      "size_bytes": 63402,
+      "sha256": "57c281fa51b9b2e5433157fce0259d4fd24af0e14d48f61cbdbdc8b74b5bee16",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-extra-brut.webp",
+      "size_bytes": 56232,
+      "sha256": "92a2a3332705435e3b50e68101ba588d250e8bd18ebd8730aebccca5eae6cc51",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-extra-rose-brut.webp",
+      "size_bytes": 51628,
+      "sha256": "4d73563a6a44543b0eea1ea2f6347eee3c2330d673a8bdf1284363e42a22c2cd",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-rose.webp",
+      "size_bytes": 87588,
+      "sha256": "c8901e30f4d51e22a36bd3c1ab063a177ecfe1c217700ccb7b9a7adeb7065850",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-saperavi.webp",
+      "size_bytes": 64066,
+      "sha256": "43e8e5ee36b2d079d8f8d946b0e87b2bc5825737d24a761a5c94aec7978d2db6",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-semi-dry.webp",
+      "size_bytes": 58704,
+      "sha256": "57a246a3c3d51f5dad8ee56aefa392e96d864b8e5490974d2e13e28958c76747",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/maestro-semi-sweet.webp",
+      "size_bytes": 64202,
+      "sha256": "692843b30a1ee95de555e3b916c21a85d863599672bc3fa2018fcc4941d4e081",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/manavi.webp",
+      "size_bytes": 45484,
+      "sha256": "22b6851239db5cc9e56fdf81b9b825d2930f7619dcf3c49ec3cf5e4d559d9dce",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/mukuzani.webp",
+      "size_bytes": 32604,
+      "sha256": "01c3ea8a015738c00c8561d375490b0972f1d58be845eba811bdae9b8a9ff636",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/newsroom/mundus-vini.jpg",
+      "size_bytes": 1350992,
+      "sha256": "7b640194b78cced4320227330444e18a0f7185890b6cbf2f09ba7d90e5ec5c10",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/newsroom/sanlian-lifeweek.jpg",
+      "size_bytes": 498736,
+      "sha256": "9e6e17712e7b6b5a633efa8f027b6353d9b3a6b7f87dbcb3aec538dc77de924c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/newsroom/saperavi-reserve.jpg",
+      "size_bytes": 83432,
+      "sha256": "818ed30d441eeef7112cf5c04f9589ce204c824375c6e567c61bf5e10fec1698",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/paolo-lavagna.webp",
+      "size_bytes": 50246,
+      "sha256": "a06ac55b5bf732c15be641f29af3d466f962a2034a02b02167514f293ed38fdb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/pirosmani-2.webp",
+      "size_bytes": 43466,
+      "sha256": "eb874ecfda05ec01408de71253425293194a6f4483da522ac68c3528535cda20",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/pirosmani.webp",
+      "size_bytes": 46684,
+      "sha256": "fecb8e7017d4a22859b694f74eab749ea2f532170df22ddb410015e6f6d2d59c",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/red-five.webp",
+      "size_bytes": 66426,
+      "sha256": "7edcfc6b4d7acabaeadb153110d92f5e308d4cdcbdd3c0cc228d5ad4315ee36f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/red-four.webp",
+      "size_bytes": 66828,
+      "sha256": "50506c75d5ae7c0cafe4dfb04b86425f90174e66ab74d0fa74478fd4dd1862a5",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/ritual-editorial.webp",
+      "size_bytes": 138822,
+      "sha256": "d3cae5660054b30fc6e80fe5d0742919532608ce468f0924e6140458201692b2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/rkatsiteli-1011.webp",
+      "size_bytes": 49608,
+      "sha256": "988545073ed70e49aa14e588fd74d8d8f37f6334d20280cf96cf221d2b9f2cbb",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/rose-three.webp",
+      "size_bytes": 63468,
+      "sha256": "dafccb3fb456416882de3d31b33934ecb69b46b80ec21cb1cb69ab4a7e99c770",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/salome-salakaia.webp",
+      "size_bytes": 32360,
+      "sha256": "102fd76674c04a5a191d0798297705d3a61c933b7fc24a47365ebf5f1ee9ddb9",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/sandro-kumsiashvili.webp",
+      "size_bytes": 38766,
+      "sha256": "1f90eea0ca6fc604212fc2b412cca315f94b238b552fd6005d18c7632135cc3d",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi-1011.webp",
+      "size_bytes": 51252,
+      "sha256": "2bd36d10f93c165e1533441a35472256269507d0e7e1df91e44dffbc8bbbec89",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi-kosher.webp",
+      "size_bytes": 13160,
+      "sha256": "27156d62431adfd4b547ec7ba955fce0f2369bec82483dab3c06d5b438a2f94a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi-qvevri.webp",
+      "size_bytes": 64316,
+      "sha256": "4644b3d5439914aa4a574fb401bf4e10c57e9920265b1c0921974110f5b206f2",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi-reserve.webp",
+      "size_bytes": 109210,
+      "sha256": "563793278be1c7fe78f67764b0f2d5026b156c9c0d96d252d8cd16d8106b9cc7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi-rose.webp",
+      "size_bytes": 45930,
+      "sha256": "22caeeeb86f229cf46bb2ac14fc3a907e5640a4d536d9b17f05ca8278a68a0ef",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/saperavi.webp",
+      "size_bytes": 44240,
+      "sha256": "f8fa0596c4efa5bd710c928d5375cf475604914390790c333632ab5ef23df6c7",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/tsinandali.webp",
+      "size_bytes": 35386,
+      "sha256": "4cde8c8b2848f679f5f5506047760c516a4811153ffb5ba38faa1c12d0c73d92",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/tvishi.webp",
+      "size_bytes": 46090,
+      "sha256": "dbfe9f7bfe4987d16d55b846503474af29e1ebc215be29273ea968c571b79f01",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/vineyard.webp",
+      "size_bytes": 439554,
+      "sha256": "f7ea6095d6f924cd6b1cd70c1ee9a985e35278a157fc321d0e514c371764ce95",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/vineyards/alaverdi.webp",
+      "size_bytes": 354636,
+      "sha256": "0fdd218cdf4538c05638577608b424b49bbd6e573b0113fe746c4e11864eca4e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/vineyards/maghraani.webp",
+      "size_bytes": 572760,
+      "sha256": "51b1b24e136439d31986063d8ebfbfd41b8d1e9ee7b41dee8dd5f9a5ff8b909b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/vineyards/mukuzani.webp",
+      "size_bytes": 580004,
+      "sha256": "729cd7f104eb8dfd9baadbddb180e9b344b77acd5c006e0755c7cdef0834f7be",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/vineyards/tsinandali.webp",
+      "size_bytes": 436542,
+      "sha256": "57735d71d61e5ed34f423c1a22696d7444ba03b6721f0b3f2811dd4de5e1f363",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/white-one.webp",
+      "size_bytes": 64316,
+      "sha256": "5e94924e9d91b7367fd5c73572b25deed24dc4b2102dc712807acd4229a8762b",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/white-two.webp",
+      "size_bytes": 62000,
+      "sha256": "d19ef193f10dd6bfbe3b165d446043f1067ec6a181dcb3f2dace353b7120d23e",
+      "git_mode": "100644"
+    },
+    {
+      "path": "public/images/winery.jpg",
+      "size_bytes": 451526,
+      "sha256": "caaf60a1e86a2ab82a8ed296c382212d2e6e8383c97fecc4d71378649af86cbe",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/build-verified.sh",
+      "size_bytes": 661,
+      "sha256": "2ae5329ac860076070c9217a43106a15cb5ecf907a0f7baeb9ef903f76b53c68",
+      "git_mode": "100755"
+    },
+    {
+      "path": "scripts/execution-profile.mjs",
+      "size_bytes": 624,
+      "sha256": "2e71116f4d2b70cff8bb70436f8dd5c709ec7ff62893424530f404e0193d3630",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/install-ci.mjs",
+      "size_bytes": 1616,
+      "sha256": "63f2c4589b740184b68a0c9214fe92439b6f7d1fbfbec9ef552fd745b0a9c6cc",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/install-ci.sh",
+      "size_bytes": 7471,
+      "sha256": "2d04c0f3879c756a7a7b4b000e05d75cf98214ac3d1be2fc44327007d122176b",
+      "git_mode": "100755"
+    },
+    {
+      "path": "scripts/run-framework.mjs",
+      "size_bytes": 993,
+      "sha256": "9bf9f41a29314cabe0238b8e9c540ec3f7b5a6adafc7c8fb6c3940722d061dca",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/sites-env.mjs",
+      "size_bytes": 906,
+      "sha256": "5de99d6806b01f0ee0b941af3684d75dcf1afbbcff22cb95bfa2e584c5dafa88",
+      "git_mode": "100644"
+    },
+    {
+      "path": "scripts/sites-env.sh",
+      "size_bytes": 1530,
+      "sha256": "df86ebfc27d2f00860036658e933ac0ddd7b5f6879aa5d51218f0863c7e1fb60",
+      "git_mode": "100755"
+    },
+    {
+      "path": "tsconfig.json",
+      "size_bytes": 800,
+      "sha256": "7199c6e4e400921e8049729840165a39f1476fa97901bed00239e7697bfe8da4",
+      "git_mode": "100644"
+    },
+    {
+      "path": "vendor/shadcn-tailwind-4.13.0.LICENSE.md",
+      "size_bytes": 1063,
+      "sha256": "1564074e13439397221ffd522e2e504d56561994a23d371aa5e3ad43e4f5423f",
+      "git_mode": "100644"
+    },
+    {
+      "path": "vendor/shadcn-tailwind-4.13.0.css",
+      "size_bytes": 16041,
+      "sha256": "bc7d83425702955b4cb67cb14ede9d603f9d912376d57a2d81d661094d2a782a",
+      "git_mode": "100644"
+    },
+    {
+      "path": "vite.config.ts",
+      "size_bytes": 2240,
+      "sha256": "4b9d8a6b14fd155328847bc6cd063c6bf44c58c64de8d46911cdf0ede611e367",
+      "git_mode": "100644"
+    }
+  ],
+  "added_export_documents": [
+    "DEVELOPER-HANDOFF.md",
+    "EXPORT-MANIFEST.json"
+  ]
+}
