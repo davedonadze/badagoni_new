@@ -184,6 +184,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .wine-specs>div {display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--border);padding:13px 0;font-size:14px}
 .wine-specs dt {color:#60605b}
 .wine-specs dd {margin:0;text-align:right}
+.wine-panel-actions {display:flex;flex-direction:column;align-items:flex-start;gap:14px}
 
 /* Saperavi Reserve: the original bottle and the story inside it. */
 .reserve-breadcrumb {display:flex;align-items:center;flex-wrap:wrap;gap:12px;min-height:62px;margin:0 var(--gutter) 20px;font-size:14px;line-height:1.4}
