@@ -16,12 +16,17 @@ const managedLinux = readExecutionProfile() === "managed-linux";
 const localBindingConfig = {
   main: "vinext/server/fetch-handler",
   compatibility_flags: ["nodejs_compat"],
+  // Local/dev builds use a placeholder D1 database that Miniflare simulates
+  // on disk. A real deploy (e.g. Cloudflare Workers Builds) needs a real
+  // database bound instead — set CLOUDFLARE_D1_DATABASE_ID (and optionally
+  // CLOUDFLARE_D1_DATABASE_NAME) as a build variable to override it. See
+  // docs/admin-panel.md.
   d1_databases: d1
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: process.env.CLOUDFLARE_D1_DATABASE_NAME || "site-creator-d1",
+          database_id: process.env.CLOUDFLARE_D1_DATABASE_ID || SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
         },
       ]
     : [],
