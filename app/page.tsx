@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { FeaturedWines } from "./wine-collection";
 import { EditorialCards } from "./editorial-cards";
 import { ScrollScene } from "./scroll-scene";
+import { ScrollReveal } from "./scroll-reveal";
 import { listWines } from "@/lib/wines/service";
 
 const worlds = [
@@ -21,10 +22,10 @@ export default async function Home() {
       <p className="campaign-caption">Native grapes.<br />Independent character.</p>
     </section>}>
 
-    <section className="opening-note" aria-label="About Badagoni">
+    <ScrollReveal><section className="opening-note" aria-label="About Badagoni">
       <h1 className="opening-signature">From Georgia, with character.</h1>
       <p className="opening-copy">Born in the heart of Kakheti, we bring a contemporary spirit to Georgian wine. From the soil to the table, it’s a story of character, connection, and a place like nowhere else.</p>
-    </section>
+    </section></ScrollReveal>
 
     <section className="selected-collection" aria-labelledby="collection-title">
       <div className="collection-label"><h2 id="collection-title">The collection</h2><span>Selected expressions / 01—03</span></div>
@@ -32,9 +33,9 @@ export default async function Home() {
       <div className="collection-more"><Link href="/catalogue" className="underlined-link">View all wines <ArrowUpRight size={16} /></Link></div>
     </section>
 
-    <EditorialCards />
+    <ScrollReveal><EditorialCards /></ScrollReveal>
 
-    <div className="origin-interlude"><p>Badagoni<br />Kakheti, Georgia</p><span>Local roots. A world of possibilities.</span></div>
+    <ScrollReveal><div className="origin-interlude"><p>Badagoni<br />Kakheti, Georgia</p><span>Local roots. A world of possibilities.</span></div></ScrollReveal>
 
     <section className="manifesto" aria-labelledby="manifesto-title">
       <ScrollScene media={<div className="manifesto-image"><img src="/images/ritual-editorial.webp" alt="A shared glass of wine around the table" loading="lazy" /><span>Wine is a way of bringing people together.</span></div>}>
@@ -42,10 +43,10 @@ export default async function Home() {
 
     <section className="world-section" aria-labelledby="world-title">
       <h2 id="world-title" className="world-label">Our world, in three parts</h2>
-      {worlds.map(world => <article className="world-row" key={world.number}>
+      {worlds.map(world => <ScrollReveal key={world.number}><article className="world-row">
         <div className="world-number"><span>{world.title}</span><span>/{world.number}</span></div>
         <div className="world-copy"><h3>{world.subtitle}</h3><p>{world.text}</p><Link href={world.href} className="underlined-link">{world.link} <ArrowUpRight size={16} /></Link></div>
-      </article>)}
+      </article></ScrollReveal>)}
     </section>
       </ScrollScene>
     </section>
