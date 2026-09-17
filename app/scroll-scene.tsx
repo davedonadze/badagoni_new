@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-export function ScrollScene({ media, children }: { media: ReactNode; children: ReactNode }) {
+export function ScrollScene({ media, children, earlyReveal = false }: { media: ReactNode; children: ReactNode; earlyReveal?: boolean }) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
 
@@ -21,7 +21,11 @@ export function ScrollScene({ media, children }: { media: ReactNode; children: R
       const height = visual.offsetHeight;
       // On short screens, reveal the bottom of the image before pinning it.
       const pinTop = Math.min(0, window.innerHeight - height);
-      const distance = reducedMotion.matches ? 0 : Math.max(0, pinTop - scene.getBoundingClientRect().top);
+      // earlyReveal starts the drift as soon as the scene begins entering the
+      // viewport from below, instead of waiting until it reaches its pinned
+      // position at the top.
+      const reference = earlyReveal ? window.innerHeight : pinTop;
+      const distance = reducedMotion.matches ? 0 : Math.max(0, reference - scene.getBoundingClientRect().top);
       // The content covers the image at full scroll speed; the image drifts at 12%.
       const offset = `${(-Math.min(distance, height + pinTop) * 0.12).toFixed(2)}px`;
       const top = `${pinTop}px`;

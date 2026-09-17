@@ -135,8 +135,8 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .origin-interlude {text-align:center;padding:145px 20px 130px;text-transform:uppercase;font-size:12px}
 .origin-interlude p {line-height:1.35}
 .origin-interlude>span {display:block;margin-top:20px;font-size:12px;color:#64645f}
-.manifesto-image {position:relative;height:650px;overflow:hidden;background:#716255}
-.manifesto-image img {width:100%;height:100%;object-fit:cover;object-position:center 69%}
+.manifesto-image {position:relative;background:#716255}
+.manifesto-image img {display:block;width:100%;height:auto}
 .manifesto-image>span {position:absolute;left:var(--gutter);bottom:22px;color:white;font-size:12px;text-transform:uppercase;text-shadow:0 1px 7px #000}
 .manifesto-content {width:var(--editorial-copy-width);margin:64px var(--gutter) 90px auto}
 .manifesto-content h2 {font-size:clamp(58px,5.8vw,90px);line-height:.92;letter-spacing:-.025em;text-transform:uppercase}
@@ -465,7 +465,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 @media(min-width:1700px) {
   .bottle-stage {height:500px}
   .bottle-stage img {height:370px}
-  .manifesto-image {height:800px}
 }
 @media(max-width:1100px) {
   .site-header {gap:25px}
@@ -475,7 +474,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .bottle-stage {height:360px}
   .bottle-stage img {height:260px}
   .wine-card-title h3 {font-size:26px}
-  .manifesto-image {height:510px}
   .world-number {padding-right:16px;gap:20px}
   .world-copy h3 {font-size:32px}
   .catalog-grid .bottle-stage {height:340px}
@@ -532,8 +530,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .editorial-details-inner {grid-template-columns:minmax(0,1fr);gap:15px;padding-top:25px}
   .editorial-description {font-size:16px}
   .origin-interlude {padding:85px 18px 80px}
-  .manifesto-image {height:450px}
-  .manifesto-image img {object-position:67% center}
   .manifesto-image>span {font-size:12px;max-width:250px}
   .manifesto-content {width:auto;margin:45px var(--gutter) 65px}
   .manifesto-content h2 {font-size:clamp(48px,10vw,70px);line-height:.95}
