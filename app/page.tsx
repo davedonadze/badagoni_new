@@ -38,7 +38,7 @@ export default async function Home() {
     <ScrollReveal><div className="origin-interlude"><p>Badagoni<br />Kakheti, Georgia</p><span>Local roots. A world of possibilities.</span></div></ScrollReveal>
 
     <section className="manifesto" aria-labelledby="manifesto-title">
-      <ScrollScene earlyReveal intensity={0.2} media={<div className="manifesto-image"><img src="/images/ritual-editorial.webp" alt="A shared glass of wine around the table" width={1672} height={941} loading="lazy" /><span>Wine is a way of bringing people together.</span></div>}>
+      <ScrollScene speed={0.45} media={<div className="manifesto-image"><img src="/images/ritual-editorial.webp" alt="A shared glass of wine around the table" width={1672} height={941} loading="lazy" /><span>Wine is a way of bringing people together.</span></div>}>
       <div className="manifesto-content"><h2 id="manifesto-title">More than<br />just wine.</h2><div className="manifesto-copy"><p className="eyebrow">A way of looking at the world</p><p>A bottle can hold a place, a memory, a conversation. Ours begin in Georgia, with the varieties and traditions that make this corner of the world our own.</p><Link href="/story" className="underlined-link">Our story <ArrowUpRight size={16} /></Link></div></div>
 
     <section className="world-section" aria-labelledby="world-title">
