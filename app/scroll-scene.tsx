@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-export function ScrollScene({ media, children, earlyReveal = false }: { media: ReactNode; children: ReactNode; earlyReveal?: boolean }) {
+export function ScrollScene({ media, children, earlyReveal = false, intensity = 0.12 }: { media: ReactNode; children: ReactNode; earlyReveal?: boolean; intensity?: number }) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
 
@@ -26,8 +26,8 @@ export function ScrollScene({ media, children, earlyReveal = false }: { media: R
       // position at the top.
       const reference = earlyReveal ? window.innerHeight : pinTop;
       const distance = reducedMotion.matches ? 0 : Math.max(0, reference - scene.getBoundingClientRect().top);
-      // The content covers the image at full scroll speed; the image drifts at 12%.
-      const offset = `${(-Math.min(distance, height + pinTop) * 0.12).toFixed(2)}px`;
+      // The content covers the image at full scroll speed; the image drifts at `intensity`.
+      const offset = `${(-Math.min(distance, height + pinTop) * intensity).toFixed(2)}px`;
       const top = `${pinTop}px`;
       if (top !== lastPinTop) {
         scene.style.setProperty("--overlap-top", top);
