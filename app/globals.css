@@ -152,8 +152,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .world-copy h3 {font-size:34px;line-height:1.05;margin-bottom:16px}
 .world-copy p {max-width:620px;font-size:16px;line-height:1.55;color:#5f5f5a}
 .world-copy .underlined-link {margin-top:19px;font-size:14px;gap:12px}
-.scroll-reveal {opacity:0;transform:translateY(28px);transition:opacity .7s ease,transform .7s ease}
-.scroll-reveal.in-view {opacity:1;transform:translateY(0)}
+.scroll-reveal {--reveal-progress:0;opacity:var(--reveal-progress);transform:translateY(calc((1 - var(--reveal-progress)) * 28px))}
 
 /* Separate catalogue and wine detail drawer. */
 .catalogue-heading {padding:35px var(--gutter) 60px}
