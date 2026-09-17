@@ -8,7 +8,7 @@ import { useEffect, useRef, type ReactNode } from "react";
 // scrolling. `lag` controls how much: 1 keeps it fully still (the old
 // frozen pin); lower values let it keep moving in the same direction as
 // scroll, just slower than the content scrolling over it.
-export function ScrollScene({ media, children, lag = 0.75 }: { media: ReactNode; children: ReactNode; lag?: number }) {
+export function ScrollScene({ media, children, lag = 0.4 }: { media: ReactNode; children: ReactNode; lag?: number }) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const mediaRef = useRef<HTMLDivElement>(null);
 
