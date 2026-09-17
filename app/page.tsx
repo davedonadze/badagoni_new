@@ -2,7 +2,8 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { FeaturedWines } from "./wine-collection";
 import { EditorialCards } from "./editorial-cards";
-import { ScrollScene } from "./scroll-scene";
+import { ParallaxMedia } from "./parallax-media";
+import { SmoothScroll } from "./smooth-scroll";
 import { ScrollReveal } from "./scroll-reveal";
 import { listWines } from "@/lib/wines/service";
 
@@ -14,13 +15,17 @@ const worlds = [
 
 export default async function Home() {
   const wines = await listWines();
-  return <main>
-    <ScrollScene media={<section className="campaign-hero" aria-label="Badagoni wine">
-      <img className="campaign-image" src="/images/ritual-editorial.webp" alt="An editorial scene of two people sharing Badagoni wine at a table" fetchPriority="high" />
-      <div className="campaign-shade" />
-      <Link href="/catalogue" className="campaign-link">Explore the collection <ArrowUpRight size={19} /></Link>
-      <p className="campaign-caption">Native grapes.<br />Independent character.</p>
-    </section>}>
+  return <SmoothScroll><main>
+    <ParallaxMedia
+      className="campaign-hero"
+      ariaLabel="Badagoni wine"
+      media={<img className="campaign-image" src="/images/ritual-editorial.webp" alt="An editorial scene of two people sharing Badagoni wine at a table" fetchPriority="high" />}
+      overlay={<>
+        <div className="campaign-shade" />
+        <Link href="/catalogue" className="campaign-link">Explore the collection <ArrowUpRight size={19} /></Link>
+        <p className="campaign-caption">Native grapes.<br />Independent character.</p>
+      </>}
+    />
 
     <ScrollReveal><section className="opening-note" aria-label="About Badagoni">
       <h1 className="opening-signature">From Georgia, with character.</h1>
@@ -38,18 +43,20 @@ export default async function Home() {
     <ScrollReveal><div className="origin-interlude"><p>Badagoni<br />Kakheti, Georgia</p><span>Local roots. A world of possibilities.</span></div></ScrollReveal>
 
     <section className="manifesto" aria-labelledby="manifesto-title">
-      <ScrollScene lag={0.25} media={<div className="manifesto-image"><img src="/images/ritual-editorial.webp" alt="A shared glass of wine around the table" width={1672} height={941} loading="lazy" /><span>Wine is a way of bringing people together.</span></div>}>
+      <ParallaxMedia
+        className="manifesto-image"
+        media={<img src="/images/ritual-editorial.webp" alt="A shared glass of wine around the table" width={1672} height={941} loading="lazy" />}
+        overlay={<span>Wine is a way of bringing people together.</span>}
+      />
       <div className="manifesto-content"><h2 id="manifesto-title">More than<br />just wine.</h2><div className="manifesto-copy"><p className="eyebrow">A way of looking at the world</p><p>A bottle can hold a place, a memory, a conversation. Ours begin in Georgia, with the varieties and traditions that make this corner of the world our own.</p><Link href="/story" className="underlined-link">Our story <ArrowUpRight size={16} /></Link></div></div>
 
-    <section className="world-section" aria-labelledby="world-title">
-      <h2 id="world-title" className="world-label">Our world, in three parts</h2>
-      {worlds.map(world => <ScrollReveal key={world.number}><article className="world-row">
-        <div className="world-number"><span>{world.title}</span><span>/{world.number}</span></div>
-        <div className="world-copy"><h3>{world.subtitle}</h3><p>{world.text}</p><Link href={world.href} className="underlined-link">{world.link} <ArrowUpRight size={16} /></Link></div>
-      </article></ScrollReveal>)}
+      <section className="world-section" aria-labelledby="world-title">
+        <h2 id="world-title" className="world-label">Our world, in three parts</h2>
+        {worlds.map(world => <ScrollReveal key={world.number}><article className="world-row">
+          <div className="world-number"><span>{world.title}</span><span>/{world.number}</span></div>
+          <div className="world-copy"><h3>{world.subtitle}</h3><p>{world.text}</p><Link href={world.href} className="underlined-link">{world.link} <ArrowUpRight size={16} /></Link></div>
+        </article></ScrollReveal>)}
+      </section>
     </section>
-      </ScrollScene>
-    </section>
-    </ScrollScene>
-  </main>;
+  </main></SmoothScroll>;
 }
