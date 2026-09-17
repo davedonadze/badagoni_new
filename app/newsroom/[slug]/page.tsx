@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowLeft, ArrowUpRight } from "lucide-react";
 import { articles, formatNewsDate } from "../articles";
+import { ParallaxMedia } from "../../parallax-media";
 
 type ArticlePageProps = { params: Promise<{ slug: string }> };
 
@@ -30,7 +31,7 @@ export default async function NewsArticlePage({ params }: ArticlePageProps) {
         <h1>{article.title}</h1>
         <p>{article.excerpt}</p>
       </header>
-      <figure className="news-media news-article-image"><img src={article.image} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} style={{ objectFit: article.imageFit }} fetchPriority="high" /></figure>
+      <ParallaxMedia className="news-media news-article-image" media={<img src={article.image} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} style={{ objectFit: article.imageFit }} fetchPriority="high" />} />
       <div className="news-article-body">
         <aside className="news-article-credit"><span className="eyebrow">Published by Badagoni</span><a href={article.sourceUrl} target="_blank" rel="noreferrer" className="underlined-link">Original announcement <ArrowUpRight size={16} aria-hidden="true" /></a></aside>
         <div className="news-article-copy">

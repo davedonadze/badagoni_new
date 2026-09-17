@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
+import { ParallaxMedia } from "../parallax-media";
 
 export const metadata: Metadata = {
   title: "Alaverdi Monastery Cellar",
@@ -16,7 +17,7 @@ export default function AlaverdiMonasteryCellar() {
     </div>
 
     <figure className="cellar-cover">
-      <img src="/images/cellar.webp" alt="A monk working among buried qvevri in the stone cellar of Alaverdi Monastery" width={1536} height={1024} fetchPriority="high" />
+      <ParallaxMedia className="cellar-cover-media" media={<img src="/images/cellar.webp" alt="A monk working among buried qvevri in the stone cellar of Alaverdi Monastery" width={1536} height={1024} fetchPriority="high" />} />
       <figcaption><span>Within the monastery walls</span><span>Alaverdi, Georgia</span></figcaption>
     </figure>
 
@@ -37,7 +38,7 @@ export default function AlaverdiMonasteryCellar() {
     </section>
 
     <section className="cellar-qvevri" aria-labelledby="cellar-qvevri-title">
-      <figure><img src="/images/vineyard.webp" alt="Alaverdi Monastery beside its vineyards, with the Caucasus Mountains in the distance" width={1680} height={1080} loading="lazy" /></figure>
+      <ParallaxMedia className="cellar-qvevri-photo" media={<img src="/images/vineyard.webp" alt="Alaverdi Monastery beside its vineyards, with the Caucasus Mountains in the distance" width={1680} height={1080} loading="lazy" />} />
       <div className="cellar-qvevri-copy">
         <p className="eyebrow">The qvevri tradition</p>
         <h2 id="cellar-qvevri-title">Earth. Grapes.<br />Time.</h2>
