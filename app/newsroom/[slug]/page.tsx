@@ -31,7 +31,7 @@ export default async function NewsArticlePage({ params }: ArticlePageProps) {
         <h1>{article.title}</h1>
         <p>{article.excerpt}</p>
       </header>
-      <ParallaxMedia className="news-media news-article-image" media={<img src={article.image} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} style={{ objectFit: article.imageFit }} fetchPriority="high" />} />
+      <ParallaxMedia className="news-media news-article-image" scale={1.5} media={<img src={article.image} alt={article.imageAlt} width={article.imageWidth} height={article.imageHeight} style={{ objectFit: article.imageFit }} fetchPriority="high" />} />
       <div className="news-article-body">
         <aside className="news-article-credit"><span className="eyebrow">Published by Badagoni</span><a href={article.sourceUrl} target="_blank" rel="noreferrer" className="underlined-link">Original announcement <ArrowUpRight size={16} aria-hidden="true" /></a></aside>
         <div className="news-article-copy">
