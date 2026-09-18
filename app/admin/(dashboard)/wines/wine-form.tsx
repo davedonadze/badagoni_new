@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../bilingual-field";
-import { ImagePicker } from "./image-picker";
+import { ImagePicker } from "../../image-picker";
 import type { Wine } from "@/lib/wines/service";
 import type { Category } from "@/lib/categories/service";
 import type { Localized } from "@/db/schema";

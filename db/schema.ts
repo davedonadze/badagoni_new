@@ -34,6 +34,18 @@ export const categories = sqliteTable("categories", {
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Editable content for individual pages whose layout/animations stay
+// hardcoded in code, but whose text and images are admin-editable. `slug`
+// identifies the page (e.g. "story"); `content` is that page's own JSON
+// shape, defined and typed alongside its page component (see lib/pages/).
+// Not a generic block builder — each page's fields are fixed, matching its
+// actual sections, not reorderable/addable from the admin UI.
+export const pages = sqliteTable("pages", {
+  slug: text("slug").primaryKey(),
+  content: text("content", { mode: "json" }).notNull(),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
 // Site navigation, managed at /admin/menu. `location` places an item in the
 // header's primary row, its secondary row, or the footer; the mobile sheet
 // menu combines header_primary + header_secondary by `order`.

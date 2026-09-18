@@ -57,6 +57,20 @@
       "when": 1789749898726,
       "tag": "0007_wines_grapes_bilingual",
       "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1789751757518,
+      "tag": "0008_powerful_romulus",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1789751757519,
+      "tag": "0009_seed_story_page",
+      "breakpoints": true
     }
   ]
 }

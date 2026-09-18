@@ -4,7 +4,7 @@ import { ImageUp } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 
-export function ImagePicker({ id, label, value, onChange }: { id: string; label: string; value: string; onChange: (value: string) => void }) {
+export function ImagePicker({ id, label, value, onChange, previewClassName }: { id: string; label: string; value: string; onChange: (value: string) => void; previewClassName?: string }) {
   const inputRef = useRef<HTMLInputElement>(null);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -32,7 +32,7 @@ export function ImagePicker({ id, label, value, onChange }: { id: string; label:
   return <div className="grid gap-1.5">
     <Label htmlFor={id}>{label}</Label>
     <div className="flex items-center gap-4">
-      <div className="flex h-24 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40">
+      <div className={previewClassName ?? "flex h-24 w-16 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40"}>
         {value ? <img src={value} alt="" className="h-full w-full object-contain" /> : <ImageUp className="size-5 text-muted-foreground" />}
       </div>
       <div className="flex flex-col gap-2">

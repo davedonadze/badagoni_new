@@ -20,6 +20,7 @@ export function BilingualField({
   value,
   onChange,
   multiline,
+  rows,
 }: {
   id: string;
   label: string;
@@ -27,10 +28,12 @@ export function BilingualField({
   value: Localized;
   onChange: (value: Localized) => void;
   multiline?: boolean;
+  rows?: number;
 }) {
   const [translating, setTranslating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const Field = multiline ? Textarea : Input;
+  const fieldRows = multiline ? (rows ?? 4) : undefined;
 
   async function handleTranslate() {
     if (!value.en.trim()) return;
@@ -65,8 +68,8 @@ export function BilingualField({
           {translating ? "Translating…" : "Translate"}
         </Button>
       </div>
-      <Field id={`${id}-en`} rows={multiline ? 4 : undefined} value={value.en} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, en: e.target.value })} className="sm:col-start-1 sm:row-start-2" />
-      <Field id={`${id}-ka`} rows={multiline ? 4 : undefined} value={value.ka} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, ka: e.target.value })} className="sm:col-start-2 sm:row-start-2" />
+      <Field id={`${id}-en`} rows={fieldRows} value={value.en} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, en: e.target.value })} className="sm:col-start-1 sm:row-start-2" />
+      <Field id={`${id}-ka`} rows={fieldRows} value={value.ka} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, ka: e.target.value })} className="sm:col-start-2 sm:row-start-2" />
     </div>
     {hint && <p className="text-xs text-muted-foreground">{hint}</p>}
     {error && <p className="text-sm text-destructive" role="alert">{error}</p>}

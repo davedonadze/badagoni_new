@@ -9,13 +9,14 @@ runtime reads it anymore.
 
 ## How it fits together
 
-- `db/schema.ts` — the `wines`, `categories`, and `menu_items` tables (Drizzle ORM / SQLite dialect, since D1 is SQLite).
-- `drizzle/0000_*.sql` — creates the wines table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines. `drizzle/0002_*.sql` — creates `menu_items`. `drizzle/0003_seed_menu_items.sql` — inserts the current header/footer navigation. `drizzle/0004_wines_bilingual.sql` — converts `wines.name`/`style`/`description` from plain text to bilingual `{en, ka}` JSON. `drizzle/0005_*.sql` — creates `categories`. `drizzle/0006_seed_categories.sql` — inserts the original 6 wine categories. `drizzle/0007_wines_grapes_bilingual.sql` — converts `wines.grapes` from a plain string array to bilingual `{en, ka}` JSON (one comma-separated field, same as name/style/description).
+- `db/schema.ts` — the `wines`, `categories`, `menu_items`, and `pages` tables (Drizzle ORM / SQLite dialect, since D1 is SQLite).
+- `drizzle/0000_*.sql` — creates the wines table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines. `drizzle/0002_*.sql` — creates `menu_items`. `drizzle/0003_seed_menu_items.sql` — inserts the current header/footer navigation. `drizzle/0004_wines_bilingual.sql` — converts `wines.name`/`style`/`description` from plain text to bilingual `{en, ka}` JSON. `drizzle/0005_*.sql` — creates `categories`. `drizzle/0006_seed_categories.sql` — inserts the original 6 wine categories. `drizzle/0007_wines_grapes_bilingual.sql` — converts `wines.grapes` from a plain string array to bilingual `{en, ka}` JSON (one comma-separated field, same as name/style/description). `drizzle/0008_*.sql` — creates `pages`. `drizzle/0009_seed_story_page.sql` — inserts the Story page's original copy as its starting content.
 - `lib/wines/service.ts` — the only place that talks to the wines table (`listWines`, `getWineBySlug`, `createWine`, `updateWine`, `deleteWine`). Public pages (`/`, `/catalogue`, `/wines/[slug]`) and the admin panel both call this.
 - `lib/categories/service.ts` — the same, for `categories` (wine categories like red/white/qvevri — `id` is the slug stored in `wines.category`/`categories`, immutable after creation in the admin UI). Public pages resolve category labels through this instead of a hardcoded map.
 - `lib/menu/service.ts` — the same, for `menu_items`. `app/layout.tsx` calls `listMenuItems()` and passes the header/footer links down to `<SiteHeader>`/`<SiteFooter>` (`app/site-shell.tsx`) as props — the nav is no longer hardcoded.
-- `app/admin/` — the admin UI: `/admin/wines` (list, new, edit), `/admin/categories` (list, new, edit), and `/admin/menu` (list grouped by location, new, edit).
-- `app/api/admin/` — the API routes the admin UI calls: `login`, `logout`, `wines` create, `wines/[slug]` update/delete, `categories` create, `categories/[id]` update/delete, `menu` create, `menu/[id]` update/delete, `upload` (bottle images to R2), and `translate`.
+- `lib/pages/service.ts` — generic get/save for the `pages` table (`slug` → JSON `content`). **Not a block builder**: each page's content shape is fixed and typed by its own module (e.g. `lib/pages/story.ts` defines `StoryContent` and `STORY_DEFAULT`, the fallback used if the DB row is ever missing) — the admin UI only lets you edit that page's specific fields, not add/remove/reorder sections. A page's layout, animations, and structure stay in its `page.tsx` component; only text and images come from the DB. To bring a new page onto this pattern: add a `lib/pages/<slug>.ts` content type + default, a form component under `app/admin/(dashboard)/pages/<slug>/`, register it in `app/admin/(dashboard)/pages/page.tsx`, and thread `getPageContent` into the page component. Story (`/story`) is the only page migrated so far — story/terroir/contact/alaverdi-monastery-cellar/enologists otherwise stay fully hardcoded.
+- `app/admin/` — the admin UI: `/admin/wines` (list, new, edit), `/admin/categories` (list, new, edit), `/admin/menu` (list grouped by location, new, edit), and `/admin/pages` (list of registered pages, each with its own fixed-field editor).
+- `app/api/admin/` — the API routes the admin UI calls: `login`, `logout`, `wines` create, `wines/[slug]` update/delete, `categories` create, `categories/[id]` update/delete, `menu` create, `menu/[id]` update/delete, `pages/[slug]` update, `upload` (images to R2), and `translate`.
 - `lib/admin/auth.ts` — the password gate. One shared `ADMIN_PASSWORD`; on success it sets an httpOnly cookie holding a SHA-256 hash of the password (not the password itself). There is no separate user/session table — this is intentionally a lightweight gate for a small team, not a full auth system.
 - `lib/translate.ts` — calls the Claude API to translate English to Georgian, used by the "Translate" button (`app/admin/bilingual-field.tsx`) next to every bilingual field. Requires `ANTHROPIC_API_KEY` (get one at https://console.anthropic.com); without it, the button shows a clear error rather than failing silently. Every bilingual field — wine name/style/description, menu item labels — is stored as `{en, ka}` JSON (see the `Localized` type in `db/schema.ts`) — the public site currently only renders the English side; Georgian pages are a later phase.
 - `app/api/admin/upload/route.ts` + `app/media/[...key]/route.ts` — wine bottle images upload to an R2 bucket (binding `BUCKET`) and are served back at `/media/<key>`. See "Setting up image uploads (R2)" below.
@@ -46,6 +47,10 @@ runtime reads it anymore.
      --config dist/server/wrangler.json --file=drizzle/0006_seed_categories.sql
    npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
      --config dist/server/wrangler.json --file=drizzle/0007_wines_grapes_bilingual.sql
+   npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
+     --config dist/server/wrangler.json --file=drizzle/0008_powerful_romulus.sql
+   npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
+     --config dist/server/wrangler.json --file=drizzle/0009_seed_story_page.sql
    ```
 4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1. To test image uploads locally, also set `CLOUDFLARE_R2_BUCKET_NAME` (any name) in your shell before running dev/build — Miniflare will simulate that bucket on disk, same as it does for D1. Without it, the upload button shows "Image storage is not configured"; everything else works normally.
 
@@ -83,6 +88,8 @@ use it instead.
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0005_brave_moira_mactaggert.sql
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0006_seed_categories.sql
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0007_wines_grapes_bilingual.sql
+   npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0008_powerful_romulus.sql
+   npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0009_seed_story_page.sql
    ```
 
    Note: migrations that use `json_object()`/`json_each()` (0004, 0006, 0007)

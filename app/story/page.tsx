@@ -3,8 +3,56 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { WinerySection } from "./winery-section";
 import { ParallaxMedia } from "../parallax-media";
+import { BreakableText } from "../breakable-text";
+import { getPageContent } from "@/lib/pages/service";
+import { STORY_SLUG, STORY_DEFAULT, type StoryContent } from "@/lib/pages/story";
 
 export const metadata: Metadata = { title: "Our story", description: "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine." };
-export default function Story() {
-  return <main><div className="editorial-heading"><p className="eyebrow">Our story / Since 2006</p><h1>Old roots.<br />New rituals.</h1><p>A Georgian point of view.<br />From our vineyards to your table.</p></div><ParallaxMedia className="story-cover" scale={1.5} ariaLabel="Kakheti, Georgia" media={<img src="/images/vineyard.webp" alt="Alaverdi Monastery in the landscapes of Kakheti" fetchPriority="high" />} overlay={<span>Kakheti, Georgia</span>} /><section className="story-intro"><p className="eyebrow">01 / The beginning</p><div><h2>It started<br />with a place.</h2><div className="story-paragraphs"><p>In 2006, Giorgi Salakaia founded Badagoni in Zemo Khodasheni, in the heart of Kakheti. The ambition was clear: make Georgian wine that could express the full character of its place.</p><p>Today, that idea guides everything we do. We work with native Georgian grape varieties, connecting an enduring winemaking heritage with contemporary research and knowledge.</p></div></div></section><section className="story-qvevri" id="qvevri"><ParallaxMedia className="qvevri-photo" scale={1.5} media={<img src="/images/cellar.webp" alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} /><div className="story-qvevri-copy"><p className="eyebrow">02 / The craft</p><h2>Of earth.<br />Of time.</h2><p>At Alaverdi Monastery, wine is part of a living heritage. Badagoni helped restore the historic cellar in 2006, supporting the continuation of its winemaking tradition.</p><p>Our qvevri wines are made in clay vessels buried in the earth, connecting each harvest to generations of Georgian craft.</p><Link href="/catalogue" className="underlined-link">Explore the wines <ArrowUpRight size={16} /></Link></div></section><WinerySection><section className="science-section"><p className="eyebrow">04 / The perspective</p><h2>Tradition has<br />a future.</h2><div><p>Our collaboration with oenologist Dr. Donato Lanati and the Enosis Meraviglia research centre brings a scientific perspective to the vineyard and the cellar. The aim is always the same: allow each Georgian variety to speak clearly.</p><Link href="/terroir" className="underlined-link">Our vineyards <ArrowUpRight size={16} /></Link></div></section></WinerySection></main>;
+
+export default async function Story() {
+  const content = (await getPageContent<StoryContent>(STORY_SLUG)) ?? STORY_DEFAULT;
+  const { heading, cover, intro, qvevri, winery, science } = content;
+
+  return <main>
+    <div className="editorial-heading">
+      <p className="eyebrow">{heading.eyebrow.en}</p>
+      <h1><BreakableText text={heading.title.en} /></h1>
+      <p><BreakableText text={heading.subtitle.en} /></p>
+    </div>
+
+    <ParallaxMedia className="story-cover" scale={1.5} ariaLabel={cover.caption.en} media={<img src={cover.image} alt="Alaverdi Monastery in the landscapes of Kakheti" fetchPriority="high" />} overlay={<span>{cover.caption.en}</span>} />
+
+    <section className="story-intro">
+      <p className="eyebrow">{intro.eyebrow.en}</p>
+      <div>
+        <h2><BreakableText text={intro.heading.en} /></h2>
+        <div className="story-paragraphs">
+          <p>{intro.paragraph1.en}</p>
+          <p>{intro.paragraph2.en}</p>
+        </div>
+      </div>
+    </section>
+
+    <section className="story-qvevri" id="qvevri">
+      <ParallaxMedia className="qvevri-photo" scale={1.5} media={<img src={qvevri.image} alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} />
+      <div className="story-qvevri-copy">
+        <p className="eyebrow">{qvevri.eyebrow.en}</p>
+        <h2><BreakableText text={qvevri.heading.en} /></h2>
+        <p>{qvevri.paragraph1.en}</p>
+        <p>{qvevri.paragraph2.en}</p>
+        <Link href="/catalogue" className="underlined-link">Explore the wines <ArrowUpRight size={16} /></Link>
+      </div>
+    </section>
+
+    <WinerySection eyebrow={winery.eyebrow.en} heading={winery.heading.en} paragraph1={winery.paragraph1.en} paragraph2={winery.paragraph2.en}>
+      <section className="science-section">
+        <p className="eyebrow">{science.eyebrow.en}</p>
+        <h2><BreakableText text={science.heading.en} /></h2>
+        <div>
+          <p>{science.paragraph.en}</p>
+          <Link href="/terroir" className="underlined-link">Our vineyards <ArrowUpRight size={16} /></Link>
+        </div>
+      </section>
+    </WinerySection>
+  </main>;
 }

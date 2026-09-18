@@ -26,7 +26,7 @@ const NAV_ITEMS = [
   { href: "/admin/wines", label: "Wines", icon: Wine },
   { href: "/admin/categories", label: "Categories", icon: Tags },
   { href: "/admin/menu", label: "Menu", icon: ListTree },
-  { href: "/admin/pages", label: "Pages", icon: FileText, comingSoon: true },
+  { href: "/admin/pages", label: "Pages", icon: FileText },
   { href: "/admin/news", label: "News", icon: Newspaper, comingSoon: true },
 ];
 
