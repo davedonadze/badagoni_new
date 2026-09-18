@@ -157,7 +157,7 @@ export function WineForm(props: WineFormProps) {
 
         <BilingualField id="wine-style" label="Style" value={style} onChange={setStyle} />
 
-        <BilingualField id="wine-grapes" label="Grapes (comma-separated, e.g. Saperavi, Rkatsiteli)" value={grapes} onChange={setGrapes} />
+        <BilingualField id="wine-grapes" label="Grapes" hint="Comma-separated, e.g. Saperavi, Rkatsiteli" value={grapes} onChange={setGrapes} />
 
         <div className="grid gap-1.5">
           <Label htmlFor="wine-alcohol">Alcohol (e.g. 14%)</Label>
