@@ -1,6 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Trash2 } from "lucide-react";
 
 export function DeleteWineButton({ slug, name }: { slug: string; name: string }) {
   const router = useRouter();
@@ -19,7 +20,7 @@ export function DeleteWineButton({ slug, name }: { slug: string; name: string })
     router.refresh();
   }
 
-  return <button type="button" className="admin-delete-button" onClick={handleDelete} disabled={pending}>
-    {pending ? "Deleting…" : "Delete"}
+  return <button type="button" className="inline-flex items-center gap-1 text-sm text-destructive underline underline-offset-4 disabled:opacity-50" onClick={handleDelete} disabled={pending}>
+    <Trash2 className="size-3.5" />{pending ? "Deleting…" : "Delete"}
   </button>;
 }

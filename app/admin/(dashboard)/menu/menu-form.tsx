@@ -1,7 +1,11 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { BilingualField } from "../bilingual-field";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { BilingualField } from "../../bilingual-field";
 import type { MenuItem, MenuLocation } from "@/lib/menu/service";
 
 const LOCATION_OPTIONS: { value: MenuLocation; label: string }[] = [
@@ -54,32 +58,41 @@ export function MenuForm(props: MenuFormProps) {
     }
   }
 
-  return <form className="admin-wine-form" onSubmit={handleSubmit}>
-    <BilingualField id="menu-label" label="Label" value={label} onChange={setLabel} />
+  return <Card className="max-w-2xl">
+    <CardContent>
+      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+        <BilingualField id="menu-label" label="Label" value={label} onChange={setLabel} />
 
-    <div className="admin-form-row">
-      <label htmlFor="menu-href">Link (e.g. /story or https://…)</label>
-      <input id="menu-href" value={href} onChange={e => setHref(e.target.value)} required />
-    </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="menu-href">Link (e.g. /story or https://…)</Label>
+          <Input id="menu-href" value={href} onChange={e => setHref(e.target.value)} required />
+        </div>
 
-    <div className="admin-form-row">
-      <label htmlFor="menu-location">Location</label>
-      <select id="menu-location" value={location} onChange={e => setLocation(e.target.value as MenuLocation)}>
-        {LOCATION_OPTIONS.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
-      </select>
-    </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="menu-location">Location</Label>
+          <select
+            id="menu-location"
+            value={location}
+            onChange={e => setLocation(e.target.value as MenuLocation)}
+            className="h-9 rounded-md border bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+          >
+            {LOCATION_OPTIONS.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
+          </select>
+        </div>
 
-    <div className="admin-form-row">
-      <label htmlFor="menu-order">Order (lower numbers appear first)</label>
-      <input id="menu-order" type="number" value={order} onChange={e => setOrder(Number(e.target.value))} />
-    </div>
+        <div className="grid gap-1.5">
+          <Label htmlFor="menu-order">Order (lower numbers appear first)</Label>
+          <Input id="menu-order" type="number" value={order} onChange={e => setOrder(Number(e.target.value))} />
+        </div>
 
-    {error && <p className="admin-form-error" role="alert">{error}</p>}
+        {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
 
-    <div className="admin-form-actions">
-      <button type="submit" className="admin-primary-button" disabled={saving}>
-        {saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}
-      </button>
-    </div>
-  </form>;
+        <div>
+          <Button type="submit" disabled={saving}>
+            {saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}
+          </Button>
+        </div>
+      </form>
+    </CardContent>
+  </Card>;
 }

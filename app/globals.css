@@ -9,6 +9,8 @@
   --secondary:#f2f2f1; --secondary-foreground:#151515; --muted:#f2f2f1; --muted-foreground:#61615d;
   --accent:#e9e9e7; --accent-foreground:#151515; --destructive:#a32631; --border:#d7d7d3;
   --input:#d7d7d3; --ring:#555; --radius:0;
+  --sidebar:#171715; --sidebar-foreground:#f4f4f2; --sidebar-primary:#fff; --sidebar-primary-foreground:#171715;
+  --sidebar-accent:#26261f; --sidebar-accent-foreground:#fff; --sidebar-border:#33332c; --sidebar-ring:#777;
   --serif:"Instrument Serif",Georgia,"Times New Roman",serif;
   --sans:"Manrope","Helvetica Neue",Arial,sans-serif;
   --gutter:clamp(18px,2.2vw,38px);
@@ -23,12 +25,27 @@
   --color-muted:var(--muted); --color-muted-foreground:var(--muted-foreground);
   --color-accent:var(--accent); --color-accent-foreground:var(--accent-foreground);
   --color-border:var(--border); --color-input:var(--input); --color-ring:var(--ring);
+  --color-sidebar:var(--sidebar); --color-sidebar-foreground:var(--sidebar-foreground);
+  --color-sidebar-primary:var(--sidebar-primary); --color-sidebar-primary-foreground:var(--sidebar-primary-foreground);
+  --color-sidebar-accent:var(--sidebar-accent); --color-sidebar-accent-foreground:var(--sidebar-accent-foreground);
+  --color-sidebar-border:var(--sidebar-border); --color-sidebar-ring:var(--sidebar-ring);
   --font-sans:var(--sans); --radius-sm:0; --radius-md:0; --radius-lg:0; --radius-xl:0;
 }
 * {box-sizing:border-box}
 html {scroll-behavior:smooth;scroll-padding-top:26px}
 body {margin:0;background:var(--background);color:var(--foreground);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
 a {color:inherit;text-decoration:none}
+/* Tailwind's utility classes live in a CSS layer, and unlayered rules like
+   the one above always win over layered ones regardless of specificity -
+   so a plain "text-*" utility on an <a> (e.g. a Button rendered as a link
+   via asChild) is silently overridden. Restore the intended colors for
+   shadcn's Button variants specifically, by the data attribute it sets. */
+a[data-slot="button"][data-variant="default"] {color:var(--primary-foreground)}
+a[data-slot="button"][data-variant="destructive"] {color:#fff}
+a[data-slot="button"][data-variant="secondary"] {color:var(--secondary-foreground)}
+a[data-slot="button"][data-variant="outline"],
+a[data-slot="button"][data-variant="ghost"] {color:var(--foreground)}
+a[data-slot="button"][data-variant="link"] {color:var(--primary)}
 button,a {-webkit-tap-highlight-color:transparent}
 button {font:inherit;cursor:pointer}
 button:disabled {cursor:default}
@@ -723,61 +740,5 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   *,*:before,*:after {animation:none!important;transition:none!important}
 }
 
-/* Admin panel: functional, not part of the marketing site's brand system. */
-.admin-login-page {display:flex;align-items:center;justify-content:center;min-height:60vh;padding:40px var(--gutter)}
-.admin-login-form {width:100%;max-width:360px;display:flex;flex-direction:column;gap:14px}
-.admin-login-form h1 {font-size:28px;margin:0}
-.admin-login-form p {margin:0 0 8px;color:#5f5f59;font-size:14px}
-.admin-login-form label,.admin-form-label {font-size:13px;font-weight:600;color:#3a3a36}
-.admin-login-form input,.admin-wine-form input,.admin-wine-form select,.admin-wine-form textarea {
-  font:inherit;padding:10px 12px;border:1px solid var(--border);border-radius:6px;background:#fff;width:100%;box-sizing:border-box
-}
-.admin-login-form button,.admin-primary-button {
-  font:inherit;padding:11px 18px;border-radius:6px;border:0;background:#1a1a17;color:#fff;cursor:pointer;
-  display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;width:max-content
-}
-.admin-login-form button:disabled {opacity:.6;cursor:default}
-.admin-form-error {color:#b3261e;font-size:13px;margin:0}
-
-.admin-shell {display:flex;flex-direction:column;min-height:60vh}
-.admin-topbar {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;padding:20px var(--gutter);border-bottom:1px solid var(--border)}
-.admin-brand {font-weight:600;text-decoration:none;color:inherit}
-.admin-topbar-nav {display:flex;align-items:center;gap:20px;font-size:14px}
-.admin-topbar-nav a {text-decoration:none;color:inherit}
-.admin-topbar-nav a:hover {text-decoration:underline}
-.admin-logout {font:inherit;background:none;border:1px solid var(--border);border-radius:6px;padding:7px 14px;cursor:pointer}
-.admin-content {padding:0 var(--gutter) 60px}
-
-.admin-page {max-width:960px;margin:0 auto;padding-top:30px}
-.admin-page-heading {display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px;margin-bottom:24px}
-.admin-page-heading h1 {font-size:26px;margin:0}
-.admin-page-heading-actions {display:flex;align-items:center;gap:16px}
-.admin-secondary-link {font-size:14px;text-decoration:underline;text-underline-offset:4px;color:inherit}
-
-.admin-table {width:100%;border-collapse:collapse;font-size:14px}
-.admin-table th,.admin-table td {text-align:left;padding:12px 10px;border-bottom:1px solid var(--border);vertical-align:top}
-.admin-table th {font-size:12px;text-transform:uppercase;letter-spacing:.03em;color:#65655f}
-.admin-table-slug {font-size:12px;color:#8b8b83;margin-top:2px}
-.admin-table-description {text-align:center}
-.admin-table-actions {display:flex;gap:14px;align-items:center;white-space:nowrap}
-.admin-table-actions a {text-decoration:underline;text-underline-offset:3px;color:inherit}
-.admin-delete-button {font:inherit;font-size:13px;background:none;border:0;color:#b3261e;cursor:pointer;padding:0;text-decoration:underline}
-.admin-delete-button:disabled {opacity:.6;cursor:default}
-
-.admin-wine-form {display:flex;flex-direction:column;gap:18px;max-width:560px}
-.admin-form-row {display:flex;flex-direction:column;gap:6px}
-.admin-wine-form textarea {resize:vertical;font-family:inherit}
-.admin-checkbox-group {display:flex;flex-wrap:wrap;gap:14px}
-.admin-checkbox {display:flex;align-items:center;gap:6px;font-size:14px;font-weight:400}
-.admin-form-actions {margin-top:6px}
-.admin-form-error {font-size:14px;color:#b3261e;margin:0}
-
-.admin-bilingual-field {display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--border);background:var(--card)}
-.admin-bilingual-header {display:flex;align-items:center;justify-content:space-between;gap:10px}
-.admin-bilingual-header .admin-secondary-link {font-size:13px;background:none;border:0;cursor:pointer;padding:0}
-.admin-bilingual-header .admin-secondary-link:disabled {opacity:.5;cursor:default;text-decoration:none}
-
-.admin-menu-group {margin-bottom:36px}
-.admin-menu-group h2 {font-size:16px;margin:0 0 12px}
-.admin-empty-state {font-size:14px;color:#8b8b83}
-.admin-badge {margin-left:8px;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:#b3261e;border:1px solid currentColor;padding:2px 6px}
+/* Admin panel now uses Tailwind + shadcn/ui components directly (see
+   app/admin/) rather than these hand-rolled classes. */

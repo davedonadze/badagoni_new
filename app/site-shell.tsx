@@ -16,6 +16,8 @@ export function SiteHeader({ primaryLinks, secondaryLinks }: { primaryLinks: Men
   const [open, setOpen] = useState(false);
   const mobileLinks = [...primaryLinks, ...secondaryLinks];
 
+  if (path.startsWith("/admin")) return null;
+
   return <header className={"site-header" + (path === "/" ? " header-over-photo" : "")}>
     <Link href="/" className="brand" aria-label="Badagoni home"><img src="/images/badagoni-logo.svg" alt="Badagoni — Est. 2006" width="328" height="75" /></Link>
     <nav className="header-nav" aria-label="Main navigation">{primaryLinks.map(link => <Link key={link.id} href={link.href} aria-current={isCurrent(path, link.href) ? "page" : undefined}>{link.label.en}</Link>)}</nav>
@@ -33,6 +35,9 @@ export function SiteHeader({ primaryLinks, secondaryLinks }: { primaryLinks: Men
 }
 
 export function SiteFooter({ footerLinks }: { footerLinks: MenuItem[] }) {
+  const path = usePathname();
+  if (path.startsWith("/admin")) return null;
+
   return <footer className="site-footer">
     <div className="footer-top"><p className="footer-statement">Good wine.<br />Good company.</p><div className="footer-invitation"><p>From Kakheti to your table.</p><Link href="/contact" className="underlined-link">Let’s start a conversation <ArrowUpRight size={17} /></Link></div><nav className="footer-nav" aria-label="Footer navigation">{footerLinks.map(link => <Link key={link.id} href={link.href}>{link.label.en}<ArrowUpRight size={15} /></Link>)}</nav></div>
     <div className="footer-details"><div><span className="eyebrow">Our home</span><p>Zemo Khodasheni<br />Kakheti, Georgia</p></div><div><span className="eyebrow">Say hello</span><a href="mailto:office@badagoni.ge">office@badagoni.ge</a><a href="tel:+995322936243">+995 32 293 62 43</a></div><div><span className="eyebrow">Badagoni</span><p>Native Georgian grapes.<br />A contemporary perspective.</p></div></div>

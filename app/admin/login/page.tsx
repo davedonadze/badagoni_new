@@ -1,6 +1,10 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function AdminLogin() {
   const router = useRouter();
@@ -24,7 +28,7 @@ export default function AdminLogin() {
         setLoading(false);
         return;
       }
-      router.push("/admin/wines");
+      router.push("/admin");
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");
@@ -32,21 +36,29 @@ export default function AdminLogin() {
     }
   }
 
-  return <main className="admin-login-page">
-    <form className="admin-login-form" onSubmit={handleSubmit}>
-      <h1>Badagoni admin</h1>
-      <p>Sign in to manage the wine catalogue.</p>
-      <label htmlFor="admin-password">Password</label>
-      <input
-        id="admin-password"
-        type="password"
-        value={password}
-        onChange={event => setPassword(event.target.value)}
-        autoFocus
-        required
-      />
-      {error && <p className="admin-form-error" role="alert">{error}</p>}
-      <button type="submit" disabled={loading}>{loading ? "Signing in…" : "Sign in"}</button>
-    </form>
+  return <main className="flex min-h-[70vh] items-center justify-center px-4">
+    <Card className="w-full max-w-sm">
+      <CardHeader>
+        <CardTitle className="text-xl">Badagoni admin</CardTitle>
+        <CardDescription>Sign in to manage the site.</CardDescription>
+      </CardHeader>
+      <CardContent>
+        <form className="flex flex-col gap-4" onSubmit={handleSubmit}>
+          <div className="grid gap-1.5">
+            <Label htmlFor="admin-password">Password</Label>
+            <Input
+              id="admin-password"
+              type="password"
+              value={password}
+              onChange={event => setPassword(event.target.value)}
+              autoFocus
+              required
+            />
+          </div>
+          {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
+          <Button type="submit" disabled={loading} className="w-full">{loading ? "Signing in…" : "Sign in"}</Button>
+        </form>
+      </CardContent>
+    </Card>
   </main>;
 }

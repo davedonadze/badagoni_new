@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronLeft } from "lucide-react";
 import { notFound } from "next/navigation";
 import { getWineBySlug } from "@/lib/wines/service";
 import { WineForm } from "../wine-form";
@@ -11,14 +12,14 @@ export default async function EditWine({ params }: EditWineProps) {
   const wine = await getWineBySlug(slug);
   if (!wine) notFound();
 
-  return <main className="admin-page">
-    <div className="admin-page-heading">
-      <h1>Edit {wine.name}</h1>
-      <div className="admin-page-heading-actions">
-        <Link href="/admin/wines" className="admin-secondary-link">Back to wines</Link>
+  return <div className="flex flex-col gap-6">
+    <div>
+      <Link href="/admin/wines" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ChevronLeft className="size-4" />Back to wines</Link>
+      <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
+        <h1 className="text-2xl font-semibold tracking-tight">Edit {wine.name}</h1>
         <DeleteWineButton slug={wine.slug} name={wine.name} />
       </div>
     </div>
     <WineForm mode="edit" wine={wine} />
-  </main>;
+  </div>;
 }

@@ -1,5 +1,10 @@
 "use client";
 import { useState } from "react";
+import { Languages } from "lucide-react";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
 import type { Localized } from "@/db/schema";
 
 // A paired English/Georgian text field. "Translate" fills the Georgian
@@ -20,7 +25,7 @@ export function BilingualField({
 }) {
   const [translating, setTranslating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const Field = multiline ? "textarea" : "input";
+  const Field = multiline ? Textarea : Input;
 
   async function handleTranslate() {
     if (!value.en.trim()) return;
@@ -45,20 +50,21 @@ export function BilingualField({
     }
   }
 
-  return <div className="admin-bilingual-field">
-    <div className="admin-form-row">
-      <label htmlFor={`${id}-en`}>{label} (English)</label>
-      <Field id={`${id}-en`} value={value.en} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, en: e.target.value })} {...(multiline ? { rows: 4 } : {})} />
+  return <div className="flex flex-col gap-3 rounded-lg border bg-muted/30 p-4">
+    <div className="grid gap-1.5">
+      <Label htmlFor={`${id}-en`}>{label} (English)</Label>
+      <Field id={`${id}-en`} rows={multiline ? 4 : undefined} value={value.en} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, en: e.target.value })} />
     </div>
-    <div className="admin-form-row">
-      <div className="admin-bilingual-header">
-        <label htmlFor={`${id}-ka`}>{label} (Georgian)</label>
-        <button type="button" className="admin-secondary-link" onClick={handleTranslate} disabled={translating || !value.en.trim()}>
+    <div className="grid gap-1.5">
+      <div className="flex items-center justify-between gap-2">
+        <Label htmlFor={`${id}-ka`}>{label} (Georgian)</Label>
+        <Button type="button" variant="ghost" size="sm" className="h-7 gap-1.5 px-2 text-xs" onClick={handleTranslate} disabled={translating || !value.en.trim()}>
+          <Languages className="size-3.5" />
           {translating ? "Translating…" : "Translate from English"}
-        </button>
+        </Button>
       </div>
-      <Field id={`${id}-ka`} value={value.ka} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, ka: e.target.value })} {...(multiline ? { rows: 4 } : {})} />
+      <Field id={`${id}-ka`} rows={multiline ? 4 : undefined} value={value.ka} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, ka: e.target.value })} />
     </div>
-    {error && <p className="admin-form-error" role="alert">{error}</p>}
+    {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
   </div>;
 }
