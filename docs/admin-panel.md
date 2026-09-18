@@ -40,7 +40,7 @@ runtime reads it anymore.
    npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
      --config dist/server/wrangler.json --file=drizzle/0004_wines_bilingual.sql
    ```
-4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1. Image uploads work locally out of the box — Miniflare simulates the R2 bucket the same way it simulates D1, no extra setup needed for local dev.
+4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1. To test image uploads locally, also set `CLOUDFLARE_R2_BUCKET_NAME` (any name) in your shell before running dev/build — Miniflare will simulate that bucket on disk, same as it does for D1. Without it, the upload button shows "Image storage is not configured"; everything else works normally.
 
 Note: `npm start` runs Wrangler directly against `dist/server/wrangler.json`, and Wrangler resolves `.dev.vars` **next to that config file**, not the repo root. If `ADMIN_PASSWORD` isn't picked up under `npm start`, also copy `.dev.vars` to `dist/server/.dev.vars` (this is build output and never committed). `npm run dev` (the Cloudflare Vite plugin) reads `.dev.vars` from the repo root as expected.
 
@@ -98,10 +98,12 @@ Without step 4, `/admin` login will fail with "ADMIN_PASSWORD is not configured"
 ## Setting up image uploads (R2)
 
 Wine bottle images upload through the admin panel's image picker to an R2
-bucket (binding `BUCKET`), the same way D1 is bound — see
-`app/api/admin/upload/route.ts` (accepts the upload) and
-`app/media/[...key]/route.ts` (serves images back out). Locally this needs no
-setup (Miniflare simulates it). For a real deploy:
+bucket (binding `BUCKET`) — see `app/api/admin/upload/route.ts` (accepts the
+upload) and `app/media/[...key]/route.ts` (serves images back out). Unlike
+D1, there's no placeholder fallback here: a `bucket_name` that doesn't
+actually exist fails deploy outright, so `vite.config.ts` omits the binding
+entirely until `CLOUDFLARE_R2_BUCKET_NAME` is set, rather than risk breaking
+every deploy the way a bad D1 ID would. For a real deploy:
 
 1. **Create the bucket** via the CLI (the dashboard's Storage & Databases → R2
    works too): `npx wrangler r2 bucket create badagoni-media`.

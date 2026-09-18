@@ -30,14 +30,17 @@ const localBindingConfig = {
         },
       ]
     : [],
-  // Same pattern as the D1 database above: local/dev builds use a placeholder
-  // bucket name, a real deploy needs CLOUDFLARE_R2_BUCKET_NAME set as a build
-  // variable to override it. See docs/admin-panel.md.
-  r2_buckets: r2
+  // Unlike the D1 database above, this has no placeholder fallback: a
+  // nonexistent bucket_name fails deploy outright (same as a bad D1 ID
+  // would), so the binding is simply omitted until CLOUDFLARE_R2_BUCKET_NAME
+  // is set - locally too, which only means testing uploads locally needs
+  // that variable set as well. The upload API degrades gracefully without
+  // it. See docs/admin-panel.md.
+  r2_buckets: r2 && process.env.CLOUDFLARE_R2_BUCKET_NAME
     ? [
         {
           binding: r2,
-          bucket_name: process.env.CLOUDFLARE_R2_BUCKET_NAME || "site-creator-r2",
+          bucket_name: process.env.CLOUDFLARE_R2_BUCKET_NAME,
         },
       ]
     : [],
