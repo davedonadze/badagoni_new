@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
-import wineData from "../../wine-data.json";
+import { getWineBySlug } from "@/lib/wines/service";
 import { ReserveAwards } from "./awards";
 
 export const metadata: Metadata = {
@@ -17,8 +17,8 @@ const awards = [
   { name: "Decanter World Wine Awards — Platinum", year: "2021", image: "/images/awards/decanter-platinum-2021.png" },
 ];
 
-export default function SaperaviReserve() {
-  const wine = wineData.find(item => item.slug === "saperavi-reserve");
+export default async function SaperaviReserve() {
+  const wine = await getWineBySlug("saperavi-reserve");
   if (!wine) notFound();
 
   const facts = [
@@ -31,7 +31,7 @@ export default function SaperaviReserve() {
   ];
 
   return <main className="reserve-page">
-    <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href="/catalogue">Wine catalogue</Link><span aria-hidden="true">/</span><span aria-current="page">{wine.name}</span></nav>
+    <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href="/catalogue">Wine catalogue</Link><span aria-hidden="true">/</span><span aria-current="page">{wine.name.en}</span></nav>
 
     <section className="reserve-product" aria-labelledby="reserve-title">
       <div className="reserve-heading"><p className="eyebrow">Badagoni / Limited release</p><h1 id="reserve-title">Saperavi<br />Reserve</h1></div>
@@ -44,7 +44,7 @@ export default function SaperaviReserve() {
         <p className="reserve-introduction">Made in limited quantities from Saperavi grapes grown near Alaverdi Monastery. Dark fruit, velvety tannins, and a long finish define this expression of the 2010 vintage.</p>
         <dl className="reserve-facts">{facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
         <div className="reserve-actions">
-          <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${wine.name}`)}`}>Enquire about this wine <ArrowUpRight size={18} /></a>
+          <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${wine.name.en}`)}`}>Enquire about this wine <ArrowUpRight size={18} /></a>
           <ReserveAwards awards={awards} />
         </div>
       </div>
