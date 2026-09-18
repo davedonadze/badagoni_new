@@ -50,7 +50,7 @@ export function BilingualField({
     }
   }
 
-  return <div className="flex flex-col gap-3 rounded-lg border bg-muted/30 p-4">
+  return <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
     <div className="grid gap-1.5">
       <Label htmlFor={`${id}-en`}>{label} (English)</Label>
       <Field id={`${id}-en`} rows={multiline ? 4 : undefined} value={value.en} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, en: e.target.value })} />
@@ -58,13 +58,13 @@ export function BilingualField({
     <div className="grid gap-1.5">
       <div className="flex items-center justify-between gap-2">
         <Label htmlFor={`${id}-ka`}>{label} (Georgian)</Label>
-        <Button type="button" variant="ghost" size="sm" className="h-7 gap-1.5 px-2 text-xs" onClick={handleTranslate} disabled={translating || !value.en.trim()}>
+        <Button type="button" variant="ghost" size="sm" className="h-7 gap-1.5 px-2 text-xs text-[var(--admin-accent)] hover:text-[var(--admin-accent)]" onClick={handleTranslate} disabled={translating || !value.en.trim()}>
           <Languages className="size-3.5" />
-          {translating ? "Translating…" : "Translate from English"}
+          {translating ? "Translating…" : "Translate"}
         </Button>
       </div>
       <Field id={`${id}-ka`} rows={multiline ? 4 : undefined} value={value.ka} onChange={(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => onChange({ ...value, ka: e.target.value })} />
     </div>
-    {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
+    {error && <p className="text-sm text-destructive sm:col-span-2" role="alert">{error}</p>}
   </div>;
 }

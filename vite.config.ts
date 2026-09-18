@@ -30,11 +30,14 @@ const localBindingConfig = {
         },
       ]
     : [],
+  // Same pattern as the D1 database above: local/dev builds use a placeholder
+  // bucket name, a real deploy needs CLOUDFLARE_R2_BUCKET_NAME set as a build
+  // variable to override it. See docs/admin-panel.md.
   r2_buckets: r2
     ? [
         {
           binding: r2,
-          bucket_name: "site-creator-r2",
+          bucket_name: process.env.CLOUDFLARE_R2_BUCKET_NAME || "site-creator-r2",
         },
       ]
     : [],

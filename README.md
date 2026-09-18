@@ -19,7 +19,7 @@ The site is in English. Contact actions open the visitor’s email or phone appl
 
 Wines and site navigation are stored in a Cloudflare D1 database (`db/schema.ts`: `wines`, `menu_items`), not hardcoded. `app/wine-data.json` is kept only as the historical seed source for `drizzle/0001_seed_wines.sql` — it is not read at runtime.
 
-`/admin` is a password-protected panel (see `app/admin/`) for managing wines (`/admin/wines`) and the header/footer navigation (`/admin/menu`) without a code deploy. Every bilingual field has an English/Georgian pair and a "Translate from English" button backed by the Claude API; the public site currently renders the English side only. Full setup instructions — local dev, provisioning the real D1 database, and setting `ADMIN_PASSWORD`/`ANTHROPIC_API_KEY` — are in `docs/admin-panel.md`.
+`/admin` is a password-protected panel (see `app/admin/`) for managing wines (`/admin/wines`, including bottle images uploaded to R2) and the header/footer navigation (`/admin/menu`) without a code deploy. Every bilingual field has an English/Georgian pair and a "Translate" button backed by the Claude API; the public site currently renders the English side only. Full setup instructions — local dev, provisioning the real D1 database and R2 bucket, and setting `ADMIN_PASSWORD`/`ANTHROPIC_API_KEY` — are in `docs/admin-panel.md`.
 
 ## Local commands
 

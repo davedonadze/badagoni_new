@@ -1,29 +1,29 @@
 import { asc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { wines } from "@/db/schema";
+import { wines, type Localized } from "@/db/schema";
 
 export type Wine = {
   slug: string;
-  name: string;
+  name: Localized;
   category: string;
   categories: string[];
   image: string;
-  style: string | null;
+  style: Localized | null;
   grapes: string[] | null;
   alcohol: string | null;
-  description: string | null;
+  description: Localized | null;
 };
 
 export type WineInput = {
   slug: string;
-  name: string;
+  name: Localized;
   category: string;
   categories: string[];
   image: string;
-  style?: string | null;
+  style?: Localized | null;
   grapes?: string[] | null;
   alcohol?: string | null;
-  description?: string | null;
+  description?: Localized | null;
 };
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -32,12 +32,12 @@ export function validateWineInput(input: Partial<WineInput>): string | null {
   if (!input.slug || !SLUG_PATTERN.test(input.slug)) {
     return "Slug is required and must be lowercase letters, numbers, and hyphens only.";
   }
-  if (!input.name?.trim()) return "Name is required.";
+  if (!input.name?.en?.trim()) return "Name (English) is required.";
   if (!input.category?.trim()) return "Category is required.";
   if (!input.categories || !Array.isArray(input.categories) || input.categories.length === 0) {
     return "At least one category is required.";
   }
-  if (!input.image?.trim()) return "Image path is required.";
+  if (!input.image?.trim()) return "Image is required.";
   return null;
 }
 

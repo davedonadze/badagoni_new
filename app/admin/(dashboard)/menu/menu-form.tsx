@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../bilingual-field";
 import type { MenuItem, MenuLocation } from "@/lib/menu/service";
 
@@ -59,8 +59,12 @@ export function MenuForm(props: MenuFormProps) {
   }
 
   return <Card className="max-w-2xl">
-    <CardContent>
-      <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit}>
+      <CardHeader className="flex-row items-center justify-between space-y-0">
+        <CardTitle>{props.mode === "create" ? "New menu item" : "Menu item"}</CardTitle>
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}</Button>
+      </CardHeader>
+      <CardContent className="flex flex-col gap-6">
         <BilingualField id="menu-label" label="Label" value={label} onChange={setLabel} />
 
         <div className="grid gap-1.5">
@@ -74,7 +78,7 @@ export function MenuForm(props: MenuFormProps) {
             id="menu-location"
             value={location}
             onChange={e => setLocation(e.target.value as MenuLocation)}
-            className="h-9 rounded-md border bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
+            className="h-9 border bg-transparent px-3 text-sm shadow-xs outline-none focus-visible:border-ring focus-visible:ring-[3px] focus-visible:ring-ring/50"
           >
             {LOCATION_OPTIONS.map(option => <option key={option.value} value={option.value}>{option.label}</option>)}
           </select>
@@ -86,13 +90,7 @@ export function MenuForm(props: MenuFormProps) {
         </div>
 
         {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
-
-        <div>
-          <Button type="submit" disabled={saving}>
-            {saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}
-          </Button>
-        </div>
-      </form>
-    </CardContent>
+      </CardContent>
+    </form>
   </Card>;
 }

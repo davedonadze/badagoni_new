@@ -32,7 +32,7 @@ const NAV_ITEMS = [
 export function AdminShell({ children }: { children: React.ReactNode }) {
   const path = usePathname();
 
-  return <SidebarProvider>
+  return <SidebarProvider className="admin-shell">
     <Sidebar collapsible="icon">
       <SidebarHeader className="px-3 py-3">
         <Link href="/admin" className="flex items-center gap-2 px-1 text-sm font-semibold tracking-tight">

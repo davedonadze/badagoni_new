@@ -10,13 +10,14 @@ runtime reads it anymore.
 ## How it fits together
 
 - `db/schema.ts` — the `wines` and `menu_items` tables (Drizzle ORM / SQLite dialect, since D1 is SQLite).
-- `drizzle/0000_*.sql` — creates the wines table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines. `drizzle/0002_*.sql` — creates `menu_items`. `drizzle/0003_seed_menu_items.sql` — inserts the current header/footer navigation.
+- `drizzle/0000_*.sql` — creates the wines table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines. `drizzle/0002_*.sql` — creates `menu_items`. `drizzle/0003_seed_menu_items.sql` — inserts the current header/footer navigation. `drizzle/0004_wines_bilingual.sql` — converts `wines.name`/`style`/`description` from plain text to bilingual `{en, ka}` JSON.
 - `lib/wines/service.ts` — the only place that talks to the wines table (`listWines`, `getWineBySlug`, `createWine`, `updateWine`, `deleteWine`). Public pages (`/`, `/catalogue`, `/wines/[slug]`) and the admin panel both call this.
 - `lib/menu/service.ts` — the same, for `menu_items`. `app/layout.tsx` calls `listMenuItems()` and passes the header/footer links down to `<SiteHeader>`/`<SiteFooter>` (`app/site-shell.tsx`) as props — the nav is no longer hardcoded.
 - `app/admin/` — the admin UI: `/admin/wines` (list, new, edit) and `/admin/menu` (list grouped by location, new, edit).
-- `app/api/admin/` — the API routes the admin UI calls: `login`, `logout`, `wines` create, `wines/[slug]` update/delete, `menu` create, `menu/[id]` update/delete, and `translate`.
+- `app/api/admin/` — the API routes the admin UI calls: `login`, `logout`, `wines` create, `wines/[slug]` update/delete, `menu` create, `menu/[id]` update/delete, `upload` (bottle images to R2), and `translate`.
 - `lib/admin/auth.ts` — the password gate. One shared `ADMIN_PASSWORD`; on success it sets an httpOnly cookie holding a SHA-256 hash of the password (not the password itself). There is no separate user/session table — this is intentionally a lightweight gate for a small team, not a full auth system.
-- `lib/translate.ts` — calls the Claude API to translate English to Georgian, used by the "Translate from English" button (`app/admin/bilingual-field.tsx`) next to every bilingual field. Requires `ANTHROPIC_API_KEY` (get one at https://console.anthropic.com); without it, the button shows a clear error rather than failing silently. Every bilingual field is stored as `{en, ka}` JSON (see the `Localized` type in `db/schema.ts`) — the public site currently only renders the English side; Georgian pages are a later phase.
+- `lib/translate.ts` — calls the Claude API to translate English to Georgian, used by the "Translate" button (`app/admin/bilingual-field.tsx`) next to every bilingual field. Requires `ANTHROPIC_API_KEY` (get one at https://console.anthropic.com); without it, the button shows a clear error rather than failing silently. Every bilingual field — wine name/style/description, menu item labels — is stored as `{en, ka}` JSON (see the `Localized` type in `db/schema.ts`) — the public site currently only renders the English side; Georgian pages are a later phase.
+- `app/api/admin/upload/route.ts` + `app/media/[...key]/route.ts` — wine bottle images upload to an R2 bucket (binding `BUCKET`) and are served back at `/media/<key>`. See "Setting up image uploads (R2)" below.
 
 ## Local development
 
@@ -36,8 +37,10 @@ runtime reads it anymore.
      --config dist/server/wrangler.json --file=drizzle/0002_steady_mantis.sql
    npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
      --config dist/server/wrangler.json --file=drizzle/0003_seed_menu_items.sql
+   npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
+     --config dist/server/wrangler.json --file=drizzle/0004_wines_bilingual.sql
    ```
-4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1.
+4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1. Image uploads work locally out of the box — Miniflare simulates the R2 bucket the same way it simulates D1, no extra setup needed for local dev.
 
 Note: `npm start` runs Wrangler directly against `dist/server/wrangler.json`, and Wrangler resolves `.dev.vars` **next to that config file**, not the repo root. If `ADMIN_PASSWORD` isn't picked up under `npm start`, also copy `.dev.vars` to `dist/server/.dev.vars` (this is build output and never committed). `npm run dev` (the Cloudflare Vite plugin) reads `.dev.vars` from the repo root as expected.
 
@@ -69,19 +72,47 @@ use it instead.
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0001_seed_wines.sql
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0002_steady_mantis.sql
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0003_seed_menu_items.sql
+   npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0004_wines_bilingual.sql
    ```
 3. In the Worker's **Build configuration** (Cloudflare Workers Builds / Git
-   integration), add these as **build variables**, not bindings:
+   integration), add these as **build variables** (type "Variable", not "Secret"):
    - `CLOUDFLARE_D1_DATABASE_ID` — the real database ID from step 1
    - `CLOUDFLARE_D1_DATABASE_NAME` — optional, e.g. `badagoni-wines` (cosmetic only, defaults to `site-creator-d1`)
-4. **Set these as encrypted build variables** too:
-   - `ADMIN_PASSWORD` — your chosen password
-   - `ANTHROPIC_API_KEY` — for the translate button; get one at https://console.anthropic.com. Skippable for now — everything except translation works without it.
+   - `CLOUDFLARE_R2_BUCKET_NAME` — see "Setting up image uploads (R2)" below
+4. **Set `ADMIN_PASSWORD` and `ANTHROPIC_API_KEY` via the Wrangler CLI, not the dashboard's "Secret" row type.** The dashboard's build-config "Variables and secrets" panel *looks* like it supports secrets (type "Secret", value shown as "encrypted"), but for a Git-integrated Worker whose non-production branches only ever run `wrangler versions upload` (never a full `wrangler deploy`), a *new* secret added there silently never attaches — Cloudflare's secret-versioning system requires an actively deployed version to attach a secret to, and this project intentionally never deploys the feature branch. The CLI bypasses this:
+   ```sh
+   npx wrangler login
+   npx wrangler versions secret put ADMIN_PASSWORD --name badagoni-new
+   npx wrangler versions secret put ANTHROPIC_API_KEY --name badagoni-new
+   ```
+   Paste the value when prompted. This attaches the secret without deploying anything (do **not** run the `wrangler versions deploy` command it suggests afterward — that pushes to production traffic). After running this, push any commit (or retry the last build) so the branch's next `wrangler versions upload` picks up the newly attached secret — the CLI command alone only updates the Worker's secret store, not what's currently served at the preview URL.
 
-   (Via CLI instead: `npx wrangler secret put ADMIN_PASSWORD` / `npx wrangler secret put ANTHROPIC_API_KEY`.)
+   `ANTHROPIC_API_KEY` — get one at https://console.anthropic.com → API Keys → **Create Key**. The full key value (`sk-ant-api03-...`) is shown **only once**, in the creation popup — copy it from there via its Copy button. The console's key list afterward only ever shows a truncated value and a separate `apikey_...` ID (not usable as the key itself); if you didn't copy it at creation time, make a new key.
 5. Trigger a rebuild (push a commit, or retry the last build). This time the
-   generated config bakes in the real database ID from step 3, so it deploys
-   cleanly — and stays correct on every future rebuild, unlike the
-   dashboard-binding approach.
+   generated config bakes in the real database ID and bucket name from step 3,
+   so it deploys cleanly — and stays correct on every future rebuild, unlike
+   the dashboard-binding approach.
 
-Without step 4, `/admin` login will fail with "ADMIN_PASSWORD is not configured" — the same error you'd see locally without `.dev.vars`. Without `ANTHROPIC_API_KEY`, everything else in the admin panel works normally; only the "Translate from English" button shows an error.
+Without step 4, `/admin` login will fail with "ADMIN_PASSWORD is not configured" — the same error you'd see locally without `.dev.vars`. Without `ANTHROPIC_API_KEY`, everything else in the admin panel works normally; only the "Translate" button shows an error.
+
+## Setting up image uploads (R2)
+
+Wine bottle images upload through the admin panel's image picker to an R2
+bucket (binding `BUCKET`), the same way D1 is bound — see
+`app/api/admin/upload/route.ts` (accepts the upload) and
+`app/media/[...key]/route.ts` (serves images back out). Locally this needs no
+setup (Miniflare simulates it). For a real deploy:
+
+1. **Create the bucket** via the CLI (the dashboard's Storage & Databases → R2
+   works too): `npx wrangler r2 bucket create badagoni-media`.
+2. Add `CLOUDFLARE_R2_BUCKET_NAME=badagoni-media` as a build **Variable**
+   (not a secret — bucket names aren't sensitive) in the same Build
+   configuration panel as `CLOUDFLARE_D1_DATABASE_ID`.
+3. Trigger a rebuild. Unlike the runtime secrets above, this binds cleanly
+   through the normal build process — `r2_buckets` (like `d1_databases`) is
+   declared directly in the generated `wrangler.json` that `wrangler versions
+   upload`/`wrangler deploy` reads, so it isn't subject to the
+   deployed-version restriction that runtime secrets hit.
+
+Without this, the upload button shows "Image storage is not configured" —
+everything else in the admin panel still works.

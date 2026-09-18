@@ -46,6 +46,25 @@ a[data-slot="button"][data-variant="secondary"] {color:var(--secondary-foregroun
 a[data-slot="button"][data-variant="outline"],
 a[data-slot="button"][data-variant="ghost"] {color:var(--foreground)}
 a[data-slot="button"][data-variant="link"] {color:var(--primary)}
+/* The admin panel wants rounded corners and a colored accent, but Tailwind
+   bakes --radius-* to 0 at build time (site-wide, for the marketing site's
+   sharp-corner look) as literal values in the generated utility CSS, not
+   runtime var() references - so rounded-* utilities can't be overridden by
+   scoping a variable. Target shadcn's data-slot attributes directly instead,
+   unlayered so this wins over the baked-0 layered utilities. The accent
+   reuses Badagoni's own wine-burgundy (--destructive) rather than a new color. */
+.admin-shell {--admin-accent:var(--destructive); --admin-accent-foreground:#fff}
+.admin-shell [data-slot="card"] {border-radius:16px}
+.admin-shell [data-slot="input"],
+.admin-shell [data-slot="textarea"],
+.admin-shell [data-slot="select-trigger"],
+.admin-shell [data-slot="badge"],
+.admin-shell [data-slot="table-container"],
+.admin-shell select,
+.admin-shell [data-slot="button"] {border-radius:10px}
+.admin-shell [data-slot="button"][data-variant="default"] {background:var(--admin-accent); color:var(--admin-accent-foreground)}
+.admin-shell [data-slot="button"][data-variant="default"]:hover {background:var(--admin-accent); opacity:.9}
+.admin-shell a[data-slot="button"][data-variant="default"] {color:var(--admin-accent-foreground)}
 button,a {-webkit-tap-highlight-color:transparent}
 button {font:inherit;cursor:pointer}
 button:disabled {cursor:default}

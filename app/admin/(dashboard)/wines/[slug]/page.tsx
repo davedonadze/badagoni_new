@@ -16,8 +16,8 @@ export default async function EditWine({ params }: EditWineProps) {
     <div>
       <Link href="/admin/wines" className="inline-flex items-center gap-1 text-sm text-muted-foreground hover:text-foreground"><ChevronLeft className="size-4" />Back to wines</Link>
       <div className="mt-2 flex flex-wrap items-center justify-between gap-4">
-        <h1 className="text-2xl font-semibold tracking-tight">Edit {wine.name}</h1>
-        <DeleteWineButton slug={wine.slug} name={wine.name} />
+        <h1 className="text-2xl font-semibold tracking-tight">Edit {wine.name.en}</h1>
+        <DeleteWineButton slug={wine.slug} name={wine.name.en} />
       </div>
     </div>
     <WineForm mode="edit" wine={wine} />

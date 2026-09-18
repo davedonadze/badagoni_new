@@ -31,7 +31,7 @@ export default async function SaperaviReserve() {
   ];
 
   return <main className="reserve-page">
-    <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href="/catalogue">Wine catalogue</Link><span aria-hidden="true">/</span><span aria-current="page">{wine.name}</span></nav>
+    <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href="/catalogue">Wine catalogue</Link><span aria-hidden="true">/</span><span aria-current="page">{wine.name.en}</span></nav>
 
     <section className="reserve-product" aria-labelledby="reserve-title">
       <div className="reserve-heading"><p className="eyebrow">Badagoni / Limited release</p><h1 id="reserve-title">Saperavi<br />Reserve</h1></div>
@@ -44,7 +44,7 @@ export default async function SaperaviReserve() {
         <p className="reserve-introduction">Made in limited quantities from Saperavi grapes grown near Alaverdi Monastery. Dark fruit, velvety tannins, and a long finish define this expression of the 2010 vintage.</p>
         <dl className="reserve-facts">{facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
         <div className="reserve-actions">
-          <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${wine.name}`)}`}>Enquire about this wine <ArrowUpRight size={18} /></a>
+          <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${wine.name.en}`)}`}>Enquire about this wine <ArrowUpRight size={18} /></a>
           <ReserveAwards awards={awards} />
         </div>
       </div>

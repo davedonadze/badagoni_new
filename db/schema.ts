@@ -11,14 +11,14 @@ export type Localized = { en: string; ka: string };
 export const wines = sqliteTable("wines", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   slug: text("slug").notNull().unique(),
-  name: text("name").notNull(),
+  name: text("name", { mode: "json" }).$type<Localized>().notNull(),
   category: text("category").notNull(),
   categories: text("categories", { mode: "json" }).$type<string[]>().notNull(),
   image: text("image").notNull(),
-  style: text("style"),
+  style: text("style", { mode: "json" }).$type<Localized | null>(),
   grapes: text("grapes", { mode: "json" }).$type<string[] | null>(),
   alcohol: text("alcohol"),
-  description: text("description"),
+  description: text("description", { mode: "json" }).$type<Localized | null>(),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
