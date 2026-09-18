@@ -7,18 +7,6 @@ function parseCategories(value: unknown): string[] {
   return [];
 }
 
-function parseGrapes(value: unknown): string[] | null {
-  if (Array.isArray(value)) {
-    const grapes = value.map(String).map(v => v.trim()).filter(Boolean);
-    return grapes.length ? grapes : null;
-  }
-  if (typeof value === "string") {
-    const grapes = value.split(",").map(v => v.trim()).filter(Boolean);
-    return grapes.length ? grapes : null;
-  }
-  return null;
-}
-
 function nullableString(value: unknown): string | null {
   if (typeof value !== "string") return null;
   const trimmed = value.trim();
@@ -50,7 +38,7 @@ export function parseWineInput(body: Record<string, unknown>): WineInput {
     categories: parseCategories(body.categories ?? category),
     image: typeof body.image === "string" ? body.image.trim() : "",
     style: nullableLocalized(body.style),
-    grapes: parseGrapes(body.grapes),
+    grapes: nullableLocalized(body.grapes),
     alcohol: nullableString(body.alcohol),
     description: nullableLocalized(body.description),
   };

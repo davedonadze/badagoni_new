@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Wine, ListTree, FileText, Newspaper } from "lucide-react";
+import { LayoutDashboard, Wine, Tags, ListTree, FileText, Newspaper } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -24,6 +24,7 @@ import { LogoutButton } from "./logout-button";
 const NAV_ITEMS = [
   { href: "/admin", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin/wines", label: "Wines", icon: Wine },
+  { href: "/admin/categories", label: "Categories", icon: Tags },
   { href: "/admin/menu", label: "Menu", icon: ListTree },
   { href: "/admin/pages", label: "Pages", icon: FileText, comingSoon: true },
   { href: "/admin/news", label: "News", icon: Newspaper, comingSoon: true },

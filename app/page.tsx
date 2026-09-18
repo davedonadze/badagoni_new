@@ -6,6 +6,7 @@ import { ParallaxMedia } from "./parallax-media";
 import { SmoothScroll } from "./smooth-scroll";
 import { ScrollReveal } from "./scroll-reveal";
 import { listWines } from "@/lib/wines/service";
+import { listCategories } from "@/lib/categories/service";
 
 const worlds = [
   { number: "01", title: "Our place", subtitle: "Rooted in Kakheti", text: "Between the Caucasus Mountains and the Alazani Valley, our vineyards give every wine a sense of belonging.", href: "/terroir", link: "Explore our vineyards" },
@@ -14,7 +15,7 @@ const worlds = [
 ];
 
 export default async function Home() {
-  const wines = await listWines();
+  const [wines, categories] = await Promise.all([listWines(), listCategories()]);
   return <SmoothScroll><main>
     <ParallaxMedia
       className="campaign-hero"
@@ -34,7 +35,7 @@ export default async function Home() {
 
     <section className="selected-collection" aria-labelledby="collection-title">
       <div className="collection-label"><h2 id="collection-title">The collection</h2><span>Selected expressions / 01—03</span></div>
-      <FeaturedWines wines={wines} />
+      <FeaturedWines wines={wines} categories={categories} />
       <div className="collection-more"><Link href="/catalogue" className="underlined-link">View all wines <ArrowUpRight size={16} /></Link></div>
     </section>
 

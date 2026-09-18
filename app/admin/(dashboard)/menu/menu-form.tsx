@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
@@ -28,11 +28,19 @@ export function MenuForm(props: MenuFormProps) {
   const [order, setOrder] = useState(initial?.order ?? 0);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
+  const [saved, setSaved] = useState(false);
+
+  useEffect(() => {
+    if (!saved) return;
+    const timeout = setTimeout(() => setSaved(false), 2000);
+    return () => clearTimeout(timeout);
+  }, [saved]);
 
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setSaving(true);
     setError(null);
+    setSaved(false);
 
     const payload = { label, href, location, order };
 
@@ -44,13 +52,17 @@ export function MenuForm(props: MenuFormProps) {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
-      const data = (await response.json()) as { error?: string };
+      const data = (await response.json()) as { item?: { id: number }; error?: string };
       if (!response.ok) {
         setError(data.error || "Failed to save menu item.");
         setSaving(false);
         return;
       }
-      router.push("/admin/menu");
+      if (props.mode === "create" && data.item) {
+        router.replace(`/admin/menu/${data.item.id}`);
+      }
+      setSaved(true);
+      setSaving(false);
       router.refresh();
     } catch {
       setError("Something went wrong. Please try again.");
@@ -62,7 +74,10 @@ export function MenuForm(props: MenuFormProps) {
     <form onSubmit={handleSubmit}>
       <CardHeader className="flex-row items-center justify-between space-y-0">
         <CardTitle>{props.mode === "create" ? "New menu item" : "Menu item"}</CardTitle>
-        <Button type="submit" disabled={saving}>{saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}</Button>
+        <div className="flex items-center gap-3">
+          {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+          <Button type="submit" disabled={saving}>{saving ? "Saving…" : props.mode === "create" ? "Add menu item" : "Save changes"}</Button>
+        </div>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="menu-label" label="Label" value={label} onChange={setLabel} />

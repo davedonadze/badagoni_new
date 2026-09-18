@@ -9,7 +9,7 @@ export type Wine = {
   categories: string[];
   image: string;
   style: Localized | null;
-  grapes: string[] | null;
+  grapes: Localized | null;
   alcohol: string | null;
   description: Localized | null;
 };
@@ -21,7 +21,7 @@ export type WineInput = {
   categories: string[];
   image: string;
   style?: Localized | null;
-  grapes?: string[] | null;
+  grapes?: Localized | null;
   alcohol?: string | null;
   description?: Localized | null;
 };

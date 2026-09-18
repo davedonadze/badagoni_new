@@ -16,9 +16,20 @@ export const wines = sqliteTable("wines", {
   categories: text("categories", { mode: "json" }).$type<string[]>().notNull(),
   image: text("image").notNull(),
   style: text("style", { mode: "json" }).$type<Localized | null>(),
-  grapes: text("grapes", { mode: "json" }).$type<string[] | null>(),
+  grapes: text("grapes", { mode: "json" }).$type<Localized | null>(),
   alcohol: text("alcohol"),
   description: text("description", { mode: "json" }).$type<Localized | null>(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
+// Wine categories (red, white, qvevri, …), managed at /admin/categories. `id`
+// is the slug stored in wines.category/categories — kept immutable after
+// creation in the admin UI so existing wines don't go stale.
+export const categories = sqliteTable("categories", {
+  id: text("id").primaryKey(),
+  label: text("label", { mode: "json" }).$type<Localized>().notNull(),
+  order: integer("order").notNull().default(0),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });

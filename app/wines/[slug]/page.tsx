@@ -3,8 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import { getWineBySlug } from "@/lib/wines/service";
-
-const labels: Record<string, string> = { red: "Red wine", white: "White wine", qvevri: "Qvevri wine", rose: "Rosé wine", sparkling: "Sparkling wine", chacha: "Chacha" };
+import { getCategory } from "@/lib/categories/service";
 
 type WinePageProps = { params: Promise<{ slug: string }> };
 
@@ -13,7 +12,8 @@ export async function generateMetadata({ params }: WinePageProps): Promise<Metad
   if (slug === "saperavi-reserve") return {};
   const wine = await getWineBySlug(slug);
   if (!wine) return { title: "Wine not found" };
-  return { title: wine.name.en, description: wine.description?.en || `Discover ${wine.name.en} from the Badagoni collection. Native Georgian grapes, ${labels[wine.category].toLowerCase()}.` };
+  const category = await getCategory(wine.category);
+  return { title: wine.name.en, description: wine.description?.en || `Discover ${wine.name.en} from the Badagoni collection. Native Georgian grapes, ${(category?.label.en ?? wine.category).toLowerCase()}.` };
 }
 
 export default async function WinePage({ params }: WinePageProps) {
@@ -21,9 +21,11 @@ export default async function WinePage({ params }: WinePageProps) {
   if (slug === "saperavi-reserve") notFound();
   const wine = await getWineBySlug(slug);
   if (!wine) notFound();
+  const category = await getCategory(wine.category);
+  const categoryLabel = category?.label.en ?? wine.category;
 
   const facts = [
-    wine.grapes && { label: "Grape variety", value: wine.grapes.join(" & ") },
+    wine.grapes && { label: "Grape variety", value: wine.grapes.en },
     wine.style && { label: "Style", value: wine.style.en },
     { label: "Origin", value: "Kakheti, Georgia" },
     wine.alcohol && { label: "Alcohol", value: wine.alcohol },
@@ -33,10 +35,10 @@ export default async function WinePage({ params }: WinePageProps) {
     <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href="/catalogue">Wine catalogue</Link><span aria-hidden="true">/</span><span aria-current="page">{wine.name.en}</span></nav>
 
     <section className="reserve-product" aria-labelledby="wine-title">
-      <div className="reserve-heading"><p className="eyebrow">Badagoni / {labels[wine.category]}</p><h1 id="wine-title">{wine.name.en}</h1></div>
+      <div className="reserve-heading"><p className="eyebrow">Badagoni / {categoryLabel}</p><h1 id="wine-title">{wine.name.en}</h1></div>
       <figure className="reserve-visual">
         <img src={wine.image} alt={wine.name.en + " bottle"} width="300" height="1105" fetchPriority="high" />
-        <figcaption>{wine.grapes?.join(" · ") || labels[wine.category]} / Kakheti, Georgia</figcaption>
+        <figcaption>{wine.grapes?.en || categoryLabel} / Kakheti, Georgia</figcaption>
       </figure>
       <div className="reserve-information">
         <p className="reserve-introduction">{wine.description?.en || "Discover this expression from the Badagoni collection. Contact our team for current vintages and further information."}</p>
