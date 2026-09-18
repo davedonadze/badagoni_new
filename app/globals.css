@@ -500,7 +500,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 }
 @media(max-width:1100px) {
   .header-nav {display:none}
-  .header-secondary .header-enologists,.header-secondary .header-cellar,.header-secondary .header-newsroom {display:none}
+  .header-secondary a:not(:last-child) {display:none}
   .mobile-menu-button {display:flex}
 }
 @media(max-width:760px) {
@@ -770,3 +770,14 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .admin-checkbox-group {display:flex;flex-wrap:wrap;gap:14px}
 .admin-checkbox {display:flex;align-items:center;gap:6px;font-size:14px;font-weight:400}
 .admin-form-actions {margin-top:6px}
+.admin-form-error {font-size:14px;color:#b3261e;margin:0}
+
+.admin-bilingual-field {display:flex;flex-direction:column;gap:10px;padding:14px;border:1px solid var(--border);background:var(--card)}
+.admin-bilingual-header {display:flex;align-items:center;justify-content:space-between;gap:10px}
+.admin-bilingual-header .admin-secondary-link {font-size:13px;background:none;border:0;cursor:pointer;padding:0}
+.admin-bilingual-header .admin-secondary-link:disabled {opacity:.5;cursor:default;text-decoration:none}
+
+.admin-menu-group {margin-bottom:36px}
+.admin-menu-group h2 {font-size:16px;margin:0 0 12px}
+.admin-empty-state {font-size:14px;color:#8b8b83}
+.admin-badge {margin-left:8px;font-size:11px;text-transform:uppercase;letter-spacing:.03em;color:#b3261e;border:1px solid currentColor;padding:2px 6px}

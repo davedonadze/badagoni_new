@@ -15,6 +15,20 @@
       "when": 1789554558063,
       "tag": "0001_seed_wines",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1789731446395,
+      "tag": "0002_steady_mantis",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1789731446396,
+      "tag": "0003_seed_menu_items",
+      "breakpoints": true
     }
   ]
 }

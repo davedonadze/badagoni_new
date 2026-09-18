@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { isAdminAuthenticated } from "@/lib/admin/auth";
-import { LogoutButton } from "./logout-button";
+import { LogoutButton } from "../wines/logout-button";
 
 export const dynamic = "force-dynamic";
 
-export default async function AdminWinesLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminMenuLayout({ children }: { children: React.ReactNode }) {
   const authenticated = await isAdminAuthenticated();
   if (!authenticated) redirect("/admin/login");
 
@@ -15,7 +15,7 @@ export default async function AdminWinesLayout({ children }: { children: React.R
       <nav className="admin-topbar-nav">
         <Link href="/admin/wines">Wines</Link>
         <Link href="/admin/menu">Menu</Link>
-        <Link href="/admin/wines/new">+ Add wine</Link>
+        <Link href="/admin/menu/new">+ Add menu item</Link>
         <LogoutButton />
       </nav>
     </header>

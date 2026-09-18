@@ -9,16 +9,18 @@ runtime reads it anymore.
 
 ## How it fits together
 
-- `db/schema.ts` — the `wines` table (Drizzle ORM / SQLite dialect, since D1 is SQLite).
-- `drizzle/0000_*.sql` — creates the table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines.
-- `lib/wines/service.ts` — the only place that talks to the database (`listWines`, `getWineBySlug`, `createWine`, `updateWine`, `deleteWine`). Public pages (`/`, `/catalogue`, `/wines/[slug]`) and the admin panel both call this.
-- `app/admin/` — the admin UI (`/admin/wines` list, `/admin/wines/new`, `/admin/wines/[slug]` edit form).
-- `app/api/admin/` — the API routes the admin UI calls (`login`, `logout`, `wines` create, `wines/[slug]` update/delete).
+- `db/schema.ts` — the `wines` and `menu_items` tables (Drizzle ORM / SQLite dialect, since D1 is SQLite).
+- `drizzle/0000_*.sql` — creates the wines table. `drizzle/0001_seed_wines.sql` — inserts the original 41 wines. `drizzle/0002_*.sql` — creates `menu_items`. `drizzle/0003_seed_menu_items.sql` — inserts the current header/footer navigation.
+- `lib/wines/service.ts` — the only place that talks to the wines table (`listWines`, `getWineBySlug`, `createWine`, `updateWine`, `deleteWine`). Public pages (`/`, `/catalogue`, `/wines/[slug]`) and the admin panel both call this.
+- `lib/menu/service.ts` — the same, for `menu_items`. `app/layout.tsx` calls `listMenuItems()` and passes the header/footer links down to `<SiteHeader>`/`<SiteFooter>` (`app/site-shell.tsx`) as props — the nav is no longer hardcoded.
+- `app/admin/` — the admin UI: `/admin/wines` (list, new, edit) and `/admin/menu` (list grouped by location, new, edit).
+- `app/api/admin/` — the API routes the admin UI calls: `login`, `logout`, `wines` create, `wines/[slug]` update/delete, `menu` create, `menu/[id]` update/delete, and `translate`.
 - `lib/admin/auth.ts` — the password gate. One shared `ADMIN_PASSWORD`; on success it sets an httpOnly cookie holding a SHA-256 hash of the password (not the password itself). There is no separate user/session table — this is intentionally a lightweight gate for a small team, not a full auth system.
+- `lib/translate.ts` — calls the Claude API to translate English to Georgian, used by the "Translate from English" button (`app/admin/bilingual-field.tsx`) next to every bilingual field. Requires `ANTHROPIC_API_KEY` (get one at https://console.anthropic.com); without it, the button shows a clear error rather than failing silently. Every bilingual field is stored as `{en, ka}` JSON (see the `Localized` type in `db/schema.ts`) — the public site currently only renders the English side; Georgian pages are a later phase.
 
 ## Local development
 
-1. Copy `.dev.vars.example` to `.dev.vars` and set a real `ADMIN_PASSWORD`. This file is gitignored — never commit it.
+1. Copy `.dev.vars.example` to `.dev.vars` and set a real `ADMIN_PASSWORD`. Add `ANTHROPIC_API_KEY` too if you want to test the translate button locally — it's optional; everything else works without it. This file is gitignored — never commit it.
 2. Run the install and build once so `dist/server/wrangler.json` exists (it declares the local D1 binding):
    ```sh
    npm run install:ci
@@ -30,6 +32,10 @@ runtime reads it anymore.
      --config dist/server/wrangler.json --file=drizzle/0000_faulty_masked_marvel.sql
    npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
      --config dist/server/wrangler.json --file=drizzle/0001_seed_wines.sql
+   npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
+     --config dist/server/wrangler.json --file=drizzle/0002_steady_mantis.sql
+   npx wrangler d1 execute site-creator-d1 --local --persist-to .wrangler/state \
+     --config dist/server/wrangler.json --file=drizzle/0003_seed_menu_items.sql
    ```
 4. `npm run dev` (Vite) or `npm start` (production build via local Wrangler) as usual, then sign in at `/admin` with the password from step 1.
 
@@ -56,23 +62,26 @@ use it instead.
    Wrangler CLI: `npx wrangler d1 create badagoni-wines`). Note its
    **Database ID** (shown on the database's Overview tab, or printed by the
    CLI command).
-2. **Apply the migrations** to it — either paste the contents of
-   `drizzle/0000_faulty_masked_marvel.sql` then `drizzle/0001_seed_wines.sql`
-   into the database's dashboard **Console** tab, or via CLI:
+2. **Apply the migrations** to it, in order — either paste each file's
+   contents into the database's dashboard **Console** tab, or via CLI:
    ```sh
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0000_faulty_masked_marvel.sql
    npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0001_seed_wines.sql
+   npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0002_steady_mantis.sql
+   npx wrangler d1 execute badagoni-wines --remote --file=drizzle/0003_seed_menu_items.sql
    ```
 3. In the Worker's **Build configuration** (Cloudflare Workers Builds / Git
    integration), add these as **build variables**, not bindings:
    - `CLOUDFLARE_D1_DATABASE_ID` — the real database ID from step 1
    - `CLOUDFLARE_D1_DATABASE_NAME` — optional, e.g. `badagoni-wines` (cosmetic only, defaults to `site-creator-d1`)
-4. **Set the admin password as an encrypted build variable** too:
-   `ADMIN_PASSWORD` — your chosen password, with "Encrypt" turned on. (Via
-   CLI instead: `npx wrangler secret put ADMIN_PASSWORD`.)
+4. **Set these as encrypted build variables** too:
+   - `ADMIN_PASSWORD` — your chosen password
+   - `ANTHROPIC_API_KEY` — for the translate button; get one at https://console.anthropic.com. Skippable for now — everything except translation works without it.
+
+   (Via CLI instead: `npx wrangler secret put ADMIN_PASSWORD` / `npx wrangler secret put ANTHROPIC_API_KEY`.)
 5. Trigger a rebuild (push a commit, or retry the last build). This time the
    generated config bakes in the real database ID from step 3, so it deploys
    cleanly — and stays correct on every future rebuild, unlike the
    dashboard-binding approach.
 
-Without step 3, `/admin` login will fail with "ADMIN_PASSWORD is not configured" — the same error you'd see locally without `.dev.vars`.
+Without step 4, `/admin` login will fail with "ADMIN_PASSWORD is not configured" — the same error you'd see locally without `.dev.vars`. Without `ANTHROPIC_API_KEY`, everything else in the admin panel works normally; only the "Translate from English" button shows an error.
