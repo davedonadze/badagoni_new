@@ -3,11 +3,16 @@ import { isAdminAuthenticated } from "@/lib/admin/auth";
 
 export const dynamic = "force-dynamic";
 
-const ALLOWED_TYPES = new Set(["image/webp", "image/png", "image/jpeg", "image/avif"]);
-const MAX_BYTES = 8 * 1024 * 1024;
+const IMAGE_TYPES = new Set(["image/webp", "image/png", "image/jpeg", "image/avif"]);
+const VIDEO_TYPES = new Set(["video/mp4", "video/webm"]);
+const MAX_IMAGE_BYTES = 8 * 1024 * 1024;
+const MAX_VIDEO_BYTES = 50 * 1024 * 1024;
 
 function extensionFor(type: string): string {
-  return { "image/webp": "webp", "image/png": "png", "image/jpeg": "jpg", "image/avif": "avif" }[type] ?? "bin";
+  return {
+    "image/webp": "webp", "image/png": "png", "image/jpeg": "jpg", "image/avif": "avif",
+    "video/mp4": "mp4", "video/webm": "webm",
+  }[type] ?? "bin";
 }
 
 export async function POST(request: Request) {
@@ -23,11 +28,14 @@ export async function POST(request: Request) {
   if (!(file instanceof File)) {
     return Response.json({ error: "No file uploaded." }, { status: 400 });
   }
-  if (!ALLOWED_TYPES.has(file.type)) {
-    return Response.json({ error: "Only WEBP, PNG, JPEG, or AVIF images are allowed." }, { status: 400 });
+
+  const isVideo = VIDEO_TYPES.has(file.type);
+  if (!isVideo && !IMAGE_TYPES.has(file.type)) {
+    return Response.json({ error: "Only WEBP, PNG, JPEG, AVIF images, or MP4/WEBM videos are allowed." }, { status: 400 });
   }
-  if (file.size > MAX_BYTES) {
-    return Response.json({ error: "Image must be under 8 MB." }, { status: 400 });
+  const maxBytes = isVideo ? MAX_VIDEO_BYTES : MAX_IMAGE_BYTES;
+  if (file.size > maxBytes) {
+    return Response.json({ error: isVideo ? "Video must be under 50 MB." : "Image must be under 8 MB." }, { status: 400 });
   }
 
   const key = `wines/${crypto.randomUUID()}.${extensionFor(file.type)}`;

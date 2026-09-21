@@ -130,7 +130,7 @@ export function WineForm(props: WineFormProps) {
           />
         </div>
 
-        <ImagePicker id="wine-image" label="Bottle image" value={image} onChange={setImage} />
+        <ImagePicker id="wine-image" label="Bottle image" value={image} onChange={setImage} recommendedResolution="600×2000px, portrait, transparent background" />
 
         <div className="grid gap-1.5">
           <Label htmlFor="wine-category">Primary category</Label>

@@ -78,9 +78,9 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
     </Card>
 
     <Card>
-      <CardHeader><CardTitle>Cover image</CardTitle></CardHeader>
+      <CardHeader><CardTitle>Cover media</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
-        <ImagePicker id="story-cover-image" label="Image" value={cover.image} onChange={v => setCover({ ...cover, image: v })} previewClassName={wideImagePreview} />
+        <ImagePicker id="story-cover-image" label="Photo or video" value={cover.image} onChange={v => setCover({ ...cover, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
         <BilingualField id="story-cover-caption" label="Caption" value={cover.caption} onChange={v => setCover({ ...cover, caption: v })} />
       </CardContent>
     </Card>
@@ -98,7 +98,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
     <Card>
       <CardHeader><CardTitle>02 — The craft</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
-        <ImagePicker id="story-qvevri-image" label="Image" value={qvevri.image} onChange={v => setQvevri({ ...qvevri, image: v })} previewClassName={wideImagePreview} />
+        <ImagePicker id="story-qvevri-image" label="Photo or video" value={qvevri.image} onChange={v => setQvevri({ ...qvevri, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
         <BilingualField id="story-qvevri-eyebrow" label="Eyebrow" value={qvevri.eyebrow} onChange={v => setQvevri({ ...qvevri, eyebrow: v })} />
         <BilingualField id="story-qvevri-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={qvevri.heading} onChange={v => setQvevri({ ...qvevri, heading: v })} />
         <BilingualField id="story-qvevri-p1" label="Paragraph 1" multiline value={qvevri.paragraph1} onChange={v => setQvevri({ ...qvevri, paragraph1: v })} />

@@ -120,15 +120,21 @@ use it instead.
 
 Without step 4, `/admin` login will fail with "ADMIN_PASSWORD is not configured" — the same error you'd see locally without `.dev.vars`. Without `ANTHROPIC_API_KEY`, everything else in the admin panel works normally; only the "Translate" button shows an error.
 
-## Setting up image uploads (R2)
+## Setting up image/video uploads (R2)
 
-Wine bottle images upload through the admin panel's image picker to an R2
-bucket (binding `BUCKET`) — see `app/api/admin/upload/route.ts` (accepts the
-upload) and `app/media/[...key]/route.ts` (serves images back out). Unlike
-D1, there's no placeholder fallback here: a `bucket_name` that doesn't
-actually exist fails deploy outright, so `vite.config.ts` omits the binding
-entirely until `CLOUDFLARE_R2_BUCKET_NAME` is set, rather than risk breaking
-every deploy the way a bad D1 ID would. For a real deploy:
+Wine bottle images, and (where a picker has `allowVideo`, like Story's cover
+and qvevri media) photos or short looping videos, upload through the admin
+panel's `ImagePicker` (`app/admin/image-picker.tsx`) to an R2 bucket
+(binding `BUCKET`) — see `app/api/admin/upload/route.ts` (accepts the
+upload; images up to 8 MB, video up to 50 MB) and `app/media/[...key]/route.ts`
+(serves it back out). A banner page component picks `<video>` vs `<img>` by
+the uploaded file's extension (`lib/media.ts`'s `isVideoUrl`, wrapped by
+`app/banner-media.tsx` for `ParallaxMedia` spots) — no separate "is this a
+video" field is stored. Unlike D1, there's no placeholder fallback here: a
+`bucket_name` that doesn't actually exist fails deploy outright, so
+`vite.config.ts` omits the binding entirely until `CLOUDFLARE_R2_BUCKET_NAME`
+is set, rather than risk breaking every deploy the way a bad D1 ID would.
+For a real deploy:
 
 1. **Create the bucket** via the CLI (the dashboard's Storage & Databases → R2
    works too): `npx wrangler r2 bucket create badagoni-media`.

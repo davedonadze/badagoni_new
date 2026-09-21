@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { WinerySection } from "./winery-section";
 import { ParallaxMedia } from "../parallax-media";
 import { BreakableText } from "../breakable-text";
+import { BannerMedia } from "../banner-media";
 import { getPageContent } from "@/lib/pages/service";
 import { STORY_SLUG, STORY_DEFAULT, type StoryContent } from "@/lib/pages/story";
 
@@ -20,7 +21,7 @@ export default async function Story() {
       <p><BreakableText text={heading.subtitle.en} /></p>
     </div>
 
-    <ParallaxMedia className="story-cover" scale={1.5} ariaLabel={cover.caption.en} media={<img src={cover.image} alt="Alaverdi Monastery in the landscapes of Kakheti" fetchPriority="high" />} overlay={<span>{cover.caption.en}</span>} />
+    <ParallaxMedia className="story-cover" scale={1.5} ariaLabel={cover.caption.en} media={<BannerMedia src={cover.image} alt="Alaverdi Monastery in the landscapes of Kakheti" fetchPriority="high" />} overlay={<span>{cover.caption.en}</span>} />
 
     <section className="story-intro">
       <p className="eyebrow">{intro.eyebrow.en}</p>
@@ -34,7 +35,7 @@ export default async function Story() {
     </section>
 
     <section className="story-qvevri" id="qvevri">
-      <ParallaxMedia className="qvevri-photo" scale={1.5} media={<img src={qvevri.image} alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} />
+      <ParallaxMedia className="qvevri-photo" scale={1.5} media={<BannerMedia src={qvevri.image} alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} />
       <div className="story-qvevri-copy">
         <p className="eyebrow">{qvevri.eyebrow.en}</p>
         <h2><BreakableText text={qvevri.heading.en} /></h2>
