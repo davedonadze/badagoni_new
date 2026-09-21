@@ -78,6 +78,13 @@
       "when": 1789751757520,
       "tag": "0010_seed_home_page",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1789751757521,
+      "tag": "0011_seed_contact_page",
+      "breakpoints": true
     }
   ]
 }

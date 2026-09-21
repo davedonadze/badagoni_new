@@ -10,6 +10,7 @@ import type { GenericPageContent } from "@/lib/pages/generic";
 const REGISTERED_PAGES = [
   { slug: "home", title: "Home", description: "/ — hero, opening note, editorial cards, manifesto, and world section." },
   { slug: "story", title: "Story", description: "/story — heading, cover, and the four editorial sections." },
+  { slug: "contact", title: "Contact", description: "/contact — heading, contact methods, and locations." },
 ];
 
 export const dynamic = "force-dynamic";
