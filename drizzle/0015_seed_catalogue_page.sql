@@ -1,0 +1,1 @@
+INSERT INTO `pages` (`slug`, `content`) VALUES ('catalogue', '{"eyebrow":{"en":"Badagoni / The collection","ka":""},"tagline":{"en":"Native grapes. Distinctive characters.","ka":""},"title":{"en":"Find your\ncharacter.","ka":""},"body":{"en":"From the depth of Saperavi to the brightness of Mtsvane.\nA Georgian expression for every kind of gathering.","ka":""}}');
