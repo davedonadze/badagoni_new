@@ -34,8 +34,15 @@ export default async function AdminWinesList() {
         <TableBody>
           {wines.map(wine => <TableRow key={wine.slug}>
             <TableCell>
-              <Link href={`/admin/wines/${wine.slug}`} className="font-medium hover:underline">{wine.name.en}</Link>
-              <div className="text-xs text-muted-foreground">{wine.slug}</div>
+              <div className="flex items-center gap-3">
+                <div className="flex h-12 w-8 shrink-0 items-center justify-center overflow-hidden rounded-[6px] border bg-muted/40">
+                  {wine.image && <img src={wine.image} alt="" className="h-full w-full object-contain" />}
+                </div>
+                <div>
+                  <Link href={`/admin/wines/${wine.slug}`} className="font-medium hover:underline">{wine.name.en}</Link>
+                  <div className="text-xs text-muted-foreground">{wine.slug}</div>
+                </div>
+              </div>
             </TableCell>
             <TableCell><div className="flex flex-wrap gap-1">{wine.categories.map(c => <Badge key={c} variant="secondary">{categoryLabel(c)}</Badge>)}</div></TableCell>
             <TableCell>{wine.style?.en || "—"}</TableCell>
