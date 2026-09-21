@@ -11,6 +11,7 @@ const REGISTERED_PAGES = [
   { slug: "home", title: "Home", description: "/ — hero, opening note, editorial cards, manifesto, and world section." },
   { slug: "story", title: "Story", description: "/story — heading, cover, and the four editorial sections." },
   { slug: "contact", title: "Contact", description: "/contact — heading, contact methods, and locations." },
+  { slug: "terroir", title: "Terroir", description: "/terroir — heading, cover, intro, four vineyard locations, and closing." },
 ];
 
 export const dynamic = "force-dynamic";

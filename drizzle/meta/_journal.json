@@ -85,6 +85,13 @@
       "when": 1789751757521,
       "tag": "0011_seed_contact_page",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1789751757522,
+      "tag": "0012_seed_terroir_page",
+      "breakpoints": true
     }
   ]
 }
