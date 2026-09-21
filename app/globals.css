@@ -280,6 +280,10 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .story-intro h2 {font-size:clamp(65px,6vw,100px);text-transform:uppercase}
 .story-paragraphs {display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:45px}
 .story-paragraphs p {font-size:16px;color:#565652}
+.generic-page-cover {height:70vh;margin:0 0 90px}
+.generic-page-cover .parallax-overlay>span {position:absolute;left:22px;bottom:22px;color:white;font-size:12px;text-transform:uppercase;text-shadow:0 1px 7px #000}
+.generic-page-body {max-width:var(--editorial-copy-width);margin:0 var(--gutter) 110px;display:flex;flex-direction:column;gap:20px}
+.generic-page-body p {font-size:16px;color:#565652}
 .story-winery-copy {scroll-margin-top:30px}
 .story-winery-copy>div>p+p {margin-top:20px}
 .story-winery-sequence {position:relative;display:grid;grid-template-columns:minmax(0,1fr);isolation:isolate;overflow:clip}

@@ -1,5 +1,5 @@
 import { isAdminAuthenticated } from "@/lib/admin/auth";
-import { savePageContent } from "@/lib/pages/service";
+import { deletePage, savePageContent } from "@/lib/pages/service";
 
 export const dynamic = "force-dynamic";
 
@@ -24,5 +24,19 @@ export async function PATCH(request: Request, { params }: RouteParams) {
   }
 
   await savePageContent(slug, body);
+  return Response.json({ ok: true });
+}
+
+export async function DELETE(_request: Request, { params }: RouteParams) {
+  if (!(await isAdminAuthenticated())) {
+    return Response.json({ error: "Not authenticated." }, { status: 401 });
+  }
+
+  const { slug } = await params;
+  const deleted = await deletePage(slug);
+  if (!deleted) {
+    return Response.json({ error: `No page found with slug "${slug}", or it can't be deleted.` }, { status: 404 });
+  }
+
   return Response.json({ ok: true });
 }
