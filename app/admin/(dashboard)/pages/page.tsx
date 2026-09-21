@@ -6,6 +6,7 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/ca
 // not a generic add-a-page builder. Add a new entry here once a page gets
 // its own content type + admin form.
 const REGISTERED_PAGES = [
+  { slug: "home", title: "Home", description: "/ — hero, opening note, editorial cards, manifesto, and world section." },
   { slug: "story", title: "Story", description: "/story — heading, cover, and the four editorial sections." },
 ];
 
