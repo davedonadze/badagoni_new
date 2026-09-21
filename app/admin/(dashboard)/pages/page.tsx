@@ -12,6 +12,7 @@ const REGISTERED_PAGES = [
   { slug: "story", title: "Story", description: "/story — heading, cover, and the four editorial sections." },
   { slug: "contact", title: "Contact", description: "/contact — heading, contact methods, and locations." },
   { slug: "terroir", title: "Terroir", description: "/terroir — heading, cover, intro, four vineyard locations, and closing." },
+  { slug: "alaverdi-monastery-cellar", title: "Alaverdi Monastery Cellar", description: "/alaverdi-monastery-cellar — heading, cover, landmarks, story, qvevri tradition, and closing." },
 ];
 
 export const dynamic = "force-dynamic";

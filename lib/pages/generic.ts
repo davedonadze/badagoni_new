@@ -21,10 +21,10 @@ export const EMPTY_GENERIC_PAGE: GenericPageContent = {
   body: { en: "", ka: "" },
 };
 
-// "home"/"story"/"contact"/"terroir" have their own dedicated editors; "new"
-// is the admin route for creating a page and would otherwise collide with a
-// page literally named "new".
-export const RESERVED_SLUGS = new Set(["home", "story", "contact", "terroir", "new"]);
+// "home"/"story"/"contact"/"terroir"/"alaverdi-monastery-cellar" have their
+// own dedicated editors; "new" is the admin route for creating a page and
+// would otherwise collide with a page literally named "new".
+export const RESERVED_SLUGS = new Set(["home", "story", "contact", "terroir", "alaverdi-monastery-cellar", "new"]);
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 
