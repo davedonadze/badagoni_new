@@ -14,7 +14,6 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuBadge,
   SidebarProvider,
   SidebarTrigger,
 } from "@/components/ui/sidebar";
@@ -27,7 +26,7 @@ const NAV_ITEMS = [
   { href: "/admin/categories", label: "Categories", icon: Tags },
   { href: "/admin/menu", label: "Menu", icon: ListTree },
   { href: "/admin/pages", label: "Pages", icon: FileText },
-  { href: "/admin/news", label: "News", icon: Newspaper, comingSoon: true },
+  { href: "/admin/news", label: "News", icon: Newspaper },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {
@@ -49,12 +48,9 @@ export function AdminShell({ children }: { children: React.ReactNode }) {
               {NAV_ITEMS.map(item => {
                 const isActive = item.exact ? path === item.href : path.startsWith(item.href);
                 return <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild isActive={isActive} disabled={item.comingSoon} tooltip={item.comingSoon ? `${item.label} — coming soon` : item.label}>
-                    {item.comingSoon
-                      ? <span className="cursor-default opacity-50"><item.icon />{item.label}</span>
-                      : <Link href={item.href}><item.icon />{item.label}</Link>}
+                  <SidebarMenuButton asChild isActive={isActive} tooltip={item.label}>
+                    <Link href={item.href}><item.icon />{item.label}</Link>
                   </SidebarMenuButton>
-                  {item.comingSoon && <SidebarMenuBadge className="text-[10px] opacity-60">soon</SidebarMenuBadge>}
                 </SidebarMenuItem>;
               })}
             </SidebarMenu>

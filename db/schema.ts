@@ -46,6 +46,26 @@ export const pages = sqliteTable("pages", {
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
+// News & stories shown at /newsroom, managed at /admin/news. Sorted by
+// `date` descending everywhere — the newest article is the "Featured
+// story" at the top of /newsroom, no separate ordering field needed.
+export const newsArticles = sqliteTable("news_articles", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  slug: text("slug").notNull().unique(),
+  title: text("title", { mode: "json" }).$type<Localized>().notNull(),
+  category: text("category", { mode: "json" }).$type<Localized>().notNull(),
+  date: text("date").notNull(),
+  excerpt: text("excerpt", { mode: "json" }).$type<Localized>().notNull(),
+  body: text("body", { mode: "json" }).$type<Localized>().notNull(),
+  image: text("image").notNull(),
+  imageFit: text("image_fit", { enum: ["cover", "contain"] }).notNull().default("cover"),
+  sourceUrl: text("source_url"),
+  relatedHref: text("related_href"),
+  relatedLabel: text("related_label", { mode: "json" }).$type<Localized | null>(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
 // Site navigation, managed at /admin/menu. `location` places an item in the
 // header's primary row, its secondary row, or the footer; the mobile sheet
 // menu combines header_primary + header_secondary by `order`.

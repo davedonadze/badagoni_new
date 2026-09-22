@@ -113,6 +113,20 @@
       "when": 1789751757525,
       "tag": "0015_seed_catalogue_page",
       "breakpoints": true
+    },
+    {
+      "idx": 16,
+      "version": "6",
+      "when": 1790063083098,
+      "tag": "0016_common_quicksilver",
+      "breakpoints": true
+    },
+    {
+      "idx": 17,
+      "version": "6",
+      "when": 1790063083099,
+      "tag": "0017_seed_news_articles",
+      "breakpoints": true
     }
   ]
 }
