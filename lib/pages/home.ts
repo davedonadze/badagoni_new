@@ -8,7 +8,6 @@ export type WorldItemContent = { title: Localized; subtitle: Localized; text: Lo
 export type HomeContent = {
   hero: { image: string; caption: Localized };
   opening: { heading: Localized; body: Localized };
-  collection: { heading: Localized; subtitle: Localized };
   editorialCards: [EditorialCardContent, EditorialCardContent, EditorialCardContent];
   originInterlude: { line: Localized; caption: Localized };
   manifesto: { image: string; overlayCaption: Localized; eyebrow: Localized; heading: Localized; body: Localized };
@@ -31,10 +30,6 @@ export const HOME_DEFAULT: HomeContent = {
   opening: {
     heading: en("From Georgia, with character."),
     body: en("Born in the heart of Kakheti, we bring a contemporary spirit to Georgian wine. From the soil to the table, it’s a story of character, connection, and a place like nowhere else."),
-  },
-  collection: {
-    heading: en("The collection"),
-    subtitle: en("Selected expressions / 01—03"),
   },
   editorialCards: [
     {
