@@ -16,6 +16,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
   const router = useRouter();
   const [hero, setHero] = useState(initial.hero);
   const [opening, setOpening] = useState(initial.opening);
+  const [collection, setCollection] = useState(initial.collection);
   const [editorialCards, setEditorialCards] = useState(initial.editorialCards);
   const [originInterlude, setOriginInterlude] = useState(initial.originInterlude);
   const [manifesto, setManifesto] = useState(initial.manifesto);
@@ -52,7 +53,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
     setError(null);
     setSaved(false);
 
-    const content: HomeContent = { hero, opening, editorialCards, originInterlude, manifesto, worldSection };
+    const content: HomeContent = { hero, opening, collection, editorialCards, originInterlude, manifesto, worldSection };
 
     try {
       const response = await fetch(`/api/admin/pages/${HOME_SLUG}`, {
@@ -99,6 +100,14 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-opening-heading" label="Heading" value={opening.heading} onChange={v => setOpening({ ...opening, heading: v })} />
         <BilingualField id="home-opening-body" label="Body" multiline value={opening.body} onChange={v => setOpening({ ...opening, body: v })} />
+      </CardContent>
+    </Card>
+
+    <Card>
+      <CardHeader><CardTitle>Collection section</CardTitle></CardHeader>
+      <CardContent className="flex flex-col gap-6">
+        <BilingualField id="home-collection-heading" label="Heading" value={collection.heading} onChange={v => setCollection({ ...collection, heading: v })} />
+        <p className="text-xs text-muted-foreground">The wines shown here come from the featured wine list — manage them in Wines.</p>
       </CardContent>
     </Card>
 

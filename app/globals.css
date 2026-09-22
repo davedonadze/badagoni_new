@@ -128,7 +128,8 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .opening-note {display:grid;grid-template-columns:minmax(0,1fr);justify-items:center;align-content:center;gap:30px;min-height:300px;padding:70px var(--gutter) 100px;text-align:center}
 .opening-signature {font-family:var(--serif);font-size:36px;letter-spacing:-.02em;line-height:1.05;white-space:nowrap}
 .opening-copy {font-size:16px;line-height:1.6;letter-spacing:0;max-width:580px;color:#61615c}
-.selected-collection {padding-top:40px}
+.collection-label {position:relative;display:flex;align-items:center;justify-content:center;min-height:92px;padding:15px var(--gutter)}
+.collection-label h2 {font-family:var(--sans);font-size:14px;letter-spacing:.02em;text-transform:uppercase;line-height:1.5}
 .wine-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:3px}
 .wine-card {display:block;min-width:0;text-align:left;padding:0;border:0;background:none;color:var(--foreground)}
 .bottle-stage {position:relative;display:flex;align-items:center;justify-content:center;background:#f3f3f2;height:430px;overflow:hidden}
@@ -569,7 +570,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .campaign-link {font-size:14px;bottom:28px}
   .opening-note {gap:28px;padding-top:50px;padding-bottom:70px;min-height:0}
   .opening-signature {font-size:clamp(22px,6.4vw,31px)}
-  .selected-collection {padding-top:25px}
+  .collection-label {min-height:65px}
   .featured-grid {grid-template-columns:repeat(3,minmax(0,1fr))}
   .featured-grid .bottle-stage {height:250px}
   .featured-grid .bottle-stage img {height:180px;max-width:82%}

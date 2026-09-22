@@ -26,7 +26,7 @@ export default async function Home() {
     listCategories(),
     getPageContent<HomeContent>(HOME_SLUG),
   ]);
-  const { hero, opening, editorialCards, originInterlude, manifesto, worldSection } = content ?? HOME_DEFAULT;
+  const { hero, opening, collection, editorialCards, originInterlude, manifesto, worldSection } = content ?? HOME_DEFAULT;
 
   return <SmoothScroll><main>
     <ParallaxMedia
@@ -45,7 +45,8 @@ export default async function Home() {
       <p className="opening-copy">{opening.body.en}</p>
     </section></ScrollReveal>
 
-    <section className="selected-collection" aria-label="Selected wines">
+    <section className="selected-collection" aria-labelledby="collection-title">
+      <div className="collection-label"><h2 id="collection-title">{collection.heading.en}</h2></div>
       <FeaturedWines wines={wines} categories={categories} />
       <div className="collection-more"><Link href="/catalogue" className="underlined-link">View all wines <ArrowUpRight size={16} /></Link></div>
     </section>
