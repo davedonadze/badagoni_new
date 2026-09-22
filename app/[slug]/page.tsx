@@ -5,6 +5,7 @@ import type { GenericPageContent } from "@/lib/pages/generic";
 import { ParallaxMedia } from "../parallax-media";
 import { BannerMedia } from "../banner-media";
 import { BreakableParagraphs } from "../breakable-paragraphs";
+import { PageSections } from "../generic-page-sections";
 
 type GenericPageProps = { params: Promise<{ slug: string }> };
 
@@ -35,5 +36,7 @@ export default async function GenericPage({ params }: GenericPageProps) {
     )}
 
     {content.body.en && <div className="generic-page-body"><BreakableParagraphs text={content.body.en} /></div>}
+
+    <PageSections sections={content.sections ?? []} />
   </main>;
 }
