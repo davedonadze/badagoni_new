@@ -8,7 +8,7 @@ const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
 // otherwise meaningful.
 export type TextSection = { id: string; type: "text"; heading: Localized; body: Localized };
 export type MediaSection = { id: string; type: "media"; media: string; heading: Localized; caption: Localized };
-export type CardItem = { id: string; title: Localized; subtitle: Localized; text: Localized };
+export type CardItem = { id: string; image: string; title: Localized; subtitle: Localized; text: Localized };
 export type CardsSection = { id: string; type: "cards"; heading: Localized; cards: CardItem[] };
 export type ProfileItem = { id: string; image: string; name: Localized; role: Localized; text: Localized };
 export type ProfilesSection = { id: string; type: "profiles"; heading: Localized; items: ProfileItem[] };
@@ -29,7 +29,7 @@ export function createSection(type: PageSection["type"]): PageSection {
 }
 
 export function createCardItem(): CardItem {
-  return { id: newId(), title: EMPTY_LOCALIZED, subtitle: EMPTY_LOCALIZED, text: EMPTY_LOCALIZED };
+  return { id: newId(), image: "", title: EMPTY_LOCALIZED, subtitle: EMPTY_LOCALIZED, text: EMPTY_LOCALIZED };
 }
 
 export function createProfileItem(): ProfileItem {

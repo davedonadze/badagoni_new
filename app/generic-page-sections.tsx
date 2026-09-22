@@ -53,6 +53,7 @@ function CardsSection({ section }: { section: Extract<PageSection, { type: "card
     <SectionHeading text={section.heading.en} />
     <div className="generic-cards-grid">
       {section.cards.map((card, index) => <div key={card.id} className="generic-card">
+        {card.image && <div className="generic-card-image"><img src={card.image} alt="" loading="lazy" /></div>}
         <span className="generic-card-number" aria-hidden="true">0{index + 1}</span>
         {card.title.en && <p className="generic-card-title">{card.title.en}</p>}
         {card.subtitle.en && <p className="generic-card-subtitle eyebrow">{card.subtitle.en}</p>}

@@ -224,6 +224,7 @@ function CardsSectionFields({ section, onChange }: { section: CardsSection; onCh
         <span className="text-xs font-medium text-muted-foreground">Card {index + 1}</span>
         <Button type="button" variant="ghost" size="icon" onClick={() => removeCard(card.id)} aria-label="Remove card"><Trash2 className="size-4 text-destructive" /></Button>
       </div>
+      <ImagePicker id={`card-${card.id}-image`} label="Photo (optional)" value={card.image} onChange={image => updateCard(card.id, { ...card, image })} recommendedResolution="At least 800×800px, square or landscape" />
       <BilingualField id={`card-${card.id}-title`} label="Title" value={card.title} onChange={title => updateCard(card.id, { ...card, title })} />
       <BilingualField id={`card-${card.id}-subtitle`} label="Subtitle" value={card.subtitle} onChange={subtitle => updateCard(card.id, { ...card, subtitle })} />
       <BilingualField id={`card-${card.id}-text`} label="Text" multiline rows={3} value={card.text} onChange={text => updateCard(card.id, { ...card, text })} />
