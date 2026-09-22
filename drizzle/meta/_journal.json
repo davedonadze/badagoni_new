@@ -1,5 +1,118 @@
 {
   "version": "7",
   "dialect": "sqlite",
-  "entries": []
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1789554558062,
+      "tag": "0000_faulty_masked_marvel",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1789554558063,
+      "tag": "0001_seed_wines",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1789731446395,
+      "tag": "0002_steady_mantis",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1789731446396,
+      "tag": "0003_seed_menu_items",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1789731446397,
+      "tag": "0004_wines_bilingual",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "6",
+      "when": 1789749898724,
+      "tag": "0005_brave_moira_mactaggert",
+      "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1789749898725,
+      "tag": "0006_seed_categories",
+      "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1789749898726,
+      "tag": "0007_wines_grapes_bilingual",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "6",
+      "when": 1789751757518,
+      "tag": "0008_powerful_romulus",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1789751757519,
+      "tag": "0009_seed_story_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "6",
+      "when": 1789751757520,
+      "tag": "0010_seed_home_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "6",
+      "when": 1789751757521,
+      "tag": "0011_seed_contact_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "6",
+      "when": 1789751757522,
+      "tag": "0012_seed_terroir_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 13,
+      "version": "6",
+      "when": 1789751757523,
+      "tag": "0013_seed_alaverdi_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 14,
+      "version": "6",
+      "when": 1789751757524,
+      "tag": "0014_seed_enologists_page",
+      "breakpoints": true
+    },
+    {
+      "idx": 15,
+      "version": "6",
+      "when": 1789751757525,
+      "tag": "0015_seed_catalogue_page",
+      "breakpoints": true
+    }
+  ]
 }

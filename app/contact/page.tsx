@@ -1,43 +1,49 @@
 import type { Metadata } from "next";
 import { ArrowUpRight } from "lucide-react";
+import { BreakableText } from "../breakable-text";
+import { getPageContent } from "@/lib/pages/service";
+import { CONTACT_SLUG, CONTACT_DEFAULT, type ContactContent } from "@/lib/pages/contact";
+
+const METHOD_HREF = [
+  (value: string) => `mailto:${value}`,
+  (value: string) => `tel:${value.replace(/\s/g, "")}`,
+];
+
+const LOCATION_META = [
+  { eyebrow: "01 / Headquarters", linkText: "Find our office" },
+  { eyebrow: "02 / Winery", linkText: "Find our winery" },
+];
 
 export const metadata: Metadata = {
   title: "Contact",
   description: "Contact Badagoni for wine enquiries and partnerships. Email or call our team, and find directions to our Tbilisi office and winery in Kakheti.",
 };
 
-export default function Contact() {
+export default async function Contact() {
+  const content = (await getPageContent<ContactContent>(CONTACT_SLUG)) ?? CONTACT_DEFAULT;
+  const { heading, methods, locations } = content;
+
   return <main className="contact-page">
     <header className="editorial-heading contact-heading">
-      <p className="eyebrow">Contact</p>
-      <h1>Get in touch.</h1>
-      <p>For wine enquiries, partnerships,<br />or a conversation with our team.</p>
+      <p className="eyebrow">{heading.eyebrow.en}</p>
+      <h1>{heading.title.en}</h1>
+      <p><BreakableText text={heading.subtitle.en} /></p>
     </header>
 
     <section className="contact-methods" aria-label="Contact our team">
-      <div className="contact-direct-line">
-        <p className="eyebrow">Email our team</p>
-        <a className="contact-method-link" href="mailto:office@badagoni.ge"><span>office@badagoni.ge</span><ArrowUpRight size={22} strokeWidth={1.4} aria-hidden="true" /></a>
-      </div>
-      <div className="contact-direct-line">
-        <p className="eyebrow">Call Badagoni</p>
-        <a className="contact-method-link" href="tel:+995322936243"><span>+995 32 293 62 43</span><ArrowUpRight size={22} strokeWidth={1.4} aria-hidden="true" /></a>
-      </div>
+      {methods.map((method, i) => <div key={i} className="contact-direct-line">
+        <p className="eyebrow">{method.label.en}</p>
+        <a className="contact-method-link" href={METHOD_HREF[i](method.value)}><span>{method.value}</span><ArrowUpRight size={22} strokeWidth={1.4} aria-hidden="true" /></a>
+      </div>)}
     </section>
 
     <section className="contact-grid contact-details" aria-label="Our locations">
-        <section aria-labelledby="contact-office-title">
-          <p className="eyebrow">01 / Headquarters</p>
-          <h2 id="contact-office-title">Tbilisi office</h2>
-          <address>JSC Badagoni<br />4 Liberty Square<br />0105 Tbilisi, Georgia</address>
-          <a className="underlined-link" href="https://maps.app.goo.gl/NnR25zEn8Hakp3di6" target="_blank" rel="noreferrer">Find our office <ArrowUpRight size={17} aria-hidden="true" /></a>
-        </section>
-        <section aria-labelledby="contact-winery-title">
-          <p className="eyebrow">02 / Winery</p>
-          <h2 id="contact-winery-title">At home in Kakheti.</h2>
-          <address>Village Zemo Khodasheni<br />0910 Akhmeta<br />Kakheti, Georgia</address>
-          <a className="underlined-link" href="https://maps.app.goo.gl/ZW8pU79YskPUNH2G9" target="_blank" rel="noreferrer">Find our winery <ArrowUpRight size={17} aria-hidden="true" /></a>
-        </section>
+      {locations.map((location, i) => <section key={i} aria-labelledby={`contact-location-${i}-title`}>
+        <p className="eyebrow">{LOCATION_META[i].eyebrow}</p>
+        <h2 id={`contact-location-${i}-title`}>{location.title.en}</h2>
+        <address><BreakableText text={location.address.en} /></address>
+        <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{LOCATION_META[i].linkText} <ArrowUpRight size={17} aria-hidden="true" /></a>
+      </section>)}
     </section>
   </main>;
 }

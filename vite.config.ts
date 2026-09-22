@@ -16,20 +16,31 @@ const managedLinux = readExecutionProfile() === "managed-linux";
 const localBindingConfig = {
   main: "vinext/server/fetch-handler",
   compatibility_flags: ["nodejs_compat"],
+  // Local/dev builds use a placeholder D1 database that Miniflare simulates
+  // on disk. A real deploy (e.g. Cloudflare Workers Builds) needs a real
+  // database bound instead — set CLOUDFLARE_D1_DATABASE_ID (and optionally
+  // CLOUDFLARE_D1_DATABASE_NAME) as a build variable to override it. See
+  // docs/admin-panel.md.
   d1_databases: d1
     ? [
         {
           binding: d1,
-          database_name: "site-creator-d1",
-          database_id: SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
+          database_name: process.env.CLOUDFLARE_D1_DATABASE_NAME || "site-creator-d1",
+          database_id: process.env.CLOUDFLARE_D1_DATABASE_ID || SITE_CREATOR_PLACEHOLDER_DATABASE_ID,
         },
       ]
     : [],
-  r2_buckets: r2
+  // Unlike the D1 database above, this has no placeholder fallback: a
+  // nonexistent bucket_name fails deploy outright (same as a bad D1 ID
+  // would), so the binding is simply omitted until CLOUDFLARE_R2_BUCKET_NAME
+  // is set - locally too, which only means testing uploads locally needs
+  // that variable set as well. The upload API degrades gracefully without
+  // it. See docs/admin-panel.md.
+  r2_buckets: r2 && process.env.CLOUDFLARE_R2_BUCKET_NAME
     ? [
         {
           binding: r2,
-          bucket_name: "site-creator-r2",
+          bucket_name: process.env.CLOUDFLARE_R2_BUCKET_NAME,
         },
       ]
     : [],
