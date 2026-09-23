@@ -46,6 +46,16 @@ export const pages = sqliteTable("pages", {
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Admin login sessions. Each login creates a random token here (not
+// derived from the password), so a session can actually be revoked - by
+// deleting its row on logout, or once it expires - instead of every past
+// login staying valid forever until the shared password itself changes.
+export const adminSessions = sqliteTable("admin_sessions", {
+  token: text("token").primaryKey(),
+  createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+  expiresAt: text("expires_at").notNull(),
+});
+
 // News & stories shown at /newsroom, managed at /admin/news. Sorted by
 // `date` descending everywhere — the newest article is the "Featured
 // story" at the top of /newsroom, no separate ordering field needed.

@@ -127,6 +127,13 @@
       "when": 1790063083099,
       "tag": "0017_seed_news_articles",
       "breakpoints": true
+    },
+    {
+      "idx": 18,
+      "version": "6",
+      "when": 1790160677660,
+      "tag": "0018_clean_stryfe",
+      "breakpoints": true
     }
   ]
 }
