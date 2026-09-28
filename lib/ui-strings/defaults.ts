@@ -15,6 +15,7 @@ import type { Localized } from "@/db/schema";
 // part of the reusable UI).
 export const UI_STRING_DEFAULTS: Record<string, Localized> = {
   // Header & footer chrome
+  "footer.statement": en("From Kakheti.\nTo Your Table."),
   "footer.startConversation": en("Let’s start a conversation"),
   "footer.legals": en("Legals"),
   "footer.termsAndConditions": en("Terms and Conditions"),
@@ -110,7 +111,7 @@ export const UI_STRING_GROUPS: UiStringGroup[] = [
     title: "Header & footer",
     keys: [
       "nav.menu", "nav.mobileTagline", "nav.home", "layout.skipToContent",
-      "footer.startConversation", "footer.legals", "footer.termsAndConditions", "footer.privacyPolicy",
+      "footer.statement", "footer.startConversation", "footer.legals", "footer.termsAndConditions", "footer.privacyPolicy",
       "footer.social", "footer.comingSoon", "footer.language", "footer.english", "footer.enjoyResponsibly", "footer.backToTop",
     ],
   },

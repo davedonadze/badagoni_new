@@ -8,6 +8,7 @@ import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from 
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
 import type { MenuItem } from "@/lib/menu/service";
 import type { Localized } from "@/db/schema";
+import { BreakableText } from "./breakable-text";
 
 type UiStrings = Record<string, Localized>;
 
@@ -68,7 +69,7 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
   return <footer className="site-footer">
     <div className="footer-top">
       <div>
-        <p className="footer-statement">From Kakheti.<br />To Your Table.</p>
+        <p className="footer-statement"><BreakableText text={localize(t["footer.statement"], locale)} /></p>
         <Link href={localizeHref("/contact", locale)} className="underlined-link footer-invitation-link">{localize(t["footer.startConversation"], locale)} <ArrowUpRight size={17} /></Link>
       </div>
       <nav className="footer-nav" aria-label="Footer navigation, part 1">{footerPrimaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}>{localize(link.label, locale)}<ArrowUpRight size={15} /></Link>)}</nav>

@@ -5,7 +5,7 @@ import { Languages } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../bilingual-field";
-import { UI_STRING_GROUPS } from "@/lib/ui-strings/defaults";
+import { UI_STRING_DEFAULTS, UI_STRING_GROUPS } from "@/lib/ui-strings/defaults";
 import type { Localized } from "@/db/schema";
 
 function humanizeKey(key: string): string {
@@ -115,7 +115,7 @@ export function TranslationsForm({ strings: initial }: { strings: Record<string,
     {UI_STRING_GROUPS.map(group => <Card key={group.title}>
       <CardHeader><CardTitle>{group.title}</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
-        {group.keys.map(key => strings[key] && <BilingualField key={key} id={`ui-string-${key}`} label={humanizeKey(key)} value={strings[key]} onChange={value => updateKey(key, value)} />)}
+        {group.keys.map(key => { const hasLineBreak = UI_STRING_DEFAULTS[key].en.includes("\n"); return strings[key] && <BilingualField key={key} id={`ui-string-${key}`} label={humanizeKey(key)} hint={hasLineBreak ? "Use a new line for a manual line break." : undefined} value={strings[key]} onChange={value => updateKey(key, value)} multiline={hasLineBreak} />; })}
       </CardContent>
     </Card>)}
   </form>;
