@@ -1,14 +1,24 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
 import type { TerroirContent } from "@/lib/pages/terroir";
+import type { Localized } from "@/db/schema";
 
-const PLACE_TITLES = ["Location 1 — Alaverdi", "Location 2 — Mukuzani", "Location 3 — Maghraani", "Location 4 — Tsinandali"];
+const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
+
+function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
+  const target = index + direction;
+  if (target < 0 || target >= items.length) return items;
+  const next = [...items];
+  [next[index], next[target]] = [next[target], next[index]];
+  return next;
+}
 
 export function TerroirForm({ content: initial }: { content: TerroirContent }) {
   const router = useRouter();
@@ -29,11 +39,16 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
   }, [saved]);
 
   function updatePlace(index: number, patch: Partial<TerroirContent["places"][number]>) {
-    setPlaces(current => {
-      const next = [...current] as TerroirContent["places"];
-      next[index] = { ...next[index], ...patch };
-      return next;
-    });
+    setPlaces(current => current.map((place, i) => i === index ? { ...place, ...patch } : place));
+  }
+  function addPlace() {
+    setPlaces(current => [...current, { name: EMPTY_LOCALIZED, grape: EMPTY_LOCALIZED, text: EMPTY_LOCALIZED, image: "" }]);
+  }
+  function removePlace(index: number) {
+    setPlaces(current => current.filter((_, i) => i !== index));
+  }
+  function movePlace(index: number, direction: -1 | 1) {
+    setPlaces(current => moveItem(current, index, direction));
   }
 
   async function handleSubmit(event: React.FormEvent) {
@@ -111,7 +126,14 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
     </Card>
 
     {places.map((place, i) => <Card key={i}>
-      <CardHeader><CardTitle>{PLACE_TITLES[i]}</CardTitle></CardHeader>
+      <CardHeader className="flex-row items-center justify-between space-y-0">
+        <CardTitle>{`Location ${i + 1}${place.name.en ? ` — ${place.name.en}` : ""}`}</CardTitle>
+        <div className="flex items-center gap-1">
+          <Button type="button" variant="ghost" size="icon" disabled={i === 0} onClick={() => movePlace(i, -1)} aria-label="Move location up"><ChevronUp className="size-4" /></Button>
+          <Button type="button" variant="ghost" size="icon" disabled={i === places.length - 1} onClick={() => movePlace(i, 1)} aria-label="Move location down"><ChevronDown className="size-4" /></Button>
+          <Button type="button" variant="ghost" size="icon" onClick={() => removePlace(i)} aria-label="Remove location"><Trash2 className="size-4 text-destructive" /></Button>
+        </div>
+      </CardHeader>
       <CardContent className="flex flex-col gap-6">
         <ImagePicker id={`terroir-place-${i}-image`} label="Image" value={place.image} onChange={v => updatePlace(i, { image: v })} recommendedResolution="1200×1200px or larger" />
         <BilingualField id={`terroir-place-${i}-name`} label="Name" value={place.name} onChange={v => updatePlace(i, { name: v })} />
@@ -119,6 +141,7 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
         <BilingualField id={`terroir-place-${i}-text`} label="Text" multiline value={place.text} onChange={v => updatePlace(i, { text: v })} />
       </CardContent>
     </Card>)}
+    <Button type="button" variant="outline" className="self-start" onClick={addPlace}><Plus className="size-4" />Add location</Button>
 
     <Card>
       <CardHeader><CardTitle>Closing</CardTitle></CardHeader>

@@ -10,15 +10,6 @@ import { TERROIR_SLUG, TERROIR_DEFAULT, type TerroirContent } from "@/lib/pages/
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 
-// Fixed metadata for the four vineyard places that stays in code - only
-// name/grape/text/image are DB-driven.
-const PLACE_META = [
-  { id: "alaverdi", imageAlt: "Alaverdi Monastery beyond Badagoni’s vineyard rows" },
-  { id: "mukuzani", imageAlt: "An aerial view of Badagoni’s Mukuzani vineyards" },
-  { id: "maghraani", imageAlt: "An aerial view of Badagoni’s Maghraani vineyards" },
-  { id: "tsinandali", imageAlt: "An aerial view of Badagoni’s Akura vineyards in the Tsinandali microzone" },
-];
-
 export const metadata: Metadata = { title: "Our vineyards", description: "The vineyards and varied terroirs of Kakheti that shape every Badagoni wine." };
 
 export default async function Terroir() {
@@ -29,14 +20,17 @@ export default async function Terroir() {
   ]);
   const { heading, cover, intro, listHeading, places, closing } = content ?? TERROIR_DEFAULT;
 
-  const vineyardPlaces = places.map((place, i) => ({
-    id: PLACE_META[i].id,
-    name: localize(place.name, locale),
-    grape: localize(place.grape, locale),
-    text: localize(place.text, locale),
-    image: place.image,
-    imageAlt: PLACE_META[i].imageAlt,
-  }));
+  const vineyardPlaces = places.map((place, i) => {
+    const name = localize(place.name, locale);
+    return {
+      id: `place-${i}`,
+      name,
+      grape: localize(place.grape, locale),
+      text: localize(place.text, locale),
+      image: place.image,
+      imageAlt: `${name} vineyard, Kakheti`,
+    };
+  });
 
   return <main>
     <div className="editorial-heading">
