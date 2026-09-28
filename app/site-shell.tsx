@@ -118,8 +118,8 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
         <p className="footer-statement"><BreakableText text={localize(t["footer.statement"], locale)} /></p>
         <Link href={localizeHref("/contact", locale)} className="underlined-link footer-invitation-link">{localize(t["footer.startConversation"], locale)} <ArrowUpRight size={17} /></Link>
       </div>
-      <nav className="footer-nav" aria-label="Footer navigation, part 1">{footerPrimaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}>{localize(link.label, locale)}<ArrowUpRight size={15} /></Link>)}</nav>
-      <nav className="footer-nav" aria-label="Footer navigation, part 2">{footerSecondaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}>{localize(link.label, locale)}<ArrowUpRight size={15} /></Link>)}</nav>
+      <nav className="footer-nav" aria-label="Footer navigation, part 1">{footerPrimaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}><span>{localize(link.label, locale)}</span><ArrowUpRight size={15} /></Link>)}</nav>
+      <nav className="footer-nav" aria-label="Footer navigation, part 2">{footerSecondaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}><span>{localize(link.label, locale)}</span><ArrowUpRight size={15} /></Link>)}</nav>
     </div>
     <div className="footer-details">
       <div><span className="eyebrow">{localize(t["footer.legals"], locale)}</span><Link href={localizeHref("/legals?tab=terms-and-conditions", locale)}>{localize(t["footer.termsAndConditions"], locale)}</Link><Link href={localizeHref("/legals?tab=privacy-policy", locale)}>{localize(t["footer.privacyPolicy"], locale)}</Link></div>

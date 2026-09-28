@@ -586,7 +586,11 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .footer-nav {display:grid;align-content:start}
 .footer-nav a {display:flex;align-items:center;justify-content:space-between;min-height:45px;gap:15px;border-top:1px solid #ccccc7;font-size:14px}
 .footer-nav a:last-child {border-bottom:1px solid #ccccc7}
-.footer-nav a:hover {text-decoration:underline;text-underline-offset:4px}
+/* Same grow-from-left underline as the header nav, instead of the instant
+   native text-decoration this used to toggle on hover. */
+.footer-nav a span {position:relative}
+.footer-nav a span::after {content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,.68,.2,1)}
+.footer-nav a:hover span::after {transform:scaleX(1)}
 .footer-details {display:grid;grid-template-columns:1fr 1fr 1fr;gap:35px;margin-top:60px;padding-top:22px;border-top:1px solid #ccccc7}
 .footer-details>div {display:flex;flex-direction:column;gap:9px}
 .footer-details .eyebrow {display:block;margin-bottom:7px}
