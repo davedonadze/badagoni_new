@@ -310,6 +310,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .story-winery-stage {position:sticky;top:0;height:100vh;height:100dvh;overflow:hidden}
 .story-winery-parallax {position:absolute;inset:-10% 0;transform:translate3d(0,var(--winery-drift,0px),0);will-change:transform}
 .story-winery-parallax img {width:100%;height:100%;object-fit:cover;object-position:left center}
+.story-winery-frame {position:relative}
 .story-winery-window {position:relative;margin:0}
 .story-winery-window:after {content:"";position:absolute;inset:70% 0 0;background:linear-gradient(transparent,#0005);pointer-events:none}
 .story-winery-window figcaption {position:absolute;left:var(--gutter);right:var(--gutter);bottom:22px;z-index:1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 22px;font-size:12px;line-height:1.5;text-transform:uppercase;color:white;text-shadow:0 1px 7px #000}
@@ -459,6 +460,31 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .legal-copy h3 {font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
 .legal-copy p {font-size:15px;line-height:1.7;color:#5a5a55;max-width:620px}
 .legal-copy p+p {margin-top:14px}
+
+/* Georgian wine: the enologists' numbered index becomes a tabbed reading space. */
+.heritage-heading h1 {font-size:clamp(64px,8.3vw,132px);line-height:.95;text-transform:none}
+.heritage-tabs[data-slot=tabs] {display:block}
+.heritage-index[data-slot=tabs-list] {display:flex;justify-content:flex-start;flex-wrap:nowrap;width:auto;height:auto;gap:45px;margin:0 var(--gutter) 45px;padding:20px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0;background:none;color:var(--foreground);overflow-x:auto}
+.heritage-tab[data-slot=tabs-trigger] {flex:none;justify-content:flex-start;gap:14px;height:auto;min-height:44px;padding:0;border:0;border-radius:0;background:none;color:var(--foreground);font-size:14px;font-weight:400;box-shadow:none;transition:opacity .25s ease}
+.heritage-tab[data-slot=tabs-trigger]>span {font-size:12px;color:#686862}
+.heritage-tab[data-slot=tabs-trigger]:after {display:none}
+.heritage-tab[data-slot=tabs-trigger][data-state=active] {background:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:5px}
+.heritage-tab[data-slot=tabs-trigger]:hover {text-decoration:underline;text-underline-offset:5px}
+.heritage-tab[data-slot=tabs-trigger]:focus-visible {outline:2px solid currentColor;outline-offset:-2px;box-shadow:none}
+.heritage-panel[data-slot=tabs-content] {margin:0;outline-offset:-3px}
+.heritage-panel[data-state=active] {animation:heritage-reveal .4s ease both}
+.heritage-panel[hidden] {display:none}
+.heritage-copy.science-section {padding-top:40px;padding-bottom:110px;min-width:0}
+.heritage-copy.science-section>div {min-width:0}
+.heritage-credit-trigger {position:absolute;top:20px;right:var(--gutter);z-index:2;display:grid;place-items:center;width:44px;height:44px;padding:0;border:1px solid #ffffff70;border-radius:50%;background:#0004;color:#fff;transition:background .2s}
+.heritage-credit-trigger:hover,.heritage-credit-trigger[data-state=open] {background:#0008}
+.heritage-credit-popover[data-slot=popover-content] {width:min(310px,calc(100vw - 36px));padding:20px;border-radius:0;font-size:14px;line-height:1.6}
+.heritage-credit-popover p+p {margin-top:10px}
+.heritage-credit-title {font-weight:600}
+.heritage-credit-popover a {text-decoration:underline;text-underline-offset:3px}
+.heritage-figure-scene .story-winery-parallax img,.heritage-figure-scene .story-winery-static-photo {object-position:center 17%}
+.heritage-qvevri-scene .story-winery-parallax img,.heritage-qvevri-scene .story-winery-static-photo {object-position:60% center}
+@keyframes heritage-reveal {from{opacity:0}to{opacity:1}}
 
 /* Newsroom: one lead story, an open grid, and spacious article pages. */
 .newsroom-heading h1 {font-size:clamp(82px,11vw,160px);text-transform:none;line-height:.9;letter-spacing:-.025em}
@@ -755,6 +781,11 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .legal-document {grid-template-columns:minmax(0,1fr);gap:0;padding-top:36px}
   .legal-document-heading {margin-bottom:28px}
   .legal-document-heading h2 {font-size:clamp(38px,11vw,56px)}
+  .heritage-heading h1 {font-size:clamp(56px,14vw,94px)}
+  .heritage-heading>p:not(.eyebrow) {margin-left:0;max-width:400px}
+  .heritage-index[data-slot=tabs-list] {gap:28px;margin-bottom:30px;padding:15px 0}
+  .heritage-tab[data-slot=tabs-trigger] {gap:10px}
+  .heritage-copy.science-section {padding-top:25px;padding-bottom:70px}
   .generic-cards-grid {grid-template-columns:minmax(0,1fr);gap:26px}
   .generic-media-cover {height:50vh}
   .newsroom-heading h1 {font-size:clamp(57px,14vw,105px)}

@@ -16,6 +16,7 @@ const REGISTERED_PAGES = [
   { slug: "enologists", title: "Enologists", description: "/enologists — heading, the four team profiles, and closing." },
   { slug: "catalogue", title: "Wine catalogue", description: "/catalogue — heading text (the wine grid is managed from Wines)." },
   { slug: "legals", title: "Legals", description: "/legals — heading and both the Terms and Conditions / Privacy Policy documents (sections can be added, removed, and reordered)." },
+  { slug: "georgian-wine", title: "Georgian wine", description: "/georgian-wine — heading and the two tabbed chapters (Badagoni figure, Qvevri tradition), each with its own photo, text, and optional photo credit." },
 ];
 
 export const dynamic = "force-dynamic";
