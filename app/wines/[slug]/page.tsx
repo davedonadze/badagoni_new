@@ -6,6 +6,7 @@ import { getWineBySlug } from "@/lib/wines/service";
 import { getCategory } from "@/lib/categories/service";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { WineAwards } from "../../wine-awards";
 
 type WinePageProps = { params: Promise<{ slug: string }> };
 
@@ -52,6 +53,7 @@ export default async function WinePage({ params }: WinePageProps) {
         <dl className="reserve-facts">{facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
         <div className="reserve-actions">
           <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${name}`)}`}>{localize(t["wine.enquireAboutThisWine"], locale)} <ArrowUpRight size={18} /></a>
+          {wine.awards && wine.awards.length > 0 && <WineAwards awards={wine.awards} wineName={name} locale={locale} t={t} />}
         </div>
       </div>
     </section>

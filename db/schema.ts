@@ -11,6 +11,11 @@ export type Localized = { en: string; ka: string };
 // temperature". Both label and value are bilingual.
 export type WineSpec = { label: Localized; value: Localized };
 
+// An award/medal a wine has received, shown in its "Awards" sheet
+// (app/wine-awards.tsx). `name` is bilingual; the medal image and year
+// aren't.
+export type WineAward = { image: string; name: Localized; year: string };
+
 // Wines shown in the catalogue and on /wines/[slug]. Managed through the
 // admin panel at /admin/wines (see app/admin/ and app/api/admin/wines/).
 export const wines = sqliteTable("wines", {
@@ -25,6 +30,7 @@ export const wines = sqliteTable("wines", {
   alcohol: text("alcohol"),
   description: text("description", { mode: "json" }).$type<Localized | null>(),
   specs: text("specs", { mode: "json" }).$type<WineSpec[] | null>(),
+  awards: text("awards", { mode: "json" }).$type<WineAward[] | null>(),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });

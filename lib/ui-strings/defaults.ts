@@ -66,6 +66,7 @@ export const UI_STRING_DEFAULTS: Record<string, Localized> = {
   "wine.viewFullWinePage": en("View full wine page"),
   "wine.backToFullCatalogue": en("Back to the full wine catalogue"),
   "wine.awards": en("Awards"),
+  "wine.awardsDescription": en("Medals and awards received, with the year of each award."),
 
   // Newsroom
   "newsroom.newsAndStories": en("News & stories"),
@@ -128,7 +129,7 @@ export const UI_STRING_GROUPS: UiStringGroup[] = [
       "wine.discoverWine", "wine.theBadagoniCollection", "wine.fallbackDescription",
       "wine.origin", "wine.georgia", "wine.kakhetiGeorgia", "wine.grapeVariety", "wine.grapeVarieties",
       "wine.alcohol", "wine.style", "wine.allFilter", "wine.expressionsSuffix", "wine.catalogueBreadcrumb",
-      "wine.exploreMore", "wine.enquireAboutThisWine", "wine.viewFullWinePage", "wine.backToFullCatalogue", "wine.awards",
+      "wine.exploreMore", "wine.enquireAboutThisWine", "wine.viewFullWinePage", "wine.backToFullCatalogue", "wine.awards", "wine.awardsDescription",
     ],
   },
   {
