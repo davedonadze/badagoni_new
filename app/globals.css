@@ -16,6 +16,13 @@
   --gutter:clamp(18px,2.2vw,38px);
   --editorial-copy-width:min(46vw,690px);
 }
+/* Instrument Serif has no Georgian glyphs, so Georgian headlines (h1/h2/h3
+   and everything else styled with --serif) fall back to whatever serif the
+   visitor's OS ships - inconsistent across devices. Futura Book Mta covers
+   Georgian Mkhedruli, so on /ka pages it takes over as the headline face. */
+html:lang(ka) {
+  --serif:"Futura Book Mta","Instrument Serif",Georgia,"Times New Roman",serif;
+}
 @theme inline {
   --color-background:var(--background); --color-foreground:var(--foreground);
   --color-card:var(--card); --color-card-foreground:var(--card-foreground);

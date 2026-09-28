@@ -6,6 +6,18 @@
   src: url('/fonts/InstrumentSerif-Regular.ttf') format('truetype');
 }
 @font-face {
+  font-family: 'Futura Book Mta';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/FuturaBookMta-Regular.ttf') format('truetype');
+  /* Only the 33-letter Georgian Mkhedruli alphabet - the only script this
+     font actually covers. Without this, the browser would also reach for
+     it on Latin fallback text (untranslated /ka headlines), replacing
+     Instrument Serif everywhere instead of only on real Georgian copy. */
+  unicode-range: U+10D0-10F0;
+}
+@font-face {
   font-family: 'Manrope';
   font-style: normal;
   font-weight: 400;
