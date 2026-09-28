@@ -7,14 +7,12 @@ import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
 import type { AlaverdiContent } from "@/lib/pages/alaverdi";
 
-const LANDMARK_TITLES = ["Landmark 1", "Landmark 2", "Landmark 3"];
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
 
 export function AlaverdiForm({ content: initial }: { content: AlaverdiContent }) {
   const router = useRouter();
   const [heading, setHeading] = useState(initial.heading);
   const [cover, setCover] = useState(initial.cover);
-  const [landmarks, setLandmarks] = useState(initial.landmarks);
   const [story, setStory] = useState(initial.story);
   const [qvevri, setQvevri] = useState(initial.qvevri);
   const [closing, setClosing] = useState(initial.closing);
@@ -28,21 +26,13 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
     return () => clearTimeout(timeout);
   }, [saved]);
 
-  function updateLandmark(index: number, patch: Partial<AlaverdiContent["landmarks"][number]>) {
-    setLandmarks(current => {
-      const next = [...current] as AlaverdiContent["landmarks"];
-      next[index] = { ...next[index], ...patch };
-      return next;
-    });
-  }
-
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setSaving(true);
     setError(null);
     setSaved(false);
 
-    const content: AlaverdiContent = { heading, cover, landmarks, story, qvevri, closing };
+    const content: AlaverdiContent = { heading, cover, story, qvevri, closing };
 
     try {
       const response = await fetch("/api/admin/pages/alaverdi-monastery-cellar", {
@@ -95,17 +85,6 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
     </Card>
 
     <Card>
-      <CardHeader><CardTitle>Landmarks</CardTitle></CardHeader>
-      <CardContent className="flex flex-col gap-6">
-        {landmarks.map((landmark, i) => <div key={i} className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:items-start">
-          <p className="text-sm font-medium text-muted-foreground sm:col-span-2">{LANDMARK_TITLES[i]}</p>
-          <BilingualField id={`alaverdi-landmark-${i}-label`} label="Label" value={landmark.label} onChange={v => updateLandmark(i, { label: v })} />
-          <BilingualField id={`alaverdi-landmark-${i}-value`} label="Value" value={landmark.value} onChange={v => updateLandmark(i, { value: v })} />
-        </div>)}
-      </CardContent>
-    </Card>
-
-    <Card>
       <CardHeader><CardTitle>Story</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="alaverdi-story-eyebrow" label="Eyebrow" value={story.eyebrow} onChange={v => setStory({ ...story, eyebrow: v })} />
@@ -120,10 +99,9 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
     <Card>
       <CardHeader><CardTitle>Qvevri tradition</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
+        <p className="text-sm text-muted-foreground">Full-bleed photo with the heading overlaid; the link below it (to the Georgian wine page) is fixed in code.</p>
         <ImagePicker id="alaverdi-qvevri-image" label="Photo or video" value={qvevri.image} onChange={v => setQvevri({ ...qvevri, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
-        <BilingualField id="alaverdi-qvevri-eyebrow" label="Eyebrow" value={qvevri.eyebrow} onChange={v => setQvevri({ ...qvevri, eyebrow: v })} />
-        <BilingualField id="alaverdi-qvevri-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={qvevri.heading} onChange={v => setQvevri({ ...qvevri, heading: v })} />
-        <BilingualField id="alaverdi-qvevri-body" label="Body" multiline value={qvevri.body} onChange={v => setQvevri({ ...qvevri, body: v })} />
+        <BilingualField id="alaverdi-qvevri-heading" label="Heading" value={qvevri.heading} onChange={v => setQvevri({ ...qvevri, heading: v })} />
       </CardContent>
     </Card>
 

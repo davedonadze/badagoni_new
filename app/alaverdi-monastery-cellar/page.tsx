@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { ParallaxMedia } from "../parallax-media";
 import { BreakableText } from "../breakable-text";
 import { BannerMedia } from "../banner-media";
+import { WineryScrollScene } from "../story/winery-scroll-scene";
 import { getPageContent } from "@/lib/pages/service";
 import { ALAVERDI_SLUG, ALAVERDI_DEFAULT, type AlaverdiContent } from "@/lib/pages/alaverdi";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
@@ -18,7 +19,7 @@ export default async function AlaverdiMonasteryCellar() {
     getPageContent<AlaverdiContent>(ALAVERDI_SLUG),
     getLocale(),
   ]);
-  const { heading, cover, landmarks, story, qvevri, closing } = content ?? ALAVERDI_DEFAULT;
+  const { heading, cover, story, qvevri, closing } = content ?? ALAVERDI_DEFAULT;
 
   return <main className="cellar-page">
     <div className="editorial-heading cellar-heading">
@@ -32,10 +33,6 @@ export default async function AlaverdiMonasteryCellar() {
       <figcaption><span>{localize(cover.captionLine1, locale)}</span><span>{localize(cover.captionLine2, locale)}</span></figcaption>
     </figure>
 
-    <dl className="cellar-landmarks" aria-label="The cellar through time">
-      {landmarks.map((landmark, i) => <div key={i}><dt>{localize(landmark.label, locale)}</dt><dd>{localize(landmark.value, locale)}</dd></div>)}
-    </dl>
-
     <section className="cellar-story" aria-labelledby="cellar-story-title">
       <div><p className="eyebrow">{localize(story.eyebrow, locale)}</p><h2 id="cellar-story-title"><BreakableText text={localize(story.heading, locale)} /></h2></div>
       <div className="cellar-story-copy">
@@ -47,12 +44,20 @@ export default async function AlaverdiMonasteryCellar() {
     </section>
 
     <section className="cellar-qvevri" aria-labelledby="cellar-qvevri-title">
-      <ParallaxMedia className="cellar-qvevri-photo" scale={1.5} media={<BannerMedia src={qvevri.image} alt="Alaverdi Monastery beside its vineyards, with the Caucasus Mountains in the distance" loading="lazy" />} />
-      <div className="cellar-qvevri-copy">
-        <p className="eyebrow">{localize(qvevri.eyebrow, locale)}</p>
-        <h2 id="cellar-qvevri-title"><BreakableText text={localize(qvevri.heading, locale)} /></h2>
-        <p>{localize(qvevri.body, locale)}</p>
-      </div>
+      <WineryScrollScene
+        intro={null}
+        className="cellar-qvevri-scene"
+        image={{
+          src: qvevri.image,
+          alt: "Alaverdi Monastery beside its vineyards, with the Caucasus Mountains in the distance",
+          title: "Alaverdi Monastery",
+          caption: "Kakheti / Georgia",
+        }}
+        imageOverlay={<div className="cellar-qvevri-copy">
+          <h2 id="cellar-qvevri-title">{localize(qvevri.heading, locale)}</h2>
+          <Link href={localizeHref("/georgian-wine?tab=qvevri-tradition#qvevri-tradition", locale)} className="underlined-link">The Qvevri Tradition <ArrowUpRight size={18} /></Link>
+        </div>}
+      />
     </section>
 
     <section className="cellar-closing" aria-labelledby="cellar-wines-title">

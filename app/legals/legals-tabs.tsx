@@ -1,5 +1,5 @@
 "use client";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
 import { BreakableParagraphs } from "../breakable-paragraphs";
 import { localize, type Locale } from "@/lib/i18n";
@@ -25,16 +25,18 @@ function LegalDocumentView({ number, document, locale }: { number: string; docum
   </article>;
 }
 
-export function LegalsTabs({ defaultTab, terms, privacy, locale }: { defaultTab: string; terms: LegalDocument; privacy: LegalDocument; locale: Locale }) {
+export function LegalsTabs({ terms, privacy, locale }: { terms: LegalDocument; privacy: LegalDocument; locale: Locale }) {
   const router = useRouter();
   const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get("tab") === "privacy-policy" ? "privacy-policy" : "terms-and-conditions";
 
-  return <Tabs defaultValue={defaultTab} className="legals-tabs" onValueChange={value => router.replace(`${pathname}?tab=${value}`, { scroll: false })}>
-    <TabsList variant="line" className="legals-tab-list" aria-label="Legal information">
-      <TabsTrigger value="terms-and-conditions" className="legals-tab"><span aria-hidden="true">01</span>Terms and conditions</TabsTrigger>
-      <TabsTrigger value="privacy-policy" className="legals-tab"><span aria-hidden="true">02</span>Privacy policy</TabsTrigger>
+  return <Tabs value={activeTab} onValueChange={value => router.push(`${pathname}?tab=${value}`, { scroll: false })} activationMode="manual" className="heritage-tabs legals-tabs">
+    <TabsList variant="line" className="heritage-index" aria-label="Legal information">
+      <TabsTrigger value="terms-and-conditions" className="heritage-tab"><span aria-hidden="true">01</span>Terms and conditions</TabsTrigger>
+      <TabsTrigger value="privacy-policy" className="heritage-tab"><span aria-hidden="true">02</span>Privacy policy</TabsTrigger>
     </TabsList>
-    <TabsContent value="terms-and-conditions"><LegalDocumentView number="01" document={terms} locale={locale} /></TabsContent>
-    <TabsContent value="privacy-policy"><LegalDocumentView number="02" document={privacy} locale={locale} /></TabsContent>
+    <TabsContent value="terms-and-conditions" className="heritage-panel"><LegalDocumentView number="01" document={terms} locale={locale} /></TabsContent>
+    <TabsContent value="privacy-policy" className="heritage-panel"><LegalDocumentView number="02" document={privacy} locale={locale} /></TabsContent>
   </Tabs>;
 }

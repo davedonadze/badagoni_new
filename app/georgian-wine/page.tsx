@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { getPageContent } from "@/lib/pages/service";
 import { GEORGIAN_WINE_SLUG, GEORGIAN_WINE_DEFAULT, type GeorgianWineContent } from "@/lib/pages/georgian-wine";
 import { getLocale, localize } from "@/lib/i18n";
@@ -22,6 +23,8 @@ export default async function GeorgianWine() {
       <h1>{localize(heading.title, locale)}</h1>
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
-    <HeritageTabs figure={figure} qvevri={qvevri} locale={locale} />
+    <Suspense fallback={<p className="legal-loading" role="status">Loading…</p>}>
+      <HeritageTabs figure={figure} qvevri={qvevri} locale={locale} />
+    </Suspense>
   </main>;
 }

@@ -2,14 +2,13 @@ import type { Localized } from "@/db/schema";
 
 export const ALAVERDI_SLUG = "alaverdi-monastery-cellar";
 
-export type AlaverdiLandmark = { label: Localized; value: Localized };
-
 export type AlaverdiContent = {
   heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
   cover: { image: string; captionLine1: Localized; captionLine2: Localized };
-  landmarks: [AlaverdiLandmark, AlaverdiLandmark, AlaverdiLandmark];
   story: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized; subheading: Localized; paragraph3: Localized };
-  qvevri: { image: string; eyebrow: Localized; heading: Localized; body: Localized };
+  // Full-bleed photo with the heading and a fixed link to the Georgian
+  // wine page's qvevri chapter overlaid on top - see app/story/winery-scroll-scene.tsx.
+  qvevri: { image: string; heading: Localized };
   closing: { eyebrow: Localized; heading: Localized; body: Localized };
 };
 
@@ -30,11 +29,6 @@ export const ALAVERDI_DEFAULT: AlaverdiContent = {
     captionLine1: en("Within the monastery walls"),
     captionLine2: en("Alaverdi, Georgia"),
   },
-  landmarks: [
-    { label: en("Historic cellar"), value: en("11th century") },
-    { label: en("Qvevri discovered"), value: en("40+") },
-    { label: en("Restored with Badagoni"), value: en("2006") },
-  ],
   story: {
     eyebrow: en("A living heritage"),
     heading: en("A cellar,\nstill alive."),
@@ -45,9 +39,7 @@ export const ALAVERDI_DEFAULT: AlaverdiContent = {
   },
   qvevri: {
     image: "/images/vineyard.webp",
-    eyebrow: en("The qvevri tradition"),
-    heading: en("Earth. Grapes.\nTime."),
-    body: en("Qvevri are large clay vessels buried in the ground, used to ferment and store wine. At Alaverdi, this craft is kept alive through the knowledge and daily work of the monks."),
+    heading: en("Earth. Grapes. Time."),
   },
   closing: {
     eyebrow: en("From the cellar to the glass"),

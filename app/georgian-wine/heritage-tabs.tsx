@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { Info } from "lucide-react";
@@ -36,17 +37,22 @@ function ChapterPanel({ number, chapter, sceneClassName, locale }: { number: "01
 }
 
 export function HeritageTabs({ figure, qvevri, locale }: { figure: HeritageChapter; qvevri: HeritageChapter; locale: Locale }) {
-  return <Tabs defaultValue="badagoni-figure" activationMode="manual" className="heritage-tabs">
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const activeTab = searchParams.get("tab") === "qvevri-tradition" ? "qvevri-tradition" : "badagoni-figure";
+
+  return <Tabs value={activeTab} onValueChange={value => router.push(`${pathname}?tab=${value}`, { scroll: false })} activationMode="manual" className="heritage-tabs">
     <TabsList variant="line" className="heritage-index" aria-label="Explore Georgian wine">
       <TabsTrigger value="badagoni-figure" className="heritage-tab"><span aria-hidden="true">01</span>{localize(figure.tabLabel, locale)}</TabsTrigger>
       <TabsTrigger value="qvevri-tradition" className="heritage-tab"><span aria-hidden="true">02</span>{localize(qvevri.tabLabel, locale)}</TabsTrigger>
     </TabsList>
 
-    <TabsContent value="badagoni-figure" className="heritage-panel">
+    <TabsContent value="badagoni-figure" id="badagoni-figure" className="heritage-panel">
       <ChapterPanel number="01" chapter={figure} sceneClassName="heritage-figure-scene" locale={locale} />
     </TabsContent>
 
-    <TabsContent value="qvevri-tradition" className="heritage-panel">
+    <TabsContent value="qvevri-tradition" id="qvevri-tradition" className="heritage-panel">
       <ChapterPanel number="02" chapter={qvevri} sceneClassName="heritage-qvevri-scene" locale={locale} />
     </TabsContent>
   </Tabs>;

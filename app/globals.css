@@ -389,9 +389,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .cellar-cover-media {height:clamp(420px,49vw,720px)}
 .cellar-cover-media .parallax-media img,.cellar-cover-media .parallax-media video {object-position:62% 55%}
 .cellar-cover figcaption {display:flex;justify-content:space-between;gap:20px;padding-top:16px;font-size:12px;line-height:1.5;text-transform:uppercase;letter-spacing:.035em;color:#65655f}
-.cellar-landmarks {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:30px;margin:55px var(--gutter) 0;padding:30px 0 42px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
-.cellar-landmarks dt {font-size:12px;line-height:1.5;text-transform:uppercase;letter-spacing:.035em;color:#65655f}
-.cellar-landmarks dd {margin:18px 0 0;font-family:var(--serif);font-size:clamp(36px,4.4vw,68px);line-height:1.05;letter-spacing:-.025em}
 .cellar-story {display:grid;grid-template-columns:minmax(0,1fr) var(--editorial-copy-width);gap:45px;margin:105px var(--gutter)}
 .cellar-story h2,.cellar-closing h2 {font-size:clamp(55px,6.3vw,98px);line-height:.98;margin-top:26px}
 .cellar-story h2 {font-size:clamp(70px,8.2vw,128px)}
@@ -399,12 +396,14 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .cellar-story-copy>p {font-size:16px;line-height:1.7;color:#565652}
 .cellar-story-copy>p+p {margin-top:22px}
 .cellar-story-copy h3 {font-size:34px;line-height:1.1;margin:42px 0 20px}
-.cellar-qvevri {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);margin:0 var(--gutter);background:#f3f3f1}
-.cellar-qvevri-photo {min-width:0;min-height:560px}
-.cellar-qvevri-photo .parallax-media img,.cellar-qvevri-photo .parallax-media video {object-position:58% center}
-.cellar-qvevri-copy {align-self:center;padding:55px clamp(30px,5vw,80px)}
-.cellar-qvevri h2 {font-size:clamp(50px,5.8vw,90px);line-height:.98;margin:30px 0}
-.cellar-qvevri-copy>p:not(.eyebrow) {max-width:470px;font-size:16px;line-height:1.7;color:#565652}
+.cellar-qvevri {margin:0}
+.cellar-qvevri-scene .story-winery-window {height:clamp(720px,86vh,1000px);height:clamp(720px,86svh,1000px)}
+.cellar-qvevri-scene .story-winery-window:after {inset:0;background:linear-gradient(90deg,#0e191c55,#0e191c9c 50%,#0e191c55)}
+.cellar-qvevri-scene .story-winery-window figcaption {display:none}
+.cellar-qvevri-scene .story-winery-parallax img,.cellar-qvevri-scene .story-winery-static-photo {object-position:58% center}
+.cellar-qvevri-copy {position:absolute;inset:0;z-index:2;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:45px var(--gutter);text-align:center;color:white;text-shadow:0 2px 14px #0003}
+.cellar-qvevri-copy h2 {font-size:clamp(50px,5.8vw,90px);line-height:.98;margin:0}
+.cellar-qvevri-copy .underlined-link {margin-top:26px;text-transform:uppercase;letter-spacing:.035em}
 .cellar-closing {display:grid;grid-template-columns:minmax(0,1fr) var(--editorial-copy-width);align-items:end;gap:45px;margin:105px var(--gutter) 110px;padding-top:40px;border-top:1px solid var(--border)}
 .cellar-closing>div>p:not(.eyebrow) {max-width:450px;font-size:16px;line-height:1.7;color:#565652}
 .cellar-closing .underlined-link {margin-top:24px}
@@ -439,27 +438,20 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .enologists-closing h2 {font-size:clamp(54px,6vw,94px);line-height:1;margin-top:28px}
 .enologists-closing .underlined-link {margin-bottom:4px}
 
-/* Legals: a tabbed pair of documents (Terms, Privacy). Each document is a
-   two-column row (title/meta, then dividered sections) matching the
-   enologist-row/world-row pattern used elsewhere on the site. */
-.legals-heading {padding-bottom:38px}
-.legals-heading h1 {text-transform:none;letter-spacing:-.02em}
-.legals-tabs {margin:0 var(--gutter) 110px;padding-top:40px;border-top:1px solid var(--border)}
-.legals-tab-list {display:flex;gap:28px;height:auto;padding:0 0 18px;border-radius:0;border-bottom:1px solid var(--border);background:none}
-.legals-tab {flex:none;height:auto;padding:0;border:0;background:none;box-shadow:none;font-family:var(--sans);font-size:14px;color:#9c9c96;gap:8px}
-.legals-tab span {font-size:12px}
-.legals-tab[data-state=active] {color:var(--foreground);background:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
-.legals-tab::after {content:none!important}
-.legal-document {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.65fr);align-items:start;gap:var(--enologist-gap,clamp(24px,3vw,48px));padding-top:58px}
-.legal-document-heading {min-width:0}
-.legal-document-heading h2 {font-family:var(--serif);font-weight:400;font-size:clamp(46px,6vw,88px);letter-spacing:-.025em;line-height:1.03;margin:16px 0 22px}
-.legal-revision {font-size:12px;color:#8a8a86;line-height:1.6}
-.legal-copy {min-width:0;display:flex;flex-direction:column}
-.legal-copy section {padding:28px 0;border-top:1px solid var(--border)}
-.legal-copy section:first-child {padding-top:0;border-top:0}
-.legal-copy h3 {font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
-.legal-copy p {font-size:15px;line-height:1.7;color:#5a5a55;max-width:620px}
-.legal-copy p+p {margin-top:14px}
+/* Legals: a tabbed pair of documents (Terms, Privacy). The tab row itself
+   reuses the Georgian wine page's heritage-tabs/heritage-index/heritage-tab/
+   heritage-panel styling (see below) rather than its own. */
+.legal-document {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:clamp(40px,7vw,110px);padding:35px var(--gutter) 120px}
+.legal-document-heading {max-width:440px}
+.legal-document-heading h2 {font-size:clamp(48px,5.4vw,82px);line-height:1.02;margin:26px 0}
+.legal-revision {color:#8a8a86;font-size:13px;line-height:1.65}
+.legal-copy {max-width:710px;min-width:0}
+.legal-copy>section+section {margin-top:38px;padding-top:32px;border-top:1px solid var(--border)}
+.legal-copy h3 {font-size:29px;line-height:1.15;margin-bottom:16px}
+.legal-copy p {font-size:16px;line-height:1.75;color:#565652}
+.legal-copy p+p {margin-top:16px}
+.legal-copy a {text-decoration:underline;text-underline-offset:4px;overflow-wrap:anywhere}
+.legal-loading {padding:35px var(--gutter) 120px}
 
 /* Georgian wine: the enologists' numbered index becomes a tabbed reading space. */
 .heritage-heading h1 {font-size:clamp(64px,8.3vw,132px);line-height:.95;text-transform:none}
@@ -750,16 +742,13 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .cellar-cover-media {height:440px}
   .cellar-cover-media .parallax-media img,.cellar-cover-media .parallax-media video {object-position:63% center}
   .cellar-cover figcaption {padding:14px var(--gutter) 0;font-size:12px}
-  .cellar-landmarks {gap:16px;margin-top:35px;padding:23px 0 28px}
-  .cellar-landmarks dd {font-size:clamp(28px,6vw,43px);margin-top:15px}
   .cellar-story {grid-template-columns:minmax(0,1fr);gap:32px;margin-top:65px;margin-bottom:65px}
   .cellar-story h2,.cellar-closing h2 {font-size:58px;margin-top:23px}
   .cellar-story h2 {font-size:clamp(64px,18vw,82px)}
   .cellar-story-copy h3 {font-size:31px;margin-top:32px}
-  .cellar-qvevri {grid-template-columns:minmax(0,1fr);margin:0}
-  .cellar-qvevri-photo {height:360px;min-height:0}
-  .cellar-qvevri-copy {padding:38px var(--gutter) 45px}
-  .cellar-qvevri h2 {font-size:58px;margin:25px 0}
+  .cellar-qvevri-scene .story-winery-window {height:clamp(600px,82vh,800px);height:clamp(600px,82svh,800px)}
+  .cellar-qvevri-copy {padding:38px var(--gutter)}
+  .cellar-qvevri-copy h2 {font-size:58px}
   .cellar-closing {grid-template-columns:minmax(0,1fr);gap:30px;margin-top:65px;margin-bottom:70px;padding-top:30px}
   .enologists-heading {padding-bottom:35px}
   .enologists-heading h1 {font-size:clamp(53px,15vw,108px)}
@@ -775,12 +764,11 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .enologist-portrait {justify-self:start;max-width:400px}
   .enologists-closing {align-items:flex-start;flex-direction:column;gap:25px;margin-bottom:70px;padding-top:35px}
   .enologists-closing h2 {font-size:58px;margin-top:24px}
-  .legals-heading {padding-bottom:30px}
-  .legals-tabs {padding-top:26px;margin-bottom:60px}
-  .legals-tab-list {gap:18px}
-  .legal-document {grid-template-columns:minmax(0,1fr);gap:0;padding-top:36px}
-  .legal-document-heading {margin-bottom:28px}
-  .legal-document-heading h2 {font-size:clamp(38px,11vw,56px)}
+  .legal-document {grid-template-columns:minmax(0,1fr);gap:40px;padding:20px var(--gutter) 75px}
+  .legal-document-heading h2 {font-size:52px;margin:22px 0}
+  .legal-copy h3 {font-size:28px}
+  .legal-copy>section+section {margin-top:30px;padding-top:26px}
+  .legals-tabs .heritage-index[data-slot=tabs-list] {gap:20px}
   .heritage-heading h1 {font-size:clamp(56px,14vw,94px)}
   .heritage-heading>p:not(.eyebrow) {margin-left:0;max-width:400px}
   .heritage-index[data-slot=tabs-list] {gap:28px;margin-bottom:30px;padding:15px 0}
