@@ -1,0 +1,1 @@
+UPDATE `wines` SET `specs` = '[{"label":{"en":"Vintage","ka":""},"value":{"en":"2010","ka":""}},{"label":{"en":"Bottle size","ka":""},"value":{"en":"750 ml","ka":""}}]' WHERE `slug` = 'saperavi-reserve' AND `specs` IS NULL;

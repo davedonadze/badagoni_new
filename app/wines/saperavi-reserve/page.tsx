@@ -16,28 +16,28 @@ export default async function SaperaviReserve() {
   const [wine, locale, t] = await Promise.all([getWineBySlug("saperavi-reserve"), getLocale(), getUiStrings()]);
   if (!wine) notFound();
   const name = localize(wine.name, locale);
+  const kakhetiGeorgia = localize(t["wine.kakhetiGeorgia"], locale);
 
   const facts = [
-    { label: localize(t["wine.grapeVariety"], locale), value: "100% Saperavi" },
-    { label: "Vintage", value: "2010" },
-    { label: localize(t["wine.style"], locale), value: "Dry red wine" },
-    { label: localize(t["wine.origin"], locale), value: localize(t["wine.kakhetiGeorgia"], locale) },
-    { label: localize(t["wine.alcohol"], locale), value: wine.alcohol },
-    { label: "Bottle size", value: "750 ml" },
-  ];
+    wine.grapes && { label: localize(t["wine.grapeVariety"], locale), value: localize(wine.grapes, locale) },
+    wine.style && { label: localize(t["wine.style"], locale), value: localize(wine.style, locale) },
+    { label: localize(t["wine.origin"], locale), value: kakhetiGeorgia },
+    wine.alcohol && { label: localize(t["wine.alcohol"], locale), value: wine.alcohol },
+    ...(wine.specs ?? []).map(spec => ({ label: localize(spec.label, locale), value: localize(spec.value, locale) })),
+  ].filter((fact): fact is { label: string; value: string } => !!fact);
 
   return <main className="reserve-page">
     <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href={localizeHref("/catalogue", locale)}>{localize(t["wine.catalogueBreadcrumb"], locale)}</Link><span aria-hidden="true">/</span><span aria-current="page">{name}</span></nav>
 
     <section className="reserve-product" aria-labelledby="reserve-title">
-      <div className="reserve-heading"><p className="eyebrow">Badagoni / Limited release</p><h1 id="reserve-title">Saperavi<br />Reserve</h1></div>
+      <div className="reserve-heading"><p className="eyebrow">Badagoni / Limited release</p><h1 id="reserve-title">{name}</h1></div>
       <figure className="reserve-visual">
         <span className="reserve-vintage">2010 vintage</span>
-        <img src={wine.image} alt="Badagoni Saperavi Reserve 2010 bottle with its original black and gold label" width="300" height="1105" fetchPriority="high" />
-        <figcaption>Saperavi / {localize(t["wine.kakhetiGeorgia"], locale)}</figcaption>
+        <img src={wine.image} alt={name + " bottle"} width="300" height="1105" fetchPriority="high" />
+        <figcaption>{wine.grapes ? localize(wine.grapes, locale) : "Saperavi"} / {kakhetiGeorgia}</figcaption>
       </figure>
       <div className="reserve-information">
-        <p className="reserve-introduction">Made in limited quantities from Saperavi grapes grown near Alaverdi Monastery. Dark fruit, velvety tannins, and a long finish define this expression of the 2010 vintage.</p>
+        <p className="reserve-introduction">{wine.description ? localize(wine.description, locale) : localize(t["wine.fallbackDescription"], locale)}</p>
         <dl className="reserve-facts">{facts.map(fact => <div key={fact.label}><dt>{fact.label}</dt><dd>{fact.value}</dd></div>)}</dl>
         <div className="reserve-actions">
           <a className="underlined-link" href={`mailto:office@badagoni.ge?subject=${encodeURIComponent(`Enquiry: ${name}`)}`}>{localize(t["wine.enquireAboutThisWine"], locale)} <ArrowUpRight size={18} /></a>
