@@ -4,6 +4,7 @@ import { ArrowUpRight } from "lucide-react";
 import { EnologistList } from "./enologist-list";
 import { getPageContent } from "@/lib/pages/service";
 import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/lib/pages/enologists";
+import { getLocale, localize, localizeHref } from "@/lib/i18n";
 
 // Fixed ids for anchor navigation (#donato-lanati, etc.) that stay in code -
 // only the people's names/role/image/description are DB-driven.
@@ -20,23 +21,26 @@ export const metadata: Metadata = {
 };
 
 export default async function Enologists() {
-  const content = (await getPageContent<EnologistsContent>(ENOLOGISTS_SLUG)) ?? ENOLOGISTS_DEFAULT;
-  const { heading, people, closing } = content;
+  const [content, locale] = await Promise.all([
+    getPageContent<EnologistsContent>(ENOLOGISTS_SLUG),
+    getLocale(),
+  ]);
+  const { heading, people, closing } = content ?? ENOLOGISTS_DEFAULT;
 
   const enologists = people.map((person, i) => ({
     id: PERSON_META[i].id,
-    firstName: person.firstName.en,
-    lastName: person.lastName.en,
-    role: person.role.en,
+    firstName: localize(person.firstName, locale),
+    lastName: localize(person.lastName, locale),
+    role: localize(person.role, locale),
     image: person.image,
-    description: person.description.en,
+    description: localize(person.description, locale),
   }));
 
   return <main className="enologists-page">
     <div className="editorial-heading enologists-heading">
-      <p className="eyebrow">{heading.eyebrow.en}</p>
-      <h1>{heading.title.en}</h1>
-      <p>{heading.subtitle.en}</p>
+      <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
+      <h1>{localize(heading.title, locale)}</h1>
+      <p>{localize(heading.subtitle, locale)}</p>
     </div>
 
     <nav className="enologists-index" aria-label="Meet the enologists">
@@ -46,8 +50,8 @@ export default async function Enologists() {
     <EnologistList enologists={enologists} />
 
     <section className="enologists-closing" aria-labelledby="enologists-closing-title">
-      <div><p className="eyebrow">{closing.eyebrow.en}</p><h2 id="enologists-closing-title">{closing.heading.en}</h2></div>
-      <Link href="/catalogue" className="underlined-link">Explore the collection <ArrowUpRight size={18} /></Link>
+      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title">{localize(closing.heading, locale)}</h2></div>
+      <Link href={localizeHref("/catalogue", locale)} className="underlined-link">Explore the collection <ArrowUpRight size={18} /></Link>
     </section>
   </main>;
 }

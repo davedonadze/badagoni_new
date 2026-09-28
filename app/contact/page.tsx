@@ -3,6 +3,7 @@ import { ArrowUpRight } from "lucide-react";
 import { BreakableText } from "../breakable-text";
 import { getPageContent } from "@/lib/pages/service";
 import { CONTACT_SLUG, CONTACT_DEFAULT, type ContactContent } from "@/lib/pages/contact";
+import { getLocale, localize } from "@/lib/i18n";
 
 const METHOD_HREF = [
   (value: string) => `mailto:${value}`,
@@ -20,19 +21,22 @@ export const metadata: Metadata = {
 };
 
 export default async function Contact() {
-  const content = (await getPageContent<ContactContent>(CONTACT_SLUG)) ?? CONTACT_DEFAULT;
-  const { heading, methods, locations } = content;
+  const [content, locale] = await Promise.all([
+    getPageContent<ContactContent>(CONTACT_SLUG),
+    getLocale(),
+  ]);
+  const { heading, methods, locations } = content ?? CONTACT_DEFAULT;
 
   return <main className="contact-page">
     <header className="editorial-heading contact-heading">
-      <p className="eyebrow">{heading.eyebrow.en}</p>
-      <h1>{heading.title.en}</h1>
-      <p><BreakableText text={heading.subtitle.en} /></p>
+      <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
+      <h1>{localize(heading.title, locale)}</h1>
+      <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </header>
 
     <section className="contact-methods" aria-label="Contact our team">
       {methods.map((method, i) => <div key={i} className="contact-direct-line">
-        <p className="eyebrow">{method.label.en}</p>
+        <p className="eyebrow">{localize(method.label, locale)}</p>
         <a className="contact-method-link" href={METHOD_HREF[i](method.value)}><span>{method.value}</span><ArrowUpRight size={22} strokeWidth={1.4} aria-hidden="true" /></a>
       </div>)}
     </section>
@@ -40,8 +44,8 @@ export default async function Contact() {
     <section className="contact-grid contact-details" aria-label="Our locations">
       {locations.map((location, i) => <section key={i} aria-labelledby={`contact-location-${i}-title`}>
         <p className="eyebrow">{LOCATION_META[i].eyebrow}</p>
-        <h2 id={`contact-location-${i}-title`}>{location.title.en}</h2>
-        <address><BreakableText text={location.address.en} /></address>
+        <h2 id={`contact-location-${i}-title`}>{localize(location.title, locale)}</h2>
+        <address><BreakableText text={localize(location.address, locale)} /></address>
         <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{LOCATION_META[i].linkText} <ArrowUpRight size={17} aria-hidden="true" /></a>
       </section>)}
     </section>

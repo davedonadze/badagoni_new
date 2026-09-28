@@ -1,4 +1,5 @@
-import { NextResponse } from "next/server";
+import { NextResponse, type NextRequest } from "next/server";
+import { LOCALE_HEADER } from "@/lib/i18n";
 
 // next.config.ts's `headers()` only reaches vinext's generated static-asset
 // `_headers` file, not actual page/API responses, so security headers are
@@ -28,8 +29,27 @@ const CSP = [
   "frame-ancestors 'none'",
 ].join("; ");
 
-export function middleware() {
-  const response = NextResponse.next();
+// /ka/<path> serves the exact same route as /<path> - this rewrites the
+// request internally (stripping the prefix) and tags it with a request
+// header that getLocale() (lib/i18n.ts) reads server-side, so no route
+// files need to be duplicated under a [locale] segment.
+export function proxy(request: NextRequest) {
+  const { pathname } = request.nextUrl;
+  const isGeorgian = pathname === "/ka" || pathname.startsWith("/ka/");
+
+  let response: NextResponse;
+  if (isGeorgian) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname === "/ka" ? "/" : pathname.slice("/ka".length);
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set(LOCALE_HEADER, "ka");
+    response = NextResponse.rewrite(url, { request: { headers: requestHeaders } });
+  } else {
+    const requestHeaders = new Headers(request.headers);
+    requestHeaders.set(LOCALE_HEADER, "en");
+    response = NextResponse.next({ request: { headers: requestHeaders } });
+  }
+
   response.headers.set("Content-Security-Policy", CSP);
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("X-Content-Type-Options", "nosniff");

@@ -9,8 +9,9 @@ import type { NewsArticle } from "@/lib/news/service";
 import { formatNewsDate } from "@/lib/news/format";
 import { BannerMedia } from "../banner-media";
 import { BreakableParagraphs } from "../breakable-paragraphs";
+import { localize, localizeHref, type Locale } from "@/lib/i18n";
 
-export function NewsCards({ stories }: { stories: NewsArticle[] }) {
+export function NewsCards({ stories, locale }: { stories: NewsArticle[]; locale: Locale }) {
   const [expanded, setExpanded] = useState("");
   const expandedIndex = stories.findIndex((story) => story.slug === expanded);
 
@@ -32,23 +33,24 @@ export function NewsCards({ stories }: { stories: NewsArticle[] }) {
   >
     {stories.map((story) => {
       const isOpen = expanded === story.slug;
+      const title = localize(story.title, locale);
 
       return <AccordionItem key={story.slug} value={story.slug} className="news-card">
         <AccordionPrimitive.Header className="news-card-heading">
-          <AccordionPrimitive.Trigger className="news-card-trigger" aria-label={story.title.en}>
+          <AccordionPrimitive.Trigger className="news-card-trigger" aria-label={title}>
             <span className="news-card-stage">
-              <span className="news-card-artwork"><BannerMedia src={story.image} alt={story.title.en} loading="lazy" /></span>
+              <span className="news-card-artwork"><BannerMedia src={story.image} alt={title} loading="lazy" /></span>
               <span className="news-card-toggle" aria-hidden="true"><Plus size={20} strokeWidth={1.4} /></span>
             </span>
-            <span className="news-card-title">{story.title.en}</span>
+            <span className="news-card-title">{title}</span>
           </AccordionPrimitive.Trigger>
         </AccordionPrimitive.Header>
         <AccordionPrimitive.Content forceMount className="news-card-details" aria-hidden={!isOpen} inert={!isOpen}>
           <div className="news-card-details-inner">
-            <div className="news-meta"><span>{story.category.en}</span><time dateTime={story.date}>{formatNewsDate(story.date)}</time></div>
-            <h3 className="news-card-detail-title">{story.title.en}</h3>
-            <div className="news-card-copy"><BreakableParagraphs text={story.body.en} /></div>
-            <Link href={`/newsroom/${story.slug}`} className="underlined-link">Read full story <ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <div className="news-meta"><span>{localize(story.category, locale)}</span><time dateTime={story.date}>{formatNewsDate(story.date)}</time></div>
+            <h3 className="news-card-detail-title">{title}</h3>
+            <div className="news-card-copy"><BreakableParagraphs text={localize(story.body, locale)} /></div>
+            <Link href={localizeHref(`/newsroom/${story.slug}`, locale)} className="underlined-link">Read full story <ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
         </AccordionPrimitive.Content>
       </AccordionItem>;

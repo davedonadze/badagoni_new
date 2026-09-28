@@ -7,6 +7,7 @@ import { BreakableText } from "../breakable-text";
 import { BannerMedia } from "../banner-media";
 import { getPageContent } from "@/lib/pages/service";
 import { TERROIR_SLUG, TERROIR_DEFAULT, type TerroirContent } from "@/lib/pages/terroir";
+import { getLocale, localize, localizeHref } from "@/lib/i18n";
 
 // Fixed metadata for the four vineyard places that stays in code - only
 // name/grape/text/image are DB-driven.
@@ -20,37 +21,40 @@ const PLACE_META = [
 export const metadata: Metadata = { title: "Our vineyards", description: "The vineyards and varied terroirs of Kakheti that shape every Badagoni wine." };
 
 export default async function Terroir() {
-  const content = (await getPageContent<TerroirContent>(TERROIR_SLUG)) ?? TERROIR_DEFAULT;
-  const { heading, cover, intro, listHeading, places, closing } = content;
+  const [content, locale] = await Promise.all([
+    getPageContent<TerroirContent>(TERROIR_SLUG),
+    getLocale(),
+  ]);
+  const { heading, cover, intro, listHeading, places, closing } = content ?? TERROIR_DEFAULT;
 
   const vineyardPlaces = places.map((place, i) => ({
     id: PLACE_META[i].id,
-    name: place.name.en,
-    grape: place.grape.en,
-    text: place.text.en,
+    name: localize(place.name, locale),
+    grape: localize(place.grape, locale),
+    text: localize(place.text, locale),
     image: place.image,
     imageAlt: PLACE_META[i].imageAlt,
   }));
 
   return <main>
     <div className="editorial-heading">
-      <p className="eyebrow">{heading.eyebrow.en}</p>
-      <h1><BreakableText text={heading.title.en} /></h1>
-      <p><BreakableText text={heading.subtitle.en} /></p>
+      <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
+      <h1><BreakableText text={localize(heading.title, locale)} /></h1>
+      <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </div>
 
-    <ParallaxMedia className="terroir-cover" scale={1.5} ariaLabel={cover.caption.en} media={<BannerMedia src={cover.image} alt="Alaverdi Monastery and the vineyards of Kakheti beneath the Caucasus Mountains" fetchPriority="high" />} overlay={<span>{cover.caption.en}</span>} />
+    <ParallaxMedia className="terroir-cover" scale={1.5} ariaLabel={localize(cover.caption, locale)} media={<BannerMedia src={cover.image} alt="Alaverdi Monastery and the vineyards of Kakheti beneath the Caucasus Mountains" fetchPriority="high" />} overlay={<span>{localize(cover.caption, locale)}</span>} />
 
     <section className="terroir-intro">
-      <p className="eyebrow">{intro.eyebrow.en}</p>
-      <h2><BreakableText text={intro.heading.en} /></h2>
-      <p>{intro.body.en}</p>
+      <p className="eyebrow">{localize(intro.eyebrow, locale)}</p>
+      <h2><BreakableText text={localize(intro.heading, locale)} /></h2>
+      <p>{localize(intro.body, locale)}</p>
     </section>
 
     <section id="selected-locations" className="vineyard-list" aria-labelledby="selected-locations-title">
       <div className="list-heading">
-        <h2 id="selected-locations-title" className="eyebrow">{listHeading.label.en}</h2>
-        <span>{listHeading.subtitle.en}</span>
+        <h2 id="selected-locations-title" className="eyebrow">{localize(listHeading.label, locale)}</h2>
+        <span>{localize(listHeading.subtitle, locale)}</span>
       </div>
       <VineyardList places={vineyardPlaces} />
     </section>
@@ -58,9 +62,9 @@ export default async function Terroir() {
     <section className="terroir-closing">
       <ParallaxMedia className="terroir-closing-media" scale={1.5} media={<BannerMedia src={closing.image} alt="Vineyards stretching toward the Caucasus Mountains" loading="lazy" />} />
       <div>
-        <p className="eyebrow">{closing.eyebrow.en}</p>
-        <h2><BreakableText text={closing.heading.en} /></h2>
-        <Link href="/catalogue" className="underlined-link">Discover the collection <ArrowUpRight size={16} /></Link>
+        <p className="eyebrow">{localize(closing.eyebrow, locale)}</p>
+        <h2><BreakableText text={localize(closing.heading, locale)} /></h2>
+        <Link href={localizeHref("/catalogue", locale)} className="underlined-link">Discover the collection <ArrowUpRight size={16} /></Link>
       </div>
     </section>
   </main>;
