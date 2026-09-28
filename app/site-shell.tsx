@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ArrowUpRight, Menu } from "lucide-react";
 import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from "@/components/ui/sheet";
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
@@ -39,12 +39,58 @@ export function SiteHeader({ primaryLinks, secondaryLinks, t }: { primaryLinks: 
   const path = usePathname();
   const locale = localeOf(path);
   const canonicalPath = canonicalPathOf(path);
+  const isHome = canonicalPath === "/";
   const [open, setOpen] = useState(false);
+  const [hidden, setHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const mobileLinks = [...primaryLinks, ...secondaryLinks];
+
+  // Hides on the way down, reappears on the way up - same rAF-throttled
+  // scroll-position read used by ScrollReveal/ParallaxMedia elsewhere, so
+  // it stays in lockstep with the page's own scroll-driven motion instead
+  // of drifting a frame behind it.
+  useEffect(() => {
+    let lastY = window.scrollY;
+    let frame = 0;
+    // Stays fully visible - never hides - until past this point: a small
+    // fixed distance on most pages (just enough to absorb a tiny scroll
+    // wobble right where someone lands), or the full hero on the homepage,
+    // so it never vanishes mid-photo before it's had a chance to switch to
+    // its solid look.
+    const topZone = isHome ? window.innerHeight * 0.85 : 80;
+
+    const update = () => {
+      frame = 0;
+      const y = window.scrollY;
+      const delta = y - lastY;
+      const scrolled = y > topZone;
+      setScrolled(scrolled);
+      if (!scrolled) setHidden(false);
+      else if (Math.abs(delta) > 4) setHidden(delta > 0);
+      lastY = y;
+    };
+
+    const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
+
+    window.addEventListener("scroll", schedule, { passive: true });
+    window.addEventListener("resize", schedule);
+    update();
+
+    return () => {
+      window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", schedule);
+      window.removeEventListener("resize", schedule);
+    };
+  }, [isHome]);
 
   if (path.startsWith("/admin")) return null;
 
-  return <header className={"site-header" + (canonicalPath === "/" ? " header-over-photo" : "")}>
+  const headerClassName = "site-header"
+    + (isHome ? " header-over-photo" : "")
+    + (scrolled ? " header-scrolled" : "")
+    + (hidden && !open ? " header-hidden" : "");
+
+  return <header className={headerClassName}>
     <Link href={localizeHref("/", locale)} className="brand" aria-label="Badagoni home"><img src="/images/badagoni-logo.svg" alt="Badagoni — Est. 2006" width="328" height="75" /></Link>
     <nav className="header-nav" aria-label="Main navigation">{primaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)} aria-current={isCurrent(canonicalPath, link.href) ? "page" : undefined}>{localize(link.label, locale)}</Link>)}</nav>
     <nav className="header-secondary" aria-label="More about Badagoni">{secondaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)} aria-current={isCurrent(canonicalPath, link.href) ? "page" : undefined}>{localize(link.label, locale)}</Link>)}</nav>
