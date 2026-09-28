@@ -6,6 +6,11 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 // field that uses it. {en, ka}
 export type Localized = { en: string; ka: string };
 
+// An admin-added extra fact on a wine's detail panel (beyond the fixed
+// Origin/Grape variety/Alcohol rows) - e.g. "Ageing", "Vintage", "Serving
+// temperature". Both label and value are bilingual.
+export type WineSpec = { label: Localized; value: Localized };
+
 // Wines shown in the catalogue and on /wines/[slug]. Managed through the
 // admin panel at /admin/wines (see app/admin/ and app/api/admin/wines/).
 export const wines = sqliteTable("wines", {
@@ -19,6 +24,7 @@ export const wines = sqliteTable("wines", {
   grapes: text("grapes", { mode: "json" }).$type<Localized | null>(),
   alcohol: text("alcohol"),
   description: text("description", { mode: "json" }).$type<Localized | null>(),
+  specs: text("specs", { mode: "json" }).$type<WineSpec[] | null>(),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });

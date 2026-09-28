@@ -33,6 +33,7 @@ export default async function WinePage({ params }: WinePageProps) {
     wine.style && { label: "Style", value: localize(wine.style, locale) },
     { label: "Origin", value: "Kakheti, Georgia" },
     wine.alcohol && { label: "Alcohol", value: wine.alcohol },
+    ...(wine.specs ?? []).map(spec => ({ label: localize(spec.label, locale), value: localize(spec.value, locale) })),
   ].filter((fact): fact is { label: string; value: string } => !!fact);
 
   return <main className="reserve-page">
