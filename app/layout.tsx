@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { SiteHeader, SiteFooter } from "./site-shell";
+import { LocaleSync } from "./locale-sync";
 import { listMenuItems } from "@/lib/menu/service";
 import { getLocale } from "@/lib/i18n";
 export const metadata: Metadata = {
@@ -15,5 +16,5 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
   const footerPrimaryLinks = menuItems.filter(item => item.location === "footer_primary");
   const footerSecondaryLinks = menuItems.filter(item => item.location === "footer_secondary");
   const footerSocialLinks = menuItems.filter(item => item.location === "footer_social");
-  return <html lang={locale}><body><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} locale={locale}/><div id="main-content">{children}</div><SiteFooter footerPrimaryLinks={footerPrimaryLinks} footerSecondaryLinks={footerSecondaryLinks} footerSocialLinks={footerSocialLinks} locale={locale}/></body></html>;
+  return <html lang={locale}><body><LocaleSync/><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks}/><div id="main-content">{children}</div><SiteFooter footerPrimaryLinks={footerPrimaryLinks} footerSecondaryLinks={footerSecondaryLinks} footerSocialLinks={footerSocialLinks}/></body></html>;
 }

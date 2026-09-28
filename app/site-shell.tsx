@@ -21,8 +21,19 @@ function canonicalPathOf(path: string): string {
   return path;
 }
 
-export function SiteHeader({ primaryLinks, secondaryLinks, locale }: { primaryLinks: MenuItem[]; secondaryLinks: MenuItem[]; locale: Locale }) {
+// Derived from the live pathname rather than taken as a prop: App Router
+// keeps the root layout mounted across client-side navigations (only the
+// page below it re-renders), so a locale prop threaded down from there
+// would go stale the moment someone clicks a link instead of hard-loading
+// the page - usePathname() is what already updates correctly on every
+// navigation, client-side included.
+function localeOf(path: string): Locale {
+  return path === "/ka" || path.startsWith("/ka/") ? "ka" : "en";
+}
+
+export function SiteHeader({ primaryLinks, secondaryLinks }: { primaryLinks: MenuItem[]; secondaryLinks: MenuItem[] }) {
   const path = usePathname();
+  const locale = localeOf(path);
   const canonicalPath = canonicalPathOf(path);
   const [open, setOpen] = useState(false);
   const mobileLinks = [...primaryLinks, ...secondaryLinks];
@@ -45,9 +56,10 @@ export function SiteHeader({ primaryLinks, secondaryLinks, locale }: { primaryLi
   </header>;
 }
 
-export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSocialLinks, locale }: { footerPrimaryLinks: MenuItem[]; footerSecondaryLinks: MenuItem[]; footerSocialLinks: MenuItem[]; locale: Locale }) {
+export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSocialLinks }: { footerPrimaryLinks: MenuItem[]; footerSecondaryLinks: MenuItem[]; footerSocialLinks: MenuItem[] }) {
   const path = usePathname();
   if (path.startsWith("/admin")) return null;
+  const locale = localeOf(path);
   const canonicalPath = canonicalPathOf(path);
 
   return <footer className="site-footer">
