@@ -15,6 +15,7 @@ const REGISTERED_PAGES = [
   { slug: "alaverdi-monastery-cellar", title: "Alaverdi Monastery Cellar", description: "/alaverdi-monastery-cellar — heading, cover, landmarks, story, qvevri tradition, and closing." },
   { slug: "enologists", title: "Enologists", description: "/enologists — heading, the four team profiles, and closing." },
   { slug: "catalogue", title: "Wine catalogue", description: "/catalogue — heading text (the wine grid is managed from Wines)." },
+  { slug: "legals", title: "Legals", description: "/legals — heading and both the Terms and Conditions / Privacy Policy documents (sections can be added, removed, and reordered)." },
 ];
 
 export const dynamic = "force-dynamic";

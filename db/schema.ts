@@ -83,7 +83,7 @@ export const menuItems = sqliteTable("menu_items", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   label: text("label", { mode: "json" }).$type<Localized>().notNull(),
   href: text("href").notNull(),
-  location: text("location", { enum: ["header_primary", "header_secondary", "footer"] }).notNull(),
+  location: text("location", { enum: ["header_primary", "header_secondary", "footer_primary", "footer_secondary", "footer_social"] }).notNull(),
   order: integer("order").notNull().default(0),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),

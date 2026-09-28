@@ -11,6 +11,8 @@ export default async function RootLayout({children}:Readonly<{children:React.Rea
   const menuItems = await listMenuItems();
   const primaryLinks = menuItems.filter(item => item.location === "header_primary");
   const secondaryLinks = menuItems.filter(item => item.location === "header_secondary");
-  const footerLinks = menuItems.filter(item => item.location === "footer");
-  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks}/><div id="main-content">{children}</div><SiteFooter footerLinks={footerLinks}/></body></html>;
+  const footerPrimaryLinks = menuItems.filter(item => item.location === "footer_primary");
+  const footerSecondaryLinks = menuItems.filter(item => item.location === "footer_secondary");
+  const footerSocialLinks = menuItems.filter(item => item.location === "footer_social");
+  return <html lang="en"><body><a className="skip-link" href="#main-content">Skip to content</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks}/><div id="main-content">{children}</div><SiteFooter footerPrimaryLinks={footerPrimaryLinks} footerSecondaryLinks={footerSecondaryLinks} footerSocialLinks={footerSocialLinks}/></body></html>;
 }
