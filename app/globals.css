@@ -24,6 +24,16 @@
 html:lang(ka) {
   --serif:"Futura Book Mta","Instrument Serif",Georgia,"Times New Roman",serif;
 }
+/* Same fix, for the header's nav links (Manrope, like the rest of the
+   header, has no Georgian glyphs either) - layered in front of --sans
+   rather than switching to --serif, so English pages are untouched and
+   Latin punctuation mixed into Georgian nav text still falls back to
+   Manrope, not the serif stack. */
+html:lang(ka) .header-nav a,
+html:lang(ka) .header-secondary a,
+html:lang(ka) .mobile-menu-button {
+  font-family:"Futura Book Mta",var(--sans);
+}
 @theme inline {
   --color-background:var(--background); --color-foreground:var(--foreground);
   --color-card:var(--card); --color-card-foreground:var(--card-foreground);
