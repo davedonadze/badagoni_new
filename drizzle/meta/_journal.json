@@ -183,6 +183,13 @@
       "when": 1790586732260,
       "tag": "0025_seed_saperavi_reserve_awards",
       "breakpoints": true
+    },
+    {
+      "idx": 26,
+      "version": "6",
+      "when": 1790598732565,
+      "tag": "0026_seed_footer_social_links",
+      "breakpoints": true
     }
   ]
 }
