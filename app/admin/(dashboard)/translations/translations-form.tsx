@@ -41,6 +41,7 @@ export function TranslationsForm({ strings: initial }: { strings: Record<string,
     if (keys.length === 0) return;
     setTranslatingAll(true);
     setTranslateProgress({ done: 0, total: keys.length });
+    const failed: string[] = [];
     for (let i = 0; i < keys.length; i++) {
       const key = keys[i];
       try {
@@ -52,14 +53,17 @@ export function TranslationsForm({ strings: initial }: { strings: Record<string,
         const data = (await response.json()) as { translation?: string };
         if (response.ok && data.translation) {
           setStrings(current => ({ ...current, [key]: { ...current[key], ka: data.translation! } }));
+        } else {
+          failed.push(key);
         }
       } catch {
-        // Skip this one; the per-row Translate button can retry it individually.
+        failed.push(key);
       }
       setTranslateProgress({ done: i + 1, total: keys.length });
     }
     setTranslatingAll(false);
     setTranslateProgress(null);
+    setError(failed.length ? `Couldn't translate: ${failed.map(humanizeKey).join(", ")}. Use each field's own Translate button to retry, or fill it in by hand.` : null);
   }
 
   async function handleSubmit(event: React.FormEvent) {

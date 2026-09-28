@@ -32,8 +32,14 @@ export function BilingualField({
 }) {
   const [translating, setTranslating] = useState(false);
   const [error, setError] = useState<string | null>(null);
-  const Field = multiline ? Textarea : Input;
-  const fieldRows = multiline ? (rows ?? 4) : undefined;
+  // A single-line Input becomes unusable if its value ever runs long (a
+  // pasted paragraph, or a bad AI translation) - the text just scrolls off
+  // to one side. Upgrade to a Textarea automatically in that case, even for
+  // fields nobody explicitly marked multiline.
+  const isLong = value.en.length > 60 || value.ka.length > 60;
+  const useTextarea = multiline || isLong;
+  const Field = useTextarea ? Textarea : Input;
+  const fieldRows = useTextarea ? (rows ?? 4) : undefined;
 
   async function handleTranslate() {
     if (!value.en.trim()) return;
