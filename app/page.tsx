@@ -12,21 +12,23 @@ import { listCategories } from "@/lib/categories/service";
 import { getPageContent } from "@/lib/pages/service";
 import { HOME_SLUG, HOME_DEFAULT, type HomeContent } from "@/lib/pages/home";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 // Fixed metadata for the world section rows that stays in code (their hrefs,
-// link text, and display number) - only title/subtitle/text are DB-driven.
+// link-text key, and display number) - only title/subtitle/text are DB-driven.
 const WORLD_META = [
-  { number: "01", href: "/terroir", link: "Explore our vineyards" },
-  { number: "02", href: "/alaverdi-monastery-cellar", link: "Discover the craft" },
-  { number: "03", href: "/story", link: "Meet Badagoni" },
+  { number: "01", href: "/terroir", linkKey: "cta.exploreOurVineyards" },
+  { number: "02", href: "/alaverdi-monastery-cellar", linkKey: "cta.discoverTheCraft" },
+  { number: "03", href: "/story", linkKey: "cta.meetBadagoni" },
 ];
 
 export default async function Home() {
-  const [wines, categories, content, locale] = await Promise.all([
+  const [wines, categories, content, locale, t] = await Promise.all([
     listWines(),
     listCategories(),
     getPageContent<HomeContent>(HOME_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { hero, opening, collection, editorialCards, originInterlude, manifesto, worldSection } = content ?? HOME_DEFAULT;
 
@@ -37,7 +39,7 @@ export default async function Home() {
       media={<BannerMedia src={hero.image} alt="An editorial scene of two people sharing Badagoni wine at a table" className="campaign-image" fetchPriority="high" />}
       overlay={<>
         <div className="campaign-shade" />
-        <Link href={localizeHref("/catalogue", locale)} className="campaign-link">Explore the collection <ArrowUpRight size={19} /></Link>
+        <Link href={localizeHref("/catalogue", locale)} className="campaign-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={19} /></Link>
         <p className="campaign-caption"><BreakableText text={localize(hero.caption, locale)} /></p>
       </>}
     />
@@ -49,11 +51,11 @@ export default async function Home() {
 
     <section className="selected-collection" aria-labelledby="collection-title">
       <div className="collection-label"><h2 id="collection-title">{localize(collection.heading, locale)}</h2></div>
-      <FeaturedWines wines={wines} categories={categories} locale={locale} />
-      <div className="collection-more"><Link href={localizeHref("/catalogue", locale)} className="underlined-link">View all wines <ArrowUpRight size={16} /></Link></div>
+      <FeaturedWines wines={wines} categories={categories} locale={locale} t={t} />
+      <div className="collection-more"><Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.viewAllWines"], locale)} <ArrowUpRight size={16} /></Link></div>
     </section>
 
-    <ScrollReveal><EditorialCards cards={editorialCards} locale={locale} /></ScrollReveal>
+    <ScrollReveal><EditorialCards cards={editorialCards} locale={locale} t={t} /></ScrollReveal>
 
     <ScrollReveal><div className="origin-interlude"><p><BreakableText text={localize(originInterlude.line, locale)} /></p><span>{localize(originInterlude.caption, locale)}</span></div></ScrollReveal>
 
@@ -63,13 +65,13 @@ export default async function Home() {
         media={<BannerMedia src={manifesto.image} alt="A shared glass of wine around the table" loading="lazy" />}
         overlay={<span>{localize(manifesto.overlayCaption, locale)}</span>}
       />
-      <div className="manifesto-content"><h2 id="manifesto-title"><BreakableText text={localize(manifesto.heading, locale)} /></h2><div className="manifesto-copy"><p className="eyebrow">{localize(manifesto.eyebrow, locale)}</p><p>{localize(manifesto.body, locale)}</p><Link href={localizeHref("/story", locale)} className="underlined-link">Our story <ArrowUpRight size={16} /></Link></div></div>
+      <div className="manifesto-content"><h2 id="manifesto-title"><BreakableText text={localize(manifesto.heading, locale)} /></h2><div className="manifesto-copy"><p className="eyebrow">{localize(manifesto.eyebrow, locale)}</p><p>{localize(manifesto.body, locale)}</p><Link href={localizeHref("/story", locale)} className="underlined-link">{localize(t["cta.ourStory"], locale)} <ArrowUpRight size={16} /></Link></div></div>
 
       <section className="world-section" aria-labelledby="world-title">
         <h2 id="world-title" className="world-label">{localize(worldSection.heading, locale)}</h2>
         {worldSection.items.map((world, i) => <ScrollReveal key={WORLD_META[i].number}><article className="world-row">
           <div className="world-number"><span>{localize(world.title, locale)}</span><span>/{WORLD_META[i].number}</span></div>
-          <div className="world-copy"><h3>{localize(world.subtitle, locale)}</h3><p>{localize(world.text, locale)}</p><Link href={localizeHref(WORLD_META[i].href, locale)} className="underlined-link">{WORLD_META[i].link} <ArrowUpRight size={16} /></Link></div>
+          <div className="world-copy"><h3>{localize(world.subtitle, locale)}</h3><p>{localize(world.text, locale)}</p><Link href={localizeHref(WORLD_META[i].href, locale)} className="underlined-link">{localize(t[WORLD_META[i].linkKey], locale)} <ArrowUpRight size={16} /></Link></div>
         </article></ScrollReveal>)}
       </section>
     </section>

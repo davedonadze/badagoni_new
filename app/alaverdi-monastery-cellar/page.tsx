@@ -8,6 +8,7 @@ import { WineryScrollScene } from "../story/winery-scroll-scene";
 import { getPageContent } from "@/lib/pages/service";
 import { ALAVERDI_SLUG, ALAVERDI_DEFAULT, type AlaverdiContent } from "@/lib/pages/alaverdi";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 export const metadata: Metadata = {
   title: "Alaverdi Monastery Cellar",
@@ -15,9 +16,10 @@ export const metadata: Metadata = {
 };
 
 export default async function AlaverdiMonasteryCellar() {
-  const [content, locale] = await Promise.all([
+  const [content, locale, t] = await Promise.all([
     getPageContent<AlaverdiContent>(ALAVERDI_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { heading, cover, story, qvevri, closing } = content ?? ALAVERDI_DEFAULT;
 
@@ -55,14 +57,14 @@ export default async function AlaverdiMonasteryCellar() {
         }}
         imageOverlay={<div className="cellar-qvevri-copy">
           <h2 id="cellar-qvevri-title">{localize(qvevri.heading, locale)}</h2>
-          <Link href={localizeHref("/georgian-wine?tab=qvevri-tradition#qvevri-tradition", locale)} className="underlined-link">The Qvevri Tradition <ArrowUpRight size={18} /></Link>
+          <Link href={localizeHref("/georgian-wine?tab=qvevri-tradition#qvevri-tradition", locale)} className="underlined-link">{localize(t["cta.theQvevriTradition"], locale)} <ArrowUpRight size={18} /></Link>
         </div>}
       />
     </section>
 
     <section className="cellar-closing" aria-labelledby="cellar-wines-title">
       <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="cellar-wines-title"><BreakableText text={localize(closing.heading, locale)} /></h2></div>
-      <div><p>{localize(closing.body, locale)}</p><Link href={localizeHref("/catalogue", locale)} className="underlined-link">Explore the collection <ArrowUpRight size={18} /></Link></div>
+      <div><p>{localize(closing.body, locale)}</p><Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={18} /></Link></div>
     </section>
   </main>;
 }

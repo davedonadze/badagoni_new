@@ -7,16 +7,17 @@ import { Accordion as AccordionPrimitive } from "radix-ui";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
 import type { EditorialCardContent } from "@/lib/pages/home";
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
+import type { Localized } from "@/db/schema";
 
 // Fixed metadata that stays in code, zipped with the DB-driven content by
 // index (always exactly 3 fixed cards, not addable/reorderable).
 const CARD_META = [
-  { id: "craft", alt: "A monk tending qvevri in Alaverdi’s historic cellar", href: "/alaverdi-monastery-cellar", link: "Discover the craft" },
-  { id: "place", alt: "Kakheti vineyards and Alaverdi Monastery", href: "/terroir", link: "Explore our vineyards" },
-  { id: "expression", alt: "Badagoni Kisi Qvevri bottle", href: "/catalogue", link: "Explore the collection" },
+  { id: "craft", alt: "A monk tending qvevri in Alaverdi’s historic cellar", href: "/alaverdi-monastery-cellar", linkKey: "cta.discoverTheCraft" },
+  { id: "place", alt: "Kakheti vineyards and Alaverdi Monastery", href: "/terroir", linkKey: "cta.exploreOurVineyards" },
+  { id: "expression", alt: "Badagoni Kisi Qvevri bottle", href: "/catalogue", linkKey: "cta.exploreCollection" },
 ];
 
-export function EditorialCards({ cards, locale }: { cards: [EditorialCardContent, EditorialCardContent, EditorialCardContent]; locale: Locale }) {
+export function EditorialCards({ cards, locale, t }: { cards: [EditorialCardContent, EditorialCardContent, EditorialCardContent]; locale: Locale; t: Record<string, Localized> }) {
   const [expanded, setExpanded] = useState("");
 
   return <section className="editorial-section" aria-label="The world of Badagoni">
@@ -35,7 +36,7 @@ export function EditorialCards({ cards, locale }: { cards: [EditorialCardContent
         <AccordionPrimitive.Content className="editorial-details">
           <div className="editorial-details-inner">
             <p className="eyebrow">{label} / 0{index + 1}</p>
-            <div><p className="editorial-description">{localize(card.description, locale)}</p><Link href={localizeHref(CARD_META[index].href, locale)} className="underlined-link">{CARD_META[index].link}<ArrowUpRight size={17} /></Link></div>
+            <div><p className="editorial-description">{localize(card.description, locale)}</p><Link href={localizeHref(CARD_META[index].href, locale)} className="underlined-link">{localize(t[CARD_META[index].linkKey], locale)}<ArrowUpRight size={17} /></Link></div>
           </div>
         </AccordionPrimitive.Content>
       </AccordionItem>;

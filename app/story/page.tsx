@@ -8,13 +8,15 @@ import { BannerMedia } from "../banner-media";
 import { getPageContent } from "@/lib/pages/service";
 import { STORY_SLUG, STORY_DEFAULT, type StoryContent } from "@/lib/pages/story";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 export const metadata: Metadata = { title: "Our story", description: "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine." };
 
 export default async function Story() {
-  const [content, locale] = await Promise.all([
+  const [content, locale, t] = await Promise.all([
     getPageContent<StoryContent>(STORY_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { heading, cover, intro, qvevri, winery, science } = content ?? STORY_DEFAULT;
 
@@ -45,7 +47,7 @@ export default async function Story() {
         <h2><BreakableText text={localize(qvevri.heading, locale)} /></h2>
         <p>{localize(qvevri.paragraph1, locale)}</p>
         <p>{localize(qvevri.paragraph2, locale)}</p>
-        <Link href={localizeHref("/catalogue", locale)} className="underlined-link">Explore the wines <ArrowUpRight size={16} /></Link>
+        <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreTheWines"], locale)} <ArrowUpRight size={16} /></Link>
       </div>
     </section>
 
@@ -55,7 +57,7 @@ export default async function Story() {
         <h2><BreakableText text={localize(science.heading, locale)} /></h2>
         <div>
           <p>{localize(science.paragraph, locale)}</p>
-          <Link href={localizeHref("/terroir", locale)} className="underlined-link">Our vineyards <ArrowUpRight size={16} /></Link>
+          <Link href={localizeHref("/terroir", locale)} className="underlined-link">{localize(t["cta.ourVineyards"], locale)} <ArrowUpRight size={16} /></Link>
         </div>
       </section>
     </WinerySection>

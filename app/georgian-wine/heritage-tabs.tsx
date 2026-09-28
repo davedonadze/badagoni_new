@@ -8,26 +8,29 @@ import { WineryScrollScene } from "../story/winery-scroll-scene";
 import { BreakableParagraphs } from "../breakable-paragraphs";
 import { localize, type Locale } from "@/lib/i18n";
 import type { HeritageChapter } from "@/lib/pages/georgian-wine";
+import type { Localized } from "@/db/schema";
 
-function PhotoCredit({ credit, locale }: { credit: NonNullable<HeritageChapter["credit"]>; locale: Locale }) {
+type UiStrings = Record<string, Localized>;
+
+function PhotoCredit({ credit, locale, t }: { credit: NonNullable<HeritageChapter["credit"]>; locale: Locale; t: UiStrings }) {
   return <Popover>
     <PopoverTrigger asChild><button className="heritage-credit-trigger" aria-label="Photo credit" title="Photo credit"><Info size={18} strokeWidth={1.5} /></button></PopoverTrigger>
     <PopoverContent className="heritage-credit-popover" align="end" sideOffset={8} aria-label="Photo credit">
-      <p className="heritage-credit-title">Photo credit</p>
+      <p className="heritage-credit-title">{localize(t["georgianWine.photoCredit"], locale)}</p>
       <p><a href={credit.url} target="_blank" rel="noreferrer">{localize(credit.label, locale)}</a></p>
-      <p><a href={credit.licenseUrl} target="_blank" rel="noreferrer">{localize(credit.license, locale)}</a> · Cropped for display.</p>
+      <p><a href={credit.licenseUrl} target="_blank" rel="noreferrer">{localize(credit.license, locale)}</a> · {localize(t["georgianWine.croppedForDisplay"], locale)}</p>
     </PopoverContent>
   </Popover>;
 }
 
-function ChapterPanel({ number, chapter, sceneClassName, locale }: { number: "01" | "02"; chapter: HeritageChapter; sceneClassName: string; locale: Locale }) {
+function ChapterPanel({ number, chapter, sceneClassName, locale, t }: { number: "01" | "02"; chapter: HeritageChapter; sceneClassName: string; locale: Locale; t: UiStrings }) {
   const titleId = `heritage-title-${number}`;
   return <WineryScrollScene className={`heritage-scroll-scene ${sceneClassName}`} image={{
     src: chapter.image,
     alt: localize(chapter.imageTitle, locale),
     title: localize(chapter.imageTitle, locale),
     caption: localize(chapter.imageCaption, locale),
-  }} imageOverlay={chapter.credit ? <PhotoCredit credit={chapter.credit} locale={locale} /> : undefined} intro={
+  }} imageOverlay={chapter.credit ? <PhotoCredit credit={chapter.credit} locale={locale} t={t} /> : undefined} intro={
     <section className="science-section story-winery-copy heritage-copy" aria-labelledby={titleId}>
       <p className="eyebrow">{localize(chapter.eyebrow, locale)}</p>
       <h2 id={titleId}>{localize(chapter.title, locale)}</h2>
@@ -36,7 +39,7 @@ function ChapterPanel({ number, chapter, sceneClassName, locale }: { number: "01
   } />;
 }
 
-export function HeritageTabs({ figure, qvevri, locale }: { figure: HeritageChapter; qvevri: HeritageChapter; locale: Locale }) {
+export function HeritageTabs({ figure, qvevri, locale, t }: { figure: HeritageChapter; qvevri: HeritageChapter; locale: Locale; t: UiStrings }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -49,11 +52,11 @@ export function HeritageTabs({ figure, qvevri, locale }: { figure: HeritageChapt
     </TabsList>
 
     <TabsContent value="badagoni-figure" id="badagoni-figure" className="heritage-panel">
-      <ChapterPanel number="01" chapter={figure} sceneClassName="heritage-figure-scene" locale={locale} />
+      <ChapterPanel number="01" chapter={figure} sceneClassName="heritage-figure-scene" locale={locale} t={t} />
     </TabsContent>
 
     <TabsContent value="qvevri-tradition" id="qvevri-tradition" className="heritage-panel">
-      <ChapterPanel number="02" chapter={qvevri} sceneClassName="heritage-qvevri-scene" locale={locale} />
+      <ChapterPanel number="02" chapter={qvevri} sceneClassName="heritage-qvevri-scene" locale={locale} t={t} />
     </TabsContent>
   </Tabs>;
 }

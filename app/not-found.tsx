@@ -1,7 +1,8 @@
 import Link from "next/link";
-import { getLocale, localizeHref } from "@/lib/i18n";
+import { getLocale, localize, localizeHref } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 export default async function NotFound(){
-  const locale = await getLocale();
-  return <main className="not-found"><p className="eyebrow">Page not found</p><h1>A different path<br/><em>back to Badagoni.</em></h1><Link href={localizeHref("/", locale)} className="text-link">Return home</Link></main>;
+  const [locale, t] = await Promise.all([getLocale(), getUiStrings()]);
+  return <main className="not-found"><p className="eyebrow">{localize(t["notFound.pageNotFound"], locale)}</p><h1>{localize(t["notFound.aDifferentPath"], locale)}<br/><em>{localize(t["notFound.backToBadagoni"], locale)}</em></h1><Link href={localizeHref("/", locale)} className="text-link">{localize(t["cta.returnHome"], locale)}</Link></main>;
 }

@@ -4,6 +4,7 @@ import { BreakableText } from "../breakable-text";
 import { getPageContent } from "@/lib/pages/service";
 import { CONTACT_SLUG, CONTACT_DEFAULT, type ContactContent } from "@/lib/pages/contact";
 import { getLocale, localize } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 const METHOD_HREF = [
   (value: string) => `mailto:${value}`,
@@ -11,8 +12,8 @@ const METHOD_HREF = [
 ];
 
 const LOCATION_META = [
-  { eyebrow: "01 / Headquarters", linkText: "Find our office" },
-  { eyebrow: "02 / Winery", linkText: "Find our winery" },
+  { eyebrowKey: "contact.headquartersEyebrow", linkKey: "contact.findOurOffice" },
+  { eyebrowKey: "contact.wineryEyebrow", linkKey: "contact.findOurWinery" },
 ];
 
 export const metadata: Metadata = {
@@ -21,9 +22,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Contact() {
-  const [content, locale] = await Promise.all([
+  const [content, locale, t] = await Promise.all([
     getPageContent<ContactContent>(CONTACT_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { heading, methods, locations } = content ?? CONTACT_DEFAULT;
 
@@ -43,10 +45,10 @@ export default async function Contact() {
 
     <section className="contact-grid contact-details" aria-label="Our locations">
       {locations.map((location, i) => <section key={i} aria-labelledby={`contact-location-${i}-title`}>
-        <p className="eyebrow">{LOCATION_META[i].eyebrow}</p>
+        <p className="eyebrow">{localize(t[LOCATION_META[i].eyebrowKey], locale)}</p>
         <h2 id={`contact-location-${i}-title`}>{localize(location.title, locale)}</h2>
         <address><BreakableText text={localize(location.address, locale)} /></address>
-        <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{LOCATION_META[i].linkText} <ArrowUpRight size={17} aria-hidden="true" /></a>
+        <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{localize(t[LOCATION_META[i].linkKey], locale)} <ArrowUpRight size={17} aria-hidden="true" /></a>
       </section>)}
     </section>
   </main>;

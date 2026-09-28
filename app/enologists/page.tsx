@@ -5,6 +5,7 @@ import { EnologistList } from "./enologist-list";
 import { getPageContent } from "@/lib/pages/service";
 import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/lib/pages/enologists";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 // Fixed ids for anchor navigation (#donato-lanati, etc.) that stay in code -
 // only the people's names/role/image/description are DB-driven.
@@ -21,9 +22,10 @@ export const metadata: Metadata = {
 };
 
 export default async function Enologists() {
-  const [content, locale] = await Promise.all([
+  const [content, locale, t] = await Promise.all([
     getPageContent<EnologistsContent>(ENOLOGISTS_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { heading, people, closing } = content ?? ENOLOGISTS_DEFAULT;
 
@@ -51,7 +53,7 @@ export default async function Enologists() {
 
     <section className="enologists-closing" aria-labelledby="enologists-closing-title">
       <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title">{localize(closing.heading, locale)}</h2></div>
-      <Link href={localizeHref("/catalogue", locale)} className="underlined-link">Explore the collection <ArrowUpRight size={18} /></Link>
+      <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={18} /></Link>
     </section>
   </main>;
 }

@@ -82,6 +82,19 @@ export const newsArticles = sqliteTable("news_articles", {
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
 
+// Small, fixed pieces of hardcoded UI copy (button/link labels, section
+// eyebrows, fallback text) that live in code rather than in a `pages` row -
+// e.g. "Explore the collection", "Enquire about this wine". `key` is a
+// stable code-defined identifier (see lib/ui-strings/defaults.ts for the
+// full English default for every key); a row here only exists once an
+// admin has edited that key, so most keys never get a row at all and just
+// resolve to their default. Managed at /admin/translations.
+export const uiStrings = sqliteTable("ui_strings", {
+  key: text("key").primaryKey(),
+  value: text("value", { mode: "json" }).$type<Localized>().notNull(),
+  updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
+});
+
 // Site navigation, managed at /admin/menu. `location` places an item in the
 // header's primary row, its secondary row, or the footer; the mobile sheet
 // menu combines header_primary + header_secondary by `order`.

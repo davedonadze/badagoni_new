@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { Accordion as AccordionPrimitive } from "radix-ui";
 import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import { localize, type Locale } from "@/lib/i18n";
+import type { Localized } from "@/db/schema";
 
 type VineyardPlace = {
   id: string;
@@ -14,7 +16,7 @@ type VineyardPlace = {
   imageAlt: string;
 };
 
-export function VineyardList({ places }: { places: VineyardPlace[] }) {
+export function VineyardList({ places, locale, t }: { places: VineyardPlace[]; locale: Locale; t: Record<string, Localized> }) {
   const [expanded, setExpanded] = useState("");
 
   return <Accordion
@@ -44,7 +46,7 @@ export function VineyardList({ places }: { places: VineyardPlace[] }) {
             <div className="vineyard-detail-grid">
               <div className="vineyard-copy">
                 <p>{place.text}</p>
-                <div className="vineyard-grape"><span className="eyebrow">Grape varieties</span><p>{place.grape}</p></div>
+                <div className="vineyard-grape"><span className="eyebrow">{localize(t["wine.grapeVarieties"], locale)}</span><p>{place.grape}</p></div>
               </div>
               <div className="vineyard-location-photo"><img src={place.image} alt={place.imageAlt} loading="lazy" /></div>
             </div>

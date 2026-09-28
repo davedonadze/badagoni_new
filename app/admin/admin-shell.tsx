@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { LayoutDashboard, Wine, Tags, ListTree, FileText, Newspaper } from "lucide-react";
+import { LayoutDashboard, Wine, Tags, ListTree, FileText, Newspaper, Languages } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -27,6 +27,7 @@ const NAV_ITEMS = [
   { href: "/admin/menu", label: "Menu", icon: ListTree },
   { href: "/admin/pages", label: "Pages", icon: FileText },
   { href: "/admin/news", label: "News", icon: Newspaper },
+  { href: "/admin/translations", label: "Translations", icon: Languages },
 ];
 
 export function AdminShell({ children }: { children: React.ReactNode }) {

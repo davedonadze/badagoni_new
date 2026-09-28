@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import { getPageContent } from "@/lib/pages/service";
 import { LEGALS_SLUG, LEGALS_DEFAULT, type LegalsContent } from "@/lib/pages/legals";
 import { getLocale, localize } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 import { LegalsTabs } from "./legals-tabs";
 
 export const metadata: Metadata = {
@@ -11,9 +12,10 @@ export const metadata: Metadata = {
 };
 
 export default async function LegalsPage() {
-  const [content, locale] = await Promise.all([
+  const [content, locale, t] = await Promise.all([
     getPageContent<LegalsContent>(LEGALS_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { heading, terms, privacy } = content ?? LEGALS_DEFAULT;
 
@@ -23,8 +25,8 @@ export default async function LegalsPage() {
       <h1>{localize(heading.title, locale)}</h1>
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
-    <Suspense fallback={<p className="legal-loading" role="status">Loading legal information…</p>}>
-      <LegalsTabs terms={terms} privacy={privacy} locale={locale} />
+    <Suspense fallback={<p className="legal-loading" role="status">{localize(t["legals.loading"], locale)}</p>}>
+      <LegalsTabs terms={terms} privacy={privacy} locale={locale} t={t} />
     </Suspense>
   </main>;
 }

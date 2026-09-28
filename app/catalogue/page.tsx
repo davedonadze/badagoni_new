@@ -7,6 +7,7 @@ import { listCategories } from "@/lib/categories/service";
 import { getPageContent } from "@/lib/pages/service";
 import { CATALOGUE_SLUG, CATALOGUE_DEFAULT, type CatalogueContent } from "@/lib/pages/catalogue";
 import { getLocale, localize } from "@/lib/i18n";
+import { getUiStrings } from "@/lib/ui-strings/service";
 
 export const metadata: Metadata = { title: "Wine catalogue", description: "Find your expression of Georgia. Explore Badagoni red, white, rosé, qvevri and sparkling wines." };
 
@@ -18,11 +19,12 @@ function CatalogueTitle({ text }: { text: string }) {
 }
 
 export default async function Catalogue() {
-  const [wines, categories, content, locale] = await Promise.all([
+  const [wines, categories, content, locale, t] = await Promise.all([
     listWines(),
     listCategories(),
     getPageContent<CatalogueContent>(CATALOGUE_SLUG),
     getLocale(),
+    getUiStrings(),
   ]);
   const { eyebrow, tagline, title, body } = content ?? CATALOGUE_DEFAULT;
 
@@ -32,6 +34,6 @@ export default async function Catalogue() {
       <h1><CatalogueTitle text={localize(title, locale)} /></h1>
       <p><BreakableText text={localize(body, locale)} /></p>
     </div>
-    <section className="catalog-section" aria-label="Wine catalogue"><WineCollection wines={wines} categories={categories} locale={locale} /></section>
+    <section className="catalog-section" aria-label="Wine catalogue"><WineCollection wines={wines} categories={categories} locale={locale} t={t} /></section>
   </main>;
 }

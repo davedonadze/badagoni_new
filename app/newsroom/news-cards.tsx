@@ -10,8 +10,9 @@ import { formatNewsDate } from "@/lib/news/format";
 import { BannerMedia } from "../banner-media";
 import { BreakableParagraphs } from "../breakable-paragraphs";
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
+import type { Localized } from "@/db/schema";
 
-export function NewsCards({ stories, locale }: { stories: NewsArticle[]; locale: Locale }) {
+export function NewsCards({ stories, locale, t }: { stories: NewsArticle[]; locale: Locale; t: Record<string, Localized> }) {
   const [expanded, setExpanded] = useState("");
   const expandedIndex = stories.findIndex((story) => story.slug === expanded);
 
@@ -50,7 +51,7 @@ export function NewsCards({ stories, locale }: { stories: NewsArticle[]; locale:
             <div className="news-meta"><span>{localize(story.category, locale)}</span><time dateTime={story.date}>{formatNewsDate(story.date)}</time></div>
             <h3 className="news-card-detail-title">{title}</h3>
             <div className="news-card-copy"><BreakableParagraphs text={localize(story.body, locale)} /></div>
-            <Link href={localizeHref(`/newsroom/${story.slug}`, locale)} className="underlined-link">Read full story <ArrowUpRight size={17} aria-hidden="true" /></Link>
+            <Link href={localizeHref(`/newsroom/${story.slug}`, locale)} className="underlined-link">{localize(t["cta.readFullStory"], locale)} <ArrowUpRight size={17} aria-hidden="true" /></Link>
           </div>
         </AccordionPrimitive.Content>
       </AccordionItem>;
