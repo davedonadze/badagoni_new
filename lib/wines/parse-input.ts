@@ -1,5 +1,5 @@
 import type { WineInput } from "./service";
-import type { Localized } from "@/db/schema";
+import type { Localized, WineSpec, WineAward } from "@/db/schema";
 
 function parseCategories(value: unknown): string[] {
   if (Array.isArray(value)) return value.map(String).map(v => v.trim()).filter(Boolean);
@@ -29,6 +29,32 @@ function nullableLocalized(value: unknown): Localized | null {
   return localized.en || localized.ka ? localized : null;
 }
 
+function parseSpecs(value: unknown): WineSpec[] | null {
+  if (!Array.isArray(value)) return null;
+  const specs = value
+    .map((entry): WineSpec => {
+      const record = (entry && typeof entry === "object" ? entry : {}) as Record<string, unknown>;
+      return { label: parseLocalized(record.label), value: parseLocalized(record.value) };
+    })
+    .filter(spec => (spec.label.en || spec.label.ka) && (spec.value.en || spec.value.ka));
+  return specs.length ? specs : null;
+}
+
+function parseAwards(value: unknown): WineAward[] | null {
+  if (!Array.isArray(value)) return null;
+  const awards = value
+    .map((entry): WineAward => {
+      const record = (entry && typeof entry === "object" ? entry : {}) as Record<string, unknown>;
+      return {
+        image: typeof record.image === "string" ? record.image.trim() : "",
+        name: parseLocalized(record.name),
+        year: typeof record.year === "string" ? record.year.trim() : "",
+      };
+    })
+    .filter(award => award.image && (award.name.en || award.name.ka) && award.year);
+  return awards.length ? awards : null;
+}
+
 export function parseWineInput(body: Record<string, unknown>): WineInput {
   const category = typeof body.category === "string" ? body.category.trim() : "";
   return {
@@ -41,5 +67,7 @@ export function parseWineInput(body: Record<string, unknown>): WineInput {
     grapes: nullableLocalized(body.grapes),
     alcohol: nullableString(body.alcohol),
     description: nullableLocalized(body.description),
+    specs: parseSpecs(body.specs),
+    awards: parseAwards(body.awards),
   };
 }

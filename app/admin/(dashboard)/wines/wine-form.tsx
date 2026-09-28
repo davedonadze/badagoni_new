@@ -1,17 +1,26 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../bilingual-field";
 import { ImagePicker } from "../../image-picker";
-import type { Wine } from "@/lib/wines/service";
+import type { Wine, WineSpec, WineAward } from "@/lib/wines/service";
 import type { Category } from "@/lib/categories/service";
 import type { Localized } from "@/db/schema";
 
 const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
+
+function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
+  const target = index + direction;
+  if (target < 0 || target >= items.length) return items;
+  const next = [...items];
+  [next[index], next[target]] = [next[target], next[index]];
+  return next;
+}
 
 type WineFormProps =
   | { mode: "create"; categories: Category[] }
@@ -41,6 +50,8 @@ export function WineForm(props: WineFormProps) {
   const [grapes, setGrapes] = useState<Localized>(initial?.grapes ?? EMPTY_LOCALIZED);
   const [alcohol, setAlcohol] = useState(initial?.alcohol ?? "");
   const [description, setDescription] = useState<Localized>(initial?.description ?? EMPTY_LOCALIZED);
+  const [specs, setSpecs] = useState<WineSpec[]>(initial?.specs ?? []);
+  const [awards, setAwards] = useState<WineAward[]>(initial?.awards ?? []);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -50,6 +61,32 @@ export function WineForm(props: WineFormProps) {
     const timeout = setTimeout(() => setSaved(false), 2000);
     return () => clearTimeout(timeout);
   }, [saved]);
+
+  function addSpec() {
+    setSpecs(current => [...current, { label: EMPTY_LOCALIZED, value: EMPTY_LOCALIZED }]);
+  }
+  function updateSpec(index: number, patch: Partial<WineSpec>) {
+    setSpecs(current => current.map((spec, i) => i === index ? { ...spec, ...patch } : spec));
+  }
+  function removeSpec(index: number) {
+    setSpecs(current => current.filter((_, i) => i !== index));
+  }
+  function moveSpec(index: number, direction: -1 | 1) {
+    setSpecs(current => moveItem(current, index, direction));
+  }
+
+  function addAward() {
+    setAwards(current => [...current, { image: "", name: EMPTY_LOCALIZED, year: "" }]);
+  }
+  function updateAward(index: number, patch: Partial<WineAward>) {
+    setAwards(current => current.map((award, i) => i === index ? { ...award, ...patch } : award));
+  }
+  function removeAward(index: number) {
+    setAwards(current => current.filter((_, i) => i !== index));
+  }
+  function moveAward(index: number, direction: -1 | 1) {
+    setAwards(current => moveItem(current, index, direction));
+  }
 
   function handleNameChange(value: Localized) {
     setName(value);
@@ -78,6 +115,8 @@ export function WineForm(props: WineFormProps) {
       grapes: grapes.en.trim() || grapes.ka.trim() ? grapes : null,
       alcohol: alcohol.trim() || null,
       description: description.en.trim() || description.ka.trim() ? description : null,
+      specs: specs.filter(spec => (spec.label.en.trim() || spec.label.ka.trim()) && (spec.value.en.trim() || spec.value.ka.trim())),
+      awards: awards.filter(award => award.image.trim() && (award.name.en.trim() || award.name.ka.trim()) && award.year.trim()),
     };
 
     try {
@@ -165,6 +204,46 @@ export function WineForm(props: WineFormProps) {
         </div>
 
         <BilingualField id="wine-description" label="Description" value={description} onChange={setDescription} multiline />
+
+        <div className="grid gap-3">
+          <Label>Additional specs</Label>
+          <p className="text-sm text-muted-foreground">Shown below Origin, Grape variety, and Alcohol on the wine detail panel — e.g. Ageing, Vintage, Serving temperature.</p>
+          {specs.map((spec, i) => <div key={i} className="flex flex-col gap-4 rounded-[10px] border p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">Spec {i + 1}</span>
+              <div className="flex items-center gap-1">
+                <Button type="button" variant="ghost" size="icon" disabled={i === 0} onClick={() => moveSpec(i, -1)} aria-label="Move spec up"><ChevronUp className="size-4" /></Button>
+                <Button type="button" variant="ghost" size="icon" disabled={i === specs.length - 1} onClick={() => moveSpec(i, 1)} aria-label="Move spec down"><ChevronDown className="size-4" /></Button>
+                <Button type="button" variant="ghost" size="icon" onClick={() => removeSpec(i)} aria-label="Remove spec"><Trash2 className="size-4 text-destructive" /></Button>
+              </div>
+            </div>
+            <BilingualField id={`wine-spec-${i}-label`} label="Label" hint="e.g. Ageing" value={spec.label} onChange={label => updateSpec(i, { label })} />
+            <BilingualField id={`wine-spec-${i}-value`} label="Value" hint="e.g. 12 months in French oak" value={spec.value} onChange={value => updateSpec(i, { value })} />
+          </div>)}
+          <Button type="button" variant="outline" size="sm" className="self-start" onClick={addSpec}><Plus className="size-4" />Add spec</Button>
+        </div>
+
+        <div className="grid gap-3">
+          <Label>Awards</Label>
+          <p className="text-sm text-muted-foreground">Medals and awards shown in the "Awards" panel on the wine's detail page.</p>
+          {awards.map((award, i) => <div key={i} className="flex flex-col gap-4 rounded-[10px] border p-4">
+            <div className="flex items-center justify-between">
+              <span className="text-sm font-medium">Award {i + 1}</span>
+              <div className="flex items-center gap-1">
+                <Button type="button" variant="ghost" size="icon" disabled={i === 0} onClick={() => moveAward(i, -1)} aria-label="Move award up"><ChevronUp className="size-4" /></Button>
+                <Button type="button" variant="ghost" size="icon" disabled={i === awards.length - 1} onClick={() => moveAward(i, 1)} aria-label="Move award down"><ChevronDown className="size-4" /></Button>
+                <Button type="button" variant="ghost" size="icon" onClick={() => removeAward(i)} aria-label="Remove award"><Trash2 className="size-4 text-destructive" /></Button>
+              </div>
+            </div>
+            <ImagePicker id={`wine-award-${i}-image`} label="Award logo" value={award.image} onChange={image => updateAward(i, { image })} recommendedResolution="240×240px, square" />
+            <BilingualField id={`wine-award-${i}-name`} label="Award title" hint="e.g. Decanter World Wine Awards — Platinum" value={award.name} onChange={name => updateAward(i, { name })} />
+            <div className="grid gap-1.5">
+              <Label htmlFor={`wine-award-${i}-year`}>Year</Label>
+              <Input id={`wine-award-${i}-year`} value={award.year} onChange={e => updateAward(i, { year: e.target.value })} />
+            </div>
+          </div>)}
+          <Button type="button" variant="outline" size="sm" className="self-start" onClick={addAward}><Plus className="size-4" />Add award</Button>
+        </div>
 
         {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
       </CardContent>

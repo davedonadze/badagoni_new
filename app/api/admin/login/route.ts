@@ -1,5 +1,5 @@
 import { cookies } from "next/headers";
-import { ADMIN_SESSION_COOKIE, sessionTokenForConfiguredPassword, verifyPassword } from "@/lib/admin/auth";
+import { ADMIN_SESSION_COOKIE, createSession, verifyPassword } from "@/lib/admin/auth";
 
 export const dynamic = "force-dynamic";
 
@@ -24,7 +24,7 @@ export async function POST(request: Request) {
     return Response.json({ error: "Incorrect password." }, { status: 401 });
   }
 
-  const token = await sessionTokenForConfiguredPassword();
+  const token = await createSession();
   const store = await cookies();
   store.set(ADMIN_SESSION_COOKIE, token, {
     httpOnly: true,

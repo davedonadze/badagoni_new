@@ -2,9 +2,35 @@
 
 import { useEffect, useRef, type ReactNode } from "react";
 
-const wineryAlt = "Badagoni winery in Zemo Khodasheni, with its illuminated sign and glass facade at dusk";
+type SceneImage = {
+  src: string;
+  alt: string;
+  // Known only for the fixed default photo below - an admin-replaced
+  // image's real dimensions aren't tracked, so this stays optional and
+  // is simply left off the <img> when absent (same as other
+  // admin-uploaded images across the site).
+  width?: number;
+  height?: number;
+  title: string;
+  caption: string;
+};
 
-export function WineryScrollScene({ intro, children }: { intro: ReactNode; children: ReactNode }) {
+const wineryImage: SceneImage = {
+  src: "/images/winery.jpg",
+  alt: "Badagoni winery in Zemo Khodasheni, with its illuminated sign and glass facade at dusk",
+  width: 2560,
+  height: 1595,
+  title: "Badagoni winery",
+  caption: "Zemo Khodasheni / Kakheti, Georgia",
+};
+
+export function WineryScrollScene({ intro, children, image = wineryImage, imageOverlay, className = "" }: {
+  intro: ReactNode;
+  children?: ReactNode;
+  image?: SceneImage;
+  imageOverlay?: ReactNode;
+  className?: string;
+}) {
   const sceneRef = useRef<HTMLDivElement>(null);
   const windowRef = useRef<HTMLElement>(null);
 
@@ -53,18 +79,21 @@ export function WineryScrollScene({ intro, children }: { intro: ReactNode; child
     };
   }, []);
 
-  return <div className="story-winery-sequence" ref={sceneRef}>
+  return <div className={`story-winery-sequence ${className}`} ref={sceneRef}>
     <div className="story-winery-content">
       <div className="story-winery-overlay">{intro}</div>
-      <figure className="story-winery-window" ref={windowRef} role="img" aria-label={wineryAlt}>
-        <img className="story-winery-static-photo" src="/images/winery.jpg" alt="" width={2560} height={1595} loading="lazy" />
-        <figcaption><span>Badagoni winery</span><span>Zemo Khodasheni / Kakheti, Georgia</span></figcaption>
-      </figure>
-      <div className="story-winery-overlay">{children}</div>
+      <div className="story-winery-frame">
+        <figure className="story-winery-window" ref={windowRef} role="img" aria-label={image.alt}>
+          <img className="story-winery-static-photo" src={image.src} alt="" width={image.width} height={image.height} loading="lazy" />
+          <figcaption><span>{image.title}</span><span>{image.caption}</span></figcaption>
+        </figure>
+        {imageOverlay}
+      </div>
+      {children && <div className="story-winery-overlay">{children}</div>}
     </div>
     <div className="story-winery-track" aria-hidden="true">
       <div className="story-winery-stage">
-        <div className="story-winery-parallax"><img src="/images/winery.jpg" alt="" width={2560} height={1595} loading="lazy" /></div>
+        <div className="story-winery-parallax"><img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" /></div>
       </div>
     </div>
   </div>;

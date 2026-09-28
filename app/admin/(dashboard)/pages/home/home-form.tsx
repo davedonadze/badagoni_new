@@ -107,7 +107,6 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>Collection section</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-collection-heading" label="Heading" value={collection.heading} onChange={v => setCollection({ ...collection, heading: v })} />
-        <BilingualField id="home-collection-subtitle" label="Subtitle" value={collection.subtitle} onChange={v => setCollection({ ...collection, subtitle: v })} />
         <p className="text-xs text-muted-foreground">The wines shown here come from the featured wine list — manage them in Wines.</p>
       </CardContent>
     </Card>

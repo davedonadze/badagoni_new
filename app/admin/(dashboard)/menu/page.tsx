@@ -10,7 +10,9 @@ import { DeleteMenuItemButton } from "./delete-menu-item-button";
 const LOCATION_LABELS: Record<MenuLocation, string> = {
   header_primary: "Header — primary",
   header_secondary: "Header — secondary",
-  footer: "Footer",
+  footer_primary: "Footer — column 1",
+  footer_secondary: "Footer — column 2",
+  footer_social: "Footer — social",
 };
 
 export default async function AdminMenuPage() {

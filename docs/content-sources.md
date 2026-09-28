@@ -103,3 +103,12 @@ Added 15 September 2026 at `/story#winery`, between the founding story and the q
 The authentic exterior photograph, https://badagoni.com/wp-content/uploads/2025/11/IMG_4332-Copy-scaled.jpg, is published on that official winery page. It was downloaded, visually inspected, and copied unchanged to `public/images/winery.jpg` (2560 × 1595). The original photograph and signage remain unmodified; the current layout crops the image with CSS to fill its frame. No explicit public reuse license or separate photographer credit was found on the source page. No image was generated or retouched.
 
 The user's subsequent revision places The Craft second and The Winery third. Winery copy now shares The Perspective's two-column layout. The photograph follows the text, spans the page width, and uses the same 620/480/390 px responsive heights as the vineyards cover. The neighboring text sections pass over the pinned photograph in either scroll direction, with subtle reversible parallax. Reduced-motion settings show a static image in the same frame. The Perspective remains section four.
+
+## Georgian wine page
+
+Added 28 September 2026 at `/georgian-wine`, linked from the footer's first link column. Two tabbed chapters, matching a reference build's real page content:
+
+- **Badagoni figure**: a bronze figure discovered in 1958 at an ancient pagan sanctuary in Melaani, Kakheti (10th–9th centuries BC), associated by researchers with an ancient Georgian deity connected with wine, fertility, and viticulture. The photograph is a 1,280 × 2,474 px Wikimedia Commons thumbnail (`public/images/badagoni-figure-melaani.jpg`), photographer 三猎, licensed CC BY-SA 4.0 (https://creativecommons.org/licenses/by-sa/4.0/), source https://commons.wikimedia.org/wiki/File:%E6%A2%85%E6%8B%89%E9%98%BF%E5%B0%BC%E9%9D%92%E9%93%9C%E7%94%B7%E5%AD%90%E5%83%8F.jpg. Downloaded without recompression or editing; the page crops it for display through CSS only. Attribution and license links are shown on the page itself via a small info button on the photo.
+- **Qvevri tradition**: reuses the existing authentic `public/images/cellar.webp` photograph (the Alaverdi Monastery cellar, already documented above) — no new photography for this chapter, no photo credit needed.
+
+Both chapters, the heading, and the photo credit are editable from `/admin/pages/georgian-wine` (heading, per-chapter text and photo, and an optional photo credit shown only when filled in).

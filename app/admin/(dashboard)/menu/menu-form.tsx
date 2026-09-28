@@ -11,7 +11,9 @@ import type { MenuItem, MenuLocation } from "@/lib/menu/service";
 const LOCATION_OPTIONS: { value: MenuLocation; label: string }[] = [
   { value: "header_primary", label: "Header — primary" },
   { value: "header_secondary", label: "Header — secondary" },
-  { value: "footer", label: "Footer" },
+  { value: "footer_primary", label: "Footer — column 1" },
+  { value: "footer_secondary", label: "Footer — column 2" },
+  { value: "footer_social", label: "Footer — social" },
 ];
 
 type MenuFormProps =

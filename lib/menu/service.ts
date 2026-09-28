@@ -2,7 +2,7 @@ import { asc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
 import { menuItems, type Localized } from "@/db/schema";
 
-export type MenuLocation = "header_primary" | "header_secondary" | "footer";
+export type MenuLocation = "header_primary" | "header_secondary" | "footer_primary" | "footer_secondary" | "footer_social";
 
 export type MenuItem = {
   id: number;

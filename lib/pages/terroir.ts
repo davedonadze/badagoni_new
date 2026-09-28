@@ -9,7 +9,7 @@ export type TerroirContent = {
   cover: { image: string; caption: Localized };
   intro: { eyebrow: Localized; heading: Localized; body: Localized };
   listHeading: { label: Localized; subtitle: Localized };
-  places: [VineyardPlaceContent, VineyardPlaceContent, VineyardPlaceContent, VineyardPlaceContent];
+  places: VineyardPlaceContent[];
   closing: { image: string; eyebrow: Localized; heading: Localized };
 };
 
@@ -17,8 +17,10 @@ function en(value: string): Localized {
   return { en: value, ka: "" };
 }
 
-// The terroir page's original hardcoded copy. Place ids, alt text, and the
-// closing link text stay fixed in app/terroir/page.tsx.
+// The terroir page's original hardcoded copy. The closing link text stays
+// fixed in app/terroir/page.tsx; each place's id and image alt text are
+// derived there from its own name rather than being fixed, since an admin
+// can add more places beyond these four.
 export const TERROIR_DEFAULT: TerroirContent = {
   heading: {
     eyebrow: en("Our vineyards / Kakheti, Georgia"),
