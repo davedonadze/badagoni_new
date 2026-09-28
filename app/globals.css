@@ -438,21 +438,25 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .enologists-closing h2 {font-size:clamp(54px,6vw,94px);line-height:1;margin-top:28px}
 .enologists-closing .underlined-link {margin-bottom:4px}
 
-/* Legals: a tabbed pair of documents (Terms, Privacy), each a plain
-   numbered list of heading+body sections. */
-.legals-heading {padding-bottom:50px}
-.legals-tabs {margin:0 var(--gutter) 110px}
+/* Legals: a tabbed pair of documents (Terms, Privacy). Each document is a
+   two-column row (title/meta, then dividered sections) matching the
+   enologist-row/world-row pattern used elsewhere on the site. */
+.legals-heading {padding-bottom:38px}
+.legals-heading h1 {text-transform:none;letter-spacing:-.02em}
+.legals-tabs {margin:0 var(--gutter) 90px;padding-top:22px;border-top:1px solid var(--border)}
 .legals-tab-list {display:flex;gap:28px;height:auto;padding:0 0 18px;border-radius:0;border-bottom:1px solid var(--border);background:none}
 .legals-tab {flex:none;height:auto;padding:0;border:0;background:none;box-shadow:none;font-family:var(--sans);font-size:14px;color:#9c9c96;gap:8px}
 .legals-tab span {font-size:12px}
-.legals-tab[data-state=active] {color:var(--foreground);background:none}
-.legal-document {max-width:760px;margin:50px auto 0}
-.legal-document-heading {margin-bottom:45px}
-.legal-document-heading h2 {font-family:var(--serif);font-size:clamp(38px,4.5vw,58px);line-height:1;margin:14px 0}
+.legals-tab[data-state=active] {color:var(--foreground);background:none;text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:6px}
+.legal-document {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.65fr);align-items:start;gap:var(--enologist-gap,clamp(24px,3vw,48px))}
+.legal-document-heading {min-width:0}
+.legal-document-heading h2 {font-family:var(--serif);font-weight:400;font-size:clamp(33px,3.4vw,54px);letter-spacing:-.025em;line-height:1.08;margin:14px 0 18px}
 .legal-revision {font-size:12px;color:#8a8a86;line-height:1.6}
-.legal-copy {display:flex;flex-direction:column;gap:36px}
-.legal-copy h3 {font-family:var(--sans);font-size:16px;font-weight:600;margin-bottom:10px}
-.legal-copy p {font-size:15px;line-height:1.7;color:#454541}
+.legal-copy {min-width:0;display:flex;flex-direction:column}
+.legal-copy section {padding:28px 0;border-top:1px solid var(--border)}
+.legal-copy section:first-child {padding-top:0;border-top:0}
+.legal-copy h3 {font-family:var(--serif);font-weight:400;font-size:24px;margin-bottom:10px}
+.legal-copy p {font-size:15px;line-height:1.7;color:#5a5a55;max-width:620px}
 .legal-copy p+p {margin-top:14px}
 
 /* Newsroom: one lead story, an open grid, and spacious article pages. */
@@ -745,9 +749,11 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .enologists-closing {align-items:flex-start;flex-direction:column;gap:25px;margin-bottom:70px;padding-top:35px}
   .enologists-closing h2 {font-size:58px;margin-top:24px}
   .legals-heading {padding-bottom:30px}
+  .legals-tabs {padding-top:18px;margin-bottom:50px}
   .legals-tab-list {gap:18px}
-  .legal-document {margin-top:35px}
-  .legal-document-heading {margin-bottom:32px}
+  .legal-document {grid-template-columns:minmax(0,1fr);gap:0}
+  .legal-document-heading {margin-bottom:28px}
+  .legal-document-heading h2 {font-size:clamp(32px,8vw,48px)}
   .generic-cards-grid {grid-template-columns:minmax(0,1fr);gap:26px}
   .generic-media-cover {height:50vh}
   .newsroom-heading h1 {font-size:clamp(57px,14vw,105px)}
