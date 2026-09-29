@@ -197,6 +197,13 @@
       "when": 1790603936532,
       "tag": "0027_seed_saperavi_reserve_specs",
       "breakpoints": true
+    },
+    {
+      "idx": 28,
+      "version": "6",
+      "when": 1790677687756,
+      "tag": "0028_add_story_winery_image",
+      "breakpoints": true
     }
   ]
 }

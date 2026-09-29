@@ -7,7 +7,7 @@ export type StoryContent = {
   cover: { image: string; caption: Localized };
   intro: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
   qvevri: { image: string; eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
-  winery: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
+  winery: { image: string; eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
   science: { eyebrow: Localized; heading: Localized; paragraph: Localized };
 };
 
@@ -42,6 +42,7 @@ export const STORY_DEFAULT: StoryContent = {
     paragraph2: en("Our qvevri wines are made in clay vessels buried in the earth, connecting each harvest to generations of Georgian craft."),
   },
   winery: {
+    image: "/images/winery.jpg",
     eyebrow: en("03 / The winery"),
     heading: en("Inside\nour winery."),
     paragraph1: en("In Zemo Khodasheni, Kakheti, our winery brings Georgian grapes together with Italian winemaking technology. Fermentation takes place in stainless steel tanks, while selected wines mature in American, French and Slovenian oak."),

@@ -111,7 +111,8 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
         <CardTitle>03 — The winery</CardTitle>
       </CardHeader>
       <CardContent className="flex flex-col gap-6">
-        <p className="text-sm text-muted-foreground -mt-2">This section's scroll animation and layout are fixed in code — only the text below is editable.</p>
+        <p className="text-sm text-muted-foreground -mt-2">This section's scroll animation and layout are fixed in code — only the fields below are editable.</p>
+        <ImagePicker id="story-winery-image" label="Photo" value={winery.image} onChange={v => setWinery({ ...winery, image: v })} recommendedResolution="2560×1600px or larger, landscape" />
         <BilingualField id="story-winery-eyebrow" label="Eyebrow" value={winery.eyebrow} onChange={v => setWinery({ ...winery, eyebrow: v })} />
         <BilingualField id="story-winery-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={winery.heading} onChange={v => setWinery({ ...winery, heading: v })} />
         <BilingualField id="story-winery-p1" label="Paragraph 1" multiline value={winery.paragraph1} onChange={v => setWinery({ ...winery, paragraph1: v })} />
