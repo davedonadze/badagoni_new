@@ -174,7 +174,10 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .wine-card:hover .bottle-stage img,.wine-card:focus-visible .bottle-stage img {transform:translateY(-8px)}
 .wine-card:hover .wine-discover,.wine-card:focus-visible .wine-discover {opacity:1}
 .wine-card-title {display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:17px 22px 0}
-.wine-card-title h3 {font-size:29px;line-height:1.1}
+/* Reserves room for a second line (in em, so it tracks font-size at every
+   breakpoint) so a longer name wrapping to two lines doesn't throw off
+   the row's alignment against cards whose name fits on one. */
+.wine-card-title h3 {font-size:29px;line-height:1.1;min-height:calc(1.1em * 2)}
 .wine-card-title>span {font-size:12px;color:#62625f}
 .wine-card-note {font-size:12px;line-height:1.55;margin:8px 22px 0;color:#656560}
 .collection-more {display:flex;justify-content:center;padding:28px 20px 90px}
