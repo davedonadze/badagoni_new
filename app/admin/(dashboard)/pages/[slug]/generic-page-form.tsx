@@ -182,6 +182,14 @@ export function GenericPageForm({ slug, content: initial }: { slug: string; cont
         </div>
       </CardContent>
     </Card>
+
+    <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
+      <p className="text-sm text-muted-foreground">Live at /{slug} once saved. Add it to the site navigation from Menu.</p>
+      <div className="flex items-center gap-3">
+        {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : "Save changes"}</Button>
+      </div>
+    </div>
   </form>;
 }
 

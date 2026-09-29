@@ -155,5 +155,13 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
         <BilingualField id={`home-world-${i}-text`} label="Text" multiline value={item.text} onChange={v => updateWorldItem(i, { text: v })} />
       </CardContent>
     </Card>)}
+
+    <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
+      <p className="text-sm text-muted-foreground">Changes apply to the live homepage once saved.</p>
+      <div className="flex items-center gap-3">
+        {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : "Save changes"}</Button>
+      </div>
+    </div>
   </form>;
 }

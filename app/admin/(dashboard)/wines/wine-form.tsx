@@ -246,6 +246,11 @@ export function WineForm(props: WineFormProps) {
         </div>
 
         {error && <p className="text-sm text-destructive" role="alert">{error}</p>}
+
+        <div className="flex items-center justify-end gap-3 rounded-[10px] border bg-card px-4 py-3">
+          {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+          <Button type="submit" disabled={saving}>{saving ? "Saving…" : props.mode === "create" ? "Add wine" : "Save changes"}</Button>
+        </div>
       </CardContent>
     </form>
   </Card>;
