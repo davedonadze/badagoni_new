@@ -51,7 +51,7 @@ export default async function Story() {
       </div>
     </section>
 
-    <WinerySection eyebrow={localize(winery.eyebrow, locale)} heading={localize(winery.heading, locale)} paragraph1={localize(winery.paragraph1, locale)} paragraph2={localize(winery.paragraph2, locale)}>
+    <WinerySection image={winery.image || "/images/winery.jpg"} eyebrow={localize(winery.eyebrow, locale)} heading={localize(winery.heading, locale)} paragraph1={localize(winery.paragraph1, locale)} paragraph2={localize(winery.paragraph2, locale)}>
       <section className="science-section">
         <p className="eyebrow">{localize(science.eyebrow, locale)}</p>
         <h2><BreakableText text={localize(science.heading, locale)} /></h2>
