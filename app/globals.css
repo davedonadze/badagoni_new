@@ -179,7 +179,11 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
    the row's alignment against cards whose name fits on one. */
 .wine-card-title h3 {font-size:29px;line-height:1.1;min-height:calc(1.1em * 2)}
 .wine-card-title>span {font-size:12px;color:#62625f}
-.wine-card-note {font-size:12px;line-height:1.55;margin:8px 22px 0;color:#656560}
+/* Same reasoning as .wine-card-title h3: the grape/style note can also wrap
+   to a different number of lines between cards in the same row (only shown
+   in .catalog-grid; the featured grid hides it), so it needs its own
+   reserved height to keep everything below the title lined up too. */
+.wine-card-note {font-size:12px;line-height:1.55;margin:8px 22px 0;color:#656560;min-height:calc(1.55em * 2)}
 .collection-more {display:flex;justify-content:center;padding:28px 20px 90px}
 .collection-more .underlined-link {font-size:14px}
 .editorial-section {margin:80px var(--gutter) 0}
