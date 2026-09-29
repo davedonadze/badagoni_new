@@ -71,5 +71,13 @@ export function CatalogueForm({ content: initial }: { content: CatalogueContent 
         <BilingualField id="catalogue-body" label="Body" hint="Use a new line for a manual line break." multiline rows={2} value={body} onChange={setBody} />
       </CardContent>
     </Card>
+
+    <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
+      <p className="text-sm text-muted-foreground">Changes apply to the live /catalogue page once saved. The wine grid itself is managed from Wines.</p>
+      <div className="flex items-center gap-3">
+        {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : "Save changes"}</Button>
+      </div>
+    </div>
   </form>;
 }

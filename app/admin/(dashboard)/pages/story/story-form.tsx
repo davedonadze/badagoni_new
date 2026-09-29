@@ -127,5 +127,13 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
         <BilingualField id="story-science-p" label="Paragraph" multiline value={science.paragraph} onChange={v => setScience({ ...science, paragraph: v })} />
       </CardContent>
     </Card>
+
+    <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
+      <p className="text-sm text-muted-foreground">Changes apply to the live /story page once saved.</p>
+      <div className="flex items-center gap-3">
+        {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : "Save changes"}</Button>
+      </div>
+    </div>
   </form>;
 }

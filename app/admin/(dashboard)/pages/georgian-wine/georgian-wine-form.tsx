@@ -129,5 +129,13 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
       <CardHeader><CardTitle>02 — Qvevri tradition</CardTitle></CardHeader>
       <CardContent><ChapterFields idPrefix="qvevri" chapter={qvevri} onChange={setQvevri} /></CardContent>
     </Card>
+
+    <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
+      <p className="text-sm text-muted-foreground">Live at /georgian-wine once saved.</p>
+      <div className="flex items-center gap-3">
+        {saved && <span className="text-sm text-muted-foreground">Saved</span>}
+        <Button type="submit" disabled={saving}>{saving ? "Saving…" : "Save changes"}</Button>
+      </div>
+    </div>
   </form>;
 }
