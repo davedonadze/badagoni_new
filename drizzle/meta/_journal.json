@@ -204,6 +204,20 @@
       "when": 1790677687756,
       "tag": "0028_add_story_winery_image",
       "breakpoints": true
+    },
+    {
+      "idx": 29,
+      "version": "6",
+      "when": 1790750779344,
+      "tag": "0029_add_wine_tasting_notes",
+      "breakpoints": true
+    },
+    {
+      "idx": 30,
+      "version": "6",
+      "when": 1790750779345,
+      "tag": "0030_seed_saperavi_reserve_tasting_notes",
+      "breakpoints": true
     }
   ]
 }

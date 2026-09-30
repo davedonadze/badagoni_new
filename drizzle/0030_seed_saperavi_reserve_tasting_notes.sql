@@ -1,0 +1,1 @@
+UPDATE `wines` SET `tasting_notes` = '{"colour": {"en": "Ripe cornel red.", "ka": ""}, "aromas": {"en": "Blackberry and ripe fruit, with oak and a touch of black pepper.", "ka": ""}, "palate": {"en": "Black plum and berries, with hints of vanilla, velvety tannins, and a long finish.", "ka": ""}}' WHERE `slug` = 'saperavi-reserve' AND `tasting_notes` IS NULL;

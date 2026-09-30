@@ -8,11 +8,12 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../bilingual-field";
 import { ImagePicker } from "../../image-picker";
-import type { Wine, WineSpec, WineAward } from "@/lib/wines/service";
+import type { Wine, WineSpec, WineAward, WineTastingNotes } from "@/lib/wines/service";
 import type { Category } from "@/lib/categories/service";
 import type { Localized } from "@/db/schema";
 
 const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
+const EMPTY_TASTING_NOTES: WineTastingNotes = { colour: EMPTY_LOCALIZED, aromas: EMPTY_LOCALIZED, palate: EMPTY_LOCALIZED };
 
 function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
   const target = index + direction;
@@ -52,6 +53,7 @@ export function WineForm(props: WineFormProps) {
   const [description, setDescription] = useState<Localized>(initial?.description ?? EMPTY_LOCALIZED);
   const [specs, setSpecs] = useState<WineSpec[]>(initial?.specs ?? []);
   const [awards, setAwards] = useState<WineAward[]>(initial?.awards ?? []);
+  const [tastingNotes, setTastingNotes] = useState<WineTastingNotes>(initial?.tastingNotes ?? EMPTY_TASTING_NOTES);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -117,6 +119,7 @@ export function WineForm(props: WineFormProps) {
       description: description.en.trim() || description.ka.trim() ? description : null,
       specs: specs.filter(spec => (spec.label.en.trim() || spec.label.ka.trim()) && (spec.value.en.trim() || spec.value.ka.trim())),
       awards: awards.filter(award => award.image.trim() && (award.name.en.trim() || award.name.ka.trim()) && award.year.trim()),
+      tastingNotes: Object.values(tastingNotes).some(field => field.en.trim() || field.ka.trim()) ? tastingNotes : null,
     };
 
     try {
@@ -243,6 +246,14 @@ export function WineForm(props: WineFormProps) {
             </div>
           </div>)}
           <Button type="button" variant="outline" size="sm" className="self-start" onClick={addAward}><Plus className="size-4" />Add award</Button>
+        </div>
+
+        <div className="grid gap-3">
+          <Label>Tasting notes</Label>
+          <p className="text-sm text-muted-foreground">Shown in the "In the glass." section on the wine's detail page. Leave blank to hide the section.</p>
+          <BilingualField id="wine-tasting-colour" label="Colour" value={tastingNotes.colour} onChange={colour => setTastingNotes({ ...tastingNotes, colour })} />
+          <BilingualField id="wine-tasting-aromas" label="Aromas" value={tastingNotes.aromas} onChange={aromas => setTastingNotes({ ...tastingNotes, aromas })} />
+          <BilingualField id="wine-tasting-palate" label="Palate" value={tastingNotes.palate} onChange={palate => setTastingNotes({ ...tastingNotes, palate })} />
         </div>
 
         {error && <p className="text-sm text-destructive" role="alert">{error}</p>}

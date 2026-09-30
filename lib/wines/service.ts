@@ -1,8 +1,8 @@
 import { asc, eq } from "drizzle-orm";
 import { getDb } from "@/db";
-import { wines, type Localized, type WineSpec, type WineAward } from "@/db/schema";
+import { wines, type Localized, type WineSpec, type WineAward, type WineTastingNotes } from "@/db/schema";
 
-export type { WineSpec, WineAward };
+export type { WineSpec, WineAward, WineTastingNotes };
 
 export type Wine = {
   slug: string;
@@ -16,6 +16,7 @@ export type Wine = {
   description: Localized | null;
   specs: WineSpec[] | null;
   awards: WineAward[] | null;
+  tastingNotes: WineTastingNotes | null;
 };
 
 export type WineInput = {
@@ -30,6 +31,7 @@ export type WineInput = {
   description?: Localized | null;
   specs?: WineSpec[] | null;
   awards?: WineAward[] | null;
+  tastingNotes?: WineTastingNotes | null;
 };
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -74,6 +76,7 @@ export async function createWine(input: WineInput): Promise<Wine> {
       description: input.description ?? null,
       specs: input.specs ?? null,
       awards: input.awards ?? null,
+      tastingNotes: input.tastingNotes ?? null,
     })
     .returning();
   return wine;
@@ -95,6 +98,7 @@ export async function updateWine(slug: string, input: WineInput): Promise<Wine |
       description: input.description ?? null,
       specs: input.specs ?? null,
       awards: input.awards ?? null,
+      tastingNotes: input.tastingNotes ?? null,
       updatedAt: new Date().toISOString(),
     })
     .where(eq(wines.slug, slug))
