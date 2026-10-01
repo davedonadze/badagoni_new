@@ -9,6 +9,7 @@ import { getPageContent } from "@/lib/pages/service";
 import { STORY_SLUG, STORY_DEFAULT, type StoryContent } from "@/lib/pages/story";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { titleStyleCss } from "@/lib/title-style";
 
 export const metadata: Metadata = { title: "Our story", description: "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine." };
 
@@ -23,7 +24,7 @@ export default async function Story() {
   return <main>
     <div className="editorial-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1><BreakableText text={localize(heading.title, locale)} /></h1>
+      <h1 style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
       <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </div>
 

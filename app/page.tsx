@@ -13,6 +13,7 @@ import { getPageContent } from "@/lib/pages/service";
 import { HOME_SLUG, HOME_DEFAULT, type HomeContent } from "@/lib/pages/home";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { titleStyleCss } from "@/lib/title-style";
 
 // Fixed metadata for the world section rows that stays in code (their hrefs,
 // link-text key, and display number) - only title/subtitle/text are DB-driven.
@@ -45,7 +46,7 @@ export default async function Home() {
     />
 
     <ScrollReveal><section className="opening-note" aria-label="About Badagoni">
-      <h1 className="opening-signature">{localize(opening.heading, locale)}</h1>
+      <h1 className="opening-signature" style={titleStyleCss(opening.headingStyle)}>{localize(opening.heading, locale)}</h1>
       <p className="opening-copy">{localize(opening.body, locale)}</p>
     </section></ScrollReveal>
 

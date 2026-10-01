@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { AlaverdiContent } from "@/lib/pages/alaverdi";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
 
@@ -71,6 +73,7 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="alaverdi-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="alaverdi-title" label="Title" hint="Use a new line for a manual line break." multiline rows={2} value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="alaverdi-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="alaverdi-subtitle" label="Subtitle" multiline value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>

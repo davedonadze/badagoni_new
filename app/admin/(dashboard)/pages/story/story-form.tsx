@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { StoryContent } from "@/lib/pages/story";
 import { STORY_SLUG } from "@/lib/pages/story";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 export function StoryForm({ content: initial }: { content: StoryContent }) {
   const router = useRouter();
@@ -73,6 +75,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="story-heading-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="story-heading-title" label="Title" hint="Use a new line for a manual line break." multiline rows={2} value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="story-heading-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="story-heading-subtitle" label="Subtitle" multiline rows={2} value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>

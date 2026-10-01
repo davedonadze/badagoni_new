@@ -1,9 +1,9 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const ALAVERDI_SLUG = "alaverdi-monastery-cellar";
 
 export type AlaverdiContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   cover: { image: string; captionLine1: Localized; captionLine2: Localized };
   story: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized; subheading: Localized; paragraph3: Localized };
   // Full-bleed photo with the heading and a fixed link to the Georgian

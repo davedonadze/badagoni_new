@@ -1,9 +1,9 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const STORY_SLUG = "story";
 
 export type StoryContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   cover: { image: string; caption: Localized };
   intro: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
   qvevri: { image: string; eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };

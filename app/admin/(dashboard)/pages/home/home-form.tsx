@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { HomeContent } from "@/lib/pages/home";
 import { HOME_SLUG } from "@/lib/pages/home";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const CARD_TITLES = ["Editorial card 1 — The craft", "Editorial card 2 — The place", "Editorial card 3 — The expression"];
 const WORLD_TITLES = ["World row 1 — Our place", "World row 2 — Our craft", "World row 3 — Our perspective"];
@@ -99,6 +101,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>Opening note</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-opening-heading" label="Heading" value={opening.heading} onChange={v => setOpening({ ...opening, heading: v })} />
+        <TitleStyleField id="home-opening-heading" value={opening.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setOpening({ ...opening, headingStyle: v })} defaultPx={36} />
         <BilingualField id="home-opening-body" label="Body" multiline value={opening.body} onChange={v => setOpening({ ...opening, body: v })} />
       </CardContent>
     </Card>

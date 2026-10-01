@@ -1,4 +1,4 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const HOME_SLUG = "home";
 
@@ -7,7 +7,7 @@ export type WorldItemContent = { title: Localized; subtitle: Localized; text: Lo
 
 export type HomeContent = {
   hero: { image: string; caption: Localized };
-  opening: { heading: Localized; body: Localized };
+  opening: { heading: Localized; headingStyle?: TitleStyle; body: Localized };
   collection: { heading: Localized };
   editorialCards: [EditorialCardContent, EditorialCardContent, EditorialCardContent];
   originInterlude: { line: Localized; caption: Localized };

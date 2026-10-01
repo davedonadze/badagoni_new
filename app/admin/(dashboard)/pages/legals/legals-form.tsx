@@ -7,8 +7,10 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
+import { TitleStyleField } from "../../../title-style-field";
 import { createSection, type TextSection } from "@/lib/pages/generic";
 import type { LegalDocument, LegalsContent } from "@/lib/pages/legals";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
   const target = index + direction;
@@ -63,6 +65,7 @@ export function LegalsForm({ content: initial }: { content: LegalsContent }) {
   const router = useRouter();
   const [eyebrow, setEyebrow] = useState(initial.heading.eyebrow);
   const [title, setTitle] = useState(initial.heading.title);
+  const [titleStyle, setTitleStyle] = useState(initial.heading.titleStyle ?? DEFAULT_TITLE_STYLE);
   const [subtitle, setSubtitle] = useState(initial.heading.subtitle);
   const [terms, setTerms] = useState(initial.terms);
   const [privacy, setPrivacy] = useState(initial.privacy);
@@ -82,7 +85,7 @@ export function LegalsForm({ content: initial }: { content: LegalsContent }) {
     setError(null);
     setSaved(false);
 
-    const content: LegalsContent = { heading: { eyebrow, title, subtitle }, terms, privacy };
+    const content: LegalsContent = { heading: { eyebrow, title, titleStyle, subtitle }, terms, privacy };
 
     try {
       const response = await fetch("/api/admin/pages/legals", {
@@ -121,6 +124,7 @@ export function LegalsForm({ content: initial }: { content: LegalsContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="legals-eyebrow" label="Eyebrow" value={eyebrow} onChange={setEyebrow} />
         <BilingualField id="legals-title" label="Title" value={title} onChange={setTitle} />
+        <TitleStyleField id="legals-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} />
         <BilingualField id="legals-subtitle" label="Subtitle" multiline value={subtitle} onChange={setSubtitle} />
       </CardContent>
     </Card>

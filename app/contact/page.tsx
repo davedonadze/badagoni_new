@@ -5,6 +5,7 @@ import { getPageContent } from "@/lib/pages/service";
 import { CONTACT_SLUG, CONTACT_DEFAULT, type ContactContent } from "@/lib/pages/contact";
 import { getLocale, localize } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { titleStyleCss } from "@/lib/title-style";
 
 const METHOD_HREF = [
   (value: string) => `mailto:${value}`,
@@ -32,7 +33,7 @@ export default async function Contact() {
   return <main className="contact-page">
     <header className="editorial-heading contact-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1>{localize(heading.title, locale)}</h1>
+      <h1 style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
       <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </header>
 

@@ -6,6 +6,14 @@ import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 // field that uses it. {en, ka}
 export type Localized = { en: string; ka: string };
 
+// An admin override for a page's main title: an exact font size in px (null
+// = use the page's own responsive default) and a forced letter case (null =
+// use the page's own default, which for most editorial titles is already
+// uppercase via CSS). Lives next to the title field it styles. Georgian
+// script has no letter-case distinction, so `case` only visibly affects the
+// English side.
+export type TitleStyle = { fontSize: number | null; case: "upper" | "lower" | null };
+
 // An admin-added extra fact on a wine's detail panel (beyond the fixed
 // Origin/Grape variety/Alcohol rows) - e.g. "Ageing", "Vintage", "Serving
 // temperature". Both label and value are bilingual.

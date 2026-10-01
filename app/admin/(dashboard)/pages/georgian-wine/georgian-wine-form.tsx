@@ -7,8 +7,10 @@ import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { Localized } from "@/db/schema";
 import type { GeorgianWineContent, HeritageChapter, HeritagePhotoCredit } from "@/lib/pages/georgian-wine";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const EMPTY: Localized = { en: "", ka: "" };
 const EMPTY_CREDIT: HeritagePhotoCredit = { label: EMPTY, url: "", license: EMPTY, licenseUrl: "" };
@@ -58,6 +60,7 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
   const router = useRouter();
   const [eyebrow, setEyebrow] = useState(initial.heading.eyebrow);
   const [title, setTitle] = useState(initial.heading.title);
+  const [titleStyle, setTitleStyle] = useState(initial.heading.titleStyle ?? DEFAULT_TITLE_STYLE);
   const [subtitle, setSubtitle] = useState(initial.heading.subtitle);
   const [figure, setFigure] = useState(initial.figure);
   const [qvevri, setQvevri] = useState(initial.qvevri);
@@ -77,7 +80,7 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
     setError(null);
     setSaved(false);
 
-    const content: GeorgianWineContent = { heading: { eyebrow, title, subtitle }, figure, qvevri };
+    const content: GeorgianWineContent = { heading: { eyebrow, title, titleStyle, subtitle }, figure, qvevri };
 
     try {
       const response = await fetch("/api/admin/pages/georgian-wine", {
@@ -116,6 +119,7 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="georgian-wine-eyebrow" label="Eyebrow" value={eyebrow} onChange={setEyebrow} />
         <BilingualField id="georgian-wine-title" label="Title" value={title} onChange={setTitle} />
+        <TitleStyleField id="georgian-wine-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} />
         <BilingualField id="georgian-wine-subtitle" label="Subtitle" multiline value={subtitle} onChange={setSubtitle} />
       </CardContent>
     </Card>

@@ -1,11 +1,11 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const ENOLOGISTS_SLUG = "enologists";
 
 export type EnologistContent = { firstName: Localized; lastName: Localized; role: Localized; image: string; description: Localized };
 
 export type EnologistsContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   people: [EnologistContent, EnologistContent, EnologistContent, EnologistContent];
   closing: { eyebrow: Localized; heading: Localized };
 };

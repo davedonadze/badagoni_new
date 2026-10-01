@@ -6,6 +6,7 @@ import { getPageContent } from "@/lib/pages/service";
 import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/lib/pages/enologists";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { titleStyleCss } from "@/lib/title-style";
 
 // Fixed ids for anchor navigation (#donato-lanati, etc.) that stay in code -
 // only the people's names/role/image/description are DB-driven.
@@ -41,7 +42,7 @@ export default async function Enologists() {
   return <main className="enologists-page">
     <div className="editorial-heading enologists-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1>{localize(heading.title, locale)}</h1>
+      <h1 style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
 

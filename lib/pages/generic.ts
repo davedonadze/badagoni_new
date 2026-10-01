@@ -1,4 +1,4 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
 
@@ -43,6 +43,7 @@ export function createProfileItem(): ProfileItem {
 // dedicated content types and editors.
 export type GenericPageContent = {
   title: Localized;
+  titleStyle?: TitleStyle;
   eyebrow: Localized;
   subtitle: Localized;
   cover: { image: string; caption: Localized } | null;

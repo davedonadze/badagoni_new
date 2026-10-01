@@ -1,11 +1,11 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const TERROIR_SLUG = "terroir";
 
 export type VineyardPlaceContent = { name: Localized; grape: Localized; text: Localized; image: string };
 
 export type TerroirContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   cover: { image: string; caption: Localized };
   intro: { eyebrow: Localized; heading: Localized; body: Localized };
   listHeading: { label: Localized; subtitle: Localized };

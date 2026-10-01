@@ -1,4 +1,4 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const GEORGIAN_WINE_SLUG = "georgian-wine";
 
@@ -24,7 +24,7 @@ export type HeritageChapter = {
 };
 
 export type GeorgianWineContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   figure: HeritageChapter;
   qvevri: HeritageChapter;
 };

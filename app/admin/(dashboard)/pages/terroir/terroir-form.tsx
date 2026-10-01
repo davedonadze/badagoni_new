@@ -6,8 +6,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { TerroirContent } from "@/lib/pages/terroir";
 import type { Localized } from "@/db/schema";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
@@ -96,6 +98,7 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="terroir-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="terroir-title" label="Title" hint="Use a new line for a manual line break." multiline rows={2} value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="terroir-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="terroir-subtitle" label="Subtitle" hint="Use a new line for a manual line break." multiline rows={2} value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>

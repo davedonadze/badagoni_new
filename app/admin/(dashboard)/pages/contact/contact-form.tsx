@@ -6,7 +6,9 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
+import { TitleStyleField } from "../../../title-style-field";
 import type { ContactContent } from "@/lib/pages/contact";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const METHOD_TITLES = ["Email", "Phone"];
 const LOCATION_TITLES = ["Location 1 — Headquarters", "Location 2 — Winery"];
@@ -87,6 +89,7 @@ export function ContactForm({ content: initial }: { content: ContactContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="contact-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="contact-title" label="Title" value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="contact-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="contact-subtitle" label="Subtitle" hint="Use a new line for a manual line break." multiline rows={2} value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>
