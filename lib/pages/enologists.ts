@@ -7,7 +7,7 @@ export type EnologistContent = { firstName: Localized; lastName: Localized; role
 export type EnologistsContent = {
   heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   people: [EnologistContent, EnologistContent, EnologistContent, EnologistContent];
-  closing: { eyebrow: Localized; heading: Localized };
+  closing: { eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle };
 };
 
 function en(value: string): Localized {

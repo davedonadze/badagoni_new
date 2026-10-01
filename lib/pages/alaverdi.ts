@@ -5,11 +5,11 @@ export const ALAVERDI_SLUG = "alaverdi-monastery-cellar";
 export type AlaverdiContent = {
   heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   cover: { image: string; captionLine1: Localized; captionLine2: Localized };
-  story: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized; subheading: Localized; paragraph3: Localized };
+  story: { eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; paragraph1: Localized; paragraph2: Localized; subheading: Localized; paragraph3: Localized };
   // Full-bleed photo with the heading and a fixed link to the Georgian
   // wine page's qvevri chapter overlaid on top - see app/story/winery-scroll-scene.tsx.
-  qvevri: { image: string; heading: Localized };
-  closing: { eyebrow: Localized; heading: Localized; body: Localized };
+  qvevri: { image: string; heading: Localized; headingStyle?: TitleStyle };
+  closing: { eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; body: Localized };
 };
 
 function en(value: string): Localized {

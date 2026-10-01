@@ -93,6 +93,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="story-intro-eyebrow" label="Eyebrow" value={intro.eyebrow} onChange={v => setIntro({ ...intro, eyebrow: v })} />
         <BilingualField id="story-intro-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={intro.heading} onChange={v => setIntro({ ...intro, heading: v })} />
+        <TitleStyleField id="story-intro-heading" value={intro.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setIntro({ ...intro, headingStyle: v })} defaultPx={100} />
         <BilingualField id="story-intro-p1" label="Paragraph 1" multiline value={intro.paragraph1} onChange={v => setIntro({ ...intro, paragraph1: v })} />
         <BilingualField id="story-intro-p2" label="Paragraph 2" multiline value={intro.paragraph2} onChange={v => setIntro({ ...intro, paragraph2: v })} />
       </CardContent>
@@ -104,6 +105,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
         <ImagePicker id="story-qvevri-image" label="Photo or video" value={qvevri.image} onChange={v => setQvevri({ ...qvevri, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
         <BilingualField id="story-qvevri-eyebrow" label="Eyebrow" value={qvevri.eyebrow} onChange={v => setQvevri({ ...qvevri, eyebrow: v })} />
         <BilingualField id="story-qvevri-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={qvevri.heading} onChange={v => setQvevri({ ...qvevri, heading: v })} />
+        <TitleStyleField id="story-qvevri-heading" value={qvevri.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setQvevri({ ...qvevri, headingStyle: v })} defaultPx={108} />
         <BilingualField id="story-qvevri-p1" label="Paragraph 1" multiline value={qvevri.paragraph1} onChange={v => setQvevri({ ...qvevri, paragraph1: v })} />
         <BilingualField id="story-qvevri-p2" label="Paragraph 2" multiline value={qvevri.paragraph2} onChange={v => setQvevri({ ...qvevri, paragraph2: v })} />
       </CardContent>
@@ -118,6 +120,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
         <ImagePicker id="story-winery-image" label="Photo" value={winery.image} onChange={v => setWinery({ ...winery, image: v })} recommendedResolution="2560×1600px or larger, landscape" />
         <BilingualField id="story-winery-eyebrow" label="Eyebrow" value={winery.eyebrow} onChange={v => setWinery({ ...winery, eyebrow: v })} />
         <BilingualField id="story-winery-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={winery.heading} onChange={v => setWinery({ ...winery, heading: v })} />
+        <TitleStyleField id="story-winery-heading" value={winery.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setWinery({ ...winery, headingStyle: v })} defaultPx={122} />
         <BilingualField id="story-winery-p1" label="Paragraph 1" multiline value={winery.paragraph1} onChange={v => setWinery({ ...winery, paragraph1: v })} />
         <BilingualField id="story-winery-p2" label="Paragraph 2" multiline value={winery.paragraph2} onChange={v => setWinery({ ...winery, paragraph2: v })} />
       </CardContent>
@@ -128,6 +131,7 @@ export function StoryForm({ content: initial }: { content: StoryContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="story-science-eyebrow" label="Eyebrow" value={science.eyebrow} onChange={v => setScience({ ...science, eyebrow: v })} />
         <BilingualField id="story-science-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={science.heading} onChange={v => setScience({ ...science, heading: v })} />
+        <TitleStyleField id="story-science-heading" value={science.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setScience({ ...science, headingStyle: v })} defaultPx={122} />
         <BilingualField id="story-science-p" label="Paragraph" multiline value={science.paragraph} onChange={v => setScience({ ...science, paragraph: v })} />
       </CardContent>
     </Card>

@@ -44,7 +44,7 @@ export default async function Terroir() {
 
     <section className="terroir-intro">
       <p className="eyebrow">{localize(intro.eyebrow, locale)}</p>
-      <h2><BreakableText text={localize(intro.heading, locale)} /></h2>
+      <h2 style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
       <p>{localize(intro.body, locale)}</p>
     </section>
 
@@ -60,7 +60,7 @@ export default async function Terroir() {
       <ParallaxMedia className="terroir-closing-media" scale={1.5} media={<BannerMedia src={closing.image} alt="Vineyards stretching toward the Caucasus Mountains" loading="lazy" />} />
       <div>
         <p className="eyebrow">{localize(closing.eyebrow, locale)}</p>
-        <h2><BreakableText text={localize(closing.heading, locale)} /></h2>
+        <h2 style={titleStyleCss(closing.headingStyle)}><BreakableText text={localize(closing.heading, locale)} /></h2>
         <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.discoverCollection"], locale)} <ArrowUpRight size={16} /></Link>
       </div>
     </section>

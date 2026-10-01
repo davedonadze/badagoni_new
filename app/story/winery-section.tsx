@@ -1,11 +1,12 @@
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { WineryScrollScene } from "./winery-scroll-scene";
 import { BreakableText } from "../breakable-text";
 
-export function WinerySection({ image, eyebrow, heading, paragraph1, paragraph2, children }: {
+export function WinerySection({ image, eyebrow, heading, headingStyle, paragraph1, paragraph2, children }: {
   image: string;
   eyebrow: string;
   heading: string;
+  headingStyle?: CSSProperties;
   paragraph1: string;
   paragraph2: string;
   children: ReactNode;
@@ -15,7 +16,7 @@ export function WinerySection({ image, eyebrow, heading, paragraph1, paragraph2,
     intro={
     <section className="science-section story-winery-copy" id="winery" aria-labelledby="winery-title">
       <p className="eyebrow">{eyebrow}</p>
-      <h2 id="winery-title"><BreakableText text={heading} /></h2>
+      <h2 id="winery-title" style={headingStyle}><BreakableText text={heading} /></h2>
       <div>
         <p>{paragraph1}</p>
         <p>{paragraph2}</p>

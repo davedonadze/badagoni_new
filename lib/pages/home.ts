@@ -3,16 +3,16 @@ import type { Localized, TitleStyle } from "@/db/schema";
 export const HOME_SLUG = "home";
 
 export type EditorialCardContent = { label: Localized; title: Localized; image: string; description: Localized };
-export type WorldItemContent = { title: Localized; subtitle: Localized; text: Localized };
+export type WorldItemContent = { title: Localized; subtitle: Localized; subtitleStyle?: TitleStyle; text: Localized };
 
 export type HomeContent = {
   hero: { image: string; caption: Localized };
   opening: { heading: Localized; headingStyle?: TitleStyle; body: Localized };
-  collection: { heading: Localized };
+  collection: { heading: Localized; headingStyle?: TitleStyle };
   editorialCards: [EditorialCardContent, EditorialCardContent, EditorialCardContent];
   originInterlude: { line: Localized; caption: Localized };
-  manifesto: { image: string; overlayCaption: Localized; eyebrow: Localized; heading: Localized; body: Localized };
-  worldSection: { heading: Localized; items: [WorldItemContent, WorldItemContent, WorldItemContent] };
+  manifesto: { image: string; overlayCaption: Localized; eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; body: Localized };
+  worldSection: { heading: Localized; headingStyle?: TitleStyle; items: [WorldItemContent, WorldItemContent, WorldItemContent] };
 };
 
 function en(value: string): Localized {

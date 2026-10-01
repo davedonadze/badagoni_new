@@ -33,7 +33,7 @@ export default async function Story() {
     <section className="story-intro">
       <p className="eyebrow">{localize(intro.eyebrow, locale)}</p>
       <div>
-        <h2><BreakableText text={localize(intro.heading, locale)} /></h2>
+        <h2 style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
         <div className="story-paragraphs">
           <p>{localize(intro.paragraph1, locale)}</p>
           <p>{localize(intro.paragraph2, locale)}</p>
@@ -45,17 +45,17 @@ export default async function Story() {
       <ParallaxMedia className="qvevri-photo" scale={1.5} media={<BannerMedia src={qvevri.image} alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} />
       <div className="story-qvevri-copy">
         <p className="eyebrow">{localize(qvevri.eyebrow, locale)}</p>
-        <h2><BreakableText text={localize(qvevri.heading, locale)} /></h2>
+        <h2 style={titleStyleCss(qvevri.headingStyle)}><BreakableText text={localize(qvevri.heading, locale)} /></h2>
         <p>{localize(qvevri.paragraph1, locale)}</p>
         <p>{localize(qvevri.paragraph2, locale)}</p>
         <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreTheWines"], locale)} <ArrowUpRight size={16} /></Link>
       </div>
     </section>
 
-    <WinerySection image={winery.image || "/images/winery.jpg"} eyebrow={localize(winery.eyebrow, locale)} heading={localize(winery.heading, locale)} paragraph1={localize(winery.paragraph1, locale)} paragraph2={localize(winery.paragraph2, locale)}>
+    <WinerySection image={winery.image || "/images/winery.jpg"} eyebrow={localize(winery.eyebrow, locale)} heading={localize(winery.heading, locale)} headingStyle={titleStyleCss(winery.headingStyle)} paragraph1={localize(winery.paragraph1, locale)} paragraph2={localize(winery.paragraph2, locale)}>
       <section className="science-section">
         <p className="eyebrow">{localize(science.eyebrow, locale)}</p>
-        <h2><BreakableText text={localize(science.heading, locale)} /></h2>
+        <h2 style={titleStyleCss(science.headingStyle)}><BreakableText text={localize(science.heading, locale)} /></h2>
         <div>
           <p>{localize(science.paragraph, locale)}</p>
           <Link href={localizeHref("/terroir", locale)} className="underlined-link">{localize(t["cta.ourVineyards"], locale)} <ArrowUpRight size={16} /></Link>

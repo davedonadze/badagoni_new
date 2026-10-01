@@ -5,10 +5,10 @@ export const STORY_SLUG = "story";
 export type StoryContent = {
   heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   cover: { image: string; caption: Localized };
-  intro: { eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
-  qvevri: { image: string; eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
-  winery: { image: string; eyebrow: Localized; heading: Localized; paragraph1: Localized; paragraph2: Localized };
-  science: { eyebrow: Localized; heading: Localized; paragraph: Localized };
+  intro: { eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; paragraph1: Localized; paragraph2: Localized };
+  qvevri: { image: string; eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; paragraph1: Localized; paragraph2: Localized };
+  winery: { image: string; eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; paragraph1: Localized; paragraph2: Localized };
+  science: { eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; paragraph: Localized };
 };
 
 function en(value: string): Localized {

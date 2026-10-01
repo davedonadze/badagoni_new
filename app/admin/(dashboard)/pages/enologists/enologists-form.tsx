@@ -100,6 +100,7 @@ export function EnologistsForm({ content: initial }: { content: EnologistsConten
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="enologists-closing-eyebrow" label="Eyebrow" value={closing.eyebrow} onChange={v => setClosing({ ...closing, eyebrow: v })} />
         <BilingualField id="enologists-closing-heading" label="Heading" value={closing.heading} onChange={v => setClosing({ ...closing, heading: v })} />
+        <TitleStyleField id="enologists-closing-heading" value={closing.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setClosing({ ...closing, headingStyle: v })} defaultPx={94} />
       </CardContent>
     </Card>
 

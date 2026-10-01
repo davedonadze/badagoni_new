@@ -53,7 +53,7 @@ export default async function Enologists() {
     <EnologistList enologists={enologists} />
 
     <section className="enologists-closing" aria-labelledby="enologists-closing-title">
-      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title">{localize(closing.heading, locale)}</h2></div>
+      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title" style={titleStyleCss(closing.headingStyle)}>{localize(closing.heading, locale)}</h2></div>
       <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={18} /></Link>
     </section>
   </main>;
