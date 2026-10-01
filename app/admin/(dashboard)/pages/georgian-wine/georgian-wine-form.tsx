@@ -29,6 +29,7 @@ function ChapterFields({ idPrefix, chapter, onChange }: { idPrefix: string; chap
     <BilingualField id={`${idPrefix}-tab-label`} label="Tab label" value={chapter.tabLabel} onChange={tabLabel => onChange({ ...chapter, tabLabel })} />
     <BilingualField id={`${idPrefix}-eyebrow`} label="Eyebrow" value={chapter.eyebrow} onChange={eyebrow => onChange({ ...chapter, eyebrow })} />
     <BilingualField id={`${idPrefix}-title`} label="Title" value={chapter.title} onChange={title => onChange({ ...chapter, title })} />
+    <TitleStyleField id={`${idPrefix}-title`} value={chapter.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={titleStyle => onChange({ ...chapter, titleStyle })} defaultPx={122} />
     <BilingualField id={`${idPrefix}-body`} label="Text" hint="Leave a blank line between paragraphs." multiline rows={5} value={chapter.body} onChange={body => onChange({ ...chapter, body })} />
 
     <ImagePicker id={`${idPrefix}-image`} label="Photo" value={chapter.image} onChange={image => onChange({ ...chapter, image })} recommendedResolution="1600px or larger on the long edge" />

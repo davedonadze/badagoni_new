@@ -9,6 +9,7 @@ import { BreakableParagraphs } from "../breakable-paragraphs";
 import { localize, type Locale } from "@/lib/i18n";
 import type { HeritageChapter } from "@/lib/pages/georgian-wine";
 import type { Localized } from "@/db/schema";
+import { titleStyleCss } from "@/lib/title-style";
 
 type UiStrings = Record<string, Localized>;
 
@@ -33,7 +34,7 @@ function ChapterPanel({ number, chapter, sceneClassName, locale, t }: { number: 
   }} imageOverlay={chapter.credit ? <PhotoCredit credit={chapter.credit} locale={locale} t={t} /> : undefined} intro={
     <section className="science-section story-winery-copy heritage-copy" aria-labelledby={titleId}>
       <p className="eyebrow">{localize(chapter.eyebrow, locale)}</p>
-      <h2 id={titleId}>{localize(chapter.title, locale)}</h2>
+      <h2 id={titleId} style={titleStyleCss(chapter.titleStyle)}>{localize(chapter.title, locale)}</h2>
       <div><BreakableParagraphs text={localize(chapter.body, locale)} /></div>
     </section>
   } />;

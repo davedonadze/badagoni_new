@@ -47,7 +47,7 @@ export default async function Contact() {
     <section className="contact-grid contact-details" aria-label="Our locations">
       {locations.map((location, i) => <section key={i} aria-labelledby={`contact-location-${i}-title`}>
         <p className="eyebrow">{localize(t[LOCATION_META[i].eyebrowKey], locale)}</p>
-        <h2 id={`contact-location-${i}-title`}>{localize(location.title, locale)}</h2>
+        <h2 id={`contact-location-${i}-title`} style={titleStyleCss(location.titleStyle)}>{localize(location.title, locale)}</h2>
         <address><BreakableText text={localize(location.address, locale)} /></address>
         <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{localize(t[LOCATION_META[i].linkKey], locale)} <ArrowUpRight size={17} aria-hidden="true" /></a>
       </section>)}

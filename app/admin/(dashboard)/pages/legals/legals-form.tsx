@@ -35,6 +35,7 @@ function LegalDocumentFields({ idPrefix, document, onChange }: { idPrefix: strin
   return <div className="flex flex-col gap-6">
     <BilingualField id={`${idPrefix}-eyebrow`} label="Eyebrow" value={document.eyebrow} onChange={eyebrow => onChange({ ...document, eyebrow })} />
     <BilingualField id={`${idPrefix}-title`} label="Title" value={document.title} onChange={title => onChange({ ...document, title })} />
+    <TitleStyleField id={`${idPrefix}-title`} value={document.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={titleStyle => onChange({ ...document, titleStyle })} defaultPx={82} />
     <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
       <BilingualField id={`${idPrefix}-revision-label`} label="Revision label" hint="e.g. Draft for review" value={document.revisionLabel} onChange={revisionLabel => onChange({ ...document, revisionLabel })} />
       <div className="grid gap-1.5">

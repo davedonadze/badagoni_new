@@ -13,6 +13,7 @@ export const LEGALS_SLUG = "legals";
 export type LegalDocument = {
   eyebrow: Localized;
   title: Localized;
+  titleStyle?: TitleStyle;
   revisionLabel: Localized;
   revisionDate: string;
   sections: TextSection[];

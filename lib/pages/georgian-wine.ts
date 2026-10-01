@@ -16,6 +16,7 @@ export type HeritageChapter = {
   tabLabel: Localized;
   eyebrow: Localized;
   title: Localized;
+  titleStyle?: TitleStyle;
   body: Localized;
   image: string;
   imageTitle: Localized;
