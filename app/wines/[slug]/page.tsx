@@ -39,6 +39,13 @@ export default async function WinePage({ params }: WinePageProps) {
     ...(wine.specs ?? []).map(spec => ({ label: localize(spec.label, locale), value: localize(spec.value, locale) })),
   ].filter((fact): fact is { label: string; value: string } => !!fact);
 
+  const tastingNotes = wine.tastingNotes;
+  const tastingRows = tastingNotes ? [
+    tastingNotes.colour && { label: localize(t["wine.colour"], locale), value: localize(tastingNotes.colour, locale) },
+    tastingNotes.aromas && { label: localize(t["wine.aromas"], locale), value: localize(tastingNotes.aromas, locale) },
+    tastingNotes.palate && { label: localize(t["wine.palate"], locale), value: localize(tastingNotes.palate, locale) },
+  ].filter((row): row is { label: string; value: string } => !!row && !!row.value) : [];
+
   return <main className="reserve-page">
     <nav className="reserve-breadcrumb" aria-label="Breadcrumb"><Link href={localizeHref("/catalogue", locale)}>{localize(t["wine.catalogueBreadcrumb"], locale)}</Link><span aria-hidden="true">/</span><span aria-current="page">{name}</span></nav>
 
@@ -57,6 +64,11 @@ export default async function WinePage({ params }: WinePageProps) {
         </div>
       </div>
     </section>
+
+    {tastingRows.length > 0 && <section className="reserve-notes" aria-labelledby="wine-tasting-title">
+      <div><p className="eyebrow">{localize(t["wine.aboutThisWine"], locale)}</p><h2 id="wine-tasting-title">{localize(t["wine.inTheGlass"], locale)}</h2></div>
+      <dl className="reserve-tasting">{tastingRows.map(row => <div key={row.label}><dt>{row.label}</dt><dd>{row.value}</dd></div>)}</dl>
+    </section>}
 
     <section className="reserve-notes" aria-labelledby="wine-collection-title">
       <div><p className="eyebrow">{localize(t["wine.theBadagoniCollection"], locale)}</p><h2 id="wine-collection-title">{localize(t["wine.exploreMore"], locale)}</h2></div>

@@ -1,5 +1,5 @@
 import type { WineInput } from "./service";
-import type { Localized, WineSpec, WineAward } from "@/db/schema";
+import type { Localized, WineSpec, WineAward, WineTastingNotes } from "@/db/schema";
 
 function parseCategories(value: unknown): string[] {
   if (Array.isArray(value)) return value.map(String).map(v => v.trim()).filter(Boolean);
@@ -55,6 +55,16 @@ function parseAwards(value: unknown): WineAward[] | null {
   return awards.length ? awards : null;
 }
 
+function parseTastingNotes(value: unknown): WineTastingNotes | null {
+  const record = (value && typeof value === "object" ? value : {}) as Record<string, unknown>;
+  const notes: WineTastingNotes = {
+    colour: parseLocalized(record.colour),
+    aromas: parseLocalized(record.aromas),
+    palate: parseLocalized(record.palate),
+  };
+  return notes.colour.en || notes.colour.ka || notes.aromas.en || notes.aromas.ka || notes.palate.en || notes.palate.ka ? notes : null;
+}
+
 export function parseWineInput(body: Record<string, unknown>): WineInput {
   const category = typeof body.category === "string" ? body.category.trim() : "";
   return {
@@ -69,5 +79,6 @@ export function parseWineInput(body: Record<string, unknown>): WineInput {
     description: nullableLocalized(body.description),
     specs: parseSpecs(body.specs),
     awards: parseAwards(body.awards),
+    tastingNotes: parseTastingNotes(body.tastingNotes),
   };
 }

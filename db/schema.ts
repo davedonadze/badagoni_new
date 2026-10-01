@@ -16,6 +16,10 @@ export type WineSpec = { label: Localized; value: Localized };
 // aren't.
 export type WineAward = { image: string; name: Localized; year: string };
 
+// The "In the glass." tasting notes shown on a wine's detail page. All
+// three fields are bilingual; the section is hidden when this is null.
+export type WineTastingNotes = { colour: Localized; aromas: Localized; palate: Localized };
+
 // Wines shown in the catalogue and on /wines/[slug]. Managed through the
 // admin panel at /admin/wines (see app/admin/ and app/api/admin/wines/).
 export const wines = sqliteTable("wines", {
@@ -31,6 +35,7 @@ export const wines = sqliteTable("wines", {
   description: text("description", { mode: "json" }).$type<Localized | null>(),
   specs: text("specs", { mode: "json" }).$type<WineSpec[] | null>(),
   awards: text("awards", { mode: "json" }).$type<WineAward[] | null>(),
+  tastingNotes: text("tasting_notes", { mode: "json" }).$type<WineTastingNotes | null>(),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });
