@@ -56,14 +56,18 @@ export function EnologistList({ enologists }: { enologists: Enologist[] }) {
             </AccordionPrimitive.Trigger>
           </h2>
         </AccordionPrimitive.Header>
-        <AccordionPrimitive.Content className="enologist-content">
-          <div className="enologist-detail-grid">
-            <div className="enologist-biography">
-              <p className="eyebrow">{person.role}</p>
-              <p className="enologist-description">{person.description}</p>
-            </div>
-            <div className="enologist-portrait">
-              <img src={person.image} alt={`${person.firstName} ${person.lastName}`} width={index === 0 ? 1000 : 700} height={index === 0 ? 900 : 700} />
+        <AccordionPrimitive.Content forceMount className="enologist-content" aria-hidden={expanded !== person.id} inert={expanded !== person.id}>
+          <div className="enologist-reveal">
+            <div className="enologist-reveal-clip">
+              <div className="enologist-detail-grid">
+                <div className="enologist-biography">
+                  <p className="eyebrow">{person.role}</p>
+                  <p className="enologist-description">{person.description}</p>
+                </div>
+                <div className="enologist-portrait">
+                  <img src={person.image} alt={`${person.firstName} ${person.lastName}`} width={index === 0 ? 1000 : 700} height={index === 0 ? 900 : 700} />
+                </div>
+              </div>
             </div>
           </div>
         </AccordionPrimitive.Content>
