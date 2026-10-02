@@ -49,9 +49,9 @@ export default async function Newsroom() {
       </Link>
     </section>
 
-    <section id="more-from-badagoni" className="newsroom-stories" aria-labelledby="newsroom-stories-title">
+    {stories.length > 0 && <section id="more-from-badagoni" className="newsroom-stories" aria-labelledby="newsroom-stories-title">
       <div className="newsroom-list-heading"><h2 id="newsroom-stories-title" className="eyebrow">{localize(t["newsroom.moreFromBadagoni"], locale)}</h2></div>
-      <NewsCards stories={[...stories, featured]} locale={locale} t={t} />
-    </section>
+      <NewsCards stories={stories} locale={locale} t={t} />
+    </section>}
   </main>;
 }
