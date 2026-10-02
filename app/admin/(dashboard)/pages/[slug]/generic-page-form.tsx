@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import {
   createCardItem,
   createProfileItem,
@@ -20,6 +21,7 @@ import {
   type TextSection,
 } from "@/lib/pages/generic";
 import type { Localized } from "@/db/schema";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
@@ -41,6 +43,7 @@ const SECTION_LABELS: Record<PageSection["type"], string> = {
 export function GenericPageForm({ slug, content: initial }: { slug: string; content: GenericPageContent }) {
   const router = useRouter();
   const [title, setTitle] = useState(initial.title);
+  const [titleStyle, setTitleStyle] = useState(initial.titleStyle ?? DEFAULT_TITLE_STYLE);
   const [eyebrow, setEyebrow] = useState(initial.eyebrow);
   const [subtitle, setSubtitle] = useState(initial.subtitle);
   const [hasCover, setHasCover] = useState(initial.cover !== null);
@@ -89,6 +92,7 @@ export function GenericPageForm({ slug, content: initial }: { slug: string; cont
 
     const content: GenericPageContent = {
       title,
+      titleStyle,
       eyebrow,
       subtitle,
       cover: hasCover && coverImage ? { image: coverImage, caption: coverCaption } : null,
@@ -133,6 +137,7 @@ export function GenericPageForm({ slug, content: initial }: { slug: string; cont
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="page-eyebrow" label="Eyebrow" value={eyebrow} onChange={setEyebrow} />
         <BilingualField id="page-title" label="Title" value={title} onChange={setTitle} />
+        <TitleStyleField id="page-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} />
         <BilingualField id="page-subtitle" label="Subtitle" multiline value={subtitle} onChange={setSubtitle} />
       </CardContent>
     </Card>

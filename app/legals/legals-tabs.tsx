@@ -5,6 +5,7 @@ import { BreakableParagraphs } from "../breakable-paragraphs";
 import { localize, type Locale } from "@/lib/i18n";
 import type { LegalDocument } from "@/lib/pages/legals";
 import type { Localized } from "@/db/schema";
+import { titleStyleCss } from "@/lib/title-style";
 
 function formatRevisionDate(date: string): string {
   return new Intl.DateTimeFormat("en-GB", { day: "numeric", month: "long", year: "numeric", timeZone: "UTC" }).format(new Date(`${date}T12:00:00Z`));
@@ -14,7 +15,7 @@ function LegalDocumentView({ number, document, locale }: { number: string; docum
   return <article className="legal-document" aria-labelledby={`legal-title-${number}`}>
     <header className="legal-document-heading">
       <p className="eyebrow">{localize(document.eyebrow, locale)}</p>
-      <h2 id={`legal-title-${number}`}>{localize(document.title, locale)}</h2>
+      <h2 id={`legal-title-${number}`} style={titleStyleCss(document.titleStyle)}>{localize(document.title, locale)}</h2>
       <p className="legal-revision">{localize(document.revisionLabel, locale)}<br /><time dateTime={document.revisionDate}>{formatRevisionDate(document.revisionDate)}</time></p>
     </header>
     <div className="legal-copy">

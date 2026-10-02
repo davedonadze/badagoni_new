@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { AlaverdiContent } from "@/lib/pages/alaverdi";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const wideImagePreview = "flex h-20 w-36 shrink-0 items-center justify-center overflow-hidden rounded-[10px] border bg-muted/40";
 
@@ -71,6 +73,7 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="alaverdi-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="alaverdi-title" label="Title" hint="Use a new line for a manual line break." multiline rows={2} value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="alaverdi-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="alaverdi-subtitle" label="Subtitle" multiline value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>
@@ -89,6 +92,7 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="alaverdi-story-eyebrow" label="Eyebrow" value={story.eyebrow} onChange={v => setStory({ ...story, eyebrow: v })} />
         <BilingualField id="alaverdi-story-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={story.heading} onChange={v => setStory({ ...story, heading: v })} />
+        <TitleStyleField id="alaverdi-story-heading" value={story.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setStory({ ...story, headingStyle: v })} defaultPx={128} />
         <BilingualField id="alaverdi-story-p1" label="Paragraph 1" multiline value={story.paragraph1} onChange={v => setStory({ ...story, paragraph1: v })} />
         <BilingualField id="alaverdi-story-p2" label="Paragraph 2" multiline value={story.paragraph2} onChange={v => setStory({ ...story, paragraph2: v })} />
         <BilingualField id="alaverdi-story-subheading" label="Subheading" value={story.subheading} onChange={v => setStory({ ...story, subheading: v })} />
@@ -102,6 +106,7 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
         <p className="text-sm text-muted-foreground">Full-bleed photo with the heading overlaid; the link below it (to the Georgian wine page) is fixed in code.</p>
         <ImagePicker id="alaverdi-qvevri-image" label="Photo or video" value={qvevri.image} onChange={v => setQvevri({ ...qvevri, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
         <BilingualField id="alaverdi-qvevri-heading" label="Heading" value={qvevri.heading} onChange={v => setQvevri({ ...qvevri, heading: v })} />
+        <TitleStyleField id="alaverdi-qvevri-heading" value={qvevri.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setQvevri({ ...qvevri, headingStyle: v })} defaultPx={90} />
       </CardContent>
     </Card>
 
@@ -110,6 +115,7 @@ export function AlaverdiForm({ content: initial }: { content: AlaverdiContent })
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="alaverdi-closing-eyebrow" label="Eyebrow" value={closing.eyebrow} onChange={v => setClosing({ ...closing, eyebrow: v })} />
         <BilingualField id="alaverdi-closing-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={closing.heading} onChange={v => setClosing({ ...closing, heading: v })} />
+        <TitleStyleField id="alaverdi-closing-heading" value={closing.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setClosing({ ...closing, headingStyle: v })} defaultPx={98} />
         <BilingualField id="alaverdi-closing-body" label="Body" multiline value={closing.body} onChange={v => setClosing({ ...closing, body: v })} />
       </CardContent>
     </Card>

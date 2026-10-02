@@ -1,4 +1,4 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 import type { TextSection } from "./generic";
 
 export const LEGALS_SLUG = "legals";
@@ -13,13 +13,14 @@ export const LEGALS_SLUG = "legals";
 export type LegalDocument = {
   eyebrow: Localized;
   title: Localized;
+  titleStyle?: TitleStyle;
   revisionLabel: Localized;
   revisionDate: string;
   sections: TextSection[];
 };
 
 export type LegalsContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   terms: LegalDocument;
   privacy: LegalDocument;
 };

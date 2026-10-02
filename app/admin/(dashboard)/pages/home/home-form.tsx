@@ -5,8 +5,10 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { HomeContent } from "@/lib/pages/home";
 import { HOME_SLUG } from "@/lib/pages/home";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const CARD_TITLES = ["Editorial card 1 — The craft", "Editorial card 2 — The place", "Editorial card 3 — The expression"];
 const WORLD_TITLES = ["World row 1 — Our place", "World row 2 — Our craft", "World row 3 — Our perspective"];
@@ -99,6 +101,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>Opening note</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-opening-heading" label="Heading" value={opening.heading} onChange={v => setOpening({ ...opening, heading: v })} />
+        <TitleStyleField id="home-opening-heading" value={opening.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setOpening({ ...opening, headingStyle: v })} defaultPx={36} />
         <BilingualField id="home-opening-body" label="Body" multiline value={opening.body} onChange={v => setOpening({ ...opening, body: v })} />
       </CardContent>
     </Card>
@@ -107,6 +110,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>Collection section</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-collection-heading" label="Heading" value={collection.heading} onChange={v => setCollection({ ...collection, heading: v })} />
+        <TitleStyleField id="home-collection-heading" value={collection.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setCollection({ ...collection, headingStyle: v })} defaultPx={14} />
         <p className="text-xs text-muted-foreground">The wines shown here come from the featured wine list — manage them in Wines.</p>
       </CardContent>
     </Card>
@@ -136,6 +140,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
         <BilingualField id="home-manifesto-overlay" label="Overlay caption" value={manifesto.overlayCaption} onChange={v => setManifesto({ ...manifesto, overlayCaption: v })} />
         <BilingualField id="home-manifesto-eyebrow" label="Eyebrow" value={manifesto.eyebrow} onChange={v => setManifesto({ ...manifesto, eyebrow: v })} />
         <BilingualField id="home-manifesto-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={manifesto.heading} onChange={v => setManifesto({ ...manifesto, heading: v })} />
+        <TitleStyleField id="home-manifesto-heading" value={manifesto.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setManifesto({ ...manifesto, headingStyle: v })} defaultPx={90} />
         <BilingualField id="home-manifesto-body" label="Body" multiline value={manifesto.body} onChange={v => setManifesto({ ...manifesto, body: v })} />
       </CardContent>
     </Card>
@@ -144,6 +149,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>World section</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="home-world-heading" label="Heading" value={worldSection.heading} onChange={v => setWorldSection({ ...worldSection, heading: v })} />
+        <TitleStyleField id="home-world-heading" value={worldSection.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setWorldSection({ ...worldSection, headingStyle: v })} defaultPx={12} />
       </CardContent>
     </Card>
 
@@ -152,6 +158,7 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id={`home-world-${i}-title`} label="Small label" value={item.title} onChange={v => updateWorldItem(i, { title: v })} />
         <BilingualField id={`home-world-${i}-subtitle`} label="Heading" value={item.subtitle} onChange={v => updateWorldItem(i, { subtitle: v })} />
+        <TitleStyleField id={`home-world-${i}-subtitle`} value={item.subtitleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => updateWorldItem(i, { subtitleStyle: v })} defaultPx={34} />
         <BilingualField id={`home-world-${i}-text`} label="Text" multiline value={item.text} onChange={v => updateWorldItem(i, { text: v })} />
       </CardContent>
     </Card>)}

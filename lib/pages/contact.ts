@@ -1,12 +1,12 @@
-import type { Localized } from "@/db/schema";
+import type { Localized, TitleStyle } from "@/db/schema";
 
 export const CONTACT_SLUG = "contact";
 
 export type ContactMethod = { label: Localized; value: string };
-export type ContactLocation = { title: Localized; address: Localized; mapUrl: string };
+export type ContactLocation = { title: Localized; titleStyle?: TitleStyle; address: Localized; mapUrl: string };
 
 export type ContactContent = {
-  heading: { eyebrow: Localized; title: Localized; subtitle: Localized };
+  heading: { eyebrow: Localized; title: Localized; titleStyle?: TitleStyle; subtitle: Localized };
   methods: [ContactMethod, ContactMethod];
   locations: [ContactLocation, ContactLocation];
 };

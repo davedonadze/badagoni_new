@@ -5,7 +5,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
+import { TitleStyleField } from "../../../title-style-field";
 import type { EnologistsContent } from "@/lib/pages/enologists";
+import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const PERSON_TITLES = ["Person 1 — Chief enologist", "Person 2 — Chief winemaker", "Person 3", "Person 4"];
 
@@ -77,6 +79,7 @@ export function EnologistsForm({ content: initial }: { content: EnologistsConten
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="enologists-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="enologists-title" label="Title" value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
+        <TitleStyleField id="enologists-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
         <BilingualField id="enologists-subtitle" label="Subtitle" multiline value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>
@@ -97,6 +100,7 @@ export function EnologistsForm({ content: initial }: { content: EnologistsConten
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="enologists-closing-eyebrow" label="Eyebrow" value={closing.eyebrow} onChange={v => setClosing({ ...closing, eyebrow: v })} />
         <BilingualField id="enologists-closing-heading" label="Heading" value={closing.heading} onChange={v => setClosing({ ...closing, heading: v })} />
+        <TitleStyleField id="enologists-closing-heading" value={closing.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setClosing({ ...closing, headingStyle: v })} defaultPx={94} />
       </CardContent>
     </Card>
 

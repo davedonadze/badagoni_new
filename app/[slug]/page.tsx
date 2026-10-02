@@ -7,6 +7,7 @@ import { BannerMedia } from "../banner-media";
 import { BreakableParagraphs } from "../breakable-paragraphs";
 import { PageSections } from "../generic-page-sections";
 import { getLocale, localize } from "@/lib/i18n";
+import { titleStyleCss } from "@/lib/title-style";
 
 type GenericPageProps = { params: Promise<{ slug: string }> };
 
@@ -35,7 +36,7 @@ export default async function GenericPage({ params }: GenericPageProps) {
   return <main>
     <div className="editorial-heading">
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h1>{title}</h1>
+      <h1 style={titleStyleCss(content.titleStyle)}>{title}</h1>
       {subtitle && <p>{subtitle}</p>}
     </div>
 

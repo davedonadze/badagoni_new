@@ -9,6 +9,7 @@ import { getPageContent } from "@/lib/pages/service";
 import { ALAVERDI_SLUG, ALAVERDI_DEFAULT, type AlaverdiContent } from "@/lib/pages/alaverdi";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { titleStyleCss } from "@/lib/title-style";
 
 export const metadata: Metadata = {
   title: "Alaverdi Monastery Cellar",
@@ -26,7 +27,7 @@ export default async function AlaverdiMonasteryCellar() {
   return <main className="cellar-page">
     <div className="editorial-heading cellar-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1><BreakableText text={localize(heading.title, locale)} /></h1>
+      <h1 style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
 
@@ -36,7 +37,7 @@ export default async function AlaverdiMonasteryCellar() {
     </figure>
 
     <section className="cellar-story" aria-labelledby="cellar-story-title">
-      <div><p className="eyebrow">{localize(story.eyebrow, locale)}</p><h2 id="cellar-story-title"><BreakableText text={localize(story.heading, locale)} /></h2></div>
+      <div><p className="eyebrow">{localize(story.eyebrow, locale)}</p><h2 id="cellar-story-title" style={titleStyleCss(story.headingStyle)}><BreakableText text={localize(story.heading, locale)} /></h2></div>
       <div className="cellar-story-copy">
         <p>{localize(story.paragraph1, locale)}</p>
         <p>{localize(story.paragraph2, locale)}</p>
@@ -56,14 +57,14 @@ export default async function AlaverdiMonasteryCellar() {
           caption: "Kakheti / Georgia",
         }}
         imageOverlay={<div className="cellar-qvevri-copy">
-          <h2 id="cellar-qvevri-title">{localize(qvevri.heading, locale)}</h2>
+          <h2 id="cellar-qvevri-title" style={titleStyleCss(qvevri.headingStyle)}>{localize(qvevri.heading, locale)}</h2>
           <Link href={localizeHref("/georgian-wine?tab=qvevri-tradition#qvevri-tradition", locale)} className="underlined-link">{localize(t["cta.theQvevriTradition"], locale)} <ArrowUpRight size={18} /></Link>
         </div>}
       />
     </section>
 
     <section className="cellar-closing" aria-labelledby="cellar-wines-title">
-      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="cellar-wines-title"><BreakableText text={localize(closing.heading, locale)} /></h2></div>
+      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="cellar-wines-title" style={titleStyleCss(closing.headingStyle)}><BreakableText text={localize(closing.heading, locale)} /></h2></div>
       <div><p>{localize(closing.body, locale)}</p><Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={18} /></Link></div>
     </section>
   </main>;
