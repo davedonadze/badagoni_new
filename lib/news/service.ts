@@ -48,7 +48,7 @@ export function validateNewsArticleInput(input: Partial<NewsArticleInput>): stri
 
 export async function listNewsArticles(): Promise<NewsArticle[]> {
   const db = getDb();
-  return db.select().from(newsArticles).orderBy(desc(newsArticles.date), desc(newsArticles.id));
+  return db.select().from(newsArticles).orderBy(desc(newsArticles.createdAt), desc(newsArticles.id));
 }
 
 export async function getNewsArticleBySlug(slug: string): Promise<NewsArticle | undefined> {
