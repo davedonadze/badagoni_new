@@ -474,10 +474,12 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .enologist-trigger {display:block;width:100%;min-height:64px;padding:0;border:0;background:none;color:inherit;text-align:left;font-family:var(--serif);font-size:clamp(33px,3.4vw,54px);font-weight:400;letter-spacing:-.025em;line-height:1.08;transition:opacity .25s ease;overflow-wrap:anywhere}
 .enologist-trigger[data-state=open] {text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:8px}
 .enologists-list:has(.enologist-trigger:focus-visible) .enologist-trigger:not(:focus-visible) {opacity:.5}
-.enologist-content {min-width:0;padding-top:8px}
-.enologist-content[hidden] {display:none}
-.enologist-detail-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:var(--enologist-gap)}
-.enologist-content[data-state=open] .enologist-detail-grid {animation:text-arrive .35s ease both}
+.enologist-content {min-width:0;pointer-events:none}
+.enologist-content[data-state=open] {pointer-events:auto}
+.enologist-reveal {display:grid;grid-template-rows:0fr;opacity:0;visibility:hidden;transform:translateY(10px);transition:grid-template-rows .6s cubic-bezier(.22,.68,.2,1),opacity .25s ease,transform .45s ease,visibility 0s linear .6s}
+.enologist-content[data-state=open] .enologist-reveal {grid-template-rows:1fr;opacity:1;visibility:visible;transform:translateY(0);transition:grid-template-rows .6s cubic-bezier(.22,.68,.2,1),opacity .4s ease .1s,transform .5s ease,visibility 0s}
+.enologist-reveal-clip {min-height:0;overflow:hidden}
+.enologist-detail-grid {display:grid;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start;gap:var(--enologist-gap);padding-top:8px}
 .enologist-biography {min-width:0}
 .enologist-description {max-width:440px;margin-top:23px;font-size:15px;line-height:1.7;color:#565652}
 .enologist-portrait {width:100%;max-width:340px;justify-self:end;aspect-ratio:4/5;overflow:hidden;background:#f2f2f0}
