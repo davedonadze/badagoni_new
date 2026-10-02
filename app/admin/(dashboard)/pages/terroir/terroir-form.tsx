@@ -98,7 +98,7 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="terroir-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="terroir-title" label="Title" hint="Use a new line for a manual line break." multiline rows={2} value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
-        <TitleStyleField id="terroir-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
+        <TitleStyleField id="terroir-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} defaultMobilePx={50} />
         <BilingualField id="terroir-subtitle" label="Subtitle" hint="Use a new line for a manual line break." multiline rows={2} value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>
@@ -116,7 +116,7 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="terroir-intro-eyebrow" label="Eyebrow" value={intro.eyebrow} onChange={v => setIntro({ ...intro, eyebrow: v })} />
         <BilingualField id="terroir-intro-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={intro.heading} onChange={v => setIntro({ ...intro, heading: v })} />
-        <TitleStyleField id="terroir-intro-heading" value={intro.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setIntro({ ...intro, headingStyle: v })} defaultPx={108} />
+        <TitleStyleField id="terroir-intro-heading" value={intro.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setIntro({ ...intro, headingStyle: v })} defaultPx={108} defaultMobilePx={61} />
         <BilingualField id="terroir-intro-body" label="Body" multiline value={intro.body} onChange={v => setIntro({ ...intro, body: v })} />
       </CardContent>
     </Card>
@@ -153,7 +153,7 @@ export function TerroirForm({ content: initial }: { content: TerroirContent }) {
         <ImagePicker id="terroir-closing-image" label="Photo or video" value={closing.image} onChange={v => setClosing({ ...closing, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
         <BilingualField id="terroir-closing-eyebrow" label="Eyebrow" value={closing.eyebrow} onChange={v => setClosing({ ...closing, eyebrow: v })} />
         <BilingualField id="terroir-closing-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={closing.heading} onChange={v => setClosing({ ...closing, heading: v })} />
-        <TitleStyleField id="terroir-closing-heading" value={closing.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setClosing({ ...closing, headingStyle: v })} defaultPx={78} />
+        <TitleStyleField id="terroir-closing-heading" value={closing.headingStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setClosing({ ...closing, headingStyle: v })} defaultPx={78} defaultMobilePx={55} />
       </CardContent>
     </Card>
 

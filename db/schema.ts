@@ -11,8 +11,12 @@ export type Localized = { en: string; ka: string };
 // use the page's own default, which for most editorial titles is already
 // uppercase via CSS). Lives next to the title field it styles. Georgian
 // script has no letter-case distinction, so `case` only visibly affects the
-// English side.
-export type TitleStyle = { fontSize: number | null; case: "upper" | "lower" | null };
+// English side. `fontSize` only applies at desktop widths - without a
+// separate `fontSizeMobile`, a desktop override would otherwise bleed into
+// mobile too (inline styles beat the site's own responsive CSS at every
+// breakpoint), so mobile always falls back to its own default unless given
+// its own explicit override.
+export type TitleStyle = { fontSize: number | null; fontSizeMobile: number | null; case: "upper" | "lower" | null };
 
 // An admin-added extra fact on a wine's detail panel (beyond the fixed
 // Origin/Grape variety/Alcohol rows) - e.g. "Ageing", "Vintage", "Serving

@@ -5,6 +5,7 @@ import { LEGALS_SLUG, LEGALS_DEFAULT, type LegalsContent } from "@/lib/pages/leg
 import { getLocale, localize } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 import { LegalsTabs } from "./legals-tabs";
 
 export const metadata: Metadata = {
@@ -23,7 +24,8 @@ export default async function LegalsPage() {
   return <main className="legals-page">
     <div className="editorial-heading enologists-heading heritage-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1 style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <h1 id="legals-heading-title" style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <TitleStyleMobileRule id="legals-heading-title" style={heading.titleStyle} defaultMobilePx={50} />
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
     <Suspense fallback={<p className="legal-loading" role="status">{localize(t["legals.loading"], locale)}</p>}>

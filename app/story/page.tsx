@@ -10,6 +10,7 @@ import { STORY_SLUG, STORY_DEFAULT, type StoryContent } from "@/lib/pages/story"
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 export const metadata: Metadata = { title: "Our story", description: "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine." };
 
@@ -24,7 +25,8 @@ export default async function Story() {
   return <main>
     <div className="editorial-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1 style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
+      <h1 id="story-heading-title" style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
+      <TitleStyleMobileRule id="story-heading-title" style={heading.titleStyle} defaultMobilePx={50} />
       <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </div>
 
@@ -33,7 +35,8 @@ export default async function Story() {
     <section className="story-intro">
       <p className="eyebrow">{localize(intro.eyebrow, locale)}</p>
       <div>
-        <h2 style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
+        <h2 id="story-intro-heading" style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
+        <TitleStyleMobileRule id="story-intro-heading" style={intro.headingStyle} defaultMobilePx={65} />
         <div className="story-paragraphs">
           <p>{localize(intro.paragraph1, locale)}</p>
           <p>{localize(intro.paragraph2, locale)}</p>
@@ -45,7 +48,8 @@ export default async function Story() {
       <ParallaxMedia className="qvevri-photo" scale={1.5} media={<BannerMedia src={qvevri.image} alt="A monk tending qvevri in Alaverdi Monastery’s historic cellar" loading="lazy" />} />
       <div className="story-qvevri-copy">
         <p className="eyebrow">{localize(qvevri.eyebrow, locale)}</p>
-        <h2 style={titleStyleCss(qvevri.headingStyle)}><BreakableText text={localize(qvevri.heading, locale)} /></h2>
+        <h2 id="story-qvevri-heading" style={titleStyleCss(qvevri.headingStyle)}><BreakableText text={localize(qvevri.heading, locale)} /></h2>
+        <TitleStyleMobileRule id="story-qvevri-heading" style={qvevri.headingStyle} defaultMobilePx={78} />
         <p>{localize(qvevri.paragraph1, locale)}</p>
         <p>{localize(qvevri.paragraph2, locale)}</p>
         <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreTheWines"], locale)} <ArrowUpRight size={16} /></Link>
@@ -53,9 +57,11 @@ export default async function Story() {
     </section>
 
     <WinerySection image={winery.image || "/images/winery.jpg"} eyebrow={localize(winery.eyebrow, locale)} heading={localize(winery.heading, locale)} headingStyle={titleStyleCss(winery.headingStyle)} paragraph1={localize(winery.paragraph1, locale)} paragraph2={localize(winery.paragraph2, locale)}>
+      <TitleStyleMobileRule id="winery-title" style={winery.headingStyle} defaultMobilePx={64} />
       <section className="science-section">
         <p className="eyebrow">{localize(science.eyebrow, locale)}</p>
-        <h2 style={titleStyleCss(science.headingStyle)}><BreakableText text={localize(science.heading, locale)} /></h2>
+        <h2 id="story-science-heading" style={titleStyleCss(science.headingStyle)}><BreakableText text={localize(science.heading, locale)} /></h2>
+        <TitleStyleMobileRule id="story-science-heading" style={science.headingStyle} defaultMobilePx={64} />
         <div>
           <p>{localize(science.paragraph, locale)}</p>
           <Link href={localizeHref("/terroir", locale)} className="underlined-link">{localize(t["cta.ourVineyards"], locale)} <ArrowUpRight size={16} /></Link>

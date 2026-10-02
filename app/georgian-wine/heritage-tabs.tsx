@@ -10,6 +10,7 @@ import { localize, type Locale } from "@/lib/i18n";
 import type { HeritageChapter } from "@/lib/pages/georgian-wine";
 import type { Localized } from "@/db/schema";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 type UiStrings = Record<string, Localized>;
 
@@ -35,6 +36,7 @@ function ChapterPanel({ number, chapter, sceneClassName, locale, t }: { number: 
     <section className="science-section story-winery-copy heritage-copy" aria-labelledby={titleId}>
       <p className="eyebrow">{localize(chapter.eyebrow, locale)}</p>
       <h2 id={titleId} style={titleStyleCss(chapter.titleStyle)}>{localize(chapter.title, locale)}</h2>
+      <TitleStyleMobileRule id={titleId} style={chapter.titleStyle} defaultMobilePx={64} />
       <div><BreakableParagraphs text={localize(chapter.body, locale)} /></div>
     </section>
   } />;
