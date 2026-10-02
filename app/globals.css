@@ -326,13 +326,13 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .editorial-heading h1 {font-size:clamp(82px,10.5vw,164px);line-height:.84;text-transform:uppercase;letter-spacing:-.035em}
 .editorial-heading>p:not(.eyebrow) {margin-left:22%;font-size:16px}
 .story-cover,.terroir-cover {margin:0}
-.story-cover,.terroir-cover,.story-winery-window {height:620px}
+.story-cover,.terroir-cover,.story-winery-window {height:868px}
 .story-cover .parallax-overlay>span,.terroir-cover .parallax-overlay>span {position:absolute;left:22px;bottom:22px;color:white;font-size:12px;text-transform:uppercase;text-shadow:0 1px 7px #000}
 .story-intro {display:grid;grid-template-columns:1fr 1fr;gap:30px;padding:130px var(--gutter)}
 .story-intro h2 {font-size:clamp(65px,6vw,100px);text-transform:uppercase}
 .story-paragraphs {display:grid;grid-template-columns:1fr 1fr;gap:30px;margin-top:45px}
 .story-paragraphs p {font-size:16px;color:#565652}
-.generic-page-cover {height:70vh;margin:0 0 90px}
+.generic-page-cover {height:85vh;margin:0 0 90px}
 .generic-page-cover .parallax-overlay>span {position:absolute;left:22px;bottom:22px;color:white;font-size:12px;text-transform:uppercase;text-shadow:0 1px 7px #000}
 .generic-page-body {max-width:var(--editorial-copy-width);margin:0 var(--gutter) 110px;display:flex;flex-direction:column;gap:20px}
 .generic-page-body p {font-size:16px;color:#565652}
@@ -438,7 +438,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .cellar-heading h1 {font-size:clamp(60px,7.2vw,114px);line-height:.96;letter-spacing:-.025em;text-transform:none}
 .cellar-heading>p:not(.eyebrow) {max-width:320px;margin-left:12%;line-height:1.65}
 .cellar-cover {position:relative;margin:0}
-.cellar-cover-media {height:clamp(420px,49vw,720px)}
+.cellar-cover-media {height:clamp(588px,68.6vw,1008px)}
 .cellar-cover-media .parallax-media img,.cellar-cover-media .parallax-media video {object-position:62% 55%}
 .cellar-cover figcaption {position:absolute;left:var(--gutter);right:var(--gutter);bottom:22px;z-index:1;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px 22px;font-size:12px;line-height:1.5;text-transform:uppercase;letter-spacing:.035em;color:white;text-shadow:0 1px 7px #000}
 .cellar-story {display:grid;grid-template-columns:minmax(0,1fr) var(--editorial-copy-width);gap:45px;margin:105px var(--gutter)}
@@ -647,7 +647,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .catalog-grid .bottle-stage {height:340px}
   .catalog-grid .bottle-stage img {height:245px}
   .wine-filters {gap:21px!important}
-  .story-cover,.terroir-cover,.story-winery-window {height:480px}
+  .story-cover,.terroir-cover,.story-winery-window {height:672px}
   .story-paragraphs {grid-template-columns:1fr;gap:20px}
   .story-qvevri-copy {padding:50px 8%}
   .vineyard-row[data-slot=accordion-item] {grid-template-columns:minmax(0,.15fr) minmax(0,1fr) minmax(0,.8fr) minmax(0,.6fr);column-gap:22px}
@@ -739,7 +739,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .editorial-heading {grid-template-columns:1fr;gap:30px;padding-top:30px;padding-bottom:40px}
   .editorial-heading h1 {font-size:clamp(50px,16vw,110px);line-height:.87}
   .editorial-heading>p:not(.eyebrow) {margin-left:20%}
-  .story-cover,.terroir-cover,.story-winery-window {height:390px}
+  .story-cover,.terroir-cover,.story-winery-window {height:546px}
   .story-intro {display:block;padding-top:70px;padding-bottom:70px}
   .story-intro>.eyebrow {margin-bottom:30px}
   .story-intro h2 {font-size:65px}
@@ -800,7 +800,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
   .cellar-heading {grid-template-columns:minmax(0,1fr);gap:25px}
   .cellar-heading h1 {font-size:clamp(44px,11.5vw,78px)}
   .cellar-heading>p:not(.eyebrow) {max-width:440px;margin-left:0}
-  .cellar-cover-media {height:440px}
+  .cellar-cover-media {height:616px}
   .cellar-cover-media .parallax-media img,.cellar-cover-media .parallax-media video {object-position:63% center}
   .cellar-cover figcaption {flex-direction:column;gap:4px;font-size:12px}
   .cellar-story {grid-template-columns:minmax(0,1fr);gap:32px;margin-top:65px;margin-bottom:65px}
