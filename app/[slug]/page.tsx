@@ -8,6 +8,7 @@ import { BreakableParagraphs } from "../breakable-paragraphs";
 import { PageSections } from "../generic-page-sections";
 import { getLocale, localize } from "@/lib/i18n";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 type GenericPageProps = { params: Promise<{ slug: string }> };
 
@@ -36,7 +37,8 @@ export default async function GenericPage({ params }: GenericPageProps) {
   return <main>
     <div className="editorial-heading">
       {eyebrow && <p className="eyebrow">{eyebrow}</p>}
-      <h1 style={titleStyleCss(content.titleStyle)}>{title}</h1>
+      <h1 id="generic-page-title" style={titleStyleCss(content.titleStyle)}>{title}</h1>
+      <TitleStyleMobileRule id="generic-page-title" style={content.titleStyle} defaultMobilePx={50} />
       {subtitle && <p>{subtitle}</p>}
     </div>
 

@@ -89,7 +89,7 @@ export function ContactForm({ content: initial }: { content: ContactContent }) {
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="contact-eyebrow" label="Eyebrow" value={heading.eyebrow} onChange={v => setHeading({ ...heading, eyebrow: v })} />
         <BilingualField id="contact-title" label="Title" value={heading.title} onChange={v => setHeading({ ...heading, title: v })} />
-        <TitleStyleField id="contact-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} />
+        <TitleStyleField id="contact-title" value={heading.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => setHeading({ ...heading, titleStyle: v })} defaultPx={164} defaultMobilePx={50} />
         <BilingualField id="contact-subtitle" label="Subtitle" hint="Use a new line for a manual line break." multiline rows={2} value={heading.subtitle} onChange={v => setHeading({ ...heading, subtitle: v })} />
       </CardContent>
     </Card>
@@ -109,7 +109,7 @@ export function ContactForm({ content: initial }: { content: ContactContent }) {
       <CardHeader><CardTitle>{LOCATION_TITLES[i]}</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <BilingualField id={`contact-location-${i}-title`} label="Title" value={location.title} onChange={v => updateLocation(i, { title: v })} />
-        <TitleStyleField id={`contact-location-${i}-title`} value={location.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => updateLocation(i, { titleStyle: v })} defaultPx={54} />
+        <TitleStyleField id={`contact-location-${i}-title`} value={location.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={v => updateLocation(i, { titleStyle: v })} defaultPx={54} defaultMobilePx={39} />
         <BilingualField id={`contact-location-${i}-address`} label="Address" hint="Use a new line for each address line." multiline rows={3} value={location.address} onChange={v => updateLocation(i, { address: v })} />
         <div className="grid gap-1.5">
           <Label htmlFor={`contact-location-${i}-map`}>Map link</Label>

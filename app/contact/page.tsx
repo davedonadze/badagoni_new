@@ -6,6 +6,7 @@ import { CONTACT_SLUG, CONTACT_DEFAULT, type ContactContent } from "@/lib/pages/
 import { getLocale, localize } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 const METHOD_HREF = [
   (value: string) => `mailto:${value}`,
@@ -33,7 +34,8 @@ export default async function Contact() {
   return <main className="contact-page">
     <header className="editorial-heading contact-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1 style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <h1 id="contact-heading-title" style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <TitleStyleMobileRule id="contact-heading-title" style={heading.titleStyle} defaultMobilePx={50} />
       <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </header>
 
@@ -48,6 +50,7 @@ export default async function Contact() {
       {locations.map((location, i) => <section key={i} aria-labelledby={`contact-location-${i}-title`}>
         <p className="eyebrow">{localize(t[LOCATION_META[i].eyebrowKey], locale)}</p>
         <h2 id={`contact-location-${i}-title`} style={titleStyleCss(location.titleStyle)}>{localize(location.title, locale)}</h2>
+        <TitleStyleMobileRule id={`contact-location-${i}-title`} style={location.titleStyle} defaultMobilePx={39} />
         <address><BreakableText text={localize(location.address, locale)} /></address>
         <a className="underlined-link" href={location.mapUrl} target="_blank" rel="noreferrer">{localize(t[LOCATION_META[i].linkKey], locale)} <ArrowUpRight size={17} aria-hidden="true" /></a>
       </section>)}

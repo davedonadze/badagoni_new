@@ -10,6 +10,7 @@ import { TERROIR_SLUG, TERROIR_DEFAULT, type TerroirContent } from "@/lib/pages/
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 export const metadata: Metadata = { title: "Our vineyards", description: "The vineyards and varied terroirs of Kakheti that shape every Badagoni wine." };
 
@@ -36,7 +37,8 @@ export default async function Terroir() {
   return <main>
     <div className="editorial-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1 style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
+      <h1 id="terroir-heading-title" style={titleStyleCss(heading.titleStyle)}><BreakableText text={localize(heading.title, locale)} /></h1>
+      <TitleStyleMobileRule id="terroir-heading-title" style={heading.titleStyle} defaultMobilePx={50} />
       <p><BreakableText text={localize(heading.subtitle, locale)} /></p>
     </div>
 
@@ -44,7 +46,8 @@ export default async function Terroir() {
 
     <section className="terroir-intro">
       <p className="eyebrow">{localize(intro.eyebrow, locale)}</p>
-      <h2 style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
+      <h2 id="terroir-intro-heading" style={titleStyleCss(intro.headingStyle)}><BreakableText text={localize(intro.heading, locale)} /></h2>
+      <TitleStyleMobileRule id="terroir-intro-heading" style={intro.headingStyle} defaultMobilePx={61} />
       <p>{localize(intro.body, locale)}</p>
     </section>
 
@@ -60,7 +63,8 @@ export default async function Terroir() {
       <ParallaxMedia className="terroir-closing-media" scale={1.5} media={<BannerMedia src={closing.image} alt="Vineyards stretching toward the Caucasus Mountains" loading="lazy" />} />
       <div>
         <p className="eyebrow">{localize(closing.eyebrow, locale)}</p>
-        <h2 style={titleStyleCss(closing.headingStyle)}><BreakableText text={localize(closing.heading, locale)} /></h2>
+        <h2 id="terroir-closing-heading" style={titleStyleCss(closing.headingStyle)}><BreakableText text={localize(closing.heading, locale)} /></h2>
+        <TitleStyleMobileRule id="terroir-closing-heading" style={closing.headingStyle} defaultMobilePx={55} />
         <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.discoverCollection"], locale)} <ArrowUpRight size={16} /></Link>
       </div>
     </section>

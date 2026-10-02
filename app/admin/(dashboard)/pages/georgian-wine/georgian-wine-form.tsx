@@ -29,7 +29,7 @@ function ChapterFields({ idPrefix, chapter, onChange }: { idPrefix: string; chap
     <BilingualField id={`${idPrefix}-tab-label`} label="Tab label" value={chapter.tabLabel} onChange={tabLabel => onChange({ ...chapter, tabLabel })} />
     <BilingualField id={`${idPrefix}-eyebrow`} label="Eyebrow" value={chapter.eyebrow} onChange={eyebrow => onChange({ ...chapter, eyebrow })} />
     <BilingualField id={`${idPrefix}-title`} label="Title" value={chapter.title} onChange={title => onChange({ ...chapter, title })} />
-    <TitleStyleField id={`${idPrefix}-title`} value={chapter.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={titleStyle => onChange({ ...chapter, titleStyle })} defaultPx={122} />
+    <TitleStyleField id={`${idPrefix}-title`} value={chapter.titleStyle ?? DEFAULT_TITLE_STYLE} onChange={titleStyle => onChange({ ...chapter, titleStyle })} defaultPx={122} defaultMobilePx={64} />
     <BilingualField id={`${idPrefix}-body`} label="Text" hint="Leave a blank line between paragraphs." multiline rows={5} value={chapter.body} onChange={body => onChange({ ...chapter, body })} />
 
     <ImagePicker id={`${idPrefix}-image`} label="Photo" value={chapter.image} onChange={image => onChange({ ...chapter, image })} recommendedResolution="1600px or larger on the long edge" />
@@ -120,7 +120,7 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="georgian-wine-eyebrow" label="Eyebrow" value={eyebrow} onChange={setEyebrow} />
         <BilingualField id="georgian-wine-title" label="Title" value={title} onChange={setTitle} />
-        <TitleStyleField id="georgian-wine-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} />
+        <TitleStyleField id="georgian-wine-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} defaultMobilePx={50} />
         <BilingualField id="georgian-wine-subtitle" label="Subtitle" multiline value={subtitle} onChange={setSubtitle} />
       </CardContent>
     </Card>

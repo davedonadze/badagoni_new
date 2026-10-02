@@ -137,7 +137,7 @@ export function GenericPageForm({ slug, content: initial }: { slug: string; cont
       <CardContent className="flex flex-col gap-6">
         <BilingualField id="page-eyebrow" label="Eyebrow" value={eyebrow} onChange={setEyebrow} />
         <BilingualField id="page-title" label="Title" value={title} onChange={setTitle} />
-        <TitleStyleField id="page-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} />
+        <TitleStyleField id="page-title" value={titleStyle} onChange={setTitleStyle} defaultPx={164} defaultMobilePx={50} />
         <BilingualField id="page-subtitle" label="Subtitle" multiline value={subtitle} onChange={setSubtitle} />
       </CardContent>
     </Card>

@@ -7,6 +7,7 @@ import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/l
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
+import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
 // Fixed ids for anchor navigation (#donato-lanati, etc.) that stay in code -
 // only the people's names/role/image/description are DB-driven.
@@ -42,7 +43,8 @@ export default async function Enologists() {
   return <main className="enologists-page">
     <div className="editorial-heading enologists-heading">
       <p className="eyebrow">{localize(heading.eyebrow, locale)}</p>
-      <h1 style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <h1 id="enologists-heading-title" style={titleStyleCss(heading.titleStyle)}>{localize(heading.title, locale)}</h1>
+      <TitleStyleMobileRule id="enologists-heading-title" style={heading.titleStyle} defaultMobilePx={50} />
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
 
@@ -53,7 +55,7 @@ export default async function Enologists() {
     <EnologistList enologists={enologists} />
 
     <section className="enologists-closing" aria-labelledby="enologists-closing-title">
-      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title" style={titleStyleCss(closing.headingStyle)}>{localize(closing.heading, locale)}</h2></div>
+      <div><p className="eyebrow">{localize(closing.eyebrow, locale)}</p><h2 id="enologists-closing-title" style={titleStyleCss(closing.headingStyle)}>{localize(closing.heading, locale)}</h2><TitleStyleMobileRule id="enologists-closing-title" style={closing.headingStyle} defaultMobilePx={58} /></div>
       <Link href={localizeHref("/catalogue", locale)} className="underlined-link">{localize(t["cta.exploreCollection"], locale)} <ArrowUpRight size={18} /></Link>
     </section>
   </main>;
