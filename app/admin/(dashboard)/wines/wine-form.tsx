@@ -54,6 +54,7 @@ export function WineForm(props: WineFormProps) {
   const [specs, setSpecs] = useState<WineSpec[]>(initial?.specs ?? []);
   const [awards, setAwards] = useState<WineAward[]>(initial?.awards ?? []);
   const [tastingNotes, setTastingNotes] = useState<WineTastingNotes>(initial?.tastingNotes ?? EMPTY_TASTING_NOTES);
+  const [featured, setFeatured] = useState(initial?.featured ?? false);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -120,6 +121,7 @@ export function WineForm(props: WineFormProps) {
       specs: specs.filter(spec => (spec.label.en.trim() || spec.label.ka.trim()) && (spec.value.en.trim() || spec.value.ka.trim())),
       awards: awards.filter(award => award.image.trim() && (award.name.en.trim() || award.name.ka.trim()) && award.year.trim()),
       tastingNotes: Object.values(tastingNotes).some(field => field.en.trim() || field.ka.trim()) ? tastingNotes : null,
+      featured,
     };
 
     try {
@@ -171,6 +173,12 @@ export function WineForm(props: WineFormProps) {
             required
           />
         </div>
+
+        <label className="flex items-center gap-2 text-sm font-normal">
+          <input type="checkbox" checked={featured} onChange={e => setFeatured(e.target.checked)} className="size-4 rounded border" />
+          Featured on homepage
+        </label>
+        <p className="-mt-4 text-xs text-muted-foreground">Shown in "The collection" on the homepage. Any number of wines can be featured; the grid wraps past 3.</p>
 
         <ImagePicker id="wine-image" label="Bottle image" value={image} onChange={setImage} recommendedResolution="600×2000px, portrait, transparent background" />
 

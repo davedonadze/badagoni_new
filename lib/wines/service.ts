@@ -17,6 +17,7 @@ export type Wine = {
   specs: WineSpec[] | null;
   awards: WineAward[] | null;
   tastingNotes: WineTastingNotes | null;
+  featured: boolean;
 };
 
 export type WineInput = {
@@ -32,6 +33,7 @@ export type WineInput = {
   specs?: WineSpec[] | null;
   awards?: WineAward[] | null;
   tastingNotes?: WineTastingNotes | null;
+  featured?: boolean;
 };
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
@@ -77,6 +79,7 @@ export async function createWine(input: WineInput): Promise<Wine> {
       specs: input.specs ?? null,
       awards: input.awards ?? null,
       tastingNotes: input.tastingNotes ?? null,
+      featured: input.featured ?? false,
     })
     .returning();
   return wine;
@@ -99,6 +102,7 @@ export async function updateWine(slug: string, input: WineInput): Promise<Wine |
       specs: input.specs ?? null,
       awards: input.awards ?? null,
       tastingNotes: input.tastingNotes ?? null,
+      featured: input.featured ?? false,
       updatedAt: new Date().toISOString(),
     })
     .where(eq(wines.slug, slug))

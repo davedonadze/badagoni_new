@@ -48,6 +48,10 @@ export const wines = sqliteTable("wines", {
   specs: text("specs", { mode: "json" }).$type<WineSpec[] | null>(),
   awards: text("awards", { mode: "json" }).$type<WineAward[] | null>(),
   tastingNotes: text("tasting_notes", { mode: "json" }).$type<WineTastingNotes | null>(),
+  // Shown in the homepage's "The collection" grid (app/wine-collection.tsx).
+  // Any number can be featured - the grid is a 3-column layout that simply
+  // wraps to another row past 3.
+  featured: integer("featured", { mode: "boolean" }).notNull().default(false),
   createdAt: text("created_at").notNull().default(sql`CURRENT_TIMESTAMP`),
   updatedAt: text("updated_at").notNull().default(sql`CURRENT_TIMESTAMP`),
 });

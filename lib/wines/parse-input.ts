@@ -80,5 +80,6 @@ export function parseWineInput(body: Record<string, unknown>): WineInput {
     specs: parseSpecs(body.specs),
     awards: parseAwards(body.awards),
     tastingNotes: parseTastingNotes(body.tastingNotes),
+    featured: body.featured === true,
   };
 }
