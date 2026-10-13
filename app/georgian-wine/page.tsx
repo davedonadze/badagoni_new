@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
 import { getPageContent } from "@/lib/pages/service";
-import { GEORGIAN_WINE_SLUG, GEORGIAN_WINE_DEFAULT, type GeorgianWineContent } from "@/lib/pages/georgian-wine";
+import { GEORGIAN_WINE_SLUG, normalizeGeorgianWineContent, type GeorgianWineContent } from "@/lib/pages/georgian-wine";
 import { getLocale, localize } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
@@ -19,7 +19,7 @@ export default async function GeorgianWine() {
     getLocale(),
     getUiStrings(),
   ]);
-  const { heading, chapters } = content ?? GEORGIAN_WINE_DEFAULT;
+  const { heading, chapters } = normalizeGeorgianWineContent(content);
 
   return <main className="heritage-page">
     <div className="editorial-heading enologists-heading heritage-heading">

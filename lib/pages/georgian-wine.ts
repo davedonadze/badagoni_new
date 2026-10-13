@@ -37,6 +37,24 @@ function en(value: string): Localized {
   return { en: value, ka: "" };
 }
 
+// Tolerates content saved before the `figure`/`qvevri` fields were merged
+// into `chapters` (see drizzle/0034_georgian_wine_chapters.sql) - preview and
+// production share one D1 database, so a code deploy can briefly run against
+// data the migration hasn't reshaped yet.
+type LegacyGeorgianWineContent = { heading: GeorgianWineContent["heading"]; figure: HeritageChapter; qvevri: HeritageChapter };
+
+export function normalizeGeorgianWineContent(content: GeorgianWineContent | LegacyGeorgianWineContent | undefined): GeorgianWineContent {
+  if (!content) return GEORGIAN_WINE_DEFAULT;
+  if ("chapters" in content) return content;
+  return {
+    heading: content.heading,
+    chapters: [
+      { ...content.figure, id: content.figure.id ?? "badagoni-figure", imageFocus: content.figure.imageFocus ?? "center 17%" },
+      { ...content.qvevri, id: content.qvevri.id ?? "qvevri-tradition", imageFocus: content.qvevri.imageFocus ?? "60% center" },
+    ],
+  };
+}
+
 // Seeded from a reference build's real "Georgian wine" page content.
 export const GEORGIAN_WINE_DEFAULT: GeorgianWineContent = {
   heading: {

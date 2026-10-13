@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getPageContent } from "@/lib/pages/service";
-import { GEORGIAN_WINE_SLUG, GEORGIAN_WINE_DEFAULT, type GeorgianWineContent } from "@/lib/pages/georgian-wine";
+import { GEORGIAN_WINE_SLUG, normalizeGeorgianWineContent, type GeorgianWineContent } from "@/lib/pages/georgian-wine";
 import { GeorgianWineForm } from "./georgian-wine-form";
 
 export const dynamic = "force-dynamic";
 
 export default async function EditGeorgianWinePage() {
-  const content = (await getPageContent<GeorgianWineContent>(GEORGIAN_WINE_SLUG)) ?? GEORGIAN_WINE_DEFAULT;
+  const content = normalizeGeorgianWineContent(await getPageContent<GeorgianWineContent>(GEORGIAN_WINE_SLUG));
 
   return <div className="flex flex-col gap-6">
     <div>
