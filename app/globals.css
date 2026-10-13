@@ -528,8 +528,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .heritage-credit-popover p+p {margin-top:10px}
 .heritage-credit-title {font-weight:600}
 .heritage-credit-popover a {text-decoration:underline;text-underline-offset:3px}
-.heritage-figure-scene .story-winery-parallax img,.heritage-figure-scene .story-winery-static-photo {object-position:center 17%}
-.heritage-qvevri-scene .story-winery-parallax img,.heritage-qvevri-scene .story-winery-static-photo {object-position:60% center}
 @keyframes heritage-reveal {from{opacity:0}to{opacity:1}}
 
 /* Newsroom: one lead story, an open grid, and spacious article pages. */

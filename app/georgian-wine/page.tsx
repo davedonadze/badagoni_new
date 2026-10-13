@@ -19,7 +19,7 @@ export default async function GeorgianWine() {
     getLocale(),
     getUiStrings(),
   ]);
-  const { heading, figure, qvevri } = content ?? GEORGIAN_WINE_DEFAULT;
+  const { heading, chapters } = content ?? GEORGIAN_WINE_DEFAULT;
 
   return <main className="heritage-page">
     <div className="editorial-heading enologists-heading heritage-heading">
@@ -29,7 +29,7 @@ export default async function GeorgianWine() {
       <p>{localize(heading.subtitle, locale)}</p>
     </div>
     <Suspense fallback={<p className="legal-loading" role="status">{localize(t["georgianWine.loading"], locale)}</p>}>
-      <HeritageTabs figure={figure} qvevri={qvevri} locale={locale} t={t} />
+      <HeritageTabs chapters={chapters} locale={locale} t={t} />
     </Suspense>
   </main>;
 }

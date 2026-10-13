@@ -25,14 +25,14 @@ function PhotoCredit({ credit, locale, t }: { credit: NonNullable<HeritageChapte
   </Popover>;
 }
 
-function ChapterPanel({ number, chapter, sceneClassName, locale, t }: { number: "01" | "02"; chapter: HeritageChapter; sceneClassName: string; locale: Locale; t: UiStrings }) {
-  const titleId = `heritage-title-${number}`;
-  return <WineryScrollScene className={`heritage-scroll-scene ${sceneClassName}`} image={{
+function ChapterPanel({ chapter, locale, t }: { chapter: HeritageChapter; locale: Locale; t: UiStrings }) {
+  const titleId = `heritage-title-${chapter.id}`;
+  return <WineryScrollScene className="heritage-scroll-scene" image={{
     src: chapter.image,
     alt: localize(chapter.imageTitle, locale),
     title: localize(chapter.imageTitle, locale),
     caption: localize(chapter.imageCaption, locale),
-  }} imageOverlay={chapter.credit ? <PhotoCredit credit={chapter.credit} locale={locale} t={t} /> : undefined} intro={
+  }} imageFocus={chapter.imageFocus} imageOverlay={chapter.credit ? <PhotoCredit credit={chapter.credit} locale={locale} t={t} /> : undefined} intro={
     <section className="science-section story-winery-copy heritage-copy" aria-labelledby={titleId}>
       <p className="eyebrow">{localize(chapter.eyebrow, locale)}</p>
       <h2 id={titleId} style={titleStyleCss(chapter.titleStyle)}>{localize(chapter.title, locale)}</h2>
@@ -42,24 +42,20 @@ function ChapterPanel({ number, chapter, sceneClassName, locale, t }: { number: 
   } />;
 }
 
-export function HeritageTabs({ figure, qvevri, locale, t }: { figure: HeritageChapter; qvevri: HeritageChapter; locale: Locale; t: UiStrings }) {
+export function HeritageTabs({ chapters, locale, t }: { chapters: HeritageChapter[]; locale: Locale; t: UiStrings }) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const activeTab = searchParams.get("tab") === "qvevri-tradition" ? "qvevri-tradition" : "badagoni-figure";
+  const requestedTab = searchParams.get("tab");
+  const activeTab = chapters.some(chapter => chapter.id === requestedTab) ? requestedTab! : chapters[0]?.id;
 
   return <Tabs value={activeTab} onValueChange={value => router.push(`${pathname}?tab=${value}`, { scroll: false })} activationMode="manual" className="heritage-tabs">
     <TabsList variant="line" className="heritage-index" aria-label="Explore Georgian wine">
-      <TabsTrigger value="badagoni-figure" className="heritage-tab"><span aria-hidden="true">01</span>{localize(figure.tabLabel, locale)}</TabsTrigger>
-      <TabsTrigger value="qvevri-tradition" className="heritage-tab"><span aria-hidden="true">02</span>{localize(qvevri.tabLabel, locale)}</TabsTrigger>
+      {chapters.map((chapter, i) => <TabsTrigger key={chapter.id} value={chapter.id} className="heritage-tab"><span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>{localize(chapter.tabLabel, locale)}</TabsTrigger>)}
     </TabsList>
 
-    <TabsContent value="badagoni-figure" id="badagoni-figure" className="heritage-panel">
-      <ChapterPanel number="01" chapter={figure} sceneClassName="heritage-figure-scene" locale={locale} t={t} />
-    </TabsContent>
-
-    <TabsContent value="qvevri-tradition" id="qvevri-tradition" className="heritage-panel">
-      <ChapterPanel number="02" chapter={qvevri} sceneClassName="heritage-qvevri-scene" locale={locale} t={t} />
-    </TabsContent>
+    {chapters.map(chapter => <TabsContent key={chapter.id} value={chapter.id} id={chapter.id} className="heritage-panel">
+      <ChapterPanel chapter={chapter} locale={locale} t={t} />
+    </TabsContent>)}
   </Tabs>;
 }

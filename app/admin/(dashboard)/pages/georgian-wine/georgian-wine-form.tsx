@@ -1,8 +1,9 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { BilingualField } from "../../../bilingual-field";
@@ -14,6 +15,18 @@ import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
 
 const EMPTY: Localized = { en: "", ka: "" };
 const EMPTY_CREDIT: HeritagePhotoCredit = { label: EMPTY, url: "", license: EMPTY, licenseUrl: "" };
+
+function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
+  const target = index + direction;
+  if (target < 0 || target >= items.length) return items;
+  const next = [...items];
+  [next[index], next[target]] = [next[target], next[index]];
+  return next;
+}
+
+function newChapter(): HeritageChapter {
+  return { id: crypto.randomUUID(), tabLabel: EMPTY, eyebrow: EMPTY, title: EMPTY, body: EMPTY, image: "", imageTitle: EMPTY, imageCaption: EMPTY, credit: null };
+}
 
 function ChapterFields({ idPrefix, chapter, onChange }: { idPrefix: string; chapter: HeritageChapter; onChange: (chapter: HeritageChapter) => void }) {
   const credit = chapter.credit ?? EMPTY_CREDIT;
@@ -63,8 +76,7 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
   const [title, setTitle] = useState(initial.heading.title);
   const [titleStyle, setTitleStyle] = useState(initial.heading.titleStyle ?? DEFAULT_TITLE_STYLE);
   const [subtitle, setSubtitle] = useState(initial.heading.subtitle);
-  const [figure, setFigure] = useState(initial.figure);
-  const [qvevri, setQvevri] = useState(initial.qvevri);
+  const [chapters, setChapters] = useState<HeritageChapter[]>(initial.chapters);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -75,13 +87,26 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
     return () => clearTimeout(timeout);
   }, [saved]);
 
+  function updateChapter(index: number, chapter: HeritageChapter) {
+    setChapters(current => current.map((c, i) => i === index ? chapter : c));
+  }
+  function addChapter() {
+    setChapters(current => [...current, newChapter()]);
+  }
+  function removeChapter(index: number) {
+    setChapters(current => current.filter((_, i) => i !== index));
+  }
+  function moveChapter(index: number, direction: -1 | 1) {
+    setChapters(current => moveItem(current, index, direction));
+  }
+
   async function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
     setSaving(true);
     setError(null);
     setSaved(false);
 
-    const content: GeorgianWineContent = { heading: { eyebrow, title, titleStyle, subtitle }, figure, qvevri };
+    const content: GeorgianWineContent = { heading: { eyebrow, title, titleStyle, subtitle }, chapters };
 
     try {
       const response = await fetch("/api/admin/pages/georgian-wine", {
@@ -125,15 +150,20 @@ export function GeorgianWineForm({ content: initial }: { content: GeorgianWineCo
       </CardContent>
     </Card>
 
-    <Card>
-      <CardHeader><CardTitle>01 — Badagoni figure</CardTitle></CardHeader>
-      <CardContent><ChapterFields idPrefix="figure" chapter={figure} onChange={setFigure} /></CardContent>
-    </Card>
-
-    <Card>
-      <CardHeader><CardTitle>02 — Qvevri tradition</CardTitle></CardHeader>
-      <CardContent><ChapterFields idPrefix="qvevri" chapter={qvevri} onChange={setQvevri} /></CardContent>
-    </Card>
+    <div className="flex flex-col gap-6">
+      {chapters.map((chapter, i) => <Card key={chapter.id}>
+        <CardHeader>
+          <CardTitle>{String(i + 1).padStart(2, "0")} — {chapter.tabLabel.en || "Untitled chapter"}</CardTitle>
+          <CardAction className="flex items-center gap-1">
+            <Button type="button" variant="ghost" size="icon" disabled={i === 0} onClick={() => moveChapter(i, -1)} aria-label="Move chapter up"><ChevronUp className="size-4" /></Button>
+            <Button type="button" variant="ghost" size="icon" disabled={i === chapters.length - 1} onClick={() => moveChapter(i, 1)} aria-label="Move chapter down"><ChevronDown className="size-4" /></Button>
+            <Button type="button" variant="ghost" size="icon" onClick={() => removeChapter(i)} aria-label="Remove chapter"><Trash2 className="size-4 text-destructive" /></Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent><ChapterFields idPrefix={`chapter-${i}`} chapter={chapter} onChange={next => updateChapter(i, next)} /></CardContent>
+      </Card>)}
+      <Button type="button" variant="outline" size="sm" className="self-start" onClick={addChapter}><Plus className="size-4" />Add chapter</Button>
+    </div>
 
     <div className="flex items-center justify-between rounded-[10px] border bg-card px-4 py-3">
       <p className="text-sm text-muted-foreground">Live at /georgian-wine once saved.</p>
