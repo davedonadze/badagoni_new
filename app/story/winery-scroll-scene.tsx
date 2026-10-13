@@ -24,10 +24,11 @@ const wineryImage: SceneImage = {
   caption: "Zemo Khodasheni / Kakheti, Georgia",
 };
 
-export function WineryScrollScene({ intro, children, image = wineryImage, imageOverlay, className = "" }: {
+export function WineryScrollScene({ intro, children, image = wineryImage, imageFocus, imageOverlay, className = "" }: {
   intro: ReactNode;
   children?: ReactNode;
   image?: SceneImage;
+  imageFocus?: string;
   imageOverlay?: ReactNode;
   className?: string;
 }) {
@@ -84,7 +85,7 @@ export function WineryScrollScene({ intro, children, image = wineryImage, imageO
       <div className="story-winery-overlay">{intro}</div>
       <div className="story-winery-frame">
         <figure className="story-winery-window" ref={windowRef} role="img" aria-label={image.alt}>
-          <img className="story-winery-static-photo" src={image.src} alt="" width={image.width} height={image.height} loading="lazy" />
+          <img className="story-winery-static-photo" src={image.src} alt="" width={image.width} height={image.height} loading="lazy" style={imageFocus ? { objectPosition: imageFocus } : undefined} />
           <figcaption><span>{image.title}</span><span>{image.caption}</span></figcaption>
         </figure>
         {imageOverlay}
@@ -93,7 +94,7 @@ export function WineryScrollScene({ intro, children, image = wineryImage, imageO
     </div>
     <div className="story-winery-track" aria-hidden="true">
       <div className="story-winery-stage">
-        <div className="story-winery-parallax"><img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" /></div>
+        <div className="story-winery-parallax"><img src={image.src} alt="" width={image.width} height={image.height} loading="lazy" style={imageFocus ? { objectPosition: imageFocus } : undefined} /></div>
       </div>
     </div>
   </div>;

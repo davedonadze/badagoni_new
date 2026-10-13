@@ -1,20 +1,34 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import { ChevronDown, ChevronUp, Plus, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardAction, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
 import { TitleStyleField } from "../../../title-style-field";
-import type { EnologistsContent } from "@/lib/pages/enologists";
+import type { EnologistContent, EnologistsContent } from "@/lib/pages/enologists";
 import { DEFAULT_TITLE_STYLE } from "@/lib/title-style";
+import type { Localized } from "@/db/schema";
 
-const PERSON_TITLES = ["Person 1 — Chief enologist", "Person 2 — Chief winemaker", "Person 3", "Person 4"];
+const EMPTY_LOCALIZED: Localized = { en: "", ka: "" };
+
+function moveItem<T>(items: T[], index: number, direction: -1 | 1): T[] {
+  const target = index + direction;
+  if (target < 0 || target >= items.length) return items;
+  const next = [...items];
+  [next[index], next[target]] = [next[target], next[index]];
+  return next;
+}
+
+function newPerson(): EnologistContent {
+  return { id: crypto.randomUUID(), firstName: EMPTY_LOCALIZED, lastName: EMPTY_LOCALIZED, role: EMPTY_LOCALIZED, image: "", description: EMPTY_LOCALIZED, hidden: false };
+}
 
 export function EnologistsForm({ content: initial }: { content: EnologistsContent }) {
   const router = useRouter();
   const [heading, setHeading] = useState(initial.heading);
-  const [people, setPeople] = useState(initial.people);
+  const [people, setPeople] = useState<EnologistContent[]>(initial.people);
   const [closing, setClosing] = useState(initial.closing);
   const [error, setError] = useState<string | null>(null);
   const [saving, setSaving] = useState(false);
@@ -26,12 +40,17 @@ export function EnologistsForm({ content: initial }: { content: EnologistsConten
     return () => clearTimeout(timeout);
   }, [saved]);
 
-  function updatePerson(index: number, patch: Partial<EnologistsContent["people"][number]>) {
-    setPeople(current => {
-      const next = [...current] as EnologistsContent["people"];
-      next[index] = { ...next[index], ...patch };
-      return next;
-    });
+  function updatePerson(index: number, patch: Partial<EnologistContent>) {
+    setPeople(current => current.map((person, i) => i === index ? { ...person, ...patch } : person));
+  }
+  function addPerson() {
+    setPeople(current => [...current, newPerson()]);
+  }
+  function removePerson(index: number) {
+    setPeople(current => current.filter((_, i) => i !== index));
+  }
+  function movePerson(index: number, direction: -1 | 1) {
+    setPeople(current => moveItem(current, index, direction));
   }
 
   async function handleSubmit(event: React.FormEvent) {
@@ -84,16 +103,30 @@ export function EnologistsForm({ content: initial }: { content: EnologistsConten
       </CardContent>
     </Card>
 
-    {people.map((person, i) => <Card key={i}>
-      <CardHeader><CardTitle>{PERSON_TITLES[i]}</CardTitle></CardHeader>
-      <CardContent className="flex flex-col gap-6">
-        <ImagePicker id={`enologist-${i}-image`} label="Portrait" value={person.image} onChange={v => updatePerson(i, { image: v })} recommendedResolution="800×900px or larger, portrait" />
-        <BilingualField id={`enologist-${i}-first`} label="First name" value={person.firstName} onChange={v => updatePerson(i, { firstName: v })} />
-        <BilingualField id={`enologist-${i}-last`} label="Last name" value={person.lastName} onChange={v => updatePerson(i, { lastName: v })} />
-        <BilingualField id={`enologist-${i}-role`} label="Role" value={person.role} onChange={v => updatePerson(i, { role: v })} />
-        <BilingualField id={`enologist-${i}-description`} label="Description" multiline value={person.description} onChange={v => updatePerson(i, { description: v })} />
-      </CardContent>
-    </Card>)}
+    <div className="flex flex-col gap-6">
+      {people.map((person, i) => <Card key={person.id}>
+        <CardHeader>
+          <CardTitle>Person {i + 1}{person.hidden ? " — Hidden" : ""}</CardTitle>
+          <CardAction className="flex items-center gap-1">
+            <Button type="button" variant="ghost" size="icon" disabled={i === 0} onClick={() => movePerson(i, -1)} aria-label="Move person up"><ChevronUp className="size-4" /></Button>
+            <Button type="button" variant="ghost" size="icon" disabled={i === people.length - 1} onClick={() => movePerson(i, 1)} aria-label="Move person down"><ChevronDown className="size-4" /></Button>
+            <Button type="button" variant="ghost" size="icon" onClick={() => removePerson(i)} aria-label="Remove person"><Trash2 className="size-4 text-destructive" /></Button>
+          </CardAction>
+        </CardHeader>
+        <CardContent className="flex flex-col gap-6">
+          <label className="flex items-center gap-2 text-sm font-normal">
+            <input type="checkbox" checked={person.hidden ?? false} onChange={e => updatePerson(i, { hidden: e.target.checked })} className="size-4 rounded border" />
+            Hidden (not shown on the live page)
+          </label>
+          <ImagePicker id={`enologist-${i}-image`} label="Portrait" value={person.image} onChange={v => updatePerson(i, { image: v })} recommendedResolution="800×900px or larger, portrait" />
+          <BilingualField id={`enologist-${i}-first`} label="First name" value={person.firstName} onChange={v => updatePerson(i, { firstName: v })} />
+          <BilingualField id={`enologist-${i}-last`} label="Last name" value={person.lastName} onChange={v => updatePerson(i, { lastName: v })} />
+          <BilingualField id={`enologist-${i}-role`} label="Role" value={person.role} onChange={v => updatePerson(i, { role: v })} />
+          <BilingualField id={`enologist-${i}-description`} label="Description" multiline value={person.description} onChange={v => updatePerson(i, { description: v })} />
+        </CardContent>
+      </Card>)}
+      <Button type="button" variant="outline" size="sm" className="self-start" onClick={addPerson}><Plus className="size-4" />Add enologist</Button>
+    </div>
 
     <Card>
       <CardHeader><CardTitle>Closing</CardTitle></CardHeader>
