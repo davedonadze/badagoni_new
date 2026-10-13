@@ -218,6 +218,20 @@
       "when": 1790750779345,
       "tag": "0030_seed_saperavi_reserve_tasting_notes",
       "breakpoints": true
+    },
+    {
+      "idx": 31,
+      "version": "6",
+      "when": 1791544037795,
+      "tag": "0031_add_wine_featured",
+      "breakpoints": true
+    },
+    {
+      "idx": 32,
+      "version": "6",
+      "when": 1791544037796,
+      "tag": "0032_seed_featured_wines",
+      "breakpoints": true
     }
   ]
 }
