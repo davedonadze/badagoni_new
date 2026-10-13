@@ -9,15 +9,6 @@ import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
 import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 
-// Fixed ids for anchor navigation (#donato-lanati, etc.) that stay in code -
-// only the people's names/role/image/description are DB-driven.
-const PERSON_META = [
-  { id: "donato-lanati" },
-  { id: "sandro-kumsiashvili" },
-  { id: "salome-salakaia" },
-  { id: "paolo-lavagna" },
-];
-
 export const metadata: Metadata = {
   title: "Enologists",
   description: "Meet the people behind Badagoni’s wines: Donato Lanati, Sandro Kumsiashvili, Salome Salakaia, and Paolo Lavagna.",
@@ -31,8 +22,8 @@ export default async function Enologists() {
   ]);
   const { heading, people, closing } = content ?? ENOLOGISTS_DEFAULT;
 
-  const enologists = people.map((person, i) => ({
-    id: PERSON_META[i].id,
+  const enologists = people.filter(person => !person.hidden).map(person => ({
+    id: person.id,
     firstName: localize(person.firstName, locale),
     lastName: localize(person.lastName, locale),
     role: localize(person.role, locale),

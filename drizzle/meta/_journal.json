@@ -232,6 +232,13 @@
       "when": 1791544037796,
       "tag": "0032_seed_featured_wines",
       "breakpoints": true
+    },
+    {
+      "idx": 33,
+      "version": "6",
+      "when": 1791544037797,
+      "tag": "0033_seed_enologist_ids",
+      "breakpoints": true
     }
   ]
 }
