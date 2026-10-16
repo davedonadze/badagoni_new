@@ -695,10 +695,9 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
   .newsroom-grid:has(.news-card:hover):not(:has(.news-card-trigger:focus-visible)) .news-card:hover .news-card-artwork {filter:brightness(1)}
 }
 
-/* Wide brand signature, with no establishment date. */
 .site-footer {background:#f2f2f0;padding:50px var(--gutter) 15px}
 .footer-top {display:grid;grid-template-columns:1fr 1fr 1fr;gap:35px}
-.footer-statement {font-family:var(--serif);font-size:clamp(46px,4.6vw,74px);line-height:1;letter-spacing:-.025em;overflow-wrap:anywhere}
+.footer-mark {display:block;width:163px;height:auto}
 .footer-invitation-link {margin-top:22px;gap:12px;font-size:14px}
 .footer-nav {display:grid;align-content:start}
 .footer-nav a {display:flex;align-items:center;justify-content:space-between;min-height:45px;gap:15px;border-top:1px solid #ccccc7;font-size:14px}
@@ -723,8 +722,6 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
 .footer-legal a {position:relative}
 .footer-legal a::after {content:"";position:absolute;left:0;right:0;bottom:-4px;height:1px;background:currentColor;transform:scaleX(0);transform-origin:left;transition:transform .4s cubic-bezier(.22,.68,.2,1)}
 .footer-legal a:hover::after {transform:scaleX(1)}
-.footer-wordmark {display:block;margin:45px calc(-1 * var(--gutter) + 14px) 0}
-.footer-wordmark img {width:100%;height:auto;filter:brightness(0)}
 
 @keyframes photo-arrive {from{transform:scale(1.035)}to{transform:scale(1)}}
 @keyframes text-arrive {from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
@@ -954,11 +951,9 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
   .site-footer {padding-top:35px}
   .footer-top {grid-template-columns:1fr;gap:30px}
   .footer-top>div:first-child {grid-column:auto}
-  .footer-statement {font-size:59px}
   .footer-details {grid-template-columns:1fr 1fr;gap:30px 22px;margin-top:45px}
   .footer-details>div:last-child {grid-column:1/-1}
   .footer-legal {flex-wrap:wrap;gap:18px;font-size:12px;margin-top:45px}
-  .footer-wordmark {margin-top:30px}
 }
 @media(max-width:380px) {
   .mobile-menu-button span {display:none}

@@ -8,7 +8,6 @@ import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from 
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
 import type { MenuItem } from "@/lib/menu/service";
 import type { Localized } from "@/db/schema";
-import { BreakableText } from "./breakable-text";
 
 type UiStrings = Record<string, Localized>;
 
@@ -115,7 +114,7 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
   return <footer className="site-footer">
     <div className="footer-top">
       <div>
-        <p className="footer-statement"><BreakableText text={localize(t["footer.statement"], locale)} /></p>
+        <img className="footer-mark" src="/images/badagoni-mark.svg" alt="Badagoni — Est. 2006" width="163" height="54" loading="lazy" />
         <Link href={localizeHref("/contact", locale)} className="underlined-link footer-invitation-link">{localize(t["footer.startConversation"], locale)} <ArrowUpRight size={17} /></Link>
       </div>
       <nav className="footer-nav" aria-label="Footer navigation, part 1">{footerPrimaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}><span>{localize(link.label, locale)}</span><ArrowUpRight size={15} /></Link>)}</nav>
@@ -131,6 +130,5 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
       </div>
     </div>
     <div className="footer-legal"><span>© {new Date().getFullYear()} Badagoni</span><span>{localize(t["footer.enjoyResponsibly"], locale)}</span><a href="#main-content">{localize(t["footer.backToTop"], locale)}</a></div>
-    <Link href={localizeHref("/", locale)} className="footer-wordmark" aria-label="Badagoni home"><img src="/images/badagoni-wordmark.svg" alt="Badagoni" width="328" height="40" loading="lazy" /></Link>
   </footer>;
 }
