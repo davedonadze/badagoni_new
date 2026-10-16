@@ -49,6 +49,7 @@ export function WineForm(props: WineFormProps) {
   const [image, setImage] = useState(initial?.image ?? "");
   const [style, setStyle] = useState<Localized>(initial?.style ?? EMPTY_LOCALIZED);
   const [grapes, setGrapes] = useState<Localized>(initial?.grapes ?? EMPTY_LOCALIZED);
+  const [origin, setOrigin] = useState<Localized>(initial?.origin ?? EMPTY_LOCALIZED);
   const [alcohol, setAlcohol] = useState(initial?.alcohol ?? "");
   const [description, setDescription] = useState<Localized>(initial?.description ?? EMPTY_LOCALIZED);
   const [specs, setSpecs] = useState<WineSpec[]>(initial?.specs ?? []);
@@ -116,6 +117,7 @@ export function WineForm(props: WineFormProps) {
       image,
       style: style.en.trim() || style.ka.trim() ? style : null,
       grapes: grapes.en.trim() || grapes.ka.trim() ? grapes : null,
+      origin: origin.en.trim() || origin.ka.trim() ? origin : null,
       alcohol: alcohol.trim() || null,
       description: description.en.trim() || description.ka.trim() ? description : null,
       specs: specs.filter(spec => (spec.label.en.trim() || spec.label.ka.trim()) && (spec.value.en.trim() || spec.value.ka.trim())),
@@ -208,6 +210,8 @@ export function WineForm(props: WineFormProps) {
         <BilingualField id="wine-style" label="Style" value={style} onChange={setStyle} />
 
         <BilingualField id="wine-grapes" label="Grapes" hint="Comma-separated, e.g. Saperavi, Rkatsiteli" value={grapes} onChange={setGrapes} />
+
+        <BilingualField id="wine-origin" label="Origin" hint="Leave blank to use the site default: Kakheti, Georgia" value={origin} onChange={setOrigin} />
 
         <div className="grid gap-1.5">
           <Label htmlFor="wine-alcohol">Alcohol (e.g. 14%)</Label>

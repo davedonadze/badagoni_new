@@ -8,7 +8,6 @@ import { Sheet, SheetTrigger, SheetContent, SheetTitle, SheetDescription } from 
 import { localize, localizeHref, type Locale } from "@/lib/i18n";
 import type { MenuItem } from "@/lib/menu/service";
 import type { Localized } from "@/db/schema";
-import { BreakableText } from "./breakable-text";
 
 type UiStrings = Record<string, Localized>;
 
@@ -115,7 +114,7 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
   return <footer className="site-footer">
     <div className="footer-top">
       <div>
-        <p className="footer-statement"><BreakableText text={localize(t["footer.statement"], locale)} /></p>
+        <img className="footer-mark" src="/images/badagoni-mark.svg" alt="Badagoni — Est. 2006" width="163" height="54" loading="lazy" />
         <Link href={localizeHref("/contact", locale)} className="underlined-link footer-invitation-link">{localize(t["footer.startConversation"], locale)} <ArrowUpRight size={17} /></Link>
       </div>
       <nav className="footer-nav" aria-label="Footer navigation, part 1">{footerPrimaryLinks.map(link => <Link key={link.id} href={localizeHref(link.href, locale)}><span>{localize(link.label, locale)}</span><ArrowUpRight size={15} /></Link>)}</nav>
@@ -126,11 +125,10 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
       <div><span className="eyebrow">{localize(t["footer.social"], locale)}</span>{footerSocialLinks.length === 0 && <span className="footer-placeholder">{localize(t["footer.comingSoon"], locale)}</span>}{footerSocialLinks.map(link => <a key={link.id} href={link.href} target="_blank" rel="noreferrer">{localize(link.label, locale)}</a>)}</div>
       <div>
         <span className="eyebrow">{localize(t["footer.language"], locale)}</span>
-        <Link href={canonicalPath} aria-current={locale === "en" ? "true" : undefined} className={locale !== "en" ? "footer-language-muted" : undefined}>{localize(t["footer.english"], locale)}</Link>
-        <Link href={localizeHref(canonicalPath, "ka")} aria-current={locale === "ka" ? "true" : undefined} className={locale !== "ka" ? "footer-language-muted" : undefined}>ქართული</Link>
+        <Link href={canonicalPath} aria-current={locale === "en" ? "true" : undefined} className={locale === "en" ? "footer-language-muted" : undefined}>{localize(t["footer.english"], locale)}</Link>
+        <Link href={localizeHref(canonicalPath, "ka")} aria-current={locale === "ka" ? "true" : undefined} className={locale === "ka" ? "footer-language-muted" : undefined}>ქართული</Link>
       </div>
     </div>
     <div className="footer-legal"><span>© {new Date().getFullYear()} Badagoni</span><span>{localize(t["footer.enjoyResponsibly"], locale)}</span><a href="#main-content">{localize(t["footer.backToTop"], locale)}</a></div>
-    <Link href={localizeHref("/", locale)} className="footer-wordmark" aria-label="Badagoni home"><img src="/images/badagoni-wordmark.svg" alt="Badagoni" width="328" height="40" loading="lazy" /></Link>
   </footer>;
 }

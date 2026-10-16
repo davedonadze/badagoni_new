@@ -29,12 +29,12 @@ export default async function WinePage({ params }: WinePageProps) {
   const category = await getCategory(wine.category);
   const categoryLabel = category ? localize(category.label, locale) : wine.category;
   const name = localize(wine.name, locale);
-  const kakhetiGeorgia = localize(t["wine.kakhetiGeorgia"], locale);
+  const origin = wine.origin ? localize(wine.origin, locale) : localize(t["wine.kakhetiGeorgia"], locale);
 
   const facts = [
     wine.grapes && { label: localize(t["wine.grapeVariety"], locale), value: localize(wine.grapes, locale) },
     wine.style && { label: localize(t["wine.style"], locale), value: localize(wine.style, locale) },
-    { label: localize(t["wine.origin"], locale), value: kakhetiGeorgia },
+    { label: localize(t["wine.origin"], locale), value: origin },
     wine.alcohol && { label: localize(t["wine.alcohol"], locale), value: wine.alcohol },
     ...(wine.specs ?? []).map(spec => ({ label: localize(spec.label, locale), value: localize(spec.value, locale) })),
   ].filter((fact): fact is { label: string; value: string } => !!fact);
@@ -53,7 +53,7 @@ export default async function WinePage({ params }: WinePageProps) {
       <div className="reserve-heading"><p className="eyebrow">Badagoni / {categoryLabel}</p><h1 id="wine-title">{name}</h1></div>
       <figure className="reserve-visual">
         <img src={wine.image} alt={name + " bottle"} width="300" height="1105" fetchPriority="high" />
-        <figcaption>{wine.grapes ? localize(wine.grapes, locale) : categoryLabel} / {kakhetiGeorgia}</figcaption>
+        <figcaption>{wine.grapes ? localize(wine.grapes, locale) : categoryLabel} / {origin}</figcaption>
       </figure>
       <div className="reserve-information">
         <p className="reserve-introduction">{wine.description ? localize(wine.description, locale) : localize(t["wine.fallbackDescription"], locale)}</p>

@@ -75,6 +75,7 @@ export function parseWineInput(body: Record<string, unknown>): WineInput {
     image: typeof body.image === "string" ? body.image.trim() : "",
     style: nullableLocalized(body.style),
     grapes: nullableLocalized(body.grapes),
+    origin: nullableLocalized(body.origin),
     alcohol: nullableString(body.alcohol),
     description: nullableLocalized(body.description),
     specs: parseSpecs(body.specs),

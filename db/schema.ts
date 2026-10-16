@@ -43,6 +43,9 @@ export const wines = sqliteTable("wines", {
   image: text("image").notNull(),
   style: text("style", { mode: "json" }).$type<Localized | null>(),
   grapes: text("grapes", { mode: "json" }).$type<Localized | null>(),
+  // Shown as "Origin" on the wine detail page/panel. Null falls back to the
+  // site's default origin text (see lib/ui-strings) rather than an empty field.
+  origin: text("origin", { mode: "json" }).$type<Localized | null>(),
   alcohol: text("alcohol"),
   description: text("description", { mode: "json" }).$type<Localized | null>(),
   specs: text("specs", { mode: "json" }).$type<WineSpec[] | null>(),
