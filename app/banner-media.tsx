@@ -6,7 +6,7 @@ import { isVideoUrl } from "@/lib/media";
 // video or image depending on what was uploaded, for use inside
 // ParallaxMedia's `media` prop. className carries page-specific framing
 // (object-position, entrance animations) that must apply to either tag.
-export function BannerMedia({ src, alt, className, fetchPriority, loading }: { src: string; alt: string; className?: string; fetchPriority?: "high" | "low" | "auto"; loading?: "lazy" | "eager" }) {
+export function BannerMedia({ src, alt, className, fetchPriority, loading, onVideoReady }: { src: string; alt: string; className?: string; fetchPriority?: "high" | "low" | "auto"; loading?: "lazy" | "eager"; onVideoReady?: (video: HTMLVideoElement | null) => void }) {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -22,7 +22,7 @@ export function BannerMedia({ src, alt, className, fetchPriority, loading }: { s
   }, [src]);
 
   if (isVideoUrl(src)) {
-    return <video ref={videoRef} src={src} className={className} autoPlay muted loop playsInline />;
+    return <video ref={el => { videoRef.current = el; onVideoReady?.(el); }} src={src} className={className} autoPlay muted loop playsInline />;
   }
   return <img src={src} alt={alt} className={className} fetchPriority={fetchPriority} loading={loading} />;
 }

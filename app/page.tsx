@@ -7,6 +7,7 @@ import { SmoothScroll } from "./smooth-scroll";
 import { ScrollReveal } from "./scroll-reveal";
 import { BreakableText } from "./breakable-text";
 import { BannerMedia } from "./banner-media";
+import { ManifestoMedia } from "./manifesto-media";
 import { listWines } from "@/lib/wines/service";
 import { listCategories } from "@/lib/categories/service";
 import { getPageContent } from "@/lib/pages/service";
@@ -64,11 +65,7 @@ export default async function Home() {
     <ScrollReveal><div className="origin-interlude"><p><BreakableText text={localize(originInterlude.line, locale)} /></p><span>{localize(originInterlude.caption, locale)}</span></div></ScrollReveal>
 
     <section className="manifesto" aria-labelledby="manifesto-title">
-      <ParallaxMedia
-        className="manifesto-image"
-        media={<BannerMedia src={manifesto.image} alt="A shared glass of wine around the table" loading="lazy" />}
-        overlay={<span>{localize(manifesto.overlayCaption, locale)}</span>}
-      />
+      <ManifestoMedia src={manifesto.image} alt="A shared glass of wine around the table" caption={localize(manifesto.overlayCaption, locale)} />
       <div className="manifesto-content"><h2 id="manifesto-title" style={titleStyleCss(manifesto.headingStyle)}><BreakableText text={localize(manifesto.heading, locale)} /></h2><TitleStyleMobileRule id="manifesto-title" style={manifesto.headingStyle} defaultMobilePx={48} /><div className="manifesto-copy"><p className="eyebrow">{localize(manifesto.eyebrow, locale)}</p><p>{localize(manifesto.body, locale)}</p><Link href={localizeHref("/story", locale)} className="underlined-link">{localize(t["cta.ourStory"], locale)} <ArrowUpRight size={16} /></Link></div></div>
 
       <section className="world-section" aria-labelledby="world-title">

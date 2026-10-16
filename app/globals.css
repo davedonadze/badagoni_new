@@ -310,6 +310,9 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
 .origin-interlude>span {display:block;margin-top:20px;font-size:12px;color:#64645f}
 .manifesto-image {aspect-ratio:1672/941;background:#716255}
 .manifesto-image .parallax-overlay>span {position:absolute;left:var(--gutter);bottom:22px;color:white;font-size:12px;text-transform:uppercase;text-shadow:0 1px 7px #000}
+.manifesto-video-controls {position:absolute;left:50%;bottom:22px;transform:translateX(-50%);display:flex;align-items:center;gap:clamp(28px,4vw,64px)}
+.manifesto-video-controls button {display:flex;align-items:center;gap:10px;border:0;background:none;padding:0;color:white;font:inherit;font-size:13px;letter-spacing:.08em;text-transform:uppercase;text-shadow:0 1px 7px #000;cursor:pointer}
+.manifesto-video-controls button:focus-visible {outline:2px solid white;outline-offset:6px}
 .manifesto-content {width:var(--editorial-copy-width);margin:64px var(--gutter) 90px auto}
 .manifesto-content h2 {font-size:clamp(58px,5.8vw,90px);line-height:.92;letter-spacing:-.025em;text-transform:uppercase}
 .manifesto-copy {margin-top:34px}
