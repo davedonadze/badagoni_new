@@ -126,8 +126,8 @@ export function SiteFooter({ footerPrimaryLinks, footerSecondaryLinks, footerSoc
       <div><span className="eyebrow">{localize(t["footer.social"], locale)}</span>{footerSocialLinks.length === 0 && <span className="footer-placeholder">{localize(t["footer.comingSoon"], locale)}</span>}{footerSocialLinks.map(link => <a key={link.id} href={link.href} target="_blank" rel="noreferrer">{localize(link.label, locale)}</a>)}</div>
       <div>
         <span className="eyebrow">{localize(t["footer.language"], locale)}</span>
-        <Link href={canonicalPath} aria-current={locale === "en" ? "true" : undefined} className={locale !== "en" ? "footer-language-muted" : undefined}>{localize(t["footer.english"], locale)}</Link>
-        <Link href={localizeHref(canonicalPath, "ka")} aria-current={locale === "ka" ? "true" : undefined} className={locale !== "ka" ? "footer-language-muted" : undefined}>ქართული</Link>
+        <Link href={canonicalPath} aria-current={locale === "en" ? "true" : undefined} className={locale === "en" ? "footer-language-muted" : undefined}>{localize(t["footer.english"], locale)}</Link>
+        <Link href={localizeHref(canonicalPath, "ka")} aria-current={locale === "ka" ? "true" : undefined} className={locale === "ka" ? "footer-language-muted" : undefined}>ქართული</Link>
       </div>
     </div>
     <div className="footer-legal"><span>© {new Date().getFullYear()} Badagoni</span><span>{localize(t["footer.enjoyResponsibly"], locale)}</span><a href="#main-content">{localize(t["footer.backToTop"], locale)}</a></div>
