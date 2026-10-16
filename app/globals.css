@@ -276,7 +276,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .wine-detail-image img {height:305px;max-width:70%;object-fit:contain;filter:drop-shadow(9px 12px 9px #0000000c)}
 .wine-detail-copy {padding:27px 30px 35px}
 .wine-detail-title[data-slot=sheet-title] {font-family:var(--serif);font-size:52px;font-weight:400;letter-spacing:-.025em;line-height:1.03;margin:15px 0 20px;overflow-wrap:anywhere}
-.wine-detail-description {font-size:16px!important;color:#5f5f59!important;line-height:1.65!important}
 .wine-specs {margin:28px 0 20px}
 .wine-specs>div {display:flex;justify-content:space-between;gap:20px;border-top:1px solid var(--border);padding:13px 0;font-size:14px}
 .wine-specs dt {color:#60605b}
