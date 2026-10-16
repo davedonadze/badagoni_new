@@ -116,6 +116,82 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .skip-link {position:fixed;left:20px;top:-100px;z-index:100;background:white;color:#151515;padding:15px}
 .skip-link:focus {top:15px}
 
+/* Age gate - shown once per visitor (gated by a cookie, see lib/age-gate.ts
+   and app/age-gate.tsx) before the rest of the site. Colors are scoped to
+   this overlay (--ag-*) rather than reusing the site's --muted etc., since
+   this is a dark theme sitting on top of the site's light one. */
+.age-gate-overlay {--ag-ivory:#f6f3e9;--ag-muted:#dadbd2;position:fixed;inset:0;z-index:9999;display:grid;overflow-y:auto;color:var(--ag-ivory);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;transition:opacity .5s ease,filter .5s ease}
+.age-gate-overlay button,.age-gate-overlay select {font:inherit}
+.age-gate-overlay button {color:inherit;cursor:pointer}
+.age-gate-overlay button:focus-visible,.age-gate-overlay select:focus-visible {outline:2px solid var(--ag-ivory);outline-offset:6px}
+.age-gate-landscape {position:fixed;inset:0;overflow:hidden;background:#111417;pointer-events:none}
+.age-gate-landscape-image {width:100%;height:100%;object-fit:cover;object-position:50% 48%;filter:brightness(.95);transform:scale(1.04);animation:age-gate-landscape-reveal 14s cubic-bezier(.15,.6,.25,1) both}
+.age-gate-landscape-shade {position:absolute;inset:0;background:radial-gradient(ellipse at 50% 49%,#07090c35 0%,transparent 65%),linear-gradient(180deg,#05070b36 0%,#080b0e20 45%,#04060a70 100%)}
+.age-gate-landscape::after {content:"";position:absolute;inset:0;box-shadow:inset 0 0 170px #05070a25}
+.age-gate {position:relative;display:grid;grid-template-rows:auto 1fr;min-height:100svh}
+.age-gate-header {position:relative;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;padding:38px var(--gutter) 22px;min-height:108px}
+.age-gate-brand {grid-column:2;display:block;width:140px;max-width:100%;height:auto;filter:brightness(0) invert(1);opacity:.95}
+.age-gate-language {display:flex;align-items:center;width:100%;min-height:60px;margin-top:18px;border:1px solid #e8e9dcad;background:#0c160e18;color:var(--ag-ivory);font-size:11px;font-weight:500;line-height:1.5;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .3s,color .3s,border-color .3s}
+.age-gate-language>span:first-child {flex:0 0 auto;padding-left:25px;font-size:10px;opacity:.8}
+.age-gate-language-value {position:relative;flex:1;min-width:0}
+.age-gate-language-value select {display:block;appearance:none;width:100%;min-height:58px;padding:19px 49px 19px 20px;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:.08em;text-align:right;text-transform:uppercase;cursor:pointer}
+.age-gate-language-value select option {background:#111417;color:var(--ag-ivory);font-size:13px;letter-spacing:0;text-transform:none}
+.age-gate-language-value svg {position:absolute;right:25px;top:50%;transform:translateY(-50%);pointer-events:none}
+.age-gate-language:focus-within {outline:2px solid var(--ag-ivory);outline-offset:6px}
+.age-gate-language-value select:focus {outline:none}
+@media(hover:hover) {.age-gate-language:hover {background:var(--ag-ivory);border-color:var(--ag-ivory);color:#17221b}}
+.age-gate-main {display:grid;place-items:center;padding:50px 24px 140px}
+.age-gate-content {width:100%;max-width:780px;text-align:center;animation:age-gate-content-reveal 1.15s .1s ease both}
+.age-gate-eyebrow {margin:0 0 27px;font-family:var(--sans);font-size:10px;font-weight:500;line-height:1.6;letter-spacing:.2em;text-transform:uppercase;color:#e8e7dc}
+.age-gate-message {max-width:360px;margin:30px auto 0;color:var(--ag-muted);font-size:13px;line-height:1.8;text-wrap:pretty}
+.age-gate-form {width:min(100%,330px);margin:24px auto 0}
+.age-gate-confirmation {position:relative;display:flex;align-items:center;justify-content:center;gap:11px;min-height:44px;padding:8px 0;color:#e4e5dc;font-size:12px;line-height:1.6;cursor:pointer}
+.age-gate-confirmation input {position:absolute;left:0;top:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer}
+.age-gate-checkbox-mark {display:grid;place-items:center;flex:0 0 16px;width:16px;height:16px;border:1px solid #d8ded28c;color:#17221b;transition:background .2s,border-color .2s}
+.age-gate-checkbox-mark svg {width:14px;height:14px;opacity:0;transform:scale(.75);transition:opacity .2s,transform .2s}
+.age-gate-confirmation input:checked+.age-gate-checkbox-mark {background:var(--ag-ivory);border-color:var(--ag-ivory)}
+.age-gate-confirmation input:checked+.age-gate-checkbox-mark svg {opacity:1;transform:scale(1)}
+.age-gate-confirmation input:focus-visible+.age-gate-checkbox-mark {outline:2px solid var(--ag-ivory);outline-offset:4px}
+.age-gate-enter {display:flex;align-items:center;justify-content:space-between;width:100%;min-height:60px;margin-top:12px;padding:19px 25px;border:1px solid #e8e9dcad;background:#0c160e18;color:var(--ag-ivory);font-size:11px;font-weight:500;line-height:1.5;letter-spacing:.15em;text-transform:uppercase;transition:background .3s,color .3s,border-color .3s}
+.age-gate-enter-arrow {flex:0 0 auto;transition:transform .3s ease}
+.age-gate-enter:disabled {cursor:wait}
+.age-gate-status {min-height:20px;margin:10px 0 0;color:var(--ag-muted);font-size:12px}
+@media(hover:hover) {.age-gate-enter:hover {background:var(--ag-ivory);border-color:var(--ag-ivory);color:#17221b}.age-gate-enter:hover .age-gate-enter-arrow {transform:translateX(4px)}}
+.age-gate-enter:active {background:var(--ag-ivory);color:#17221b}
+.age-gate-overlay.is-leaving {opacity:0;filter:blur(3px);pointer-events:none}
+.age-gate-overlay.is-leaving .age-gate-landscape-image {animation:none;transition:transform .8s ease;transform:scale(1.08)}
+html:lang(ka) .age-gate-eyebrow {letter-spacing:.04em;font-size:11px}
+html:lang(ka) .age-gate-message {max-width:410px;line-height:1.9}
+html:lang(ka) .age-gate-enter {letter-spacing:.02em}
+html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {letter-spacing:.02em}
+@keyframes age-gate-landscape-reveal {from{transform:scale(1.12)}to{transform:scale(1.04)}}
+@keyframes age-gate-content-reveal {from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:700px) {
+  .age-gate-header {padding:29px var(--gutter) 10px;grid-template-columns:1fr;align-items:start}
+  .age-gate-brand {grid-column:1;justify-self:center;width:124px}
+  .age-gate-language {min-height:58px;margin-top:16px}
+  .age-gate-language-value select {min-height:56px;padding-top:18px;padding-bottom:18px}
+  .age-gate-main {padding:38px 22px 132px}
+  .age-gate-eyebrow {margin-bottom:24px;font-size:9px;letter-spacing:.16em}
+  .age-gate-message {margin-top:26px;max-width:300px;font-size:12px}
+  .age-gate-form {max-width:300px;margin-top:23px}
+  .age-gate-enter {min-height:58px}
+  .age-gate-landscape-image {object-position:50% center}
+}
+@media(max-height:720px) and (min-width:701px) {
+  .age-gate-header {min-height:86px;padding-top:24px;padding-bottom:16px}
+  .age-gate-brand {width:128px}
+  .age-gate-main {padding-top:20px;padding-bottom:30px}
+  .age-gate-eyebrow {margin-bottom:20px}
+  .age-gate-message {margin-top:22px}
+  .age-gate-form {margin-top:16px}
+}
+@media(prefers-reduced-motion:reduce) {
+  .age-gate-overlay,.age-gate-overlay * {animation:none!important;transition:none!important}
+  .age-gate-landscape-image {transform:scale(1.04)}
+  .age-gate-overlay.is-leaving {opacity:1;filter:none}
+}
+
 /* Fixed so it can stay pinned while scrolling up; hides on the way down and
    reappears on the way up (site-shell.tsx tracks scroll direction and
    toggles .header-hidden), sliding with the same easing used for other
