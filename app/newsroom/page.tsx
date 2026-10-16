@@ -13,9 +13,12 @@ export const metadata: Metadata = {
   description: "News, awards, and stories from Badagoni and the world of Georgian wine.",
 };
 
+const PREVIEW_COUNT = 3;
+
 export default async function Newsroom() {
   const [articles, locale, t] = await Promise.all([listNewsArticles(), getLocale(), getUiStrings()]);
   const [featured, ...stories] = articles;
+  const preview = stories.slice(0, PREVIEW_COUNT);
 
   if (!featured) {
     return <main className="newsroom-page">
@@ -49,9 +52,10 @@ export default async function Newsroom() {
       </Link>
     </section>
 
-    {stories.length > 0 && <section id="more-from-badagoni" className="newsroom-stories" aria-labelledby="newsroom-stories-title">
+    {preview.length > 0 && <section id="more-from-badagoni" className="newsroom-stories" aria-labelledby="newsroom-stories-title">
       <div className="newsroom-list-heading"><h2 id="newsroom-stories-title" className="eyebrow">{localize(t["newsroom.moreFromBadagoni"], locale)}</h2></div>
-      <NewsCards stories={stories} locale={locale} t={t} />
+      <NewsCards stories={preview} locale={locale} t={t} />
+      {stories.length > PREVIEW_COUNT && <div className="newsroom-more"><Link href={localizeHref("/newsroom/all", locale)} className="underlined-link">{localize(t["newsroom.more"], locale)} <ArrowUpRight size={18} aria-hidden="true" /></Link></div>}
     </section>}
   </main>;
 }
