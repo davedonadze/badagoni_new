@@ -246,6 +246,13 @@
       "when": 1791544037798,
       "tag": "0034_georgian_wine_chapters",
       "breakpoints": true
+    },
+    {
+      "idx": 35,
+      "version": "6",
+      "when": 1791544037799,
+      "tag": "0035_add_wine_origin",
+      "breakpoints": true
     }
   ]
 }

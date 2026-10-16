@@ -12,6 +12,7 @@ export type Wine = {
   image: string;
   style: Localized | null;
   grapes: Localized | null;
+  origin: Localized | null;
   alcohol: string | null;
   description: Localized | null;
   specs: WineSpec[] | null;
@@ -28,6 +29,7 @@ export type WineInput = {
   image: string;
   style?: Localized | null;
   grapes?: Localized | null;
+  origin?: Localized | null;
   alcohol?: string | null;
   description?: Localized | null;
   specs?: WineSpec[] | null;
@@ -74,6 +76,7 @@ export async function createWine(input: WineInput): Promise<Wine> {
       image: input.image,
       style: input.style ?? null,
       grapes: input.grapes ?? null,
+      origin: input.origin ?? null,
       alcohol: input.alcohol ?? null,
       description: input.description ?? null,
       specs: input.specs ?? null,
@@ -97,6 +100,7 @@ export async function updateWine(slug: string, input: WineInput): Promise<Wine |
       image: input.image,
       style: input.style ?? null,
       grapes: input.grapes ?? null,
+      origin: input.origin ?? null,
       alcohol: input.alcohol ?? null,
       description: input.description ?? null,
       specs: input.specs ?? null,

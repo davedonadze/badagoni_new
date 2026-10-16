@@ -16,12 +16,12 @@ export default async function SaperaviReserve() {
   const [wine, locale, t] = await Promise.all([getWineBySlug("saperavi-reserve"), getLocale(), getUiStrings()]);
   if (!wine) notFound();
   const name = localize(wine.name, locale);
-  const kakhetiGeorgia = localize(t["wine.kakhetiGeorgia"], locale);
+  const origin = wine.origin ? localize(wine.origin, locale) : localize(t["wine.kakhetiGeorgia"], locale);
 
   const facts = [
     wine.grapes && { label: localize(t["wine.grapeVariety"], locale), value: localize(wine.grapes, locale) },
     wine.style && { label: localize(t["wine.style"], locale), value: localize(wine.style, locale) },
-    { label: localize(t["wine.origin"], locale), value: kakhetiGeorgia },
+    { label: localize(t["wine.origin"], locale), value: origin },
     wine.alcohol && { label: localize(t["wine.alcohol"], locale), value: wine.alcohol },
     ...(wine.specs ?? []).map(spec => ({ label: localize(spec.label, locale), value: localize(spec.value, locale) })),
   ].filter((fact): fact is { label: string; value: string } => !!fact);
@@ -41,7 +41,7 @@ export default async function SaperaviReserve() {
       <figure className="reserve-visual">
         <span className="reserve-vintage">2010 vintage</span>
         <img src={wine.image} alt={name + " bottle"} width="300" height="1105" fetchPriority="high" />
-        <figcaption>{wine.grapes ? localize(wine.grapes, locale) : "Saperavi"} / {kakhetiGeorgia}</figcaption>
+        <figcaption>{wine.grapes ? localize(wine.grapes, locale) : "Saperavi"} / {origin}</figcaption>
       </figure>
       <div className="reserve-information">
         <p className="reserve-introduction">{wine.description ? localize(wine.description, locale) : localize(t["wine.fallbackDescription"], locale)}</p>
