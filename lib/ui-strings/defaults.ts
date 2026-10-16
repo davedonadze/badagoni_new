@@ -79,8 +79,6 @@ export const UI_STRING_DEFAULTS: Record<string, Localized> = {
   "newsroom.heading": en("Newsroom."),
   "newsroom.subheadLine1": en("From our home in Kakheti"),
   "newsroom.subheadLine2": en("to the wider world of wine."),
-  "newsroom.featuredStory": en("Featured story"),
-  "newsroom.moreFromBadagoni": en("More from Badagoni"),
   "newsroom.backToNewsroom": en("Back to newsroom"),
   "newsroom.publishedByBadagoni": en("Published by Badagoni"),
   "newsroom.originalAnnouncement": en("Original announcement"),
@@ -149,7 +147,7 @@ export const UI_STRING_GROUPS: UiStringGroup[] = [
     title: "Newsroom",
     keys: [
       "newsroom.newsAndStories", "newsroom.heading", "newsroom.subheadLine1", "newsroom.subheadLine2",
-      "newsroom.featuredStory", "newsroom.moreFromBadagoni", "newsroom.backToNewsroom",
+      "newsroom.backToNewsroom",
       "newsroom.publishedByBadagoni", "newsroom.originalAnnouncement", "newsroom.learnMore", "newsroom.allNewsAndStories",
       "newsroom.more", "newsroom.allNewsHeading", "newsroom.allNewsSubheadLine1", "newsroom.allNewsSubheadLine2",
       "newsroom.latestFirst", "newsroom.storiesSuffix",

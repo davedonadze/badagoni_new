@@ -12,8 +12,7 @@ export const metadata: Metadata = {
 };
 
 export default async function AllNews() {
-  const [articles, locale, t] = await Promise.all([listNewsArticles(), getLocale(), getUiStrings()]);
-  const [, ...stories] = articles;
+  const [stories, locale, t] = await Promise.all([listNewsArticles(), getLocale(), getUiStrings()]);
 
   return <main className="all-news-page">
     <nav className="news-article-back" aria-label="Newsroom navigation">
