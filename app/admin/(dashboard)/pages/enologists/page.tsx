@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { getPageContent } from "@/lib/pages/service";
-import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/lib/pages/enologists";
+import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, ensureEnologistIds, type EnologistsContent } from "@/lib/pages/enologists";
 import { EnologistsForm } from "./enologists-form";
 
 export const dynamic = "force-dynamic";
 
 export default async function EditEnologistsPage() {
-  const content = (await getPageContent<EnologistsContent>(ENOLOGISTS_SLUG)) ?? ENOLOGISTS_DEFAULT;
+  const content = ensureEnologistIds((await getPageContent<EnologistsContent>(ENOLOGISTS_SLUG)) ?? ENOLOGISTS_DEFAULT);
 
   return <div className="flex flex-col gap-6">
     <div>

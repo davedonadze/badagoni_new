@@ -3,7 +3,7 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { EnologistList } from "./enologist-list";
 import { getPageContent } from "@/lib/pages/service";
-import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, type EnologistsContent } from "@/lib/pages/enologists";
+import { ENOLOGISTS_SLUG, ENOLOGISTS_DEFAULT, ensureEnologistIds, type EnologistsContent } from "@/lib/pages/enologists";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
@@ -20,7 +20,7 @@ export default async function Enologists() {
     getLocale(),
     getUiStrings(),
   ]);
-  const { heading, people, closing } = content ?? ENOLOGISTS_DEFAULT;
+  const { heading, people, closing } = ensureEnologistIds(content ?? ENOLOGISTS_DEFAULT);
 
   const enologists = people.filter(person => !person.hidden).map(person => ({
     id: person.id,

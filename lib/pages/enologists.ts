@@ -14,6 +14,26 @@ function en(value: string): Localized {
   return { en: value, ka: "" };
 }
 
+function slugify(value: string): string {
+  return value.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "");
+}
+
+// A person saved (e.g. via an admin form the browser had cached from before
+// `id` existed on this type) without an id breaks the public page's
+// accordion - every item shares the same empty value, so clicking does
+// nothing. Patch in a stable id at read time so a stray save like that can't
+// silently break the page; a subsequent admin save persists it for good.
+export function ensureEnologistIds(content: EnologistsContent): EnologistsContent {
+  let changed = false;
+  const people = content.people.map((person, i) => {
+    if (person.id) return person;
+    changed = true;
+    const slug = slugify(`${person.firstName.en} ${person.lastName.en}`);
+    return { ...person, id: slug || `person-${i}` };
+  });
+  return changed ? { ...content, people } : content;
+}
+
 // The enologists page's original hardcoded copy. Each person's id (used for
 // the index nav's #anchor links) is now stored alongside the content so
 // admins can add/remove/reorder people; the closing link text stays fixed in
