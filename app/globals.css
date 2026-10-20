@@ -59,6 +59,11 @@ html:lang(ka) .opening-signature {
 }
 * {box-sizing:border-box}
 html {scroll-behavior:smooth;scroll-padding-top:26px}
+/* Radix's scroll lock (data-scroll-locked, set while any Sheet/Dialog is
+   open) only locks body's own overflow, not html's - without this, a wheel
+   scroll over a sheet whose content doesn't fill the viewport chains to
+   html instead, scrolling the page behind the (fixed-position) sheet. */
+html:has(body[data-scroll-locked]) {overflow:hidden}
 body {margin:0;background:var(--background);color:var(--foreground);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
 a {color:inherit;text-decoration:none}
 /* Tailwind's utility classes live in a CSS layer, and unlayered rules like
@@ -123,7 +128,7 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .age-gate-overlay {--ag-ivory:#f6f3e9;--ag-muted:#dadbd2;position:fixed;inset:0;z-index:9999;display:grid;overflow-y:auto;color:var(--ag-ivory);font-family:var(--sans);font-weight:400;-webkit-font-smoothing:antialiased;transition:opacity .5s ease,filter .5s ease}
 .age-gate-overlay button,.age-gate-overlay select {font:inherit}
 .age-gate-overlay button {color:inherit;cursor:pointer}
-.age-gate-overlay button:focus-visible,.age-gate-overlay select:focus-visible {outline:2px solid var(--ag-ivory);outline-offset:6px}
+.age-gate-overlay button:focus-visible {outline:2px solid var(--ag-ivory);outline-offset:6px}
 .age-gate-landscape {position:fixed;inset:0;overflow:hidden;background:#111417;pointer-events:none}
 .age-gate-landscape-image {width:100%;height:100%;object-fit:cover;object-position:50% 48%;filter:brightness(.95);transform:scale(1.04);animation:age-gate-landscape-reveal 14s cubic-bezier(.15,.6,.25,1) both}
 .age-gate-landscape-shade {position:absolute;inset:0;background:radial-gradient(ellipse at 50% 49%,#07090c35 0%,transparent 65%),linear-gradient(180deg,#05070b36 0%,#080b0e20 45%,#04060a70 100%)}
@@ -137,7 +142,6 @@ a:focus-visible,button:focus-visible {outline:2px solid currentColor;outline-off
 .age-gate-language-value select {display:block;appearance:none;width:100%;min-height:58px;padding:19px 49px 19px 20px;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:.08em;text-align:right;text-transform:uppercase;cursor:pointer}
 .age-gate-language-value select option {background:#111417;color:var(--ag-ivory);font-size:13px;letter-spacing:0;text-transform:none}
 .age-gate-language-value svg {position:absolute;right:25px;top:50%;transform:translateY(-50%);pointer-events:none}
-.age-gate-language:focus-within {outline:2px solid var(--ag-ivory);outline-offset:6px}
 .age-gate-language-value select:focus {outline:none}
 @media(hover:hover) {.age-gate-language:hover {background:var(--ag-ivory);border-color:var(--ag-ivory);color:#17221b}}
 .age-gate-main {display:grid;place-items:center;padding:50px 24px 140px}
