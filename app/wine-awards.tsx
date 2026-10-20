@@ -11,7 +11,7 @@ export function WineAwards({ awards, wineName, locale, t }: { awards: WineAward[
     <SheetTrigger asChild>
       <button type="button" className="underlined-link reserve-awards-trigger">{localize(t["wine.awards"], locale)} <ArrowUpRight size={18} aria-hidden="true" /></button>
     </SheetTrigger>
-    <SheetContent side="right" className="wine-panel reserve-awards-panel" showCloseButton={false}>
+    <SheetContent side="right" className="wine-panel reserve-awards-panel" data-lenis-prevent showCloseButton={false}>
       <div className="wine-panel-top">
         <span className="eyebrow">{wineName}</span>
         <SheetClose aria-label="Close awards" className="panel-close"><X size={23} strokeWidth={1.3} aria-hidden="true" /></SheetClose>

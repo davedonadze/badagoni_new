@@ -59,6 +59,11 @@ html:lang(ka) .opening-signature {
 }
 * {box-sizing:border-box}
 html {scroll-behavior:smooth;scroll-padding-top:26px}
+/* Radix's scroll lock (data-scroll-locked, set while any Sheet/Dialog is
+   open) only locks body's own overflow, not html's - without this, a wheel
+   scroll over a sheet whose content doesn't fill the viewport chains to
+   html instead, scrolling the page behind the (fixed-position) sheet. */
+html:has(body[data-scroll-locked]) {overflow:hidden}
 body {margin:0;background:var(--background);color:var(--foreground);font-family:var(--sans);font-size:16px;-webkit-font-smoothing:antialiased}
 a {color:inherit;text-decoration:none}
 /* Tailwind's utility classes live in a CSS layer, and unlayered rules like
