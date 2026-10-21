@@ -9,6 +9,7 @@ import { BannerMedia } from "../../banner-media";
 import { BreakableParagraphs } from "../../breakable-paragraphs";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
+import { pageMetadata } from "@/lib/seo";
 
 type ArticlePageProps = { params: Promise<{ slug: string }> };
 
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: ArticlePageProps): Promise<Me
   const { slug } = await params;
   const [article, locale] = await Promise.all([getNewsArticleBySlug(slug), getLocale()]);
   if (!article) return { title: "Story not found" };
-  return { title: localize(article.title, locale), description: localize(article.excerpt, locale) };
+  return pageMetadata({ title: localize(article.title, locale), description: localize(article.excerpt, locale), image: article.image });
 }
 
 export default async function NewsArticlePage({ params }: ArticlePageProps) {

@@ -9,6 +9,7 @@ import { PageSections } from "../generic-page-sections";
 import { getLocale, localize } from "@/lib/i18n";
 import { titleStyleCss } from "@/lib/title-style";
 import { TitleStyleMobileRule } from "../title-style-mobile-rule";
+import { pageMetadata } from "@/lib/seo";
 
 type GenericPageProps = { params: Promise<{ slug: string }> };
 
@@ -17,7 +18,7 @@ export async function generateMetadata({ params }: GenericPageProps): Promise<Me
   const [content, locale] = await Promise.all([getPageContent<GenericPageContent>(slug), getLocale()]);
   if (!content) return {};
   const subtitle = localize(content.subtitle, locale);
-  return { title: localize(content.title, locale), description: subtitle || undefined };
+  return pageMetadata({ title: localize(content.title, locale), description: subtitle || undefined, image: content.cover?.image });
 }
 
 // Renders any admin-created page (see lib/pages/generic.ts) that isn't one

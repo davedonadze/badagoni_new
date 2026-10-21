@@ -6,11 +6,14 @@ import { getWineBySlug } from "@/lib/wines/service";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { WineAwards } from "../../wine-awards";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Saperavi Reserve — 2010",
-  description: "Discover Badagoni Saperavi Reserve 2010: a limited dry red wine from vineyards near Alaverdi Monastery. 100% Saperavi, 14% alcohol.",
-};
+const DESCRIPTION = "Discover Badagoni Saperavi Reserve 2010: a limited dry red wine from vineyards near Alaverdi Monastery. 100% Saperavi, 14% alcohol.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const wine = await getWineBySlug("saperavi-reserve");
+  return pageMetadata({ title: "Saperavi Reserve — 2010", description: DESCRIPTION, image: wine?.image });
+}
 
 export default async function SaperaviReserve() {
   const [wine, locale, t] = await Promise.all([getWineBySlug("saperavi-reserve"), getLocale(), getUiStrings()]);
