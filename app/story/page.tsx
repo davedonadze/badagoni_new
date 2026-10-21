@@ -11,8 +11,14 @@ import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
 import { TitleStyleMobileRule } from "../title-style-mobile-rule";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Our story", description: "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine." };
+const DESCRIPTION = "Born in Kakheti in 2006. Georgian heritage and a contemporary perspective on wine.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPageContent<StoryContent>(STORY_SLUG);
+  return pageMetadata({ title: "Our story", description: DESCRIPTION, image: (content ?? STORY_DEFAULT).cover.image });
+}
 
 export default async function Story() {
   const [content, locale, t] = await Promise.all([

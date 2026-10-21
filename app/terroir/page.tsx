@@ -11,8 +11,14 @@ import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
 import { TitleStyleMobileRule } from "../title-style-mobile-rule";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = { title: "Our vineyards", description: "The vineyards and varied terroirs of Kakheti that shape every Badagoni wine." };
+const DESCRIPTION = "The vineyards and varied terroirs of Kakheti that shape every Badagoni wine.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPageContent<TerroirContent>(TERROIR_SLUG);
+  return pageMetadata({ title: "Our vineyards", description: DESCRIPTION, image: (content ?? TERROIR_DEFAULT).cover.image });
+}
 
 export default async function Terroir() {
   const [content, locale, t] = await Promise.all([

@@ -7,6 +7,7 @@ import { getCategory } from "@/lib/categories/service";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { WineAwards } from "../../wine-awards";
+import { pageMetadata } from "@/lib/seo";
 
 type WinePageProps = { params: Promise<{ slug: string }> };
 
@@ -18,7 +19,8 @@ export async function generateMetadata({ params }: WinePageProps): Promise<Metad
   const category = await getCategory(wine.category);
   const name = localize(wine.name, locale);
   const categoryLabel = category ? localize(category.label, locale) : wine.category;
-  return { title: name, description: wine.description ? localize(wine.description, locale) : `Discover ${name} from the Badagoni collection. Native Georgian grapes, ${categoryLabel.toLowerCase()}.` };
+  const description = wine.description ? localize(wine.description, locale) : `Discover ${name} from the Badagoni collection. Native Georgian grapes, ${categoryLabel.toLowerCase()}.`;
+  return pageMetadata({ title: name, description, image: wine.image });
 }
 
 export default async function WinePage({ params }: WinePageProps) {

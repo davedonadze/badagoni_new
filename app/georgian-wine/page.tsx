@@ -7,11 +7,15 @@ import { getUiStrings } from "@/lib/ui-strings/service";
 import { titleStyleCss } from "@/lib/title-style";
 import { TitleStyleMobileRule } from "../title-style-mobile-rule";
 import { HeritageTabs } from "./heritage-tabs";
+import { pageMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Georgian wine",
-  description: "Discover the bronze Badagoni figure found in Melaani and the Georgian qvevri winemaking tradition.",
-};
+const DESCRIPTION = "Discover the bronze Badagoni figure found in Melaani and the Georgian qvevri winemaking tradition.";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const content = await getPageContent<GeorgianWineContent>(GEORGIAN_WINE_SLUG);
+  const { chapters } = normalizeGeorgianWineContent(content ?? undefined);
+  return pageMetadata({ title: "Georgian wine", description: DESCRIPTION, image: chapters[0]?.image });
+}
 
 export default async function GeorgianWine() {
   const [content, locale, t] = await Promise.all([
