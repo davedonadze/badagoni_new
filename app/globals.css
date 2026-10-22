@@ -668,7 +668,7 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
 .news-article-copy>.underlined-link {margin-top:30px}
 .news-article-share {margin-top:40px;display:flex;flex-direction:column;gap:14px}
 .news-article-share-links {display:flex;gap:10px}
-.news-article-share-link {display:flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:9px;color:#fff;transition:opacity .15s ease}
+.news-article-share-link {display:flex;align-items:center;justify-content:center;width:68px;height:38px;border-radius:7px;color:#fff;transition:opacity .15s ease}
 .news-article-share-link:hover {opacity:.85}
 .news-article-share-facebook {background:#1877f2}
 .news-article-share-linkedin {background:#0a66c2}
