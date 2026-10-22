@@ -10,7 +10,7 @@ import { isVideoUrl } from "@/lib/media";
 // Default: playing, muted (same as every other autoplaying banner video on
 // the site), with a bottom-center control bar to let a visitor pause it or
 // turn the sound on.
-export function ManifestoMedia({ src, alt, caption }: { src: string; alt: string; caption: string }) {
+export function ManifestoMedia({ src, alt, caption, showControls = true }: { src: string; alt: string; caption: string; showControls?: boolean }) {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [playing, setPlaying] = useState(true);
   const [muted, setMuted] = useState(true);
@@ -49,7 +49,7 @@ export function ManifestoMedia({ src, alt, caption }: { src: string; alt: string
     media={<BannerMedia src={src} alt={alt} loading="lazy" onVideoReady={el => { videoRef.current = el; }} />}
     overlay={<>
       <span>{caption}</span>
-      {isVideo && <div className="manifesto-video-controls">
+      {isVideo && showControls && <div className="manifesto-video-controls">
         <button type="button" onClick={togglePlay} aria-label={playing ? "Pause video" : "Play video"}>
           {playing ? "Pause" : "Play"}{playing ? <Pause size={14} strokeWidth={1.3} /> : <Play size={14} fill="currentColor" />}
         </button>

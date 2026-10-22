@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Switch } from "@/components/ui/switch";
 import { BilingualField } from "../../../bilingual-field";
 import { ImagePicker } from "../../../image-picker";
 import { TitleStyleField } from "../../../title-style-field";
@@ -137,6 +138,13 @@ export function HomeForm({ content: initial }: { content: HomeContent }) {
       <CardHeader><CardTitle>Manifesto</CardTitle></CardHeader>
       <CardContent className="flex flex-col gap-6">
         <ImagePicker id="home-manifesto-image" label="Photo or video" value={manifesto.image} onChange={v => setManifesto({ ...manifesto, image: v })} previewClassName={wideImagePreview} allowVideo recommendedResolution="1920×1080px or larger, landscape" />
+        <label className="flex items-center justify-between gap-4">
+          <span className="flex flex-col gap-0.5">
+            <span className="text-sm font-medium">Show play/pause and sound controls</span>
+            <span className="text-sm text-muted-foreground">Only applies when the media above is a video.</span>
+          </span>
+          <Switch checked={manifesto.showControls ?? true} onCheckedChange={v => setManifesto({ ...manifesto, showControls: v })} />
+        </label>
         <BilingualField id="home-manifesto-overlay" label="Overlay caption" value={manifesto.overlayCaption} onChange={v => setManifesto({ ...manifesto, overlayCaption: v })} />
         <BilingualField id="home-manifesto-eyebrow" label="Eyebrow" value={manifesto.eyebrow} onChange={v => setManifesto({ ...manifesto, eyebrow: v })} />
         <BilingualField id="home-manifesto-heading" label="Heading" hint="Use a new line for a manual line break." multiline rows={2} value={manifesto.heading} onChange={v => setManifesto({ ...manifesto, heading: v })} />
