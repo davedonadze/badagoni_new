@@ -9,7 +9,8 @@ import { BannerMedia } from "../../banner-media";
 import { BreakableParagraphs } from "../../breakable-paragraphs";
 import { getLocale, localize, localizeHref } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
-import { pageMetadata } from "@/lib/seo";
+import { pageMetadata, SITE_URL } from "@/lib/seo";
+import { ShareButtons } from "../share-buttons";
 
 type ArticlePageProps = { params: Promise<{ slug: string }> };
 
@@ -47,6 +48,7 @@ export default async function NewsArticlePage({ params }: ArticlePageProps) {
         <div className="news-article-copy">
           <BreakableParagraphs text={localize(article.body, locale)} />
           {article.relatedHref && <Link href={localizeHref(article.relatedHref, locale)} className="underlined-link">{article.relatedLabel ? localize(article.relatedLabel, locale) : localize(t["newsroom.learnMore"], locale)}<ArrowUpRight size={18} aria-hidden="true" /></Link>}
+          <ShareButtons url={`${SITE_URL}${localizeHref(`/newsroom/${slug}`, locale)}`} title={title} label={localize(t["newsroom.share"], locale)} />
         </div>
       </div>
     </article>
