@@ -90,6 +90,7 @@ export const UI_STRING_DEFAULTS: Record<string, Localized> = {
   "newsroom.allNewsSubheadLine2": en("from the world of Badagoni."),
   "newsroom.latestFirst": en("Latest first"),
   "newsroom.storiesSuffix": en("stories"),
+  "newsroom.share": en("Share"),
 
   // Legals & Georgian wine tabs
   "legals.termsAndConditionsTab": en("Terms and conditions"),
@@ -150,7 +151,7 @@ export const UI_STRING_GROUPS: UiStringGroup[] = [
       "newsroom.backToNewsroom",
       "newsroom.publishedByBadagoni", "newsroom.originalAnnouncement", "newsroom.learnMore", "newsroom.allNewsAndStories",
       "newsroom.more", "newsroom.allNewsHeading", "newsroom.allNewsSubheadLine1", "newsroom.allNewsSubheadLine2",
-      "newsroom.latestFirst", "newsroom.storiesSuffix",
+      "newsroom.latestFirst", "newsroom.storiesSuffix", "newsroom.share",
     ],
   },
   {

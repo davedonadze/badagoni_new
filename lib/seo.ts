@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 
 export const SITE_NAME = "Badagoni";
+export const SITE_URL = "https://badagoni.com";
 export const DEFAULT_OG_IMAGE = "/images/hero.webp";
 
 // Open Graph/Twitter fields aren't deep-merged with the root layout's

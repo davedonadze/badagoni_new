@@ -65,7 +65,7 @@ export default async function Home() {
     <ScrollReveal><div className="origin-interlude"><p><BreakableText text={localize(originInterlude.line, locale)} /></p><span>{localize(originInterlude.caption, locale)}</span></div></ScrollReveal>
 
     <section className="manifesto" aria-labelledby="manifesto-title">
-      <ManifestoMedia src={manifesto.image} alt="A shared glass of wine around the table" caption={localize(manifesto.overlayCaption, locale)} />
+      <ManifestoMedia src={manifesto.image} alt="A shared glass of wine around the table" caption={localize(manifesto.overlayCaption, locale)} showControls={manifesto.showControls ?? true} />
       <div className="manifesto-content"><h2 id="manifesto-title" style={titleStyleCss(manifesto.headingStyle)}><BreakableText text={localize(manifesto.heading, locale)} /></h2><TitleStyleMobileRule id="manifesto-title" style={manifesto.headingStyle} defaultMobilePx={48} /><div className="manifesto-copy"><p className="eyebrow">{localize(manifesto.eyebrow, locale)}</p><p>{localize(manifesto.body, locale)}</p><Link href={localizeHref("/story", locale)} className="underlined-link">{localize(t["cta.ourStory"], locale)} <ArrowUpRight size={16} /></Link></div></div>
 
       <section className="world-section" aria-labelledby="world-title">

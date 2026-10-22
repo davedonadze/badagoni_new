@@ -11,7 +11,9 @@ export type HomeContent = {
   collection: { heading: Localized; headingStyle?: TitleStyle };
   editorialCards: [EditorialCardContent, EditorialCardContent, EditorialCardContent];
   originInterlude: { line: Localized; caption: Localized };
-  manifesto: { image: string; overlayCaption: Localized; eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; body: Localized };
+  // showControls defaults to true when unset, so content saved before this
+  // field existed keeps showing the play/pause and sound buttons.
+  manifesto: { image: string; overlayCaption: Localized; eyebrow: Localized; heading: Localized; headingStyle?: TitleStyle; body: Localized; showControls?: boolean };
   worldSection: { heading: Localized; headingStyle?: TitleStyle; items: [WorldItemContent, WorldItemContent, WorldItemContent] };
 };
 
