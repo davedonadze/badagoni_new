@@ -26,7 +26,7 @@ const COPY: Record<Locale, { eyebrow: string; message: string; confirm: string; 
 
 const FOCUSABLE = 'a[href],button:not([disabled]),input:not([disabled]),select:not([disabled]),[tabindex]:not([tabindex="-1"])';
 
-export function AgeGate({ locale, initiallyConfirmed }: { locale: Locale; initiallyConfirmed: boolean }) {
+export function AgeGate({ locale, initiallyConfirmed, hideGeorgianLanguage }: { locale: Locale; initiallyConfirmed: boolean; hideGeorgianLanguage?: boolean }) {
   const pathname = usePathname();
   const [confirmed, setConfirmed] = useState(initiallyConfirmed);
   const [leaving, setLeaving] = useState(false);
@@ -115,7 +115,7 @@ export function AgeGate({ locale, initiallyConfirmed }: { locale: Locale; initia
               <span className="age-gate-checkbox-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="m3.5 8 3 3 6-6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" /></svg></span>
               <span>{t.confirm}</span>
             </label>
-            <label className="age-gate-language" htmlFor="age-gate-site-language">
+            {!hideGeorgianLanguage && <label className="age-gate-language" htmlFor="age-gate-site-language">
               <span id="age-gate-language-label">{t.languageLabel}</span>
               <span className="age-gate-language-value">
                 <select id="age-gate-site-language" aria-labelledby="age-gate-language-label" value={language} onChange={e => setLanguage(e.target.value as Locale)}>
@@ -124,7 +124,7 @@ export function AgeGate({ locale, initiallyConfirmed }: { locale: Locale; initia
                 </select>
                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none" aria-hidden="true"><path d="m1 1 6 6 6-6" stroke="currentColor" strokeWidth="1.2" /></svg>
               </span>
-            </label>
+            </label>}
             <button className="age-gate-enter" type="submit" disabled={submitting}>
               <span>{t.enter}</span>
               <svg className="age-gate-enter-arrow" width="22" height="16" viewBox="0 0 22 16" fill="none" aria-hidden="true"><path d="M1 8h19M13.5 1.5 20 8l-6.5 6.5" stroke="currentColor" strokeWidth="1.2" /></svg>

@@ -64,7 +64,7 @@ export const EMPTY_GENERIC_PAGE: GenericPageContent = {
 // "catalogue"/"legals"/"georgian-wine" have their own dedicated editors;
 // "new" is the admin route for creating a page and would otherwise collide
 // with a page literally named "new".
-export const RESERVED_SLUGS = new Set(["home", "story", "contact", "terroir", "alaverdi-monastery-cellar", "enologists", "catalogue", "legals", "georgian-wine", "new"]);
+export const RESERVED_SLUGS = new Set(["home", "story", "contact", "terroir", "alaverdi-monastery-cellar", "enologists", "catalogue", "legals", "georgian-wine", "site-settings", "new"]);
 
 const SLUG_PATTERN = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
 

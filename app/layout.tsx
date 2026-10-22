@@ -8,6 +8,8 @@ import { listMenuItems } from "@/lib/menu/service";
 import { getLocale, localize } from "@/lib/i18n";
 import { getUiStrings } from "@/lib/ui-strings/service";
 import { AGE_GATE_COOKIE } from "@/lib/age-gate";
+import { getPageContent } from "@/lib/pages/service";
+import { SITE_SETTINGS_SLUG, SITE_SETTINGS_DEFAULT, type SiteSettingsContent } from "@/lib/pages/site-settings";
 const SITE_NAME = "Badagoni";
 const DEFAULT_DESCRIPTION = "Discover Badagoni. Native Georgian grapes, remarkable Kakhetian vineyards, and a contemporary expression of an enduring winemaking tradition.";
 const DEFAULT_OG_IMAGE = "/images/hero.webp";
@@ -32,12 +34,13 @@ export const metadata: Metadata = {
  },
 };
 export default async function RootLayout({children}:Readonly<{children:React.ReactNode}>){
-  const [menuItems, locale, t, cookieStore] = await Promise.all([listMenuItems(), getLocale(), getUiStrings(), cookies()]);
+  const [menuItems, locale, t, cookieStore, siteSettings] = await Promise.all([listMenuItems(), getLocale(), getUiStrings(), cookies(), getPageContent<SiteSettingsContent>(SITE_SETTINGS_SLUG)]);
   const ageConfirmed = cookieStore.get(AGE_GATE_COOKIE)?.value === "true";
+  const hideGeorgianLanguage = (siteSettings ?? SITE_SETTINGS_DEFAULT).hideGeorgianLanguage;
   const primaryLinks = menuItems.filter(item => item.location === "header_primary");
   const secondaryLinks = menuItems.filter(item => item.location === "header_secondary");
   const footerPrimaryLinks = menuItems.filter(item => item.location === "footer_primary");
   const footerSecondaryLinks = menuItems.filter(item => item.location === "footer_secondary");
   const footerSocialLinks = menuItems.filter(item => item.location === "footer_social");
-  return <html lang={locale}><body><AgeGate locale={locale} initiallyConfirmed={ageConfirmed}/><LocaleSync/><a className="skip-link" href="#main-content">{localize(t["layout.skipToContent"], locale)}</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} t={t}/><div id="main-content">{children}</div><SiteFooter footerPrimaryLinks={footerPrimaryLinks} footerSecondaryLinks={footerSecondaryLinks} footerSocialLinks={footerSocialLinks} t={t}/></body></html>;
+  return <html lang={locale}><body><AgeGate locale={locale} initiallyConfirmed={ageConfirmed} hideGeorgianLanguage={hideGeorgianLanguage}/><LocaleSync/><a className="skip-link" href="#main-content">{localize(t["layout.skipToContent"], locale)}</a><SiteHeader primaryLinks={primaryLinks} secondaryLinks={secondaryLinks} t={t}/><div id="main-content">{children}</div><SiteFooter footerPrimaryLinks={footerPrimaryLinks} footerSecondaryLinks={footerSecondaryLinks} footerSocialLinks={footerSocialLinks} t={t} hideGeorgianLanguage={hideGeorgianLanguage}/></body></html>;
 }
