@@ -51,10 +51,10 @@ export function ManifestoMedia({ src, alt, caption }: { src: string; alt: string
       <span>{caption}</span>
       {isVideo && <div className="manifesto-video-controls">
         <button type="button" onClick={togglePlay} aria-label={playing ? "Pause video" : "Play video"}>
-          {playing ? "Pause" : "Play"}{playing ? <Pause size={14} fill="currentColor" /> : <Play size={14} fill="currentColor" />}
+          {playing ? "Pause" : "Play"}{playing ? <Pause size={14} strokeWidth={1.3} /> : <Play size={14} fill="currentColor" />}
         </button>
         <button type="button" onClick={toggleSound} aria-label={muted ? "Turn sound on" : "Turn sound off"}>
-          {muted ? "Sound on" : "Sound off"}
+          {muted ? "Sound off" : "Sound on"}
         </button>
       </div>}
     </>}
