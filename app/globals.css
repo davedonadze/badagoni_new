@@ -662,7 +662,7 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
 .news-article-body {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,2fr);gap:55px;margin:65px var(--gutter) 85px}
 .news-article-credit {display:flex;flex-direction:column;align-items:flex-start;gap:12px}
 .news-article-credit .underlined-link {gap:12px}
-.news-article-copy {max-width:710px}
+.news-article-copy {grid-column:2;max-width:710px}
 .news-article-copy>p {font-size:18px;line-height:1.8;color:#454541}
 .news-article-copy>p+p {margin-top:24px}
 .news-article-copy>.underlined-link {margin-top:30px}
@@ -960,6 +960,7 @@ html:lang(ka) .age-gate-language,html:lang(ka) .age-gate-language-value select {
   .news-article-image {height:clamp(300px,78vw,480px);margin:0}
   .news-article-body {grid-template-columns:minmax(0,1fr);gap:35px;margin-top:35px;margin-bottom:55px}
   .news-article-credit {grid-row:2}
+  .news-article-copy {grid-column:1}
   .news-article-copy>p {font-size:17px;line-height:1.75}
   .news-article-return {margin-bottom:60px}
   .site-footer {padding-top:35px}
